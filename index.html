@@ -1,4 +1,41 @@
-<!doctype html>
-<meta charset="utf-8">
-<meta http-equiv="refresh" content="0; url=v2.1.5/">
-<a href="v2.1.5/">synapser documentation</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>synapser documentation</title>
+</head>
+<body style="font-family: sans-serif; text-align: center; margin-top: 50px;">
+  <h1>synapser documentation</h1>
+  <p>Select a version to view:</p>
+
+  <select id="version-select" aria-label="Documentation version">
+    <option value="">-- Choose Version --</option>
+  </select>
+
+  <p id="latest-link"></p>
+
+  <script>
+    // The list of versions lives in versions.json (newest first), so adding a
+    // version means editing that one file.
+    fetch("versions.json")
+      .then(function (r) { return r.json(); })
+      .then(function (versions) {
+        var select = document.getElementById("version-select");
+        versions.forEach(function (v) {
+          var opt = document.createElement("option");
+          opt.value = v.path;
+          opt.textContent = v.name;
+          select.appendChild(opt);
+        });
+        select.addEventListener("change", function () {
+          if (select.value) window.location.href = select.value;
+        });
+        if (versions.length) {
+          document.getElementById("latest-link").innerHTML =
+            '<a href="' + versions[0].path + '">Go straight to ' + versions[0].name + "</a>";
+        }
+      });
+  </script>
+</body>
+</html>
