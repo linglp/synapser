@@ -10,6 +10,11 @@
 # each major version (see .github/scripts/docs_versions.py). Older releases
 # stay on the site, so saved links keep working; they are just not listed.
 #
+# The landing page (.github/docs-site/index.html) and docs_versions.py are read
+# from one fixed branch, not from the ref being built.
+# Otherwise a hotfix pushed to master, or a release tag cut before those files
+# existed, would publish an older landing page or fail.
+#
 # The gh-pages branch has to exist before the first run. Create it once with:
 #   git switch --orphan gh-pages
 #   git commit --allow-empty -m "start gh-pages"
@@ -88,14 +93,27 @@ jobs:
 
     steps:
       - name: Check out synapser source
-        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           path: src
           persist-credentials: false
 
+      # ensure the landing page and docs_versions.py come from the default branch. 
+      - name: Check out publishing tools
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          # TODO: before opening the PR, replace docs-test with the default branch
+          # (github.event.repository.default_branch). 
+          ref: docs-test
+          path: tools
+          persist-credentials: false
+          sparse-checkout: |
+            .github/docs-site
+            .github/scripts
+
       # checked out up front so a missing gh-pages branch fails before the build
       - name: Check out gh-pages branch
-        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           ref: gh-pages
           path: site
@@ -144,7 +162,8 @@ jobs:
             )'
 
       # copy the build into this version's folder, refresh the files at the
-      # site root, then commit and push
+      # site root (landing page and versions.json, from tools/), then commit
+      # and push
       - name: Copy build into version folder and push to gh-pages
         shell: bash
         run: |
@@ -154,14 +173,14 @@ jobs:
           # the build don't linger and cp doesn't nest site-out inside the folder
           rm -rf "site/$SITE_DIR"
           cp -R src/site-out "site/$SITE_DIR"
-          cp src/.github/docs-site/index.html site/index.html
+          cp tools/.github/docs-site/index.html site/index.html
           touch site/.nojekyll
           # ignore custom domain for fork builds; only set CNAME for the upstream repo
           if [ "$GITHUB_REPOSITORY" = "Sage-Bionetworks/synapser" ]; then
             echo r-docs.synapse.org > site/CNAME
           fi
 
-          python3 src/.github/scripts/docs_versions.py update site
+          python3 tools/.github/scripts/docs_versions.py update site
 
           cd site
           git add --all

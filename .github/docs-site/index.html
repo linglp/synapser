@@ -87,6 +87,10 @@
     }
     .latest:hover { background: var(--accent-hover); transform: translateY(-1px); }
     .latest:focus-visible { outline: 3px solid color-mix(in srgb, var(--accent) 40%, transparent); outline-offset: 2px; }
+    /* legacy versions get their own, quieter block under the main picker */
+    .legacy { margin-top: 28px; padding-top: 20px; border-top: 1px solid var(--border); }
+    .legacy select { color: var(--muted); }
+    .legacy-note { margin: 8px 0 0; text-align: left; color: var(--muted); font-size: 0.85rem; }
     .error { margin-top: 16px; color: var(--muted); font-size: 0.9rem; }
   </style>
 </head>
@@ -101,25 +105,53 @@
     </select>
 
     <a id="latest-link" class="latest" hidden></a>
+
+    <section id="legacy" class="legacy" hidden>
+      <label id="legacy-label" for="legacy-select">Legacy versions</label>
+      <select id="legacy-select">
+        <option value="">Choose a legacy version&hellip;</option>
+      </select>
+      <p class="legacy-note">Older releases, kept so existing links keep working.</p>
+    </section>
+
     <p id="error" class="error" hidden>Couldn't load the version list.</p>
   </main>
 
   <script>
+    // Releases of a major version below this one are listed as legacy.
+    var LEGACY_BELOW_MAJOR = 3;
+
     // The docs workflow regenerates versions.json on every publish. The first
     // entry is the one the button below opens.
     fetch("versions.json")
       .then(function (r) { return r.json(); })
       .then(function (versions) {
         var select = document.getElementById("version-select");
+        var legacySelect = document.getElementById("legacy-select");
+        var legacyCount = 0;
         versions.forEach(function (v) {
           var opt = document.createElement("option");
           opt.value = v.path;
           opt.textContent = v.name;
-          select.appendChild(opt);
+          // release names look like "2.1.5"; "stable" and "latest (develop)" don't
+          var release = /^(\d+)\./.exec(v.name);
+          if (release && Number(release[1]) < LEGACY_BELOW_MAJOR) {
+            legacySelect.appendChild(opt);
+            legacyCount++;
+          } else {
+            select.appendChild(opt);
+          }
         });
-        select.addEventListener("change", function () {
-          if (select.value) window.location.href = select.value;
+        [select, legacySelect].forEach(function (s) {
+          s.addEventListener("change", function () {
+            if (s.value) window.location.href = s.value;
+          });
         });
+        if (legacyCount) {
+          document.getElementById("legacy-label").textContent =
+            "Legacy versions (below " + LEGACY_BELOW_MAJOR + ".0.0)";
+          document.getElementById("legacy").hidden = false;
+        }
         if (versions.length) {
           var latest = document.getElementById("latest-link");
           latest.href = versions[0].path;
