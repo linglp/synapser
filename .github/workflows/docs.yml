@@ -70,10 +70,8 @@ jobs:
             fi
           fi
 
-          {
-            echo "skip=$skip"
-            echo "dir=$dir"
-          } >> "$GITHUB_OUTPUT"
+          echo "skip=$skip" >> "$GITHUB_OUTPUT"
+          echo "dir=$dir" >> "$GITHUB_OUTPUT"
 
   publish:
     needs: plan
@@ -158,9 +156,8 @@ jobs:
           cp -R src/site-out "site/$SITE_DIR"
           cp src/.github/docs-site/index.html site/index.html
           touch site/.nojekyll
-          # the custom domain belongs to the upstream repo only; a fork serves
-          # from github.io
-          if [ "$GITHUB_REPOSITORY" = Sage-Bionetworks/synapser ]; then
+          # ignore custom domain for fork builds; only set CNAME for the upstream repo
+          if [ "$GITHUB_REPOSITORY" = "Sage-Bionetworks/synapser" ]; then
             echo r-docs.synapse.org > site/CNAME
           fi
 
