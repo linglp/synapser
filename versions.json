@@ -1,2 +1,10 @@
-[{"name": "2.1.5", "path": "v2.1.5/"},
- {"name": "2.1.0", "path": "v2.1.0/"}]
+[
+  {
+    "name": "latest (develop)",
+    "path": "latest/"
+  },
+  {
+    "name": "2.1.5",
+    "path": "v2.1.5/"
+  }
+]

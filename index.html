@@ -105,8 +105,8 @@
   </main>
 
   <script>
-    // The list of versions lives in versions.json (newest first), so adding a
-    // version means editing that one file.
+    // The docs workflow regenerates versions.json on every publish. The first
+    // entry is the one the button below opens.
     fetch("versions.json")
       .then(function (r) { return r.json(); })
       .then(function (versions) {

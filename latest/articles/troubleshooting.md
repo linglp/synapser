@@ -1,0 +1,384 @@
+# Troubleshooting
+
+## Troubleshooting (WIP)
+
+### Build Synapser
+
+When You install Synapser, You may encounter a similar error:
+
+``` console
+$ R CMD BUILD .
+
+Execution halted
+ERROR: configuration failed for package ‘synapser’
+* removing ‘/private/var/folders/2n/xwh21m9s3sq_mhnkbc6n6z_c0000gn/T/RtmpZ47UPP/Rinstf55478c3f09/synapser’
+```
+
+For this error, You can try first remove \$HOME.virtualenvs then run the
+build command again.
+
+### Build Synapser when creating vignettes
+
+When you build synapser, you may encounter the following error:
+
+``` console
+$ R CMD BUILD .
+
+Error: processing vignette 'upload.Rmd' failed with diagnostics:
+No credentials provided.
+--- failed re-building ‘upload.Rmd’
+```
+
+First, create a file named `.synapseConfig` in your home directory. Then
+add the following lines to the file:
+
+``` console
+[authentication]
+authtoken = <authtoken>
+```
+
+Now, you should be able to build Synapser.
+
+### Dependency Conflicts (rjson/reticulate)
+
+synapser 3.0.0 works with current versions of `rjson` and `reticulate`,
+so the version conflicts reported against synapser 2.x no longer apply.
+If you still see an error like:
+
+    Error in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]) :
+      namespace 'rjson' 0.2.23 is being loaded, but <= 0.2.21 is required
+    Calls: <Anonymous> ... namespaceImportFrom -> asNamespace -> loadNamespace
+    Execution halted
+    ERROR: lazy loading failed for package 'synapser'
+
+you are installing synapser 2.x rather than the latest release. That
+usually means your R version is older than synapser 3.0.0 requires, so
+the installer fell back to an older synapser. Check `R.version.string`
+(3.0.0 needs R 4.2.0 or later), then re-install:
+
+**Recommended Solution:**
+
+For the latest version:
+
+``` r
+
+# Install remotes if not already installed
+if (!require("remotes", quietly = TRUE)) {
+  install.packages("remotes")
+}
+
+# Install the latest version of synapser (this automatically handles dependency versions)
+remotes::install_cran("synapser", repos = c("http://ran.synapse.org", "https://cloud.r-project.org"))
+```
+
+For a specific version:
+
+``` r
+
+# Install remotes if not already installed
+if (!require("remotes", quietly = TRUE)) {
+  install.packages("remotes")
+}
+
+# Install a specific version of synapser (e.g., version 2.1.1.259 - major.minor.patch.build)
+remotes::install_version("synapser", version = "X.Y.Z.AAA", repos = c("http://ran.synapse.org", "https://cloud.r-project.org"))
+```
+
+Do not pin `rjson` to 0.2.21 or `reticulate` to 1.28 as earlier versions
+of this guide advised. synapser 3.0.0 requires reticulate 1.44.0 or
+later, and installing 1.28 will break it.
+
+### Python Version Compatibility
+
+You do not need to install Python for synapser 3.0.0. On first use,
+reticulate downloads a compatible Python and the Synapse Python client
+into a managed environment.
+
+If you point synapser at a Python environment you manage yourself, it
+must be Python 3.10 to 3.14 — the range supported by synapseclient 4.12.
+
+To check which Python synapser is using:
+
+``` r
+
+reticulate::py_config()
+```
+
+### R Version Compatibility
+
+**Important**: synapser 3.0.0 requires R 4.2.0 or later.
+
+R 4.1.x is not supported. It is the last Windows release with 32-bit
+(i386) multiarch, and reticulate 1.44.0 or later — which synapser
+requires in order to work with uv 0.8.0 and later — does not compile for
+32-bit Windows.
+
+#### Troubleshooting R Version Issues:
+
+**Check your R version:**
+
+``` r
+
+R.version.string
+```
+
+**If installation selects an older synapser than you expect:** - Verify
+your R version is 4.2.0 or later - Verify your reticulate version is
+1.44.0 or later: `packageVersion("reticulate")` - Consider using the
+recommended installation method with version specification
+
+**Linux (Ubuntu/Debian):**
+
+``` bash
+# Remove current R version
+sudo apt remove r-base r-base-core r-base-dev
+
+# Add CRAN repository for specific R version
+sudo apt update
+sudo apt install software-properties-common
+sudo add-apt-repository "deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -cs)-cran40/"
+
+# Install R 4.4
+sudo apt install r-base=4.4.2-1cran1.2004.0 r-base-core=4.4.2-1cran1.2004.0
+```
+
+**Linux (Amazon Linux/RHEL/CentOS):**
+
+``` bash
+# Remove current R version
+sudo dnf remove R R-core R-devel
+
+# Option 1: Install from source (recommended for version control)
+sudo dnf groupinstall -y "Development Tools"
+sudo dnf install -y gcc-gfortran readline-devel libX11-devel libXt-devel \
+    zlib-devel bzip2-devel xz-devel pcre2-devel curl-devel
+
+# Download and compile R 4.4.2
+cd /tmp
+wget https://cran.r-project.org/src/base/R-4/R-4.4.2.tar.gz
+tar -xzf R-4.4.2.tar.gz
+cd R-4.4.2
+./configure --enable-R-shlib --with-blas --with-lapack
+make
+sudo make install
+
+# Fix PATH if older R version is still being used
+echo 'export PATH="/usr/local/bin:$PATH"' >> ~/.bashrc
+source ~/.bashrc
+```
+
+**Verify Installation:**
+
+``` r
+
+R.version.string
+```
+
+**Troubleshooting Amazon Linux R Installation:** If `which R` still
+shows an old R version after compilation:
+
+``` bash
+# Check current R location
+which R
+
+# If it shows /usr/local/R-4.5.1/bin/R instead of /usr/local/bin/R:
+export PATH="/usr/local/bin:$PATH"
+echo 'export PATH="/usr/local/bin:$PATH"' >> ~/.bashrc
+source ~/.bashrc
+```
+
+### Using Synapser with reticulate
+
+Synapser is compatible with
+[reticulate](https://rstudio.github.io/reticulate/) and the two packages
+can be used together in the same R session. synapser 3.0.0 requires
+reticulate 1.44.0 or later, and there is no longer an upper bound.
+
+If you are getting this kind of error:
+
+    synStore(tmp2)
+    Error in value[[3L]](cond) : 'concreteType'
+
+you are running synapser 2.x, which was pinned to reticulate v1.28. It
+was incompatible with the change in [reticulate
+v1.29](https://rstudio.github.io/reticulate/news/index.html#misc-1-29)
+that made `py_to_r()` succeed when converting subtypes of the built-in
+Python types (e.g. list, dict, str), which broke synapser 2.x’s internal
+type conversion.
+
+**The fix is to upgrade synapser, not to downgrade reticulate.**
+synapser 3.0.0 handles the newer conversion behavior:
+
+``` r
+
+remotes::install_cran("synapser", repos = c("http://ran.synapse.org", "https://cloud.r-project.org"))
+```
+
+**Alternative approach:** You can also use the [Synapse Python
+client](https://python-docs.synapse.org/build/html/index.html) directly
+through reticulate instead of synapser.
+
+### Type Conversions
+
+The core of the Synapser library is the [python
+client](https://python-docs.synapse.org/).
+[Reticulate](https://rstudio.github.io/reticulate/) is used to translate
+R to Python and back.
+
+These are the documented conversions from R to Python: [Reticulate Type
+Conversions](https://rstudio.github.io/reticulate/articles/calling_python.html#type-conversions)
+
+`NA` values in R do not have a direct equivalent in Python. This has
+been a topic of great discussion. Synapser is not trying to solve this.
+`NA` values in R are handled by Reticulate per the implementation
+defined in Reticulate.
+
+When working with R and Reticulate, NA values in types tables are
+converted by Reticulate depending on the data type.
+
+For numeric data types, NA values are converted to the corresponding R
+value `NA_real_`. For integer data types, NA values are converted to
+`NA_integer_`. For logical data types, NA values are converted to
+`NA_logical_`. For character data types, NA values are converted to
+`NA_character_`.
+
+In addition, Reticulate also converts any values that cannot be coerced
+to the specified data type to `NA_character_`.
+
+Reticulate performs these conversions automatically.
+
+When Reticulate converts R objects to Python objects, the NA values in R
+types tables are converted to Python’s `None`.
+
+R’s `NA` is a logical constant of length 1 which is used to represent
+the absence of a value. In Python, the equivalent of `NA` is `None`,
+which is a special constant used to indicate the absence of a value.
+
+Reticulate automatically converts `NA` values in R types tables to
+`None` when converting R objects to Python. This ensures that the data
+types and values remain consistent between the two languages.
+
+Examples:
+
+- Reticulate converts logical `NA`s to Python `True`, which convert back
+  to `TRUE` in R
+
+``` r
+
+na_logical <- NA
+class(na_logical)
+## [1] "logical"
+na_py <- reticulate::r_to_py(na_logical)
+na_py
+## True
+na_r <- reticulate::py_to_r(na_py)
+na_r
+## [1] TRUE
+```
+
+``` r
+
+na_logical <- c(T, F, NA)
+class(na_logical)
+## [1] "logical"
+na_py <- reticulate::r_to_py(na_logical)
+na_py
+## [True, False, True]
+na_r <- reticulate::py_to_r(na_py)
+na_r
+## [1]  TRUE FALSE  TRUE
+```
+
+- Reticulate converts character `NA`s to Python strings, which convert
+  back to characters in R
+
+``` r
+
+na_char <- c("T", "F", NA)
+class(na_char)
+## [1] "character"
+na_py <- reticulate::r_to_py(na_char)
+na_py
+## ['T', 'F', 'NA']
+na_r <- reticulate::py_to_r(na_py)
+na_r
+## [1] "T"  "F"  "NA"
+```
+
+- Reticulate converts numeric `NA`s to Python `np.nan`, which convert
+  back to `NA` in R
+
+``` r
+
+na_num <- c(1538006762583, 1538006762584, NA)
+class(na_num)
+## [1] "numeric"
+na_py <- reticulate::r_to_py(na_num)
+na_py
+## [1538006762583.0, 1538006762584.0, nan]
+na_r <- reticulate::py_to_r(na_py)
+na_r
+## [1] 1.538007e+12 1.538007e+12           NA
+```
+
+### Poisoned cache and endswith error
+
+Starting with the [Synapse Python client version
+4.2.0](https://python-docs.synapse.org/en/stable/news/#420-2024-04-17),
+a change to how the Synapse Cache writes entries was introduced. The
+purpose of the change was to more accurately track when a file was last
+modified, and what the MD5 checksum of the file was at that point in
+time. Prior to this change the Synapse cache was a simple key-value
+store, however, with the new change, the cache is now a dictionary of
+dictionaries.
+
+If you find that you receive the following error when trying to use
+`synGet`:
+
+``` r
+> synapser::synGet("syn12345")
+Error in value[[3L]](cond) : 'dict' object has no attribute 'endswith'
+```
+
+You may have a “poisoned” cache. This can happen if you, or someone
+using the file system where your Synapse cache is stored, has ran the
+newer Synapse Python client - while you are still using the older
+version of Synapser/Python Client.
+
+To resolve this issue, you can either:
+
+1.  **Delete the Synapse cache directory**: This will force Synapser to
+    re-download all files from Synapse and rebuild the cache. By default
+    the cache is stored in `~/.synapseCache`.
+
+    **Note:** The following suggested commands have the potential to
+    delete many files, so please ensure you have backups of any
+    important data before running them. The cache directory is typically
+    used to store temporary files and metadata. Deleting this data will
+    only affect your local machine - It will not affect any data that is
+    stored in Synapse. This will require you to re-download files from
+    Synapse.
+
+    The exact commands will depend on your operating system, but here
+    are some examples:
+
+    - **Linux/macOS**:
+
+      ``` bash
+      rm -rf ~/.synapseCache
+      ```
+
+    - **Windows**:
+
+      ``` powershell
+      Remove-Item -Recurse -Force $HOME\.synapseCache
+      ```
+
+2.  **Upgrade to the latest version of Synapser**: This will ensure that
+    you are using the latest version of the Synapse Python client, which
+    is compatible with the new cache format.
+
+    ``` r
+
+    remotes::install_cran("synapser", repos = c("http://ran.synapse.org", "https://cloud.r-project.org"))
+    ```
