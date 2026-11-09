@@ -22,7 +22,7 @@ on:
     branches:
       - develop
       - master
-      - add-workflow   # TODO: remove before opening the PR
+      - docs-test   # TODO: remove before opening the PR
   release:
     types:
       - published
