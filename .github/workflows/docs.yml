@@ -108,12 +108,14 @@ jobs:
         with:
           # TODO: before opening the PR, replace docs-test with the default branch
           # (github.event.repository.default_branch). 
-          ref: docs-test
+          ref: docs-test-2
           path: tools
           persist-credentials: false
           sparse-checkout: |
             .github/docs-site
             .github/scripts
+            .github/version-switcher.js
+
 
       # checked out up front so a missing gh-pages branch fails before the build
       - name: Check out gh-pages branch
