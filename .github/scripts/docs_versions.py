@@ -1,18 +1,25 @@
 #!/usr/bin/env python3
-"""Rewrite versions.json of the published docs site (the gh-pages branch).
+"""Keep the published docs site (the gh-pages branch) in line with its folders.
 
 The site is laid out as:
 
-    stable/        docs built from master
-    latest/        docs built from develop
-    vX.Y.Z/        releases
-    versions.json  what the landing page (index.html) offers in its picker
+    stable/                docs built from master
+    latest/                docs built from develop
+    vX.Y.Z/                releases
+    versions.json          every version, for the pickers
+    version-switcher.js    the floating version picker
 
     docs_versions.py update SITE
 
-versions.json lists stable, latest and the newest release of each major
-version. Older releases stay in SITE, so saved links to them keep working,
-but nothing on the landing page points at them.
+update does two things:
+
+1. Writes versions.json: stable, latest, then every release, newest first.
+   The site root (index.html) forwards readers to the first entry, and the
+   picker on each version's home page reads the whole list.
+2. Makes sure the home page of every version (stable/, latest/ and each
+   release folder, old ones included) loads version-switcher.js. It runs on
+   every publish because a rebuilt folder starts without the script tag, and
+   it skips pages that already have the tag.
 """
 
 import argparse
@@ -24,6 +31,12 @@ RELEASE_DIR = re.compile(r"^v(\d+)\.(\d+)\.(\d+)$")
 
 # listed ahead of the releases, as (folder, label shown in the picker)
 PINNED = [("stable", "stable"), ("latest", "latest (develop)")]
+
+# Each version's home page is one folder below the site root, where
+# version-switcher.js is published, so the relative path works wherever the
+# site is served from (the custom domain or a fork's /<repo>/ path).
+SWITCHER_FILE = "version-switcher.js"
+SWITCHER_TAG = f'<script src="../{SWITCHER_FILE}" defer></script>'
 
 
 def releases(site):
@@ -49,29 +62,53 @@ def releases(site):
     return found
 
 
-def newest_per_major(found):
-    """Pick the newest release of each major version.
+def add_switcher(site):
+    """Make each version's home page load version-switcher.js.
+
+    Adds SWITCHER_TAG just before the closing body tag of index.html in
+    stable/, latest/ and every release folder. Pages that already load the
+    script are left alone, so running this again changes nothing. Old
+    releases are patched this way too: they get one added line and nothing
+    else.
 
     Args:
-        found: The dict returned by releases().
+        site: Directory holding the published docs, one folder per version.
 
     Returns:
-        The versions to list, newest first. For example, 2.1.0, 2.1.5, 2.1.6
-        and 3.0.0 give [(3, 0, 0), (2, 1, 6)].
+        The folders whose index.html was changed, as a list of names.
     """
-    newest = {}
-    for version in found:
-        if version[0] not in newest or version > newest[version[0]]:
-            newest[version[0]] = version
-    return sorted(newest.values(), reverse=True)
+    folders = [folder for folder, _ in PINNED] + [
+        found for _, found in sorted(releases(site).items(), reverse=True)
+    ]
+    changed = []
+    for name in folders:
+        page = site / name / "index.html"
+        if not page.is_file():
+            continue
+        # bytes in and out, so nothing else in the page is touched
+        html = page.read_bytes().decode("utf-8")
+        if SWITCHER_FILE in html:
+            continue
+        head, closing, tail = html.rpartition("</body>")
+        if not closing:
+            print(f"warning: {page} has no </body>, switcher not added")
+            continue
+        # the new line goes above </body>, which keeps its own indent
+        indent = head[len(head.rstrip(" \t")) :]
+        page.write_bytes(
+            f"{head}{SWITCHER_TAG}\n{indent}{closing}{tail}".encode("utf-8")
+        )
+        changed.append(name)
+    return changed
 
 
 def update(site):
-    """Write site/versions.json from the folders present in site.
+    """Write site/versions.json and add the version picker to the home pages.
 
-    The list holds stable and latest (when their folders exist), followed by
-    the newest release of each major version. The landing page reads this
-    file to fill its version picker, and opens the first entry.
+    versions.json holds stable and latest (when their folders exist),
+    followed by every release, newest first. The site root page forwards
+    readers to the first entry, and the picker on each version's home page
+    lists all of them.
 
     Args:
         site: Directory holding the published docs, one folder per version.
@@ -85,10 +122,13 @@ def update(site):
     ]
     entries += [
         {"name": ".".join(map(str, version)), "path": f"{found[version]}/"}
-        for version in newest_per_major(found)
+        for version in sorted(found, reverse=True)
     ]
     (site / "versions.json").write_text(json.dumps(entries, indent=2) + "\n")
     print("versions.json:", ", ".join(entry["name"] for entry in entries) or "(empty)")
+
+    changed = add_switcher(site)
+    print("version picker added to:", ", ".join(changed) or "(nothing new)")
 
 
 def main():
