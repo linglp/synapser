@@ -93,7 +93,7 @@
 
       <h1>Installation</h1>
             
-            <h4 data-toc-skip class="date">2026-11-10</h4>
+            <h4 data-toc-skip class="date">2026-11-11</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/Sage-Bionetworks/synapser/blob/docs-test-2/vignettes/installation.Rmd" class="external-link"><code>vignettes/installation.Rmd</code></a></small>
       <div class="d-none name"><code>installation.Rmd</code></div>
@@ -101,68 +101,197 @@
 
     
     
-<p>Synapser is a wrapper around the Python client. Due to this, there
-are some complexities in installing the package. Please follow this
-guide.</p>
-<div class="section level3">
-<h3 id="prerequisites">Prerequisites<a class="anchor" aria-label="anchor" href="#prerequisites"></a>
-</h3>
+<p>synapser is a wrapper around the Synapse Python client
+(<code>synapseclient</code>). This guide covers installing synapser
+3.0.0 on Windows, macOS, and Linux.</p>
+<p>synapser 3.0.0 is distributed through <a href="https://sage-bionetworks.r-universe.dev" class="external-link">R-universe</a> at <a href="https://sage-bionetworks.r-universe.dev/synapser" class="external-link">https://sage-bionetworks.r-universe.dev/synapser</a>.
+Releases of synapser 2.x and earlier remain on the Synapse R repository
+(RAN) at <a href="http://ran.synapse.org" class="external-link">http://ran.synapse.org</a>;
+see <a href="#installing-an-older-version">Installing an older
+version</a>.</p>
+<div class="section level2">
+<h2 id="prerequisites">Prerequisites<a class="anchor" aria-label="anchor" href="#prerequisites"></a>
+</h2>
 <ul>
 <li>R 4.2.0 or later (R 4.1.x is not supported: it is the last Windows R
 with 32-bit multiarch, and reticulate 1.44.0 or later does not build for
-32-bit Windows)</li>
+32-bit Windows).</li>
 <li>reticulate 1.44.0 or later (earlier versions are incompatible with
 uv 0.8.0 and later, and fail with
-<code>could not find a Python environment for /</code>)</li>
+<code>could not find a Python environment for /</code>). You do not need
+to install reticulate yourself. It is installed automatically as a
+dependency of synapser.</li>
+<li>rjson 0.2.23 or later. You do not need to install rjson yourself. It
+is installed automatically as a dependency of synapser.</li>
+<li>Python 3.11 or later. You do not need to install Python yourself.
+synapser downloads a compatible one (Python 3.11 to 3.15) and the
+Synapse Python client into an environment that reticulate manages. See
+<a href="#how-synapser-finds-python">How synapser finds Python</a>.</li>
+<li>No Python setup of your own. synapser always uses reticulate’s
+managed environment, and any Python or virtual environment you already
+have is left unused. See <a href="#how-synapser-finds-python">How
+synapser finds Python</a>.</li>
 </ul>
-<p>When synapser is loaded, it declares its Python requirement
-(<code>synapseclient[pandas]</code>, pinned to the version synapser
-wraps) via <code><a href="https://rstudio.github.io/reticulate/reference/py_require.html" class="external-link">reticulate::py_require()</a></code>. If reticulate does not
-find another Python configured on your machine, it uses <a href="https://docs.astral.sh/uv/" class="external-link">uv</a> to download a compatible Python
-and the Synapse Python client into a managed environment, so you
-<strong>DO NOT</strong> need to install Python yourself. synapser
-supports Python 3.10 to 3.14 and does not request a specific one, so
-reticulate picks its own default: two minor versions behind the newest
-stable release (Python 3.12 as of reticulate 1.46.0). Run
-<code><a href="https://rstudio.github.io/reticulate/reference/py_config.html" class="external-link">reticulate::py_config()</a></code> to see which version you got. The
-first load may take a minute; later loads reuse the cached
-environment.</p>
-<p>By default, reticulate only uses this managed environment when no
-other Python takes precedence in its <a href="https://rstudio.github.io/reticulate/articles/versions.html#order-of-discovery" class="external-link">Order
-of Discovery</a>. In particular, synapser will use a different Python if
-any of the following apply:</p>
-<ul>
-<li>The <code>RETICULATE_PYTHON</code> or
-<code>RETICULATE_PYTHON_ENV</code> environment variable is set (this
-includes selecting a Python interpreter in RStudio’s Project or Global
-Options).</li>
-<li>A Python virtual environment is activated (<code>VIRTUAL_ENV</code>
-is set), or your working directory contains a <code>.venv</code>,
-<code>venv</code>, or similar virtual environment.</li>
-<li>A virtual environment named <code>r-reticulate</code> exists (for
-example, <code>~/.virtualenvs/r-reticulate</code>, created by earlier
-versions of these instructions).</li>
-</ul>
-<p>In those cases synapser installs the Synapse Python client into that
-Python, which must be version 3.10 to 3.14. To use the managed
-environment instead, remove the conflicting setting,
-e.g. <code>reticulate::virtualenv_remove("r-reticulate")</code>, and
-restart R. You can check which Python synapser is using with
-<code><a href="https://rstudio.github.io/reticulate/reference/py_config.html" class="external-link">reticulate::py_config()</a></code>.</p>
+</div>
+<div class="section level2">
+<h2 id="install-r">Install R<a class="anchor" aria-label="anchor" href="#install-r"></a>
+</h2>
+<p>Follow the <a href="https://rstudio-education.github.io/hopr/starting.html" class="external-link">installation
+instructions</a> to install R 4.2.0 or later.</p>
+<p>Check your R version with:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">R.version.string</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="install-synapser">Install synapser<a class="anchor" aria-label="anchor" href="#install-synapser"></a>
+</h2>
+<p>On Windows and macOS, run the command below. Listing CRAN alongside
+R-universe lets R pull synapser’s dependencies (such as
+<code>reticulate</code> and <code>rjson</code>) from CRAN as ready-built
+packages.</p>
+<p>On Linux, CRAN only provides source packages, and several of
+synapser’s dependencies contain compiled code. <strong>Complete the <a href="#linux">Linux</a> steps first</strong>, then run the same
+command.</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span></span>
+<span>  <span class="st">"synapser"</span>,</span>
+<span>  repos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"https://sage-bionetworks.r-universe.dev"</span>, <span class="st">"https://cloud.r-project.org"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p>Or</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>repos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"https://sage-bionetworks.r-universe.dev"</span>, <span class="st">"https://cloud.r-project.org"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"synapser"</span><span class="op">)</span></span></code></pre></div>
+<p>The sections below cover the setup for each operating system. Linux
+needs extra steps; Windows and macOS do not.</p>
+<div class="section level3">
+<h3 id="windows">Windows<a class="anchor" aria-label="anchor" href="#windows"></a>
+</h3>
+<p>No extra setup is needed. R-universe provides synapser already built
+for Windows, so you do not need to install <a href="https://cran.r-project.org/bin/windows/Rtools/" class="external-link">Rtools</a> (the
+toolkit Windows uses to build R packages from source code).</p>
+<p>If you only use R through RStudio, you can skip the rest of this
+section. If you want to run <code>R</code> or <code>Rscript</code> from
+a terminal such as Command Prompt, PowerShell, or VS Code, Windows needs
+to know where R is installed. Add R’s <code>bin</code> folder,
+e.g. <code>C:\Program Files\R\R-4.5.1\bin</code> (use your R version),
+to your <code>PATH</code> environment variable.</p>
 </div>
 <div class="section level3">
-<h3 id="install-synapser-from-github">Install SynapseR from GitHub<a class="anchor" aria-label="anchor" href="#install-synapser-from-github"></a>
+<h3 id="macos">macOS<a class="anchor" aria-label="anchor" href="#macos"></a>
 </h3>
-<p>The synapser source code is on GitHub at <a href="https://github.com/Sage-Bionetworks/synapser" class="external-link">Sage-Bionetworks/
-synapser</a>. In stalling from GitHub is useful if you want to try
-changes t hat have not been released to the Synapse R repository (RAN )
-yet. For everyday use, install a released version from RA N as shown
-above.</p>
+<p>R-universe provides prebuilt binaries for both Apple silicon and
+Intel Macs, so you do not need Xcode command line tools. synapser uses
+the managed environment described below. The Python macOS ships at
+<code>/usr/bin/python3</code> is left unused.</p>
+</div>
+<div class="section level3">
+<h3 id="linux">Linux<a class="anchor" aria-label="anchor" href="#linux"></a>
+</h3>
+<p>R on Linux installs packages from source by default. synapser itself
+is pure R and needs no compiler, but most of its dependencies (including
+<code>reticulate</code>, <code>Rcpp</code>, <code>RcppTOML</code>,
+<code>rjson</code>, <code>jsonlite</code>, <code>rlang</code>, and
+<code>png</code>) contain C or C++ code that must be compiled. They all
+need a C/C++ compiler, and <code>png</code> also needs the libpng
+development headers.</p>
+<p>Install them, then run the <a href="#install-synapser">standard
+command</a>. Many machines that already build R packages have both, in
+which case this step changes nothing. Without the libpng headers,
+installing <code>png</code> fails with
+<code>png.h: No such file or directory</code>.</p>
+<p>Ubuntu / Debian (Optional):</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="fu">sudo</span> apt-get update</span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="fu">sudo</span> apt-get install <span class="at">-y</span> build-essential libpng-dev</span></code></pre></div>
+<p>If you installed R with <code>sudo apt install r-base</code>, you
+most likely already have both: apt also installs
+<code>r-base-dev</code>, which includes them. You need this step if R
+was installed with <code>--no-install-recommends</code> (as in CRAN’s
+Ubuntu instructions), with <a href="https://github.com/r-lib/rig" class="external-link">rig</a>, or in a minimal Docker
+image. To check, run <code>dpkg -s build-essential libpng-dev</code>; it
+reports an error for any package that is missing.</p>
+<p>Amazon Linux/RHEL/CentOS:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="fu">sudo</span> dnf install <span class="at">-y</span> gcc gcc-c++ make libpng-devel</span></code></pre></div>
+</div>
+</div>
+<div class="section level2">
+<h2 id="verify-the-installation">Verify the installation<a class="anchor" aria-label="anchor" href="#verify-the-installation"></a>
+</h2>
+<p>Restart R, then load synapser:</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/Sage-Bionetworks/synapser" class="external-link">synapser</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/packageDescription.html" class="external-link">packageVersion</a></span><span class="op">(</span><span class="st">"synapser"</span><span class="op">)</span>  <span class="co"># should be 3.0.0</span></span>
+<span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_config.html" class="external-link">py_config</a></span><span class="op">(</span><span class="op">)</span>     <span class="co"># shows which Python synapser is using</span></span></code></pre></div>
+<p>The first <code><a href="https://github.com/Sage-Bionetworks/synapser" class="external-link">library(synapser)</a></code> may take a minute while
+reticulate downloads Python and the Synapse Python client. Later loads
+reuse the cached environment.</p>
+<p>Then log in. See the <a href="authentication.html">Authentication</a>
+vignette for authentication options:</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/synLogin.html">synLogin</a></span><span class="op">(</span>authToken <span class="op">=</span> <span class="st">"&lt;your personal access token&gt;"</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="upgrading-from-synapser-2-x">Upgrading from synapser 2.x<a class="anchor" aria-label="anchor" href="#upgrading-from-synapser-2-x"></a>
+</h2>
+<ol style="list-style-type: decimal">
+<li>
+<p><strong>Optionally, remove the <code>r-reticulate</code> virtual
+environment</strong> that the 2.x instructions had you create. synapser
+3.0.0 no longer uses it, so you can delete it if nothing else needs
+it:</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/virtualenv-tools.html" class="external-link">virtualenv_remove</a></span><span class="op">(</span><span class="st">"r-reticulate"</span><span class="op">)</span></span></code></pre></div>
+</li>
+<li><p><strong>Optionally, remove any other virtual environment</strong>
+that the 2.x instructions had you create, such as those in
+<code>~/.venv</code> and <code>~/.virtualenv</code> folders.</p></li>
+<li>
+<p><strong>Install current <code>rjson</code> and
+<code>reticulate</code>.</strong> synapser 3.0.0 requires reticulate
+1.44.0 or later and works with current <code>rjson</code>. A library
+still on the 2.x pins, reticulate 1.28 and <code>rjson</code> 0.2.21,
+fails when synapser loads:</p>
+<pre><code>Error: package or namespace load failed for ‘synapser’ in loadNamespace(i, c(lib.loc, .libPaths()), versionCheck = vI[[i]]):
+namespace ‘reticulate’ 1.28 is being loaded, but &gt;= 1.44.0 is required</code></pre>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"rjson"</span>, <span class="st">"reticulate"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/packageDescription.html" class="external-link">packageVersion</a></span><span class="op">(</span><span class="st">"reticulate"</span><span class="op">)</span>  <span class="co"># 1.44.0 or later</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/packageDescription.html" class="external-link">packageVersion</a></span><span class="op">(</span><span class="st">"rjson"</span><span class="op">)</span>       <span class="co"># later than 0.2.21</span></span></code></pre></div>
+</li>
+<li><p><strong>Switch your repository from RAN to R-universe.</strong>
+If your <code>~/.Rprofile</code>, Dockerfile, or scripts list
+<code>http://ran.synapse.org</code>, replace it with
+<code>https://sage-bionetworks.r-universe.dev</code>. RAN does not host
+synapser 3.0.0.</p></li>
+<li><p><strong>Install synapser</strong> as described in <a href="#install-synapser">Install synapser</a>, then restart R.</p></li>
+</ol>
+</div>
+<div class="section level2">
+<h2 id="installing-an-older-version">Installing an older version<a class="anchor" aria-label="anchor" href="#installing-an-older-version"></a>
+</h2>
+<p>R-universe serves only the latest release. Older releases (synapser
+2.x and earlier, versioned <code>major.minor.patch.build</code>,
+e.g. <code>2.1.1.259</code>) are still on RAN:</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st"><a href="https://remotes.r-lib.org" class="external-link">"remotes"</a></span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_cran</span><span class="op">(</span><span class="st">"synapser"</span>, repos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"http://ran.synapse.org"</span>, <span class="st">"https://cloud.r-project.org"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p>These versions have their own Python and dependency requirements; see
+the documentation for the release you are installing.</p>
+</div>
+<div class="section level2">
+<h2 id="install-from-github">Install from GitHub<a class="anchor" aria-label="anchor" href="#install-from-github"></a>
+</h2>
+<p>The synapser source code is on GitHub at <a href="https://github.com/Sage-Bionetworks/synapser" class="external-link">Sage-Bionetworks/synapser</a>.
+Installing from GitHub is useful only if you want to try changes that
+have not been released yet. For everyday use, install a released version
+from R-universe as shown above.</p>
 <ol style="list-style-type: decimal">
 <li>
 <p><strong>Install the <code>remotes</code> package</strong> if you
-don’t already h ave it:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+don’t already have it:</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st"><a href="https://remotes.r-lib.org" class="external-link">"remotes"</a></span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
@@ -171,387 +300,81 @@ don’t already h ave it:</p>
 <p><strong>Install synapser from GitHub.</strong> Without a
 <code>ref</code>, this installs the default branch,
 <code>develop</code>, which contains the latest development changes:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"Sage-Bionetworks/synapser"</span><span class="op">)</span></span></code></pre></div>
 </li>
 <li>
 <p><strong>Optionally, install a specific branch or release</strong>
 by passing <code>ref</code>:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># The latest release</span></span>
-<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"Sage-Bionetworks/synapser"</span>, ref</span>
-<span> <span class="op">=</span> <span class="st">"master"</span><span class="op">)</span></span>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"Sage-Bionetworks/synapser"</span>, ref <span class="op">=</span> <span class="st">"master"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># A specific release, by its tag (for example, 2.1.5)</span></span>
-<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"Sage-Bionetworks/synapser"</span>, ref</span>
-<span> <span class="op">=</span> <span class="st">"3.0.0"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="co"># A specific release, by its tag</span></span>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"Sage-Bionetworks/synapser"</span>, ref <span class="op">=</span> <span class="st">"3.0.0"</span><span class="op">)</span></span></code></pre></div>
 </li>
 <li>
 <p><strong>Restart R, then load synapser</strong> to confirm the
-install ation:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+installation:</p>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/Sage-Bionetworks/synapser" class="external-link">synapser</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/packageDescription.html" class="external-link">packageVersion</a></span><span class="op">(</span><span class="st">"synapser"</span><span class="op">)</span></span></code></pre></div>
 </li>
 </ol>
-</div>
-<div class="section level3">
-<h3 id="install-r">Install R<a class="anchor" aria-label="anchor" href="#install-r"></a>
-</h3>
-<ol style="list-style-type: decimal">
-<li>Install R v4.2.0 or later
-<ol style="list-style-type: lower-alpha">
-<li>Download links
-<ol style="list-style-type: lower-roman">
-<li>For macOS users, you can select a mirror and download R <a href="https://cran.r-project.org/bin/macosx/" class="external-link">here</a>
-</li>
-<li>For Windows and Linux users, you can select a mirror and download R
-<a href="https://cran.r-project.org/mirrors.html" class="external-link">here</a> NOTE: R 4.1.x
-and earlier are not supported. On Windows, R 4.1.x is the last release
-with 32-bit multiarch, which the required version of reticulate cannot
-build for.</li>
-</ol>
-</li>
-</ol>
-</li>
-<li>Install <a href="https://posit.co/download/rstudio-desktop/" class="external-link">RStudio
-Desktop</a>
-</li>
-<li>For Windows users, if you intend to run the project from outside <a href="https://posit.co/download/rstudio-desktop/" class="external-link">RStudio Desktop</a>
-(for example: VS Code or Terminal) the only additional step is to add R
-to system path: <code>C:\Program Files\R\R-4.2.0\bin\R.exe</code>
-</li>
-</ol>
+<p>To install from a local clone of the repository instead, run
+<code>remotes::install_local(path = ".", upgrade = "never")</code> from
+its root directory.</p>
+<p>On Linux, see the <a href="#linux">Linux</a> section for how to get
+synapser’s compiled dependencies.</p>
 </div>
 <div class="section level2">
-<h2 id="synapser-installation-wip">SynapseR Installation (WIP)<a class="anchor" aria-label="anchor" href="#synapser-installation-wip"></a>
+<h2 id="how-synapser-finds-python">How synapser finds Python<a class="anchor" aria-label="anchor" href="#how-synapser-finds-python"></a>
 </h2>
-<div class="section level3">
-<h3 id="install-from-rstudio">Install from RStudio<a class="anchor" aria-label="anchor" href="#install-from-rstudio"></a>
-</h3>
+<p>When synapser is loaded, it declares its Python requirement
+(<code>synapseclient[pandas]</code>, pinned to the version synapser
+wraps) via <code><a href="https://rstudio.github.io/reticulate/reference/py_require.html" class="external-link">reticulate::py_require()</a></code> and tells reticulate to
+use its managed environment. reticulate then uses <a href="https://docs.astral.sh/uv/" class="external-link">uv</a> to download a compatible Python
+and the Synapse Python client into that environment, and caches them so
+later loads reuse them. This works the same way on Windows, macOS, and
+Linux. synapser supports Python 3.11 to 3.15 and does not request a
+specific one, so reticulate picks its own default: two minor versions
+behind the newest stable release (Python 3.12 as of reticulate
+1.46.0).</p>
+<p>synapser <em>always</em> uses this managed environment. It does not
+use, or install anything into, any other Python on your machine.
+Settings that would otherwise make reticulate choose a different Python
+in its <a href="https://rstudio.github.io/reticulate/articles/versions.html#order-of-discovery" class="external-link">Order
+of Discovery</a> are ignored, including:</p>
 <ul>
-<li>This guide assumes you have Python, R, and RStudio Desktop installed
-as described above.</li>
-<li>This guide will presume most users want to install and work with
-Synapse from RStudio Desktop.</li>
+<li>The <code>RETICULATE_PYTHON</code> or
+<code>RETICULATE_PYTHON_ENV</code> environment variable (this includes
+selecting a Python interpreter in RStudio’s Project or Global
+Options).</li>
+<li>
+<code><a href="https://rstudio.github.io/reticulate/reference/use_python.html" class="external-link">reticulate::use_python()</a></code>,
+<code>use_virtualenv()</code>, or <code>use_condaenv()</code> called
+before <code><a href="https://github.com/Sage-Bionetworks/synapser" class="external-link">library(synapser)</a></code>.</li>
+<li>An activated Python virtual environment (<code>VIRTUAL_ENV</code> is
+set), or a <code>.venv</code>, <code>venv</code>, or similar virtual
+environment in your working directory.</li>
+<li>A virtual environment named <code>r-reticulate</code> (for example,
+<code>~/.virtualenvs/r-reticulate</code>, created by the installation
+instructions for synapser 2.x).</li>
 </ul>
-<p>Once that’s complete, we are ready to move on to selecting our
-desired Python interpreter. If the above fails, follow the steps below,
-then run the installation.</p>
-<ol style="list-style-type: decimal">
-<li>Select your project’s desired Python interpreter</li>
-</ol>
-<p>To select our desired Python interpreter, let’s navigate to Tools
-&gt; Project Options (or Global Options)</p>
-<div class="float" id="id">
-<img src="synapser_options.png" class="class" width="600" height="400" alt="RStudio Project Options menu"><div class="figcaption">RStudio Project Options menu</div>
-</div>
-<ol start="2" style="list-style-type: decimal">
-<li>Let’s select Python from the list of options on the left hand
-side:</li>
-</ol>
-<div class="float" id="id">
-<img src="synapser_python.png" class="class" width="600" height="400" alt="RStudio Project Options with Python selected in left panel"><div class="figcaption">RStudio Project Options with Python selected in
-left panel</div>
-</div>
-<ol start="3" style="list-style-type: decimal">
-<li>Click Select</li>
-</ol>
-<div class="float" id="id">
-<img src="synapser_select_py.png" class="class" width="600" height="400" alt="Python interpreter selection dialog"><div class="figcaption">Python interpreter selection dialog</div>
-</div>
-<ol start="4" style="list-style-type: decimal">
-<li>Select the Virtual Environments tab:</li>
-</ol>
-<div class="float" id="id">
-<img src="synapser_py_env.png" class="class" width="600" height="400" alt="Python virtual environments tab"><div class="figcaption">Python virtual environments tab</div>
-</div>
-<ol start="5" style="list-style-type: decimal">
-<li>Click on Select to choose our desired Reticulate virtual
-environment:</li>
-</ol>
-<div class="float" id="id">
-<img src="synapser_final.png" class="class" width="600" height="400" alt="Selected reticulate virtual environment in RStudio"><div class="figcaption">Selected reticulate virtual environment in
-RStudio</div>
-</div>
-<p>In the example above, we can see that my desired Python 3.9.6
-environment (your python version may be different, and that’s ok)
-installed from the official Python installer and NOT the Python version
-that shipped on macOS - is selected.</p>
-</div>
-<div class="section level3">
-<h3 id="install-from-r">Install from R<a class="anchor" aria-label="anchor" href="#install-from-r"></a>
-</h3>
-<div class="section level4">
-<h4 id="step-by-step-installation-with-dependency-management">Step-by-Step Installation with Dependency Management<a class="anchor" aria-label="anchor" href="#step-by-step-installation-with-dependency-management"></a>
-</h4>
-<p>Below are step-by-step instructions for installing synapser using
-Python 3.10. If you followed the pyenv installation above, these steps
-will use your pyenv-managed Python. If you’re using a system Python
-installation, ensure it’s Python 3.10.</p>
-<div class="section level5">
-<h5 id="prerequisites-verify-python-installation">Prerequisites: Verify Python Installation<a class="anchor" aria-label="anchor" href="#prerequisites-verify-python-installation"></a>
-</h5>
-<p><strong>If using pyenv (recommended):</strong></p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co"># This is a bash session - Not R code</span></span>
-<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="co"># Verify pyenv is working and Python 3.10 is installed</span></span>
-<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="ex">pyenv</span> versions</span>
-<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="ex">python</span> <span class="at">--version</span>  <span class="co"># Should show Python 3.10</span></span>
-<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a><span class="ex">pyenv</span> version</span></code></pre></div>
-<p><strong>If using system Python:</strong></p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co"># This is a bash session - Not R code</span></span>
-<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="co"># Verify you have Python 3.10</span></span>
-<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="ex">python3</span> <span class="at">--version</span>  <span class="co"># Should show Python 3.10.x</span></span>
-<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="fu">which</span> python3</span></code></pre></div>
-</div>
-<div class="section level5">
-<h5 id="r-installation-steps">R Installation Steps<a class="anchor" aria-label="anchor" href="#r-installation-steps"></a>
-</h5>
-<ol style="list-style-type: decimal">
-<li>
-<p><strong>Remove existing reticulate virtual environment</strong>
-(provides a clean environment for installation):</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Remove any existing virtual environment</span></span>
-<span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/virtualenv-tools.html" class="external-link">virtualenv_remove</a></span><span class="op">(</span>envname<span class="op">=</span><span class="st">'r-reticulate'</span><span class="op">)</span></span></code></pre></div>
-</li>
-<li>
-<p><strong>Create a virtual environment using your Python 3.10
-installation:</strong></p>
-<p><strong>If using pyenv (recommended):</strong></p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># This will use the pyenv-managed Python 3.10</span></span>
-<span><span class="co"># You must replace '3.10.x' with the specific version you installed, e.g., '3.10.18'</span></span>
-<span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/virtualenv-tools.html" class="external-link">virtualenv_create</a></span><span class="op">(</span>envname<span class="op">=</span><span class="st">'r-reticulate'</span>, version <span class="op">=</span> <span class="st">'3.10.x'</span><span class="op">)</span></span></code></pre></div>
-<p><strong>If using system Python 3.10:</strong></p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Specify the system Python path explicitly</span></span>
-<span><span class="va">python_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.which.html" class="external-link">Sys.which</a></span><span class="op">(</span><span class="st">"python3"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/virtualenv-tools.html" class="external-link">virtualenv_create</a></span><span class="op">(</span>envname<span class="op">=</span><span class="st">'r-reticulate'</span>, python <span class="op">=</span> <span class="va">python_path</span><span class="op">)</span></span></code></pre></div>
-</li>
-<li>
-<p><strong>Install synapser using remotes (this will automatically
-handle dependency versions):</strong></p>
-<p><strong>For the latest version:</strong></p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Install remotes if not already installed</span></span>
-<span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st"><a href="https://remotes.r-lib.org" class="external-link">"remotes"</a></span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span></span>
-<span><span class="op">}</span></span>
-<span></span>
-<span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/use_python.html" class="external-link">use_virtualenv</a></span><span class="op">(</span><span class="st">"r-reticulate"</span>, required <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Install the latest version of synapser (handles compatible dependency versions automatically)</span></span>
-<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_cran</span><span class="op">(</span><span class="st">"synapser"</span>, repos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"http://ran.synapse.org"</span>, <span class="st">"https://cloud.r-project.org"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><strong>For a specific version:</strong></p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Install remotes if not already installed</span></span>
-<span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st"><a href="https://remotes.r-lib.org" class="external-link">"remotes"</a></span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span></span>
-<span><span class="op">}</span></span>
-<span></span>
-<span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/use_python.html" class="external-link">use_virtualenv</a></span><span class="op">(</span><span class="st">"r-reticulate"</span>, required <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Install a specific version of synapser (e.g., version 2.1.1.259 - major.minor.patch.build)</span></span>
-<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_version</span><span class="op">(</span><span class="st">"synapser"</span>, version <span class="op">=</span> <span class="st">"X.Y.Z.AAA"</span>, repos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"http://ran.synapse.org"</span>, <span class="st">"https://cloud.r-project.org"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><strong>Installing from source:</strong></p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/use_python.html" class="external-link">use_virtualenv</a></span><span class="op">(</span><span class="st">"r-reticulate"</span>, required <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_local</span><span class="op">(</span>path<span class="op">=</span><span class="st">"."</span>, upgrade <span class="op">=</span> <span class="st">"never"</span><span class="op">)</span></span></code></pre></div>
-</li>
-<li>
-<p><strong>If you previously pinned <code>rjson</code> or
-<code>reticulate</code> for synapser 2.x</strong>, undo those pins.
-synapser 3.0.0 works with current versions of both, and it requires
-reticulate 1.44.0 or later — <code>reticulate</code> 1.28 will break
-it:</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"rjson"</span>, <span class="st">"reticulate"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/packageDescription.html" class="external-link">packageVersion</a></span><span class="op">(</span><span class="st">"reticulate"</span><span class="op">)</span>  <span class="co"># must be &gt;= 1.44.0</span></span></code></pre></div>
-<p>Then try step 3 again.</p>
-</li>
-</ol>
-</div>
-</div>
-<div class="section level4">
-<h4 id="alternative-simple-installation">Alternative Simple Installation<a class="anchor" aria-label="anchor" href="#alternative-simple-installation"></a>
-</h4>
-<p>If you don’t have dependency conflicts, you can try the simple
-installation:</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"synapser"</span>, repos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"http://ran.synapse.org"</span>, <span class="st">"https://cloud.r-project.org"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-</div>
-</div>
-<div class="section level3">
-<h3 id="troubleshooting">Troubleshooting<a class="anchor" aria-label="anchor" href="#troubleshooting"></a>
-</h3>
-<ul>
-<li>If you get an error while building the project that it cannot find
-synapseclient module. This is because RStudio is using the wrong python
-version. To get <a href="https://posit.co/download/rstudio-desktop/" class="external-link">RStudio Desktop</a> to
-build the package correctly, navigate to Tools &gt; Project Options &gt;
-Python &gt; Virtual Envs and select the first entry
-<code>~/.virtualenvs/r-reticulate</code> (or Conda if that’s your
-preferred Python virtual env) and perform the below step. R-Studio will
-re-create a virtual environment at that path using the correct Python
-version. Manually specifying python at the official installation path
-doesn’t always fix it.</li>
-<li>If you have already tried building the project with an older version
-of Python, make sure to remove <code>~/.virtualenvs/r-reticulate</code>
-before re-building (it will be re-created).</li>
-<li>If you halt the build process, a lock file might be left behind,
-which will need to be manually deleted
-(<code>$HOME\AppData\Local\R\win-library\4.2\00LOCK-synapser</code>)</li>
-<li>macOS ships with Python by default - Python 3.8 or Python 3.9.6 at
-the location <code>/usr/bin/python</code>3 - but it doesn’t work
-well.</li>
-<li>If you’re intending to run the project from terminal or VSCode on
-Windows and forgot to add python to path, it can be added manually using
-system environment variables:
-<code>C:\Users\USER\AppData\Local\Programs\Python\Python310\</code>
-</li>
-</ul>
-</div>
-</div>
-<div class="section level2">
-<h2 id="optional-managing-python">(Optional) Managing Python<a class="anchor" aria-label="anchor" href="#optional-managing-python"></a>
-</h2>
-<p>This step is optional, but recommended if you plan to use multiple
-Python versions or want full control over your Python environment. Most
-synapser users do <strong>not</strong> need pyenv unless they have
-special requirements. ## Option 1: Using pyenv (Recommended)</p>
-<p>We strongly recommend using <code>pyenv</code> to manage Python
-versions, as it provides better compatibility and easier version
-switching. This is especially important for synapser, which requires
-Python 3.10-3.14.</p>
-<p>Find more information about <code>pyenv</code> <a href="https://github.com/pyenv/pyenv?tab=readme-ov-file#installation" class="external-link">here</a></p>
-<div class="section level4">
-<h4 id="install-pyenv">Install pyenv<a class="anchor" aria-label="anchor" href="#install-pyenv"></a>
-</h4>
-<p><strong>For macOS:</strong></p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="co"># Using Homebrew (recommended)</span></span>
-<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a><span class="ex">brew</span> install pyenv</span>
-<span id="cb15-3"><a href="#cb15-3" tabindex="-1"></a></span>
-<span id="cb15-4"><a href="#cb15-4" tabindex="-1"></a><span class="co"># Or using the automatic installer</span></span>
-<span id="cb15-5"><a href="#cb15-5" tabindex="-1"></a><span class="ex">curl</span> https://pyenv.run <span class="kw">|</span> <span class="fu">bash</span></span></code></pre></div>
-<p><strong>For Linux (including Ubuntu/Amazon Linux):</strong></p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="co"># Install dependencies first</span></span>
-<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a><span class="fu">sudo</span> apt-get update</span>
-<span id="cb16-3"><a href="#cb16-3" tabindex="-1"></a><span class="fu">sudo</span> apt-get install <span class="at">-y</span> make build-essential libssl-dev zlib1g-dev <span class="dt">\</span></span>
-<span id="cb16-4"><a href="#cb16-4" tabindex="-1"></a>libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev <span class="dt">\</span></span>
-<span id="cb16-5"><a href="#cb16-5" tabindex="-1"></a>libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python3-openssl git</span>
-<span id="cb16-6"><a href="#cb16-6" tabindex="-1"></a></span>
-<span id="cb16-7"><a href="#cb16-7" tabindex="-1"></a><span class="co"># Install pyenv</span></span>
-<span id="cb16-8"><a href="#cb16-8" tabindex="-1"></a><span class="ex">curl</span> https://pyenv.run <span class="kw">|</span> <span class="fu">bash</span></span></code></pre></div>
-<p><strong>For Amazon Linux 2/RHEL/CentOS:</strong></p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a><span class="co"># Install dependencies first</span></span>
-<span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a><span class="fu">sudo</span> yum groupinstall <span class="at">-y</span> <span class="st">"Development Tools"</span></span>
-<span id="cb17-3"><a href="#cb17-3" tabindex="-1"></a><span class="fu">sudo</span> yum install <span class="at">-y</span> zlib-devel bzip2-devel readline-devel sqlite-devel libffi-devel <span class="dt">\</span></span>
-<span id="cb17-4"><a href="#cb17-4" tabindex="-1"></a>openssl-devel xz-devel libffi-devel</span>
-<span id="cb17-5"><a href="#cb17-5" tabindex="-1"></a></span>
-<span id="cb17-6"><a href="#cb17-6" tabindex="-1"></a><span class="co"># Install pyenv</span></span>
-<span id="cb17-7"><a href="#cb17-7" tabindex="-1"></a><span class="ex">curl</span> https://pyenv.run <span class="kw">|</span> <span class="fu">bash</span></span></code></pre></div>
-</div>
-<div class="section level4">
-<h4 id="configure-pyenv">Configure pyenv<a class="anchor" aria-label="anchor" href="#configure-pyenv"></a>
-</h4>
-<p>To make pyenv available permanently, you need to add it to your shell
-configuration file. The temporary <code>export</code> command only works
-for the current session.</p>
-<p><strong>Step 1: Determine your shell</strong></p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a><span class="bu">echo</span> <span class="va">$SHELL</span></span>
-<span id="cb18-2"><a href="#cb18-2" tabindex="-1"></a><span class="co"># Common outputs:</span></span>
-<span id="cb18-3"><a href="#cb18-3" tabindex="-1"></a><span class="co"># /bin/bash  -&gt; use ~/.bashrc or ~/.bash_profile</span></span>
-<span id="cb18-4"><a href="#cb18-4" tabindex="-1"></a><span class="co"># /bin/zsh   -&gt; use ~/.zshrc</span></span></code></pre></div>
-<p><strong>Step 2: Add pyenv to your shell configuration
-file</strong></p>
-<p><strong>For bash users:</strong></p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a><span class="co"># Add to ~/.bashrc (Linux) or ~/.bash_profile (macOS)</span></span>
-<span id="cb19-2"><a href="#cb19-2" tabindex="-1"></a><span class="bu">echo</span> <span class="st">'export PATH="$HOME/.pyenv/bin:$PATH"'</span> <span class="op">&gt;&gt;</span> ~/.bashrc</span>
-<span id="cb19-3"><a href="#cb19-3" tabindex="-1"></a><span class="bu">echo</span> <span class="st">'eval "$(pyenv init --path)"'</span> <span class="op">&gt;&gt;</span> ~/.bashrc</span>
-<span id="cb19-4"><a href="#cb19-4" tabindex="-1"></a><span class="bu">echo</span> <span class="st">'eval "$(pyenv init -)"'</span> <span class="op">&gt;&gt;</span> ~/.bashrc</span>
-<span id="cb19-5"><a href="#cb19-5" tabindex="-1"></a></span>
-<span id="cb19-6"><a href="#cb19-6" tabindex="-1"></a><span class="co"># For macOS bash users, also add to ~/.bash_profile</span></span>
-<span id="cb19-7"><a href="#cb19-7" tabindex="-1"></a><span class="bu">echo</span> <span class="st">'export PATH="$HOME/.pyenv/bin:$PATH"'</span> <span class="op">&gt;&gt;</span> ~/.bash_profile</span>
-<span id="cb19-8"><a href="#cb19-8" tabindex="-1"></a><span class="bu">echo</span> <span class="st">'eval "$(pyenv init --path)"'</span> <span class="op">&gt;&gt;</span> ~/.bash_profile</span>
-<span id="cb19-9"><a href="#cb19-9" tabindex="-1"></a><span class="bu">echo</span> <span class="st">'eval "$(pyenv init -)"'</span> <span class="op">&gt;&gt;</span> ~/.bash_profile</span></code></pre></div>
-<p><strong>For zsh users:</strong></p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a><span class="co"># Add to ~/.zshrc</span></span>
-<span id="cb20-2"><a href="#cb20-2" tabindex="-1"></a><span class="bu">echo</span> <span class="st">'export PATH="$HOME/.pyenv/bin:$PATH"'</span> <span class="op">&gt;&gt;</span> ~/.zshrc</span>
-<span id="cb20-3"><a href="#cb20-3" tabindex="-1"></a><span class="bu">echo</span> <span class="st">'eval "$(pyenv init --path)"'</span> <span class="op">&gt;&gt;</span> ~/.zshrc</span>
-<span id="cb20-4"><a href="#cb20-4" tabindex="-1"></a><span class="bu">echo</span> <span class="st">'eval "$(pyenv init -)"'</span> <span class="op">&gt;&gt;</span> ~/.zshrc</span></code></pre></div>
-<p><strong>Alternative: Manual editing</strong> You can also manually
-edit the configuration file:</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a><span class="co"># For bash</span></span>
-<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a><span class="fu">nano</span> ~/.bashrc    <span class="co"># or ~/.bash_profile on macOS</span></span>
-<span id="cb21-3"><a href="#cb21-3" tabindex="-1"></a></span>
-<span id="cb21-4"><a href="#cb21-4" tabindex="-1"></a><span class="co"># For zsh  </span></span>
-<span id="cb21-5"><a href="#cb21-5" tabindex="-1"></a><span class="fu">nano</span> ~/.zshrc</span></code></pre></div>
-<p>Then add these lines to the file:</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a><span class="bu">export</span> <span class="va">PATH</span><span class="op">=</span><span class="st">"</span><span class="va">$HOME</span><span class="st">/.pyenv/bin:</span><span class="va">$PATH</span><span class="st">"</span></span>
-<span id="cb22-2"><a href="#cb22-2" tabindex="-1"></a><span class="bu">eval</span> <span class="st">"</span><span class="va">$(</span><span class="ex">pyenv</span> init <span class="at">--path</span><span class="va">)</span><span class="st">"</span></span>
-<span id="cb22-3"><a href="#cb22-3" tabindex="-1"></a><span class="bu">eval</span> <span class="st">"</span><span class="va">$(</span><span class="ex">pyenv</span> init <span class="at">-</span><span class="va">)</span><span class="st">"</span></span></code></pre></div>
-<p><strong>Step 3: Apply the changes</strong></p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a><span class="co"># Reload your shell configuration</span></span>
-<span id="cb23-2"><a href="#cb23-2" tabindex="-1"></a><span class="bu">source</span> ~/.bashrc    <span class="co"># for bash on Linux</span></span>
-<span id="cb23-3"><a href="#cb23-3" tabindex="-1"></a><span class="bu">source</span> ~/.bash_profile  <span class="co"># for bash on macOS</span></span>
-<span id="cb23-4"><a href="#cb23-4" tabindex="-1"></a><span class="bu">source</span> ~/.zshrc     <span class="co"># for zsh</span></span>
-<span id="cb23-5"><a href="#cb23-5" tabindex="-1"></a></span>
-<span id="cb23-6"><a href="#cb23-6" tabindex="-1"></a><span class="co"># OR restart your terminal</span></span></code></pre></div>
-<p><strong>Step 4: Verify pyenv is working</strong></p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a><span class="ex">pyenv</span> <span class="at">--version</span></span>
-<span id="cb24-2"><a href="#cb24-2" tabindex="-1"></a><span class="fu">which</span> pyenv  <span class="co"># Should show /home/username/.pyenv/bin/pyenv</span></span></code></pre></div>
-</div>
-<div class="section level4">
-<h4 id="install-and-set-python-3-10">Install and set Python 3.10<a class="anchor" aria-label="anchor" href="#install-and-set-python-3-10"></a>
-</h4>
-<div class="sourceCode" id="cb25"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a><span class="co"># List available Python versions</span></span>
-<span id="cb25-2"><a href="#cb25-2" tabindex="-1"></a><span class="ex">pyenv</span> install <span class="at">--list</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="st">" 3\.10"</span></span>
-<span id="cb25-3"><a href="#cb25-3" tabindex="-1"></a></span>
-<span id="cb25-4"><a href="#cb25-4" tabindex="-1"></a><span class="co"># Install Python 3.10 (recommended version)</span></span>
-<span id="cb25-5"><a href="#cb25-5" tabindex="-1"></a><span class="ex">pyenv</span> install 3.10</span>
-<span id="cb25-6"><a href="#cb25-6" tabindex="-1"></a></span>
-<span id="cb25-7"><a href="#cb25-7" tabindex="-1"></a><span class="co"># Set as global default (optional)</span></span>
-<span id="cb25-8"><a href="#cb25-8" tabindex="-1"></a><span class="ex">pyenv</span> global 3.10</span>
-<span id="cb25-9"><a href="#cb25-9" tabindex="-1"></a></span>
-<span id="cb25-10"><a href="#cb25-10" tabindex="-1"></a><span class="co"># Or set as local for your project directory</span></span>
-<span id="cb25-11"><a href="#cb25-11" tabindex="-1"></a><span class="bu">cd</span> /path/to/your/project</span>
-<span id="cb25-12"><a href="#cb25-12" tabindex="-1"></a><span class="ex">pyenv</span> local 3.10</span>
-<span id="cb25-13"><a href="#cb25-13" tabindex="-1"></a></span>
-<span id="cb25-14"><a href="#cb25-14" tabindex="-1"></a><span class="co"># Verify installation</span></span>
-<span id="cb25-15"><a href="#cb25-15" tabindex="-1"></a><span class="ex">python</span> <span class="at">--version</span>  <span class="co"># Should show Python 3.10</span></span>
-<span id="cb25-16"><a href="#cb25-16" tabindex="-1"></a><span class="ex">pyenv</span> version</span></code></pre></div>
-</div>
-<div class="section level3">
-<h3 id="option-2-official-python-installer-alternative">Option 2: Official Python Installer (Alternative)<a class="anchor" aria-label="anchor" href="#option-2-official-python-installer-alternative"></a>
-</h3>
-<p>If you prefer not to use pyenv, you can install Python from the
-official installers:</p>
-<ol style="list-style-type: decimal">
-<li>
-<p>Install Python from one of the official <a href="https://www.python.org/downloads/" class="external-link">Python installers</a> - version
-3.10 to 3.14 and remove other versions of Python except for the one that
-ships with macOS located in <code>usr/bin/python</code> (note for
-windows: make sure to add Python to path if you’re planning on running
-the project from outside RStudio, for example from terminal). TIP: You
-can verify which version you have with….</p>
-<pre><code>% which -a python3
-/usr/bin/python3        # &lt;- Default Python shipped with macOS
-
-% which -a python3
-/usr/local/bin/python3  # &lt;- Official Python installer (3.11.1 for me)
-/usr/bin/python3        # &lt;- Default Python shipped with macOS</code></pre>
-<p>macOS ships with Python by default - Python 3.8 or Python 3.9.6 at
-the location /usr/bin/python3 - but it doesn’t work well.</p>
-<p>Only the official installer versions work. Seriously. Please do
-yourself a favor and avoid having a very long, sad day because you
-insisted on using the version that shipped with macOS by
-default.</p>
-</li>
-</ol>
-</div>
+<p>Loading synapser sets <code>RETICULATE_PYTHON</code> to
+<code>"managed"</code> for the rest of the R session. Other packages
+that use reticulate in the same session therefore run in the same
+managed environment. If they need additional Python packages, declare
+them with <code><a href="https://rstudio.github.io/reticulate/reference/py_require.html" class="external-link">reticulate::py_require()</a></code>, which adds them to that
+environment.</p>
+<p>reticulate binds an R session to one Python the first time Python is
+used. When another package or a <code>reticulate</code> call has already
+bound a different Python, <code><a href="https://github.com/Sage-Bionetworks/synapser" class="external-link">library(synapser)</a></code> stops with:</p>
+<pre><code>synapser only runs in the Python environment reticulate manages with uv, but Python was already initialized in this R session with:
+  &lt;path to the other Python&gt;
+Restart R and load synapser before anything else that uses Python.</code></pre>
+<p>To fix it, restart R and call <code><a href="https://github.com/Sage-Bionetworks/synapser" class="external-link">library(synapser)</a></code> before
+anything else that uses Python.</p>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>

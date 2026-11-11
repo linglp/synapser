@@ -96,7 +96,7 @@
 <div class="section level3">
 <h3 id="prerequisites">Prerequisites<a class="anchor" aria-label="anchor" href="#prerequisites"></a></h3>
 <ul><li>R (check <code>DESCRIPTION</code> for minimum version)</li>
-<li>Python (for the embedded Python client)</li>
+<li>Python 3.11+ (for the <a href="https://github.com/Sage-Bionetworks/synapsePythonClient/blob/master/setup.cfg" class="external-link">embedded Python client</a>)</li>
 <li>
 <code>devtools</code>, <code>pkgdown</code> (== 2.2.0), <code>styler</code> R packages</li>
 </ul></div>
@@ -274,36 +274,35 @@
 <h2 id="updating-the-python-client-version">Updating the Python Client Version<a class="anchor" aria-label="anchor" href="#updating-the-python-client-version"></a></h2>
 <p>The wrapped Python client version is pinned in <code>R/shared.R</code>:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">PYTHON_CLIENT_VERSION</span> <span class="op">&lt;-</span> <span class="st">'4.12'</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">PYTHON_CLIENT_VERSION</span> <span class="op">&lt;-</span> <span class="st">'4.14'</span></span></code></pre></div>
 <p>After bumping the version, regenerate documentation (see next section).</p>
+<div class="section level3">
+<h3 id="testing-against-a-synapseclient-feature-branch">Testing Against a synapseclient Feature Branch<a class="anchor" aria-label="anchor" href="#testing-against-a-synapseclient-feature-branch"></a></h3>
+<p>To exercise synapser against unreleased changes on a <code>synapsePythonClient</code> feature branch, put your checkout on <code>PYTHONPATH</code> in a <strong>fresh</strong> R session before loading synapser:</p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.setenv</a></span><span class="op">(</span>PYTHONPATH <span class="op">=</span> <span class="st">"/path/to/synapsePythonClient"</span><span class="op">)</span></span>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">load_all</span><span class="op">(</span><span class="st">"/path/to/synapser"</span><span class="op">)</span></span></code></pre></div>
+<p>synapser still provisions its uv-managed environment with the pinned <code>synapseclient[pandas]</code>, which supplies the dependencies. Python searches <code>PYTHONPATH</code> before site-packages, so <code>import synapseclient</code> resolves to your checkout, including uncommitted edits.</p>
+<ul><li>If the branch adds a Python dependency the pinned version lacks, declare it before loading, e.g. <code>reticulate::py_require("newdep")</code>.</li>
+<li>If you edit the synapsePythonClient checkout after synapser has loaded, restart R to pick up the edits. Python caches <code>synapseclient</code> on first import, so re-running <code>load_all()</code> in the same session reuses the old code.</li>
+<li>The same allowlist check as for a version bump applies (see <a href="#updating-the-python-client-version">Updating the Python Client Version</a>).</li>
+</ul><p>To confirm synapser loaded your branch:</p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_run.html" class="external-link">py_run_string</a></span><span class="op">(</span><span class="st">"import synapseclient; print(synapseclient.__version__))"</span><span class="op">)</span></span></code></pre></div>
+<p>The printed file path should point into your feature-branch checkout, and the version is the checkout’s, not <code>PYTHON_CLIENT_VERSION</code>.</p>
+</div>
 </div>
 <div class="section level2">
-<h2 id="testing-against-a-synapseclient-feature-branch">Testing Against a synapseclient Feature Branch<a class="anchor" aria-label="anchor" href="#testing-against-a-synapseclient-feature-branch"></a></h2>
-<p>To exercise synapser against unreleased changes on a <code>synapsePythonClient</code> feature branch (best option if you’re iterating on both repos at once), use a persistent virtualenv with an editable install rather than the pinned version in <code>R/shared.R</code>.</p>
-<ol style="list-style-type: decimal"><li>
-<p>Checkout the feature branch and install it editable into a dedicated venv:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="bu">cd</span> /path/to/synapsePythonClient</span>
-<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a><span class="fu">git</span> checkout SYNPY-1234-feature-branch</span>
-<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> venv ~/.venvs/synapser-dev</span>
-<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a><span class="bu">source</span> ~/.venvs/synapser-dev/bin/activate</span>
-<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a><span class="ex">pip</span> install <span class="at">-e</span> <span class="st">".[pandas]"</span></span></code></pre></div>
-</li>
-<li>
-<p>In a <strong>fresh</strong> R session, point <code>RETICULATE_PYTHON</code> at that venv before synapser (or reticulate) touches Python, then load synapser:</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.setenv</a></span><span class="op">(</span>RETICULATE_PYTHON <span class="op">=</span> <span class="st">"~/.venvs/synapser-dev/bin/python"</span><span class="op">)</span></span>
-<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">load_all</span><span class="op">(</span><span class="st">"/path/to/synapser"</span><span class="op">)</span></span></code></pre></div>
-</li>
-</ol><p>This works because <code>.onLoad</code> in <code>R/zzz.R</code> calls <code>py_require()</code> with the pinned version first, which normally makes reticulate auto-provision an ephemeral uv-managed venv at that exact version. If <code>RETICULATE_PYTHON</code> already points to a persistent venv, reticulate uses that env instead — so <code>import synapseclient</code> resolves to your editable branch checkout, including any uncommitted edits, with no reinstall needed as you keep editing.</p>
+<h2 id="python-environment">Python Environment<a class="anchor" aria-label="anchor" href="#python-environment"></a></h2>
+<p>synapser runs in its own ephemeral Python environment, which reticulate automatically sets up using uv and the pinned version of synapseclient[pandas] (see R/shared.R). No manual Python installation or environment setup is required.</p>
+<p>If Python has not yet been initialized, synapser ignores RETICULATE_PYTHON, use_python(), activated virtual environments, and project-level .venv directories.</p>
 <blockquote>
-<p><strong>Note:</strong> Python binds to the R process once. If you change <code>RETICULATE_PYTHON</code> or need to switch branches, restart R — re-running <code>load_all()</code> alone won’t pick up the change.</p>
+<p><strong>Note:</strong> Python can only be set up once per R session. If another package initializes Python before synapser loads, synapser stops with an error naming the Python it found. Restart R and load synapser first.</p>
 </blockquote>
-<p>To confirm synapser actually loaded your branch (not a stale cached env):</p>
+<p>To confirm which environment synapser is using:</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_config.html" class="external-link">py_config</a></span><span class="op">(</span><span class="op">)</span>  <span class="co"># check the python: path matches your venv</span></span>
-<span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_run.html" class="external-link">py_run_string</a></span><span class="op">(</span><span class="st">"import synapseclient, os; print(synapseclient.__version__); print(os.path.dirname(synapseclient.__file__))"</span><span class="op">)</span></span></code></pre></div>
-<p>The printed file path should point into your feature-branch checkout.</p>
-<p>Because synapser generates its R wrappers by introspecting the Python module at load time, also check whether the branch adds/renames classes or methods that need corresponding updates to the allowlists in <code>R/shared.R</code> (see <a href="#adding-new-models-or-functions">Adding New Models or Functions</a> above) — new Python API surface is otherwise silently omitted from synapser.</p>
+<code class="sourceCode R"><span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_config.html" class="external-link">py_config</a></span><span class="op">(</span><span class="op">)</span>  <span class="co"># the python: path should be under reticulate's uv cache</span></span>
+<span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_run.html" class="external-link">py_run_string</a></span><span class="op">(</span><span class="st">"import synapseclient; print(synapseclient.__version__)"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="regenerating-documentation">Regenerating Documentation<a class="anchor" aria-label="anchor" href="#regenerating-documentation"></a></h2>
@@ -332,17 +331,17 @@
 </ul></li>
 <li><p>Update the <code>_pkgdown.yml</code> files to reflect any new or modified content. Be sure to organize tutorials imported from the Python client under the “Tutorials” section, and place supplementary materials or extended examples in the “Advanced” section under “Further Reading,” as appropriate.</p></li>
 <li>
-<p>Check if the newly generated reference page can be rendered successfully.</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a><span class="ex">R</span> <span class="at">-e</span> <span class="st">"pkgdown::build_reference()"</span></span></code></pre></div>
+<p>Check if the newly generated reference page can be rendered successfully. The <code>override</code> builds into <code>site-out/</code>, the same folder the docs workflow uses, so nothing under <code>docs/</code> changes.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a><span class="ex">R</span> <span class="at">-e</span> <span class="st">"pkgdown::build_reference(override = list(destination = 'site-out'))"</span></span></code></pre></div>
 </li>
 <li>
 <p>Check if newly generated home or article pages can be rendered successfully. For guidance on additional documentation sections, refer to: <a href="https://pkgdown.r-lib.org/reference/index.html" class="external-link uri">https://pkgdown.r-lib.org/reference/index.html</a></p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a><span class="ex">R</span> <span class="at">-e</span> <span class="st">"pkgdown::build_home()"</span></span>
-<span id="cb20-2"><a href="#cb20-2" tabindex="-1"></a><span class="ex">R</span> <span class="at">-e</span> <span class="st">"pkgdown::build_articles()"</span></span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a><span class="ex">R</span> <span class="at">-e</span> <span class="st">"pkgdown::build_home(override = list(destination = 'site-out'))"</span></span>
+<span id="cb20-2"><a href="#cb20-2" tabindex="-1"></a><span class="ex">R</span> <span class="at">-e</span> <span class="st">"pkgdown::build_articles(override = list(destination = 'site-out'))"</span></span></code></pre></div>
 </li>
 <li>
-<p>Commit both <code>auto-man/</code>, <code>man/</code>, <code>docs/reference</code> or <code>/vignettes</code> changes:</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a><span class="fu">git</span> add auto-man/ man/ docs/reference/ vignettes/</span>
+<p>Commit the <code>auto-man/</code>, <code>man/</code>, <code>_pkgdown.yml</code> and <code>vignettes/</code> changes. Do not commit rendered pages: the <a href="#publishing-documentation">docs workflow</a> builds and publishes the site.</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a><span class="fu">git</span> add auto-man/ man/ _pkgdown.yml vignettes/</span>
 <span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"SYNR-1234: update generated and curated docs for new FooClass wrapper"</span></span></code></pre></div>
 </li>
 </ol><blockquote>
@@ -364,24 +363,24 @@
 </li>
 <li><p>Update <code>NEWS.md</code> (changelog) and bump the version in <code>DESCRIPTION</code>.</p></li>
 <li>
-<p>Build the pkgdown site:</p>
+<p>Rebuild the README and check that the pkgdown site builds:</p>
 <div class="sourceCode" id="cb23"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a><span class="ex">R</span> <span class="at">-e</span> <span class="st">"devtools::build_readme()"</span></span>
-<span id="cb23-2"><a href="#cb23-2" tabindex="-1"></a><span class="ex">R</span> <span class="at">-e</span> <span class="st">"pkgdown::build_site()"</span></span></code></pre></div>
-<p>Review <code>docs/index.html</code>, then commit and push.</p>
+<span id="cb23-2"><a href="#cb23-2" tabindex="-1"></a><span class="ex">R</span> <span class="at">-e</span> <span class="st">"pkgdown::build_site(override = list(destination = 'site-out'))"</span></span></code></pre></div>
+<p>Review <code>site-out/index.html</code>, then commit and push. The rendered site is not committed: the docs workflow builds and publishes it (see <a href="#publishing-documentation">Publishing Documentation</a>).</p>
 </li>
 <li>
 <p>On GitHub → <a href="https://github.com/Sage-Bionetworks/synapser/releases" class="external-link">Releases</a>, draft a new release:</p>
 <ul><li>
-<strong>Tag</strong>: <code>X.Y-rc</code>
+<strong>Tag</strong>: <code>X.Y.Z-rc</code>
 </li>
 <li>
 <strong>Target</strong>: <code>vX.Y-rc</code> branch</li>
 <li>
-<strong>Title</strong>: <code>X.Y-rc</code>
+<strong>Title</strong>: <code>X.Y.Z-rc</code>
 </li>
 <li>
 <strong>Check</strong> “Set as a pre-release”</li>
-</ul><p>Publishing triggers a GitHub Action that deploys to <a href="http://staging-ran.synapse.org" class="external-link uri">http://staging-ran.synapse.org</a>.</p>
+</ul><p>Publishing triggers a GitHub Action that deploys to <a href="http://staging-ran.synapse.org" class="external-link uri">http://staging-ran.synapse.org</a>. It also publishes the docs for this release candidate to <code>vX.Y.Z-rc/</code> on the docs site, so validators can review them (see <a href="#publishing-documentation">Publishing Documentation</a>).</p>
 </li>
 <li><p>Notify validators with the artifact version (format: <code>&lt;version&gt;.&lt;build-number&gt;</code>, e.g. <code>1.0.87</code>).</p></li>
 </ol></div>
@@ -404,23 +403,23 @@
 <ol style="list-style-type: decimal"><li>
 <p>On GitHub → Releases, draft a new release:</p>
 <ul><li>
-<strong>Tag</strong>: <code>X.Y</code>
+<strong>Tag</strong>: <code>X.Y.Z</code>
 </li>
 <li>
 <strong>Target</strong>: <code>vX.Y-rc</code> branch</li>
 <li>
-<strong>Title</strong>: <code>X.Y</code>
+<strong>Title</strong>: <code>X.Y.Z</code>
 </li>
 <li>
 <strong>Do NOT</strong> check “This is a pre-release”</li>
-</ul><p>Publishing deploys to <a href="http://ran.synapse.org" class="external-link uri">http://ran.synapse.org</a>.</p>
+</ul><p>Publishing deploys to <a href="http://ran.synapse.org" class="external-link uri">http://ran.synapse.org</a>. It also publishes the docs for this release to <code>vX.Y.Z/</code> on the docs site, but only for tags of the form <code>X.Y.Z</code>, and deletes the release candidate docs in <code>vX.Y.Z-rc/</code> (see <a href="#publishing-documentation">Publishing Documentation</a>).</p>
 </li>
 <li>
 <p>Merge the release candidate to <code>master</code>:</p>
 <div class="sourceCode" id="cb26"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" tabindex="-1"></a><span class="fu">git</span> checkout master</span>
 <span id="cb26-2"><a href="#cb26-2" tabindex="-1"></a><span class="fu">git</span> merge vX.Y-rc</span>
 <span id="cb26-3"><a href="#cb26-3" tabindex="-1"></a><span class="fu">git</span> push upstream master</span></code></pre></div>
-<p>Merging to <code>master</code> automatically updates <a href="https://r-docs.synapse.org" class="external-link uri">https://r-docs.synapse.org</a> via GitHub Pages.</p>
+<p>Pushing to <code>master</code> runs the docs workflow, which publishes the <code>stable/</code> docs at <a href="https://r-docs.synapse.org/stable/" class="external-link uri">https://r-docs.synapse.org/stable/</a>.</p>
 </li>
 <li>
 <p>Merge <code>master</code> back to <code>develop</code>:</p>
@@ -442,13 +441,30 @@
 <li>Production RAN: <a href="http://ran.synapse.org" class="external-link uri">http://ran.synapse.org</a>
 </li>
 </ol><p>Each location should include general <code>synapser</code> information and installation guidance. The package documentation site should be the canonical source for full documentation, and the other locations should link to it.</p>
+<p>The docs site is built and published automatically by the <code>docs</code> GitHub Actions workflow (<a href="https://github.com/Sage-Bionetworks/synapser/blob/develop/.github/workflows/docs.yml" class="external-link"><code>.github/workflows/docs.yml</code></a>), so rendered pages are not committed to this repository. Each build owns one folder on the <code>gh-pages</code> branch, which GitHub Pages serves:</p>
+<table class="table"><colgroup><col width="33%"><col width="66%"></colgroup><thead><tr><th>Event</th>
+<th>Published to</th>
+</tr></thead><tbody><tr><td>Push to <code>develop</code>
+</td>
+<td><code>latest/</code></td>
+</tr><tr><td>Push to <code>master</code>
+</td>
+<td><code>stable/</code></td>
+</tr><tr><td>Production release, tag <code>X.Y.Z</code>
+</td>
+<td><code>vX.Y.Z/</code></td>
+</tr><tr><td>Pre-release, tag <code>X.Y.Z-rc</code>
+</td>
+<td>
+<code>vX.Y.Z-rc/</code>, deleted once <code>X.Y.Z</code> is published</td>
+</tr></tbody></table><p>Other pre-release tags (for example <code>X.Y.Z-test</code> or <code>X.Y.Z-rc1</code>) are not published, and neither are pushes to a <code>vX.Y-rc</code> branch. The site root forwards to <code>stable/</code> (or to <code>latest/</code> until there is a stable version), and the home page of every version has a version picker. The list of versions is <code>versions.json</code> at the site root; <code>.github/scripts/docs_versions.py</code> rewrites it on every publish.</p>
 <p>Documentation updates are part of the release process:</p>
-<ul><li>During staging release builds (artifact publication to staging RAN), regenerate docs and commit updates to the release candidate branch.</li>
-<li>During production release, merge the release candidate branch to <code>master</code>; this updates the published docs site.</li>
+<ul><li>During a staging release, check that the site builds locally (see <a href="#step-2-staging-release">Step 2</a>). Publishing the pre-release (tag <code>X.Y.Z-rc</code>) adds its docs to <code>vX.Y.Z-rc/</code>; pushes to the release candidate branch are not published.</li>
+<li>During a production release, publishing the release (tag <code>X.Y.Z</code>) adds that version’s docs and deletes <code>vX.Y.Z-rc/</code>, and merging the release candidate to <code>master</code> updates <code>stable/</code>.</li>
 </ul></div>
 <div class="section level2">
 <h2 id="cicd">CI/CD<a class="anchor" aria-label="anchor" href="#cicd"></a></h2>
-<p>GitHub Actions drive all builds and deployments. The workflow is defined in <a href="https://github.com/Sage-Bionetworks/synapser/blob/develop/.github/workflows/build.yml" class="external-link"><code>.github/workflows/build.yml</code></a>. Every push to a fork runs the build and test suite automatically.</p>
+<p>GitHub Actions drive all builds and deployments. The build and deploy workflow is defined in <a href="https://github.com/Sage-Bionetworks/synapser/blob/develop/.github/workflows/build.yml" class="external-link"><code>.github/workflows/build.yml</code></a>. The documentation site is built and published by <a href="https://github.com/Sage-Bionetworks/synapser/blob/develop/.github/workflows/docs.yml" class="external-link"><code>.github/workflows/docs.yml</code></a> (see <a href="#publishing-documentation">Publishing Documentation</a>). Every push to a fork runs the build and test suite automatically.</p>
 </div>
 </div>
 

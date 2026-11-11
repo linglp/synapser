@@ -278,10 +278,11 @@ synStoreRows(instance, values, schema_storage_strategy=NULL, column_expansion_st
   (list\[Union\[TableSchemaChangeRequest, UploadToTableRequest,
   AppendableRowSetRequest\]\]) Additional changes to the table that
   should execute within the same transaction as appending or updating
-  rows. This is used as a part of the `synUpsertRows()` function call to
-  allow for the updating of rows and the updating of the table schema in
-  the same transaction. In most cases you will not need to use this
-  argument.
+  rows. This is used as a part of the
+  [`synUpsertRows()`](https://r-docs.synapse.org/latest/reference/Table_UpsertRows.md)
+  function call to allow for the updating of rows and the updating of
+  the table schema in the same transaction. In most cases you will not
+  need to use this argument.
 
 - insert_size_bytes:
 
