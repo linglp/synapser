@@ -36,6 +36,7 @@ on:
     branches:
       - develop
       - master
+      - my-experiment
   release:
     types:
       - published
@@ -111,7 +112,7 @@ jobs:
       - name: Check out publishing tools
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          ref: ${{ github.event.repository.default_branch }}
+          ref: my-experiment
           path: tools
           persist-credentials: false
           # non-cone mode, so only these folders are checked out and the files
