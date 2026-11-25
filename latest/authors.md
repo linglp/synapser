@@ -15,7 +15,7 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/Sage-Bionetworks/synapser/blob/develop/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/Sage-Bionetworks/synapser/blob/my-experiment/DESCRIPTION)
 
 Lu D, Yu T, Hoff B, Fauble B (2026). *synapser: R Language Bindings for
 Synapse API*. R package version 3.0.0,

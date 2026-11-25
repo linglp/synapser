@@ -1,11 +1,11 @@
 [
   {
-    "name": "latest (develop)",
-    "path": "latest/"
-  },
-  {
     "name": "3.0.0",
     "path": "v3.0.0/"
+  },
+  {
+    "name": "latest (develop)",
+    "path": "latest/"
   },
   {
     "name": "2.1.5",

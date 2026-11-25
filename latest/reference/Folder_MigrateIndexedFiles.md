@@ -1,11 +1,11 @@
 # Folder : migrate_indexed_files
 
 Migrate files that have been indexed with
-[`synIndexFilesForMigration()`](https://r-docs.synapse.org/latest/reference/Folder_IndexFilesForMigration.md).
+[`synIndexFilesForMigration()`](https://linglp.github.io/synapser/latest/reference/Folder_IndexFilesForMigration.md).
 
 This is the second step in migrating files to a new storage location.
 Files must first be indexed using
-[`synIndexFilesForMigration()`](https://r-docs.synapse.org/latest/reference/Folder_IndexFilesForMigration.md).
+[`synIndexFilesForMigration()`](https://linglp.github.io/synapser/latest/reference/Folder_IndexFilesForMigration.md).
 
 **Interactive confirmation:** When called from an interactive shell and
 `force=FALSE` (the default), this function will print the number of
@@ -29,7 +29,7 @@ synMigrateIndexedFiles(instance, db_path, create_table_snapshots=TRUE, continue_
 - db_path:
 
   (character) Path to the SQLite database file created by
-  [`synIndexFilesForMigration()`](https://r-docs.synapse.org/latest/reference/Folder_IndexFilesForMigration.md).
+  [`synIndexFilesForMigration()`](https://linglp.github.io/synapser/latest/reference/Folder_IndexFilesForMigration.md).
   You can get this from the `db_path` field of the `MigrationResult` it
   returns.
 

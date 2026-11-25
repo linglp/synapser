@@ -32,7 +32,7 @@ synListAcl(instance, recursive=FALSE, include_container_content=FALSE, target_en
   used with include_container_content=TRUE to have any effect. Setting
   recursive=TRUE with include_container_content=FALSE will raise an
   error. Only works on classes that support the
-  [`synSyncFromSynapse()`](https://r-docs.synapse.org/latest/reference/Folder_SyncFromSynapse.md)
+  [`synSyncFromSynapse()`](https://linglp.github.io/synapser/latest/reference/Folder_SyncFromSynapse.md)
   function.
 
 - include_container_content:

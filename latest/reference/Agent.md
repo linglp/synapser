@@ -62,22 +62,22 @@ NULL
 - `Agent(cloud_agent_id=NULL, cloud_alias_id=NULL, registration_id=NULL, registered_on=NULL, type=NULL, sessions=list(), current_session=NULL)`:
   Constructor for `Agent`
 
-- [`synGetChatHistory`](https://r-docs.synapse.org/latest/reference/Agent_GetChatHistory.md)`(instance)`:
+- [`synGetChatHistory`](https://linglp.github.io/synapser/latest/reference/Agent_GetChatHistory.md)`(instance)`:
   Gets the chat history for the current session.
 
-- [`synGetSession`](https://r-docs.synapse.org/latest/reference/Agent_GetSession.md)`(instance, session_id, synapse_client=NULL)`:
+- [`synGetSession`](https://linglp.github.io/synapser/latest/reference/Agent_GetSession.md)`(instance, session_id, synapse_client=NULL)`:
   Gets an existing agent session. Adds the session to the Agent's
   sessions named list and sets it as the current session.
 
-- [`synPrompt`](https://r-docs.synapse.org/latest/reference/Agent_Prompt.md)`(instance, prompt, enable_trace=FALSE, print_response=FALSE, session=NULL, newer_than=NULL, timeout=120L, synapse_client=NULL)`:
+- [`synPrompt`](https://linglp.github.io/synapser/latest/reference/Agent_Prompt.md)`(instance, prompt, enable_trace=FALSE, print_response=FALSE, session=NULL, newer_than=NULL, timeout=120L, synapse_client=NULL)`:
   Sends a prompt to the agent for the current session. If no session is
   currently active, a new session will be started.
 
-- [`synRegister`](https://r-docs.synapse.org/latest/reference/Agent_Register.md)`(instance, synapse_client=NULL)`:
+- [`synRegister`](https://linglp.github.io/synapser/latest/reference/Agent_Register.md)`(instance, synapse_client=NULL)`:
   Registers an agent with the Synapse API. If agent already exists, it
   will be retrieved.
 
-- [`synStartSession`](https://r-docs.synapse.org/latest/reference/Agent_StartSession.md)`(instance, access_level="PUBLICLY_ACCESSIBLE", synapse_client=NULL)`:
+- [`synStartSession`](https://linglp.github.io/synapser/latest/reference/Agent_StartSession.md)`(instance, access_level="PUBLICLY_ACCESSIBLE", synapse_client=NULL)`:
   Starts an agent session. Adds the session to the Agent's sessions
   named list and sets it as the current session.
 

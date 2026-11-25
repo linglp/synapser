@@ -41,13 +41,13 @@ NULL
 - `Organization(name=NULL, id=NULL, created_on=NULL, created_by=NULL)`:
   Constructor for `Organization`
 
-- [`synGetAcl`](https://r-docs.synapse.org/latest/reference/Organization_GetAcl.md)`(instance, synapse_client=NULL)`:
+- [`synGetAcl`](https://linglp.github.io/synapser/latest/reference/Organization_GetAcl.md)`(instance, synapse_client=NULL)`:
   Gets the ACL for this organization
 
-- [`synGetJsonSchemas`](https://r-docs.synapse.org/latest/reference/Organization_GetJsonSchemas.md)`(instance, synapse_client=NULL)`:
+- [`synGetJsonSchemas`](https://linglp.github.io/synapser/latest/reference/Organization_GetJsonSchemas.md)`(instance, synapse_client=NULL)`:
   Gets the JSON Schemas that are part of this organization
 
-- [`synUpdateAcl`](https://r-docs.synapse.org/latest/reference/Organization_UpdateAcl.md)`(instance, principal_id, access_type, synapse_client=NULL)`:
+- [`synUpdateAcl`](https://linglp.github.io/synapser/latest/reference/Organization_UpdateAcl.md)`(instance, principal_id, access_type, synapse_client=NULL)`:
   Updates the ACL for a principal for this organization
 
 ## Examples

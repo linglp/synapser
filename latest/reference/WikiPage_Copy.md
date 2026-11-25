@@ -53,7 +53,7 @@ synCopy(instance, destination_owner_id, destination_sub_page_id=NULL, update_lin
 ## Value
 
 A list of
-[`WikiHeader`](https://r-docs.synapse.org/latest/reference/WikiHeader.md)
+[`WikiHeader`](https://linglp.github.io/synapser/latest/reference/WikiHeader.md)
 objects for the destination entity.
 
 ## Errors

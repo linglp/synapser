@@ -74,11 +74,11 @@ As an organizer of a Synapse challenge, you will
 ## Prerequisites
 
 - You have an existing
-  [Evaluation](https://r-docs.synapse.org/latest/articles/evaluation.md)
+  [Evaluation](https://linglp.github.io/synapser/latest/articles/evaluation.md)
   on Synapse to work from
 - You have an existing entity with which to make a submission (can be a
-  [File](https://r-docs.synapse.org/latest/articles/file.md) or Docker
-  Repository)
+  [File](https://linglp.github.io/synapser/latest/articles/file.md) or
+  Docker Repository)
 - You have the correct permissions on the Evaluation queue for your
   desired tutorial section (participant or organizer)
 
@@ -88,7 +88,7 @@ As an organizer of a Synapse challenge, you will
 
 \
 [`library`](https://rdrr.io/r/base/library.html)`(`[`synapser`](https://github.com/Sage-Bionetworks/synapser)`)`\
-[`synLogin`](https://r-docs.synapse.org/latest/reference/synLogin.md)`(``)`\
+[`synLogin`](https://linglp.github.io/synapser/latest/reference/synLogin.md)`(``)`\
 \
 `# REQUIRED: Set these to your actual Synapse IDs`\
 `# Do NOT leave these as NULL - the script will not work properly`\
@@ -107,12 +107,12 @@ As an organizer of a Synapse challenge, you will
 
 \
 `# Create a new Submission object`\
-`submission`` ``<-`` `[`Submission`](https://r-docs.synapse.org/latest/reference/Submission.md)`(`\
+`submission`` ``<-`` `[`Submission`](https://linglp.github.io/synapser/latest/reference/Submission.md)`(`\
 `  entity_id ``=`` ``ENTITY_ID``, evaluation_id ``=`` ``EVALUATION_ID``, name ``=`` ``"My Tutorial Submission"`\
 `)`\
 \
 `# Submit the entity to the evaluation queue`\
-`submission`` ``<-`` ``submission`` ``|>`` `[`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)`(``)`\
+`submission`` ``<-`` ``submission`` ``|>`` `[`synStore`](https://linglp.github.io/synapser/latest/reference/synStore.md)`(``)`\
 \
 [`print`](https://rdrr.io/r/base/print.html)`(``"Submission created successfully!"``)`\
 [`print`](https://rdrr.io/r/base/print.html)`(`[`sprintf`](https://rdrr.io/r/base/sprintf.html)`(``"Submission ID: %s"``, ``submission``$``id``)``)`\
@@ -128,7 +128,7 @@ As an organizer of a Synapse challenge, you will
 
 \
 `# Retrieve the submission we just created`\
-`retrieved_submission`` ``<-`` `[`Submission`](https://r-docs.synapse.org/latest/reference/Submission.md)`(``id ``=`` ``submission_id``)`` ``|>`` `[`synGet`](https://r-docs.synapse.org/latest/reference/synGet.md)`(``)`\
+`retrieved_submission`` ``<-`` `[`Submission`](https://linglp.github.io/synapser/latest/reference/Submission.md)`(``id ``=`` ``submission_id``)`` ``|>`` `[`synGet`](https://linglp.github.io/synapser/latest/reference/synGet.md)`(``)`\
 \
 [`print`](https://rdrr.io/r/base/print.html)`(``"Retrieved submission:"``)`\
 [`print`](https://rdrr.io/r/base/print.html)`(`[`sprintf`](https://rdrr.io/r/base/sprintf.html)`(``"  ID: %s"``, ``retrieved_submission``$``id``)``)`\
@@ -149,7 +149,7 @@ As an organizer of a Synapse challenge, you will
 
 \
 `# Get all of your submissions for this evaluation`\
-`user_submissions`` ``<-`` `[`as.list`](https://rdrr.io/r/base/list.html)`(`[`Submission`](https://r-docs.synapse.org/latest/reference/Submission.md)`(``)`` ``|>`` ``synGetUserSubmissions``(``evaluation_id ``=`` ``EVALUATION_ID``)``)`\
+`user_submissions`` ``<-`` `[`as.list`](https://rdrr.io/r/base/list.html)`(`[`Submission`](https://linglp.github.io/synapser/latest/reference/Submission.md)`(``)`` ``|>`` ``synGetUserSubmissions``(``evaluation_id ``=`` ``EVALUATION_ID``)``)`\
 \
 [`print`](https://rdrr.io/r/base/print.html)`(`[`sprintf`](https://rdrr.io/r/base/sprintf.html)`(``"Found %d submissions from the current user:"``, `[`length`](https://rdrr.io/r/base/length.html)`(``user_submissions``)``)``)`\
 `for`` ``(``i`` ``in`` `[`seq_along`](https://rdrr.io/r/base/seq.html)`(``user_submissions``)``)`` ``{`\
@@ -161,7 +161,7 @@ As an organizer of a Synapse challenge, you will
 
 \
 `# Fetch the status of our submission`\
-`status`` ``<-`` `[`SubmissionStatus`](https://r-docs.synapse.org/latest/reference/SubmissionStatus.md)`(``id ``=`` ``submission_id``)`` ``|>`` `[`synGet`](https://r-docs.synapse.org/latest/reference/synGet.md)`(``)`\
+`status`` ``<-`` `[`SubmissionStatus`](https://linglp.github.io/synapser/latest/reference/SubmissionStatus.md)`(``id ``=`` ``submission_id``)`` ``|>`` `[`synGet`](https://linglp.github.io/synapser/latest/reference/synGet.md)`(``)`\
 \
 [`print`](https://rdrr.io/r/base/print.html)`(``"Submission status details:"``)`\
 [`print`](https://rdrr.io/r/base/print.html)`(`[`sprintf`](https://rdrr.io/r/base/sprintf.html)`(``"  Status: %s"``, ``status``$``status``)``)`\
@@ -203,7 +203,7 @@ functionality.
 
 \
 [`library`](https://rdrr.io/r/base/library.html)`(`[`synapser`](https://github.com/Sage-Bionetworks/synapser)`)`\
-[`synLogin`](https://r-docs.synapse.org/latest/reference/synLogin.md)`(``)`\
+[`synLogin`](https://linglp.github.io/synapser/latest/reference/synLogin.md)`(``)`\
 \
 `# REQUIRED: Set these to your actual Synapse IDs`\
 `# Do NOT leave these as NULL - the script will not work properly`\
@@ -222,7 +222,7 @@ functionality.
 
 \
 `# First, get the submission status`\
-`status`` ``<-`` `[`SubmissionStatus`](https://r-docs.synapse.org/latest/reference/SubmissionStatus.md)`(``id ``=`` ``SUBMISSION_ID``)`` ``|>`` `[`synGet`](https://r-docs.synapse.org/latest/reference/synGet.md)`(``)`\
+`status`` ``<-`` `[`SubmissionStatus`](https://linglp.github.io/synapser/latest/reference/SubmissionStatus.md)`(``id ``=`` ``SUBMISSION_ID``)`` ``|>`` `[`synGet`](https://linglp.github.io/synapser/latest/reference/synGet.md)`(``)`\
 [`print`](https://rdrr.io/r/base/print.html)`(`[`sprintf`](https://rdrr.io/r/base/sprintf.html)`(``"Retrieved submission status for submission %s"``, ``SUBMISSION_ID``)``)`\
 [`print`](https://rdrr.io/r/base/print.html)`(`[`sprintf`](https://rdrr.io/r/base/sprintf.html)`(``"Current status: %s"``, ``status``$``status``)``)`\
 \
@@ -237,7 +237,7 @@ functionality.
 `)`\
 \
 `# Store the updated status`\
-`updated_status`` ``<-`` ``status`` ``|>`` `[`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)`(``)`\
+`updated_status`` ``<-`` ``status`` ``|>`` `[`synStore`](https://linglp.github.io/synapser/latest/reference/synStore.md)`(``)`\
 [`print`](https://rdrr.io/r/base/print.html)`(``"Successfully scored submission!"``)`\
 [`print`](https://rdrr.io/r/base/print.html)`(`[`sprintf`](https://rdrr.io/r/base/sprintf.html)`(``"Status: %s"``, ``updated_status``$``status``)``)`\
 [`print`](https://rdrr.io/r/base/print.html)`(``"Annotations added:"``)`\
@@ -289,7 +289,7 @@ functionality.
 `# Get all scored submission bundles for the evaluation`\
 [`print`](https://rdrr.io/r/base/print.html)`(``"Fetching all submission bundles for the evaluation..."``)`\
 \
-`bundles`` ``<-`` `[`as.list`](https://rdrr.io/r/base/list.html)`(`[`SubmissionBundle`](https://r-docs.synapse.org/latest/reference/SubmissionBundle.md)`(``)`` ``|>`` ``synGetEvaluationSubmissionBundles``(`\
+`bundles`` ``<-`` `[`as.list`](https://rdrr.io/r/base/list.html)`(`[`SubmissionBundle`](https://linglp.github.io/synapser/latest/reference/SubmissionBundle.md)`(``)`` ``|>`` ``synGetEvaluationSubmissionBundles``(`\
 `  evaluation_id ``=`` ``EVALUATION_ID``,`\
 `  status ``=`` ``"SCORED"`` ``# Only get scored submissions`\
 `)``)`\
@@ -352,15 +352,15 @@ functionality.
 `  ``status``$``submission_annotations`` ``<-`` ``annotations`\
 \
 `  ``# Store the update`\
-`  ``updated_status`` ``<-`` ``status`` ``|>`` `[`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)`(``)`\
+`  ``updated_status`` ``<-`` ``status`` ``|>`` `[`synStore`](https://linglp.github.io/synapser/latest/reference/synStore.md)`(``)`\
 `  `[`print`](https://rdrr.io/r/base/print.html)`(`[`sprintf`](https://rdrr.io/r/base/sprintf.html)`(``"  Approved cancellation for submission %s"``, ``updated_status``$``id``)``)`\
 `}`\
 \
 `# Example: Proactively allow cancellation for a specific submission`\
 [`print`](https://rdrr.io/r/base/print.html)`(``"Enabling cancellation for a specific submission..."``)`\
-`target_status`` ``<-`` `[`SubmissionStatus`](https://r-docs.synapse.org/latest/reference/SubmissionStatus.md)`(``id ``=`` ``SUBMISSION_ID``)`` ``|>`` `[`synGet`](https://r-docs.synapse.org/latest/reference/synGet.md)`(``)`\
+`target_status`` ``<-`` `[`SubmissionStatus`](https://linglp.github.io/synapser/latest/reference/SubmissionStatus.md)`(``id ``=`` ``SUBMISSION_ID``)`` ``|>`` `[`synGet`](https://linglp.github.io/synapser/latest/reference/synGet.md)`(``)`\
 `target_status``$``can_cancel`` ``<-`` ``TRUE`\
-`target_status`` ``<-`` ``target_status`` ``|>`` `[`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)`(``)`\
+`target_status`` ``<-`` ``target_status`` ``|>`` `[`synStore`](https://linglp.github.io/synapser/latest/reference/synStore.md)`(``)`\
 [`print`](https://rdrr.io/r/base/print.html)`(`[`sprintf`](https://rdrr.io/r/base/sprintf.html)`(``"Cancellation enabled for submission %s"``, ``SUBMISSION_ID``)``)`
 
 ### 5. Delete submissions
@@ -385,8 +385,8 @@ if you want to test this functionality.
 \
 `# Delete each submission that was requested for cancellation`\
 `for`` ``(``submission_id`` ``in`` ``submissions_to_delete``)`` ``{`\
-`  ``submission`` ``<-`` `[`Submission`](https://r-docs.synapse.org/latest/reference/Submission.md)`(``id ``=`` ``submission_id``)`` ``|>`` `[`synGet`](https://r-docs.synapse.org/latest/reference/synGet.md)`(``)`\
-`  ``submission`` ``|>`` `[`synDelete`](https://r-docs.synapse.org/latest/reference/synDelete.md)`(``)`\
+`  ``submission`` ``<-`` `[`Submission`](https://linglp.github.io/synapser/latest/reference/Submission.md)`(``id ``=`` ``submission_id``)`` ``|>`` `[`synGet`](https://linglp.github.io/synapser/latest/reference/synGet.md)`(``)`\
+`  ``submission`` ``|>`` `[`synDelete`](https://linglp.github.io/synapser/latest/reference/synDelete.md)`(``)`\
 `  `[`print`](https://rdrr.io/r/base/print.html)`(`[`sprintf`](https://rdrr.io/r/base/sprintf.html)`(``"Successfully deleted submission %s"``, ``submission_id``)``)`\
 `}`\
 \
@@ -396,7 +396,7 @@ if you want to test this functionality.
 
 ## References
 
-- [`Submission`](https://r-docs.synapse.org/latest/reference/Submission.md)
-- [`SubmissionStatus`](https://r-docs.synapse.org/latest/reference/SubmissionStatus.md)
-- [`SubmissionBundle`](https://r-docs.synapse.org/latest/reference/SubmissionBundle.md)
-- [`synLogin`](https://r-docs.synapse.org/latest/reference/synLogin.md)
+- [`Submission`](https://linglp.github.io/synapser/latest/reference/Submission.md)
+- [`SubmissionStatus`](https://linglp.github.io/synapser/latest/reference/SubmissionStatus.md)
+- [`SubmissionBundle`](https://linglp.github.io/synapser/latest/reference/SubmissionBundle.md)
+- [`synLogin`](https://linglp.github.io/synapser/latest/reference/synLogin.md)

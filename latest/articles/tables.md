@@ -37,14 +37,14 @@ In this vignette you will:
 [`library`](https://rdrr.io/r/base/library.html)`(`[`synapser`](https://github.com/Sage-Bionetworks/synapser)`)`
 
 \
-[`synLogin`](https://r-docs.synapse.org/latest/reference/synLogin.md)`(``)`\
+[`synLogin`](https://linglp.github.io/synapser/latest/reference/synLogin.md)`(``)`\
 \
-`project`` ``<-`` `[`Project`](https://r-docs.synapse.org/latest/reference/Project.md)`(`\
+`project`` ``<-`` `[`Project`](https://linglp.github.io/synapser/latest/reference/Project.md)`(`\
 `  name ``=`` `[`paste0`](https://rdrr.io/r/base/paste.html)`(`\
 `    ``"My uniquely named project about Alzheimer's Disease"``,`\
 `    `[`paste`](https://rdrr.io/r/base/paste.html)`(`[`sample`](https://rdrr.io/r/base/sample.html)`(`[`c`](https://rdrr.io/r/base/c.html)`(``letters``, ``LETTERS``, ``0``:``9``)``, ``8``, replace ``=`` ``TRUE``)``, collapse ``=`` ``""``)`\
 `  ``)`\
-`)`` ``|>`` `[`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)`(``)`\
+`)`` ``|>`` `[`synStore`](https://linglp.github.io/synapser/latest/reference/synStore.md)`(``)`\
 [`cat`](https://rdrr.io/r/base/cat.html)`(``"Created project:"``, ``project``$``id``, ``"\n"``)`
 
 ### Example data
@@ -82,10 +82,10 @@ First, let’s load some data. Let’s say we had a file, genes.csv:
   `synBuildTable()`.
 
 \
-`table`` ``<-`` `[`Table`](https://r-docs.synapse.org/latest/reference/Table.md)`(`\
+`table`` ``<-`` `[`Table`](https://linglp.github.io/synapser/latest/reference/Table.md)`(`\
 `  name ``=`` ``"My Favorite Genes_no_initial_columns"``,`\
 `  parent_id ``=`` ``project``$``id`\
-`)`` ``|>`` `[`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)`(``)`\
+`)`` ``|>`` `[`synStore`](https://linglp.github.io/synapser/latest/reference/synStore.md)`(``)`\
 \
 `table`` ``|>`` ``synStoreRows``(`\
 `  values ``=`` ``genes_csv``,`\
@@ -108,18 +108,18 @@ First, let’s load some data. Let’s say we had a file, genes.csv:
 
 \
 `columns`` ``<-`` `[`list`](https://rdrr.io/r/base/list.html)`(`\
-`  `[`Column`](https://r-docs.synapse.org/latest/reference/Column.md)`(``name ``=`` ``"Name"``, column_type ``=`` ``"STRING"``, maximum_size ``=`` ``20``)``,`\
-`  `[`Column`](https://r-docs.synapse.org/latest/reference/Column.md)`(``name ``=`` ``"Chromosome"``, column_type ``=`` ``"STRING"``, maximum_size ``=`` ``20``)``,`\
-`  `[`Column`](https://r-docs.synapse.org/latest/reference/Column.md)`(``name ``=`` ``"Start"``, column_type ``=`` ``"INTEGER"``)``,`\
-`  `[`Column`](https://r-docs.synapse.org/latest/reference/Column.md)`(``name ``=`` ``"End"``, column_type ``=`` ``"INTEGER"``)``,`\
-`  `[`Column`](https://r-docs.synapse.org/latest/reference/Column.md)`(``name ``=`` ``"Strand"``, column_type ``=`` ``"STRING"``, enum_values ``=`` `[`list`](https://rdrr.io/r/base/list.html)`(``"+"``, ``"-"``)``, maximum_size ``=`` ``1``)``,`\
-`  `[`Column`](https://r-docs.synapse.org/latest/reference/Column.md)`(``name ``=`` ``"TranscriptionFactor"``, column_type ``=`` ``"BOOLEAN"``)`\
+`  `[`Column`](https://linglp.github.io/synapser/latest/reference/Column.md)`(``name ``=`` ``"Name"``, column_type ``=`` ``"STRING"``, maximum_size ``=`` ``20``)``,`\
+`  `[`Column`](https://linglp.github.io/synapser/latest/reference/Column.md)`(``name ``=`` ``"Chromosome"``, column_type ``=`` ``"STRING"``, maximum_size ``=`` ``20``)``,`\
+`  `[`Column`](https://linglp.github.io/synapser/latest/reference/Column.md)`(``name ``=`` ``"Start"``, column_type ``=`` ``"INTEGER"``)``,`\
+`  `[`Column`](https://linglp.github.io/synapser/latest/reference/Column.md)`(``name ``=`` ``"End"``, column_type ``=`` ``"INTEGER"``)``,`\
+`  `[`Column`](https://linglp.github.io/synapser/latest/reference/Column.md)`(``name ``=`` ``"Strand"``, column_type ``=`` ``"STRING"``, enum_values ``=`` `[`list`](https://rdrr.io/r/base/list.html)`(``"+"``, ``"-"``)``, maximum_size ``=`` ``1``)``,`\
+`  `[`Column`](https://linglp.github.io/synapser/latest/reference/Column.md)`(``name ``=`` ``"TranscriptionFactor"``, column_type ``=`` ``"BOOLEAN"``)`\
 `)`\
-`table`` ``<-`` `[`Table`](https://r-docs.synapse.org/latest/reference/Table.md)`(`\
+`table`` ``<-`` `[`Table`](https://linglp.github.io/synapser/latest/reference/Table.md)`(`\
 `  name ``=`` ``"My Favorite Genes_with_columns"``,`\
 `  columns ``=`` ``columns``,`\
 `  parent_id ``=`` ``project``$``id`\
-`)`` ``|>`` `[`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)`(``)`\
+`)`` ``|>`` `[`synStore`](https://linglp.github.io/synapser/latest/reference/synStore.md)`(``)`\
 `table`` ``|>`` ``synStoreRows``(``values ``=`` ``genes_csv``)`
 
 - Creating a table from a data frame
@@ -134,10 +134,10 @@ First, let’s load some data. Let’s say we had a file, genes.csv:
 `  TranscriptionFactor ``=`` `[`c`](https://rdrr.io/r/base/c.html)`(``FALSE``, ``FALSE``, ``FALSE``, ``FALSE``, ``TRUE``, ``FALSE``)`\
 `)`\
 \
-`table`` ``<-`` `[`Table`](https://r-docs.synapse.org/latest/reference/Table.md)`(`\
+`table`` ``<-`` `[`Table`](https://linglp.github.io/synapser/latest/reference/Table.md)`(`\
 `  name ``=`` ``"My Favorite Genes_from_dataframe"``,`\
 `  parent_id ``=`` ``project``$``id`\
-`)`` ``|>`` `[`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)`(``)`\
+`)`` ``|>`` `[`synStore`](https://linglp.github.io/synapser/latest/reference/synStore.md)`(``)`\
 `table`` ``|>`` ``synStoreRows``(``values ``=`` ``genes``, schema_storage_strategy ``=`` ``"INFER_FROM_DATA"``)`
 
 ## 2. Querying for data
@@ -196,10 +196,10 @@ The more_genes.csv:
 `  ``more_genes_csv`\
 `)`\
 \
-`table`` ``<-`` `[`Table`](https://r-docs.synapse.org/latest/reference/Table.md)`(`\
+`table`` ``<-`` `[`Table`](https://linglp.github.io/synapser/latest/reference/Table.md)`(`\
 `  name ``=`` ``"My Favorite Genes_from_dataframe"``,`\
 `  parent_id ``=`` ``project``$``id`\
-`)`` ``|>`` `[`synGet`](https://r-docs.synapse.org/latest/reference/synGet.md)`(``)`\
+`)`` ``|>`` `[`synGet`](https://linglp.github.io/synapser/latest/reference/synGet.md)`(``)`\
 `table`` ``|>`` ``synStoreRows``(``values ``=`` ``more_genes_csv``)`
 
 - Using a data frame If a column is not given, `NA` values are added
@@ -261,9 +261,9 @@ to update your table. This function does not do deletions.
 
 \
 `table`` ``|>`` ``synAddColumn``(`\
-`  `[`Column`](https://r-docs.synapse.org/latest/reference/Column.md)`(``name ``=`` ``"Expression"``, column_type ``=`` ``"STRING"``)`\
+`  `[`Column`](https://linglp.github.io/synapser/latest/reference/Column.md)`(``name ``=`` ``"Expression"``, column_type ``=`` ``"STRING"``)`\
 `)`\
-`table`` ``|>`` `[`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)`(``)`
+`table`` ``|>`` `[`synStore`](https://linglp.github.io/synapser/latest/reference/synStore.md)`(``)`
 
 - Renaming or modifying a column Renaming or otherwise modifying a
   column is done by changing the attributes on the `Column` object
@@ -272,13 +272,13 @@ to update your table. This function does not do deletions.
 \
 `table``$``columns``[[``"Expression"``]``]``$``name`` ``<-`` ``"Expression2"`\
 `table``$``columns``[[``"Expression"``]``]``$``column_type`` ``<-`` ``"INTEGER"`\
-`table`` ``|>`` `[`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)`(``)`
+`table`` ``|>`` `[`synStore`](https://linglp.github.io/synapser/latest/reference/synStore.md)`(``)`
 
 - Removing a column
 
 \
 `table`` ``|>`` ``synDeleteColumn``(``name ``=`` ``"Expression2"``)`\
-`table`` ``|>`` `[`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)`(``)`
+`table`` ``|>`` `[`synStore`](https://linglp.github.io/synapser/latest/reference/synStore.md)`(``)`
 
 ## 5. Deleting Table Rows & Tables
 
@@ -302,7 +302,7 @@ with every subsequent update.
 Deleting the whole table deletes the table and all of its rows:
 
 \
-[`synDelete`](https://r-docs.synapse.org/latest/reference/synDelete.md)`(``table``)`
+[`synDelete`](https://linglp.github.io/synapser/latest/reference/synDelete.md)`(``table``)`
 
 ### Working with dates and datetimes
 
@@ -315,15 +315,15 @@ with a `DATE` column and walk through the different ways datetime data
 can be stored and queried.
 
 \
-`table`` ``<-`` `[`Table`](https://r-docs.synapse.org/latest/reference/Table.md)`(`\
+`table`` ``<-`` `[`Table`](https://linglp.github.io/synapser/latest/reference/Table.md)`(`\
 `  name ``=`` ``"Sample Collection Dates"``,`\
 `  parent_id ``=`` ``project``$``id``,`\
 `  columns ``=`` `[`c`](https://rdrr.io/r/base/c.html)`(`\
-`    `[`Column`](https://r-docs.synapse.org/latest/reference/Column.md)`(``name ``=`` ``"sample_id"``, column_type ``=`` ``"STRING"``, maximum_size ``=`` ``20``)``,`\
-`    `[`Column`](https://r-docs.synapse.org/latest/reference/Column.md)`(``name ``=`` ``"collected_on"``, column_type ``=`` ``"DATE"``)`\
+`    `[`Column`](https://linglp.github.io/synapser/latest/reference/Column.md)`(``name ``=`` ``"sample_id"``, column_type ``=`` ``"STRING"``, maximum_size ``=`` ``20``)``,`\
+`    `[`Column`](https://linglp.github.io/synapser/latest/reference/Column.md)`(``name ``=`` ``"collected_on"``, column_type ``=`` ``"DATE"``)`\
 `  ``)`\
 `)`\
-`table`` ``|>`` `[`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)`(``)`
+`table`` ``|>`` `[`synStore`](https://linglp.github.io/synapser/latest/reference/synStore.md)`(``)`
 
 ### Storing timezone-aware datetimes (recommended)
 
@@ -491,4 +491,4 @@ upload, see the `synStoreRows` reference documentation.
 Delete the project and all its contents when done:
 
 \
-[`synDelete`](https://r-docs.synapse.org/latest/reference/synDelete.md)`(``project``)`
+[`synDelete`](https://linglp.github.io/synapser/latest/reference/synDelete.md)`(``project``)`

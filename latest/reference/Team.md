@@ -74,37 +74,37 @@ NULL
 - `Team(id=NULL, name=NULL, description=NULL, icon=NULL, can_public_join=FALSE, can_request_membership=TRUE, etag=NULL, created_on=NULL, modified_on=NULL, created_by=NULL, modified_by=NULL)`:
   Constructor for `Team`
 
-- [`synCreate`](https://r-docs.synapse.org/latest/reference/Team_Create.md)`(instance, synapse_client=NULL)`:
+- [`synCreate`](https://linglp.github.io/synapser/latest/reference/Team_Create.md)`(instance, synapse_client=NULL)`:
   Creates a new team on Synapse.
 
-- [`synGetFromId`](https://r-docs.synapse.org/latest/reference/Team_GetFromId.md)`(cls, id, synapse_client=NULL)`:
+- [`synGetFromId`](https://linglp.github.io/synapser/latest/reference/Team_GetFromId.md)`(cls, id, synapse_client=NULL)`:
   Gets Team object using its integer id.
 
-- [`synGetFromName`](https://r-docs.synapse.org/latest/reference/Team_GetFromName.md)`(cls, name, synapse_client=NULL)`:
+- [`synGetFromName`](https://linglp.github.io/synapser/latest/reference/Team_GetFromName.md)`(cls, name, synapse_client=NULL)`:
   Gets Team object using its string name.\
   \
   **Note:** You will be unable to retrieve a team by name immediately
   after its creation because the fragment service is eventually
   consistent. If you need to retrieve a team immediately following
   creation you should use the
-  [`synGetFromId()`](https://r-docs.synapse.org/latest/reference/Team_GetFromId.md)
+  [`synGetFromId()`](https://linglp.github.io/synapser/latest/reference/Team_GetFromId.md)
   function instead.
 
-- [`synGetUserMembershipStatus`](https://r-docs.synapse.org/latest/reference/Team_GetUserMembershipStatus.md)`(instance, user_id, synapse_client=NULL)`:
+- [`synGetUserMembershipStatus`](https://linglp.github.io/synapser/latest/reference/Team_GetUserMembershipStatus.md)`(instance, user_id, synapse_client=NULL)`:
   Retrieve a user's Team Membership Status bundle for this team.
 
-- [`synInviteToTeam`](https://r-docs.synapse.org/latest/reference/Team_InviteToTeam.md)`(instance, user, message, force=TRUE, synapse_client=NULL)`:
+- [`synInviteToTeam`](https://linglp.github.io/synapser/latest/reference/Team_InviteToTeam.md)`(instance, user, message, force=TRUE, synapse_client=NULL)`:
   Invites a user to a team given the ID field on the Team instance.
 
-- [`synGetTeamMembers`](https://r-docs.synapse.org/latest/reference/Team_GetTeamMembers.md)`(instance, synapse_client=NULL)`:
+- [`synGetTeamMembers`](https://linglp.github.io/synapser/latest/reference/Team_GetTeamMembers.md)`(instance, synapse_client=NULL)`:
   Gets the TeamMembers associated with a team given the ID field on the
   Team instance.
 
-- [`synGetOpenInvitations`](https://r-docs.synapse.org/latest/reference/Team_GetOpenInvitations.md)`(instance, synapse_client=NULL)`:
+- [`synGetOpenInvitations`](https://linglp.github.io/synapser/latest/reference/Team_GetOpenInvitations.md)`(instance, synapse_client=NULL)`:
   Gets all open invitations for a team given the ID field on the Team
   instance.
 
-- [`synDeleteInvitation`](https://r-docs.synapse.org/latest/reference/Team_DeleteInvitation.md)`(invitation_id, synapse_client=NULL)`:
+- [`synDeleteInvitation`](https://linglp.github.io/synapser/latest/reference/Team_DeleteInvitation.md)`(invitation_id, synapse_client=NULL)`:
   Deletes an open invitation to a team. Note: The client must be an
   administrator of the Team referenced by the invitation, or the
   invitee, to make this request.

@@ -137,11 +137,11 @@ take a minute while reticulate downloads Python and the Synapse Python
 client. Later loads reuse the cached environment.
 
 Then log in. See the
-[Authentication](https://r-docs.synapse.org/latest/articles/authentication.md)
+[Authentication](https://linglp.github.io/synapser/latest/articles/authentication.md)
 vignette for authentication options:
 
 \
-[`synLogin`](https://r-docs.synapse.org/latest/reference/synLogin.md)`(``authToken ``=`` ``"<your personal access token>"``)`
+[`synLogin`](https://linglp.github.io/synapser/latest/reference/synLogin.md)`(``authToken ``=`` ``"<your personal access token>"``)`
 
 ## Upgrading from synapser 2.x
 

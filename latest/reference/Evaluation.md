@@ -74,23 +74,23 @@ NULL
 - `Evaluation(id=NULL, etag=NULL, name=NULL, description=NULL, owner_id=NULL, created_on=NULL, content_source=NULL, submission_instructions_message=NULL, submission_receipt_message=NULL)`:
   Constructor for `Evaluation`
 
-- [`synGetAcl`](https://r-docs.synapse.org/latest/reference/Evaluation_GetAcl.md)`(instance, synapse_client=NULL)`:
+- [`synGetAcl`](https://linglp.github.io/synapser/latest/reference/Evaluation_GetAcl.md)`(instance, synapse_client=NULL)`:
   Get the access control list (ACL) governing this evaluation.
 
-- [`synGetAllEvaluations`](https://r-docs.synapse.org/latest/reference/Evaluation_GetAllEvaluations.md)`(access_type=NULL, active_only=NULL, evaluation_ids=NULL, offset=NULL, limit=NULL, synapse_client=NULL)`:
+- [`synGetAllEvaluations`](https://linglp.github.io/synapser/latest/reference/Evaluation_GetAllEvaluations.md)`(access_type=NULL, active_only=NULL, evaluation_ids=NULL, offset=NULL, limit=NULL, synapse_client=NULL)`:
   Get a list of all Evaluations, within a given range.
 
-- [`synGetAvailableEvaluations`](https://r-docs.synapse.org/latest/reference/Evaluation_GetAvailableEvaluations.md)`(active_only=NULL, evaluation_ids=NULL, offset=NULL, limit=NULL, synapse_client=NULL)`:
+- [`synGetAvailableEvaluations`](https://linglp.github.io/synapser/latest/reference/Evaluation_GetAvailableEvaluations.md)`(active_only=NULL, evaluation_ids=NULL, offset=NULL, limit=NULL, synapse_client=NULL)`:
   Get a list of Evaluations to which the user has SUBMIT permission,
   within a given range.
 
-- [`synGetEvaluationsByProject`](https://r-docs.synapse.org/latest/reference/Evaluation_GetEvaluationsByProject.md)`(project_id, access_type=NULL, active_only=NULL, evaluation_ids=NULL, offset=NULL, limit=NULL, synapse_client=NULL)`:
+- [`synGetEvaluationsByProject`](https://linglp.github.io/synapser/latest/reference/Evaluation_GetEvaluationsByProject.md)`(project_id, access_type=NULL, active_only=NULL, evaluation_ids=NULL, offset=NULL, limit=NULL, synapse_client=NULL)`:
   Get Evaluations tied to a project.
 
-- [`synGetPermissions`](https://r-docs.synapse.org/latest/reference/Evaluation_GetPermissions.md)`(instance, synapse_client=NULL)`:
+- [`synGetPermissions`](https://linglp.github.io/synapser/latest/reference/Evaluation_GetPermissions.md)`(instance, synapse_client=NULL)`:
   Get the user permissions for this evaluation.
 
-- [`synUpdateAcl`](https://r-docs.synapse.org/latest/reference/Evaluation_UpdateAcl.md)`(instance, principal_id=NULL, access_type=NULL, acl=NULL, synapse_client=NULL)`:
+- [`synUpdateAcl`](https://linglp.github.io/synapser/latest/reference/Evaluation_UpdateAcl.md)`(instance, principal_id=NULL, access_type=NULL, acl=NULL, synapse_client=NULL)`:
   Update the access control list (ACL) for this evaluation.\
   \
   You can either:\

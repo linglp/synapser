@@ -2,7 +2,7 @@
 
 Walk a local directory, mirror its folder hierarchy under this container
 in Synapse, and write a CSV manifest ready for
-[`synSyncToSynapse()`](https://r-docs.synapse.org/latest/reference/Project_SyncToSynapse.md).
+[`synSyncToSynapse()`](https://linglp.github.io/synapser/latest/reference/Project_SyncToSynapse.md).
 
 The manifest has two columns: path (absolute, symlink-resolved) and
 parentId (the Synapse ID of the file's containing folder). Existing

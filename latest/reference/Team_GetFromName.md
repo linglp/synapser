@@ -6,7 +6,7 @@ Gets Team object using its string name.
 after its creation because the fragment service is eventually
 consistent. If you need to retrieve a team immediately following
 creation you should use the
-[`synGetFromId()`](https://r-docs.synapse.org/latest/reference/Team_GetFromId.md)
+[`synGetFromId()`](https://linglp.github.io/synapser/latest/reference/Team_GetFromId.md)
 function instead.
 
 ## Usage

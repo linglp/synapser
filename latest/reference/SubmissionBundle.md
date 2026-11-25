@@ -40,11 +40,11 @@ NULL
 - `SubmissionBundle(submission=NULL, submission_status=NULL)`:
   Constructor for `SubmissionBundle`
 
-- [`synGetEvaluationSubmissionBundles`](https://r-docs.synapse.org/latest/reference/SubmissionBundle_GetEvaluationSubmissionBundles.md)`(cls, evaluation_id, status=NULL, synapse_client=NULL)`:
+- [`synGetEvaluationSubmissionBundles`](https://linglp.github.io/synapser/latest/reference/SubmissionBundle_GetEvaluationSubmissionBundles.md)`(cls, evaluation_id, status=NULL, synapse_client=NULL)`:
   Retrieves bundled Submissions and SubmissionStatuses for a given
   Evaluation.
 
-- [`synGetUserSubmissionBundles`](https://r-docs.synapse.org/latest/reference/SubmissionBundle_GetUserSubmissionBundles.md)`(cls, evaluation_id, synapse_client=NULL)`:
+- [`synGetUserSubmissionBundles`](https://linglp.github.io/synapser/latest/reference/SubmissionBundle_GetUserSubmissionBundles.md)`(cls, evaluation_id, synapse_client=NULL)`:
   Retrieves all user bundled Submissions and SubmissionStatuses for a
   specified Evaluation.
 

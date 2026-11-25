@@ -49,21 +49,21 @@ synGet(synapse_id=NULL, entity_name=NULL, parent_id=NULL, version_number=NULL, a
 - activity_options:
 
   (Optional\[ActivityOptions\])
-  [`ActivityOptions`](https://r-docs.synapse.org/latest/reference/ActivityOptions.md)
+  [`ActivityOptions`](https://linglp.github.io/synapser/latest/reference/ActivityOptions.md)
   to apply. Can be applied to any entity type to include activity
   information.
 
 - file_options:
 
   (Optional\[FileOptions\])
-  [`FileOptions`](https://r-docs.synapse.org/latest/reference/FileOptions.md)
+  [`FileOptions`](https://linglp.github.io/synapser/latest/reference/FileOptions.md)
   to apply. Only applies to File entities. Ignored for other entity
   types.
 
 - table_options:
 
   (Optional\[TableOptions\])
-  [`TableOptions`](https://r-docs.synapse.org/latest/reference/TableOptions.md)
+  [`TableOptions`](https://linglp.github.io/synapser/latest/reference/TableOptions.md)
   to apply. Only applies to Table-like entities (Table, Dataset,
   EntityView, MaterializedView, SubmissionView, VirtualTable,
   DatasetCollection). Ignored for other entity types.
@@ -71,7 +71,7 @@ synGet(synapse_id=NULL, entity_name=NULL, parent_id=NULL, version_number=NULL, a
 - link_options:
 
   (Optional\[LinkOptions\])
-  [`LinkOptions`](https://r-docs.synapse.org/latest/reference/LinkOptions.md)
+  [`LinkOptions`](https://linglp.github.io/synapser/latest/reference/LinkOptions.md)
   to apply. Only applies when the entity is a Link. Ignored for other
   entity types.
 

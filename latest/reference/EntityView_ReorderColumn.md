@@ -2,7 +2,7 @@
 
 Reorder a column in the EntityView. Note that this does not store the
 column in Synapse. You must call the
-[`synStore()`](https://r-docs.synapse.org/latest/reference/synStore.md)
+[`synStore()`](https://linglp.github.io/synapser/latest/reference/synStore.md)
 function on this EntityView instance to store the column in Synapse.
 This is a convenience function to eliminate the need to manually reorder
 the named list stored in the `$columns` attribute.

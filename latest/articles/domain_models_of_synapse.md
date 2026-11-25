@@ -15,7 +15,7 @@ ID, or synID. The synID is represented by the prefix “syn” followed by
 numbers (for example, syn12345678). This identifier can be used to refer
 to a specific entity on the web and through the programmatic clients.
 
-## [Projects](https://r-docs.synapse.org/latest/articles/project.md)
+## [Projects](https://linglp.github.io/synapser/latest/articles/project.md)
 
 Projects in Synapse are “containers” that group relevant content and
 people together. All data must be uploaded into a project. Projects can
@@ -52,7 +52,7 @@ Projects help you to:
 - **Attach figures and documents**: Upload documents and images via the
   website or programmatically.
 
-## [Folders](https://r-docs.synapse.org/latest/articles/folder.md)
+## [Folders](https://linglp.github.io/synapser/latest/articles/folder.md)
 
 Similar to projects, folders are “containers” that offer an additional
 way to organize your data. Instead of uploading a bunch of single files
@@ -79,12 +79,12 @@ conditions for use on specific folders within a folder.
   Conditions for
   Use](https://docs.synapse.org/synapse-docs/sharing-settings-permissions-and-conditions-for-use).
 
-## [Files](https://r-docs.synapse.org/latest/articles/file.md)
+## [Files](https://linglp.github.io/synapser/latest/articles/file.md)
 
 Synapse files can be created by uploading content from your local
 computer or linking to digital files on the web. You can [annotate files
 with custom
-metadata](https://r-docs.synapse.org/latest/articles/data_upload_download.html#add-update-and-remove-annotations),
+metadata](https://linglp.github.io/synapser/latest/articles/data_upload_download.html#add-update-and-remove-annotations),
 [embed files into Synapse wiki
 pages](https://docs.synapse.org/synapse-docs/links), or [associate them
 with a
@@ -110,7 +110,7 @@ conditions for use on specific files within a folder.
   Conditions for
   Use](https://docs.synapse.org/synapse-docs/sharing-settings-permissions-and-conditions-for-use).
 
-## [Annotations](https://r-docs.synapse.org/latest/articles/data_upload_download.html#add-update-and-remove-annotations)
+## [Annotations](https://linglp.github.io/synapser/latest/articles/data_upload_download.html#add-update-and-remove-annotations)
 
 Annotations help users search for and find data, and they are a powerful
 tool used to systematically group and/or describe things in Synapse.

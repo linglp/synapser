@@ -88,7 +88,7 @@ NULL
 - `WikiPage(id=NULL, etag=NULL, title=NULL, parent_id=NULL, markdown=NULL, attachments=list(), owner_id=NULL, created_on=NULL, created_by=NULL, modified_on=NULL, modified_by=NULL, wiki_version=NULL, markdown_file_handle_id=NULL, attachment_file_handle_ids=list())`:
   Constructor for `WikiPage`
 
-- [`synCopy`](https://r-docs.synapse.org/latest/reference/WikiPage_Copy.md)`(instance, destination_owner_id, destination_sub_page_id=NULL, update_links=TRUE, entity_map=NULL, synapse_client=NULL)`:
+- [`synCopy`](https://linglp.github.io/synapser/latest/reference/WikiPage_Copy.md)`(instance, destination_owner_id, destination_sub_page_id=NULL, update_links=TRUE, entity_map=NULL, synapse_client=NULL)`:
   Copy the wiki page tree of the owner entity to another entity and
   update internal links.
 
@@ -96,26 +96,26 @@ NULL
   page is copied. Otherwise the entire wiki of the owner entity is
   copied.
 
-- [`synGetAttachment`](https://r-docs.synapse.org/latest/reference/WikiPage_GetAttachment.md)`(instance, file_name, download_file=TRUE, download_location=NULL, synapse_client=NULL)`:
+- [`synGetAttachment`](https://linglp.github.io/synapser/latest/reference/WikiPage_GetAttachment.md)`(instance, file_name, download_file=TRUE, download_location=NULL, synapse_client=NULL)`:
   Download the wiki page attachment to a local file or return the URL.
 
-- [`synGetAttachmentHandles`](https://r-docs.synapse.org/latest/reference/WikiPage_GetAttachmentHandles.md)`(instance, synapse_client=NULL)`:
+- [`synGetAttachmentHandles`](https://linglp.github.io/synapser/latest/reference/WikiPage_GetAttachmentHandles.md)`(instance, synapse_client=NULL)`:
   Get the file handles of all attachments on this wiki page.
 
-- [`synGetAttachmentPreview`](https://r-docs.synapse.org/latest/reference/WikiPage_GetAttachmentPreview.md)`(instance, file_name, download_file=TRUE, download_location=NULL, synapse_client=NULL)`:
+- [`synGetAttachmentPreview`](https://linglp.github.io/synapser/latest/reference/WikiPage_GetAttachmentPreview.md)`(instance, file_name, download_file=TRUE, download_location=NULL, synapse_client=NULL)`:
   Download the wiki page attachment preview to a local file or return
   the URL.
 
-- [`synGetMarkdownFile`](https://r-docs.synapse.org/latest/reference/WikiPage_GetMarkdownFile.md)`(instance, download_file=TRUE, download_location=NULL, synapse_client=NULL)`:
+- [`synGetMarkdownFile`](https://linglp.github.io/synapser/latest/reference/WikiPage_GetMarkdownFile.md)`(instance, download_file=TRUE, download_location=NULL, synapse_client=NULL)`:
   Get the markdown URL of this wiki page.
 
-- [`synReformatAttachmentFileName`](https://r-docs.synapse.org/latest/reference/WikiPage_ReformatAttachmentFileName.md)`(attachment_file_name)`:
+- [`synReformatAttachmentFileName`](https://linglp.github.io/synapser/latest/reference/WikiPage_ReformatAttachmentFileName.md)`(attachment_file_name)`:
   Reformat the attachment file name to be a valid attachment path.
 
-- [`synRestore`](https://r-docs.synapse.org/latest/reference/WikiPage_Restore.md)`(instance, synapse_client=NULL)`:
+- [`synRestore`](https://linglp.github.io/synapser/latest/reference/WikiPage_Restore.md)`(instance, synapse_client=NULL)`:
   Restore a specific version of a wiki page.
 
-- [`synUnzipGzippedFile`](https://r-docs.synapse.org/latest/reference/WikiPage_UnzipGzippedFile.md)`(file_path)`:
+- [`synUnzipGzippedFile`](https://linglp.github.io/synapser/latest/reference/WikiPage_UnzipGzippedFile.md)`(file_path)`:
   Unzip the gzipped file and return the file path to the unzipped file.
   If the file is a markdown file, the content will be printed.
 

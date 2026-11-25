@@ -249,10 +249,10 @@ Add method names here to suppress them from the generated R wrappers.
 Any model method whose name is in `.operationsFunctionNames` (for
 example `get`, `store`, `delete`) is dropped from that class’s R
 wrappers, because
-[`synGet()`](https://r-docs.synapse.org/latest/reference/synGet.md),
-[`synStore()`](https://r-docs.synapse.org/latest/reference/synStore.md),
+[`synGet()`](https://linglp.github.io/synapser/latest/reference/synGet.md),
+[`synStore()`](https://linglp.github.io/synapser/latest/reference/synStore.md),
 and
-[`synDelete()`](https://r-docs.synapse.org/latest/reference/synDelete.md)
+[`synDelete()`](https://linglp.github.io/synapser/latest/reference/synDelete.md)
 are generated from the `synapseclient.operations` functions instead.
 That only works if the operations function supports the class. For
 classes it doesn’t support, `store()` and `delete()` raise an error such
@@ -276,7 +276,7 @@ To keep a model’s own method, add the class and method names to
 
 Methods listed here stay wrapped, and `.defineOperationsFallbacks()` in
 `R/zzz.R` replaces
-[`synGet()`](https://r-docs.synapse.org/latest/reference/synGet.md)/[`synStore()`](https://r-docs.synapse.org/latest/reference/synStore.md)/[`synDelete()`](https://r-docs.synapse.org/latest/reference/synDelete.md)
+[`synGet()`](https://linglp.github.io/synapser/latest/reference/synGet.md)/[`synStore()`](https://linglp.github.io/synapser/latest/reference/synStore.md)/[`synDelete()`](https://linglp.github.io/synapser/latest/reference/synDelete.md)
 with a shim. The shim decides whether a call goes to the model’s own
 method (e.g. `Activity$store`) or to the `synapseclient.operations`
 function, which only accepts entities. For example,
@@ -288,18 +288,18 @@ The shim decides in two steps:
 
 1.  **Pick the dispatch object.** This is the argument bound to the
     operations function’s first formal (`synapse_id` for
-    [`synGet()`](https://r-docs.synapse.org/latest/reference/synGet.md),
+    [`synGet()`](https://linglp.github.io/synapser/latest/reference/synGet.md),
     `entity` for
-    [`synStore()`](https://r-docs.synapse.org/latest/reference/synStore.md)/[`synDelete()`](https://r-docs.synapse.org/latest/reference/synDelete.md)):
+    [`synStore()`](https://linglp.github.io/synapser/latest/reference/synStore.md)/[`synDelete()`](https://linglp.github.io/synapser/latest/reference/synDelete.md)):
     that argument by name if the caller supplied it, otherwise the first
     unnamed argument. It is not simply the first argument by position.
     Named arguments can come in any order, so the object may not be
     first:
 
     \
-    [`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)`(``parent ``=`` ``file``, entity ``=`` ``activity``)``   ``` # dispatches on `activity` ``\
-    [`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)`(``parent ``=`` ``file``, ``activity``)``            ``` # dispatches on `activity` ``\
-    [`synGet`](https://r-docs.synapse.org/latest/reference/synGet.md)`(``synapse_id ``=`` `[`Submission`](https://r-docs.synapse.org/latest/reference/Submission.md)`(``id ``=`` ``"9"``)``)``    ``# dispatches on the Submission`
+    [`synStore`](https://linglp.github.io/synapser/latest/reference/synStore.md)`(``parent ``=`` ``file``, entity ``=`` ``activity``)``   ``` # dispatches on `activity` ``\
+    [`synStore`](https://linglp.github.io/synapser/latest/reference/synStore.md)`(``parent ``=`` ``file``, ``activity``)``            ``` # dispatches on `activity` ``\
+    [`synGet`](https://linglp.github.io/synapser/latest/reference/synGet.md)`(``synapse_id ``=`` `[`Submission`](https://linglp.github.io/synapser/latest/reference/Submission.md)`(``id ``=`` ``"9"``)``)``    ``# dispatches on the Submission`
 
 2.  **Match its class.** The shim strips the module path from each entry
     of `class(<object>)` and uses the first one that has a worker in
@@ -309,13 +309,13 @@ The shim decides in two steps:
     reticulate’s full dotted path:
 
     \
-    `activity`` ``<-`` `[`Activity`](https://r-docs.synapse.org/latest/reference/Activity.md)`(``name ``=`` ``"x"``)`\
-    `file`` ``<-`` `[`File`](https://r-docs.synapse.org/latest/reference/File.md)`(``id ``=`` ``"syn123"``, activity ``=`` ``activity``)``  ``# an existing file you can edit`\
+    `activity`` ``<-`` `[`Activity`](https://linglp.github.io/synapser/latest/reference/Activity.md)`(``name ``=`` ``"x"``)`\
+    `file`` ``<-`` `[`File`](https://linglp.github.io/synapser/latest/reference/File.md)`(``id ``=`` ``"syn123"``, activity ``=`` ``activity``)``  ``# an existing file you can edit`\
     \
     [`class`](https://rdrr.io/r/base/class.html)`(``activity``)``[``1``]``       ``# "Activity"`\
     [`class`](https://rdrr.io/r/base/class.html)`(``file``$``activity``)``[``1``]``  ``# "synapseclient.models.activity.Activity"`\
     \
-    [`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)`(``file``$``activity``, parent ``=`` ``file``)``   ``# reaches Activity.store`
+    [`synStore`](https://linglp.github.io/synapser/latest/reference/synStore.md)`(``file``$``activity``, parent ``=`` ``file``)``   ``# reaches Activity.store`
 
 To check whether a class needs an entry, look for it in the supported
 types of the matching operations function in `synapseclient/operations/`
@@ -330,7 +330,7 @@ into `man/`; put their examples on the model’s constructor page instead
 
 Option dataclasses from `synapseclient.operations` that callers
 construct directly, to configure
-[`synGet()`](https://r-docs.synapse.org/latest/reference/synGet.md)/[`synStore()`](https://r-docs.synapse.org/latest/reference/synStore.md)
+[`synGet()`](https://linglp.github.io/synapser/latest/reference/synGet.md)/[`synStore()`](https://linglp.github.io/synapser/latest/reference/synStore.md)
 calls or to pass as arguments, are listed in:
 
 \

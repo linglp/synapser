@@ -5,7 +5,7 @@ files within Synapse the first one found will be returned. The other
 matching files will be printed to the console.
 
 Wrapper for
-[`synGet`](https://r-docs.synapse.org/latest/reference/synGet.md).
+[`synGet`](https://linglp.github.io/synapser/latest/reference/synGet.md).
 
 ## Usage
 

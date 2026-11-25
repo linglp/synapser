@@ -136,11 +136,11 @@ An S3-style class object.
   The order of the columns will be the order they are stored in Synapse.
   If you need to reorder the columns the recommended approach is to use
   the
-  [`synReorderColumn()`](https://r-docs.synapse.org/latest/reference/SubmissionView_ReorderColumn.md)
+  [`synReorderColumn()`](https://linglp.github.io/synapser/latest/reference/SubmissionView_ReorderColumn.md)
   function. Additionally, you may add, and delete columns using the
-  [`synAddColumn()`](https://r-docs.synapse.org/latest/reference/SubmissionView_AddColumn.md),
+  [`synAddColumn()`](https://linglp.github.io/synapser/latest/reference/SubmissionView_AddColumn.md),
   and
-  [`synDeleteColumn()`](https://r-docs.synapse.org/latest/reference/SubmissionView_DeleteColumn.md)
+  [`synDeleteColumn()`](https://linglp.github.io/synapser/latest/reference/SubmissionView_DeleteColumn.md)
   functions on your view class instance.\
   \
   You may modify the attributes of the Column object to change the
@@ -201,10 +201,10 @@ NULL
 - `SubmissionView(id=NULL, name=NULL, parent_id=NULL, activity=NULL, version_number=NULL, view_entity_type="submissionview", view_type_mask=NULL, include_default_columns=TRUE, description=NULL, etag=NULL, created_on=NULL, modified_on=NULL, created_by=NULL, modified_by=NULL, version_label=NULL, version_comment=NULL, is_latest_version=NULL, columns=list(), annotations=list(), is_search_enabled=NULL, scope_ids=list())`:
   Constructor for `SubmissionView`
 
-- [`synAddColumn`](https://r-docs.synapse.org/latest/reference/SubmissionView_AddColumn.md)`(instance, column, index=NULL)`:
+- [`synAddColumn`](https://linglp.github.io/synapser/latest/reference/SubmissionView_AddColumn.md)`(instance, column, index=NULL)`:
   Add column(s) to the table. Note that this does not store the
   column(s) in Synapse. You must call the
-  [`synStore()`](https://r-docs.synapse.org/latest/reference/synStore.md)
+  [`synStore()`](https://linglp.github.io/synapser/latest/reference/synStore.md)
   function on this SubmissionView instance to store the column(s) in
   Synapse. This is a convenience function to eliminate the need to
   manually add the column(s) to the `$columns` list.\
@@ -213,17 +213,17 @@ NULL
   SubmissionView instance. `$columns` is a named list where the key is
   the name of the column and the value is the Column object.
 
-- [`synDeleteColumn`](https://r-docs.synapse.org/latest/reference/SubmissionView_DeleteColumn.md)`(instance, name)`:
+- [`synDeleteColumn`](https://linglp.github.io/synapser/latest/reference/SubmissionView_DeleteColumn.md)`(instance, name)`:
   Mark a column for deletion. Note that this does not delete the column
   from Synapse. You must call the
-  [`synStore()`](https://r-docs.synapse.org/latest/reference/synStore.md)
+  [`synStore()`](https://linglp.github.io/synapser/latest/reference/synStore.md)
   function on this SubmissionView instance to delete the column from
   Synapse.
 
-- [`synReorderColumn`](https://r-docs.synapse.org/latest/reference/SubmissionView_ReorderColumn.md)`(instance, name, index)`:
+- [`synReorderColumn`](https://linglp.github.io/synapser/latest/reference/SubmissionView_ReorderColumn.md)`(instance, name, index)`:
   Reorder a column in the table. Note that this does not store the
   column in Synapse. You must call the
-  [`synStore()`](https://r-docs.synapse.org/latest/reference/synStore.md)
+  [`synStore()`](https://linglp.github.io/synapser/latest/reference/synStore.md)
   function on this SubmissionView instance to store the column in
   Synapse. This is a convenience function to eliminate the need to
   manually reorder the named list stored in the `$columns` attribute.\
@@ -232,16 +232,16 @@ NULL
   columns in the table. If you pass in an index that is out of bounds
   the column will be added to the end of the list.
 
-- [`synGetPermissions`](https://r-docs.synapse.org/latest/reference/SubmissionView_GetPermissions.md)`(instance, synapse_client=NULL)`:
+- [`synGetPermissions`](https://linglp.github.io/synapser/latest/reference/SubmissionView_GetPermissions.md)`(instance, synapse_client=NULL)`:
   Get the
   [permissions](https://python-docs.synapse.org/reference/permissions/)
   that the caller has on an Entity.
 
-- [`synSetPermissions`](https://r-docs.synapse.org/latest/reference/SubmissionView_SetPermissions.md)`(instance, principal_id=NULL, access_type=NULL, modify_benefactor=FALSE, warn_if_inherits=TRUE, overwrite=TRUE, synapse_client=NULL)`:
+- [`synSetPermissions`](https://linglp.github.io/synapser/latest/reference/SubmissionView_SetPermissions.md)`(instance, principal_id=NULL, access_type=NULL, modify_benefactor=FALSE, warn_if_inherits=TRUE, overwrite=TRUE, synapse_client=NULL)`:
   Sets permission that a user or group has on an Entity. An Entity may
   have its own ACL or inherit its ACL from a benefactor.
 
-- [`synDeletePermissions`](https://r-docs.synapse.org/latest/reference/SubmissionView_DeletePermissions.md)`(instance, include_self=TRUE, include_container_content=FALSE, recursive=FALSE, target_entity_types=NULL, dry_run=FALSE, show_acl_details=TRUE, show_files_in_containers=TRUE, synapse_client=NULL)`:
+- [`synDeletePermissions`](https://linglp.github.io/synapser/latest/reference/SubmissionView_DeletePermissions.md)`(instance, include_self=TRUE, include_container_content=FALSE, recursive=FALSE, target_entity_types=NULL, dry_run=FALSE, show_acl_details=TRUE, show_files_in_containers=TRUE, synapse_client=NULL)`:
   Delete the entire **local** Access Control List (ACL) for a given
   Entity. This is not scoped to a specific user or group, but rather
   removes all permissions associated with the Entity. After this
@@ -250,7 +250,7 @@ NULL
   \
   In order to remove permissions for a specific user or group, you
   should use the
-  [`synSetPermissions()`](https://r-docs.synapse.org/latest/reference/SubmissionView_SetPermissions.md)
+  [`synSetPermissions()`](https://linglp.github.io/synapser/latest/reference/SubmissionView_SetPermissions.md)
   function with the `access_type` set to an empty list.\
   \
   By default, Entities such as FileEntity and Folder inherit their
@@ -267,11 +267,11 @@ NULL
   deleted, you must individually update or revoke the permissions for
   each user or group.
 
-- [`synGetAcl`](https://r-docs.synapse.org/latest/reference/SubmissionView_GetAcl.md)`(instance, principal_id=NULL, check_benefactor=TRUE, synapse_client=NULL)`:
+- [`synGetAcl`](https://linglp.github.io/synapser/latest/reference/SubmissionView_GetAcl.md)`(instance, principal_id=NULL, check_benefactor=TRUE, synapse_client=NULL)`:
   Get the [ACL](https://python-docs.synapse.org/reference/permissions/)
   that a user or group has on an Entity.
 
-- [`synListAcl`](https://r-docs.synapse.org/latest/reference/SubmissionView_ListAcl.md)`(instance, recursive=FALSE, include_container_content=FALSE, target_entity_types=NULL, log_tree=FALSE, synapse_client=NULL)`:
+- [`synListAcl`](https://linglp.github.io/synapser/latest/reference/SubmissionView_ListAcl.md)`(instance, recursive=FALSE, include_container_content=FALSE, target_entity_types=NULL, log_tree=FALSE, synapse_client=NULL)`:
   List the Access Control Lists (ACLs) for this entity and optionally
   its children.\
   \
@@ -285,7 +285,7 @@ NULL
   Team that the user has access to that has permissions on the entity,
   or through inheritance from parent entities.
 
-- [`synQuery`](https://r-docs.synapse.org/latest/reference/SubmissionView_Query.md)`(query, include_row_id_and_row_version=TRUE, convert_to_datetime=FALSE, download_location=NULL, quote_character="\"", escape_character=r"(\)", line_end="\n", separator=",", header=TRUE, timeout=250L, synapse_client=NULL)`:
+- [`synQuery`](https://linglp.github.io/synapser/latest/reference/SubmissionView_Query.md)`(query, include_row_id_and_row_version=TRUE, convert_to_datetime=FALSE, download_location=NULL, quote_character="\"", escape_character=r"(\)", line_end="\n", separator=",", header=TRUE, timeout=250L, synapse_client=NULL)`:
   Query for data on a table stored in Synapse. The results will always
   be returned as a data frame unless you specify a `download_location`
   in which case the results will be downloaded to that location. There
@@ -293,20 +293,20 @@ NULL
   on if you are getting the results back as a DataFrame or downloading
   the results to a file.
 
-- [`synQueryPartMask`](https://r-docs.synapse.org/latest/reference/SubmissionView_QueryPartMask.md)`(query, part_mask, timeout=250L, synapse_client=NULL)`:
+- [`synQueryPartMask`](https://linglp.github.io/synapser/latest/reference/SubmissionView_QueryPartMask.md)`(query, part_mask, timeout=250L, synapse_client=NULL)`:
   Query for data on a table stored in Synapse. This is a more advanced
   use case of the
-  [`synQuery()`](https://r-docs.synapse.org/latest/reference/SubmissionView_Query.md)
+  [`synQuery()`](https://linglp.github.io/synapser/latest/reference/SubmissionView_Query.md)
   function that allows you to determine what additional metadata about
   the table or query should also be returned. If you do not need this
   additional information then you are better off using the
-  [`synQuery()`](https://r-docs.synapse.org/latest/reference/SubmissionView_Query.md)
+  [`synQuery()`](https://linglp.github.io/synapser/latest/reference/SubmissionView_Query.md)
   function.\
   \
   The query for this method uses this Rest API:\
   \<https://rest-docs.synapse.org/rest/POST/entity/id/table/query/async/start.html\>
 
-- [`synSnapshot`](https://r-docs.synapse.org/latest/reference/SubmissionView_Snapshot.md)`(instance, comment=NULL, label=NULL, include_activity=TRUE, associate_activity_to_new_version=TRUE, timeout=120L, synapse_client=NULL)`:
+- [`synSnapshot`](https://linglp.github.io/synapser/latest/reference/SubmissionView_Snapshot.md)`(instance, comment=NULL, label=NULL, include_activity=TRUE, associate_activity_to_new_version=TRUE, timeout=120L, synapse_client=NULL)`:
   Creates a snapshot of the `SubmissionView` entity. Synapse handles
   snapshot creation differently for `Table`- and `View`-like entities.
   `View` snapshots are created using the asynchronous job API.\

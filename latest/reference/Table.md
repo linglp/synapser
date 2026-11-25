@@ -38,7 +38,7 @@ An S3-style class object.
   the [W3C Specification](https://www.w3.org/TR/prov-n/) on Provenance.
   Activity cannot be removed during a store operation by setting it to
   None. You must use:
-  [`synDelete`](https://r-docs.synapse.org/latest/reference/synDelete.md)
+  [`synDelete`](https://linglp.github.io/synapser/latest/reference/synDelete.md)
   or `synDisassociateActivityFromEntity`.
 
 - version_number:
@@ -161,10 +161,10 @@ NULL
 - `Table(id=NULL, name=NULL, parent_id=NULL, activity=NULL, version_number=NULL, description=NULL, columns=list(), etag=NULL, created_on=NULL, created_by=NULL, modified_on=NULL, modified_by=NULL, version_label=NULL, version_comment=NULL, is_latest_version=NULL, is_search_enabled=NULL, annotations=list())`:
   Constructor for `Table`
 
-- [`synAddColumn`](https://r-docs.synapse.org/latest/reference/Table_AddColumn.md)`(instance, column, index=NULL)`:
+- [`synAddColumn`](https://linglp.github.io/synapser/latest/reference/Table_AddColumn.md)`(instance, column, index=NULL)`:
   Add column(s) to the table. Note that this does not store the
   column(s) in Synapse. You must call the
-  [`synStore()`](https://r-docs.synapse.org/latest/reference/synStore.md)
+  [`synStore()`](https://linglp.github.io/synapser/latest/reference/synStore.md)
   function on this Table instance to store the column(s) in Synapse.
   This is a convenience function to eliminate the need to manually add
   the column(s) to the `$columns` list.\
@@ -173,16 +173,16 @@ NULL
   Table instance. `$columns` is a named list where the key is the name
   of the column and the value is the Column object.
 
-- [`synBindSchema`](https://r-docs.synapse.org/latest/reference/Table_BindSchema.md)`(instance, json_schema_uri, enable_derived_annotations=FALSE, synapse_client=NULL)`:
+- [`synBindSchema`](https://linglp.github.io/synapser/latest/reference/Table_BindSchema.md)`(instance, json_schema_uri, enable_derived_annotations=FALSE, synapse_client=NULL)`:
   Bind a JSON schema to the entity.
 
-- [`synDeleteColumn`](https://r-docs.synapse.org/latest/reference/Table_DeleteColumn.md)`(instance, name)`:
+- [`synDeleteColumn`](https://linglp.github.io/synapser/latest/reference/Table_DeleteColumn.md)`(instance, name)`:
   Mark a column for deletion. Note that this does not delete the column
   from Synapse. You must call the
-  [`synStore()`](https://r-docs.synapse.org/latest/reference/synStore.md)
+  [`synStore()`](https://linglp.github.io/synapser/latest/reference/synStore.md)
   function on this Table instance to delete the column from Synapse.
 
-- [`synDeletePermissions`](https://r-docs.synapse.org/latest/reference/Table_DeletePermissions.md)`(instance, include_self=TRUE, include_container_content=FALSE, recursive=FALSE, target_entity_types=NULL, dry_run=FALSE, show_acl_details=TRUE, show_files_in_containers=TRUE, synapse_client=NULL)`:
+- [`synDeletePermissions`](https://linglp.github.io/synapser/latest/reference/Table_DeletePermissions.md)`(instance, include_self=TRUE, include_container_content=FALSE, recursive=FALSE, target_entity_types=NULL, dry_run=FALSE, show_acl_details=TRUE, show_files_in_containers=TRUE, synapse_client=NULL)`:
   Delete the entire **local** Access Control List (ACL) for a given
   Entity. This is not scoped to a specific user or group, but rather
   removes all permissions associated with the Entity. After this
@@ -191,7 +191,7 @@ NULL
   \
   In order to remove permissions for a specific user or group, you
   should use the
-  [`synSetPermissions()`](https://r-docs.synapse.org/latest/reference/Table_SetPermissions.md)
+  [`synSetPermissions()`](https://linglp.github.io/synapser/latest/reference/Table_SetPermissions.md)
   function with the `access_type` set to an empty list.\
   \
   By default, Entities such as FileEntity and Folder inherit their
@@ -208,35 +208,35 @@ NULL
   deleted, you must individually update or revoke the permissions for
   each user or group.
 
-- [`synDeleteRows`](https://r-docs.synapse.org/latest/reference/Table_DeleteRows.md)`(instance, query=NULL, df=NULL, job_timeout=600L, synapse_client=NULL)`:
+- [`synDeleteRows`](https://linglp.github.io/synapser/latest/reference/Table_DeleteRows.md)`(instance, query=NULL, df=NULL, job_timeout=600L, synapse_client=NULL)`:
   Delete rows from a table given a query or a data frame to select rows.
   The query at a minimum must select the `ROW_ID` and `ROW_VERSION`
   columns. If you want to inspect the data that will be deleted ahead of
   time you may use the
-  [`synQuery()`](https://r-docs.synapse.org/latest/reference/Table_Query.md)
+  [`synQuery()`](https://linglp.github.io/synapser/latest/reference/Table_Query.md)
   function to get the data. The data frame must at least contain the
   `ROW_ID` and `ROW_VERSION` columns. And `ROW_ETAG` column is also
   required if the entity is one of the following: `EntityView`,
   `Dataset`, `DatasetCollection`, or `SubmissionView`. If both query and
   df are provided, the query will be used.
 
-- [`synGetAcl`](https://r-docs.synapse.org/latest/reference/Table_GetAcl.md)`(instance, principal_id=NULL, check_benefactor=TRUE, synapse_client=NULL)`:
+- [`synGetAcl`](https://linglp.github.io/synapser/latest/reference/Table_GetAcl.md)`(instance, principal_id=NULL, check_benefactor=TRUE, synapse_client=NULL)`:
   Get the
   [ACL](https://rest-docs.synapse.org/rest/org/sagebionetworks/repo/model/ACCESS_TYPE.html)
   that a user or group has on an Entity.
 
-- [`synGetPermissions`](https://r-docs.synapse.org/latest/reference/Table_GetPermissions.md)`(instance, synapse_client=NULL)`:
+- [`synGetPermissions`](https://linglp.github.io/synapser/latest/reference/Table_GetPermissions.md)`(instance, synapse_client=NULL)`:
   Get the
   [permissions](https://python-docs.synapse.org/reference/permissions/)
   that the caller has on an Entity.
 
-- [`synGetSchema`](https://r-docs.synapse.org/latest/reference/Table_GetSchema.md)`(instance, synapse_client=NULL)`:
+- [`synGetSchema`](https://linglp.github.io/synapser/latest/reference/Table_GetSchema.md)`(instance, synapse_client=NULL)`:
   Get the JSON schema bound to the entity.
 
-- [`synGetSchemaDerivedKeys`](https://r-docs.synapse.org/latest/reference/Table_GetSchemaDerivedKeys.md)`(instance, synapse_client=NULL)`:
+- [`synGetSchemaDerivedKeys`](https://linglp.github.io/synapser/latest/reference/Table_GetSchemaDerivedKeys.md)`(instance, synapse_client=NULL)`:
   Retrieve derived JSON schema keys for the entity.
 
-- [`synListAcl`](https://r-docs.synapse.org/latest/reference/Table_ListAcl.md)`(instance, recursive=FALSE, include_container_content=FALSE, target_entity_types=NULL, log_tree=FALSE, synapse_client=NULL)`:
+- [`synListAcl`](https://linglp.github.io/synapser/latest/reference/Table_ListAcl.md)`(instance, recursive=FALSE, include_container_content=FALSE, target_entity_types=NULL, log_tree=FALSE, synapse_client=NULL)`:
   List the Access Control Lists (ACLs) for this entity and optionally
   its children.\
   \
@@ -250,7 +250,7 @@ NULL
   Team that the user has access to that has permissions on the entity,
   or through inheritance from parent entities.
 
-- [`synQuery`](https://r-docs.synapse.org/latest/reference/Table_Query.md)`(query, include_row_id_and_row_version=TRUE, convert_to_datetime=FALSE, download_location=NULL, quote_character="\"", escape_character=r"(\)", line_end="\n", separator=",", header=TRUE, timeout=250L, synapse_client=NULL)`:
+- [`synQuery`](https://linglp.github.io/synapser/latest/reference/Table_Query.md)`(query, include_row_id_and_row_version=TRUE, convert_to_datetime=FALSE, download_location=NULL, quote_character="\"", escape_character=r"(\)", line_end="\n", separator=",", header=TRUE, timeout=250L, synapse_client=NULL)`:
   Query for data on a table stored in Synapse. The results will always
   be returned as a data frame unless you specify a `download_location`
   in which case the results will be downloaded to that location. There
@@ -258,23 +258,23 @@ NULL
   on if you are getting the results back as a data frame or downloading
   the results to a file.
 
-- [`synQueryPartMask`](https://r-docs.synapse.org/latest/reference/Table_QueryPartMask.md)`(query, part_mask, timeout=250L, synapse_client=NULL)`:
+- [`synQueryPartMask`](https://linglp.github.io/synapser/latest/reference/Table_QueryPartMask.md)`(query, part_mask, timeout=250L, synapse_client=NULL)`:
   Query for data on a table stored in Synapse. This is a more advanced
   use case of the
-  [`synQuery()`](https://r-docs.synapse.org/latest/reference/Table_Query.md)
+  [`synQuery()`](https://linglp.github.io/synapser/latest/reference/Table_Query.md)
   function that allows you to determine what additional metadata about
   the table or query should also be returned. If you do not need this
   additional information then you are better off using the
-  [`synQuery()`](https://r-docs.synapse.org/latest/reference/Table_Query.md)
+  [`synQuery()`](https://linglp.github.io/synapser/latest/reference/Table_Query.md)
   function.\
   \
   The query for this method uses this Rest API:\
   <https://rest-docs.synapse.org/rest/POST/entity/id/table/query/async/start.html>
 
-- [`synReorderColumn`](https://r-docs.synapse.org/latest/reference/Table_ReorderColumn.md)`(instance, name, index)`:
+- [`synReorderColumn`](https://linglp.github.io/synapser/latest/reference/Table_ReorderColumn.md)`(instance, name, index)`:
   Reorder a column in the table. Note that this does not store the
   column in Synapse. You must call the
-  [`synStore()`](https://r-docs.synapse.org/latest/reference/synStore.md)
+  [`synStore()`](https://linglp.github.io/synapser/latest/reference/synStore.md)
   function on this Table instance to store the column in Synapse. This
   is a convenience function to eliminate the need to manually reorder
   the named list stored in the `$columns` attribute.\
@@ -283,18 +283,18 @@ NULL
   columns in the table. If you pass in an index that is out of bounds
   the column will be added to the end of the list.
 
-- [`synSetPermissions`](https://r-docs.synapse.org/latest/reference/Table_SetPermissions.md)`(instance, principal_id=NULL, access_type=NULL, modify_benefactor=FALSE, warn_if_inherits=TRUE, overwrite=TRUE, synapse_client=NULL)`:
+- [`synSetPermissions`](https://linglp.github.io/synapser/latest/reference/Table_SetPermissions.md)`(instance, principal_id=NULL, access_type=NULL, modify_benefactor=FALSE, warn_if_inherits=TRUE, overwrite=TRUE, synapse_client=NULL)`:
   Sets permission that a user or group has on an Entity. An Entity may
   have its own ACL or inherit its ACL from a benefactor.
 
-- [`synSnapshot`](https://r-docs.synapse.org/latest/reference/Table_Snapshot.md)`(instance, comment=NULL, label=NULL, include_activity=TRUE, associate_activity_to_new_version=TRUE, synapse_client=NULL)`:
+- [`synSnapshot`](https://linglp.github.io/synapser/latest/reference/Table_Snapshot.md)`(instance, comment=NULL, label=NULL, include_activity=TRUE, associate_activity_to_new_version=TRUE, synapse_client=NULL)`:
   Request to create a new snapshot of a table. The provided comment,
   label, and activity will be applied to the current version thereby
   creating a snapshot and locking the current version. After the
   snapshot is created a new version will be started with an
   'in-progress' label.
 
-- [`synStoreRows`](https://r-docs.synapse.org/latest/reference/Table_StoreRows.md)`(instance, values, schema_storage_strategy=NULL, column_expansion_strategy=NULL, dry_run=FALSE, additional_changes=NULL, insert_size_bytes=943718400L, csv_table_descriptor=NULL, date_columns=NULL, date_format=NULL, read_csv_kwargs=NULL, to_csv_kwargs=NULL, job_timeout=600L, synapse_client=NULL)`:
+- [`synStoreRows`](https://linglp.github.io/synapser/latest/reference/Table_StoreRows.md)`(instance, values, schema_storage_strategy=NULL, column_expansion_strategy=NULL, dry_run=FALSE, additional_changes=NULL, insert_size_bytes=943718400L, csv_table_descriptor=NULL, date_columns=NULL, date_format=NULL, read_csv_kwargs=NULL, to_csv_kwargs=NULL, job_timeout=600L, synapse_client=NULL)`:
   Add or update rows in Synapse from the sources defined below. In most
   cases the result of this function call will append rows to the table.
   In the case of an update this method works on a full row replacement.
@@ -307,20 +307,20 @@ NULL
 
   If you'd like to perform an `upsert` or partial update of a row you
   may use the
-  [`synUpsertRows()`](https://r-docs.synapse.org/latest/reference/Table_UpsertRows.md)
+  [`synUpsertRows()`](https://linglp.github.io/synapser/latest/reference/Table_UpsertRows.md)
   function. See that function for more information.
 
   Note the following behavior for the order of columns:
 
   \- If a column is added via the
-  [`synAddColumn()`](https://r-docs.synapse.org/latest/reference/Table_AddColumn.md)
+  [`synAddColumn()`](https://linglp.github.io/synapser/latest/reference/Table_AddColumn.md)
   function it will be added at the index you specify, or at the end of
   the columns list.\
   \- If column(s) are added during the construction of your `Table`
   instance, ie. `Table(columns = list(Column(name = "foo")))`, they will
   be added at the beginning of the columns list.\
   \- If you use the
-  [`synStoreRows()`](https://r-docs.synapse.org/latest/reference/Table_StoreRows.md)
+  [`synStoreRows()`](https://linglp.github.io/synapser/latest/reference/Table_StoreRows.md)
   function and the `schema_storage_strategy` is set to `INFER_FROM_DATA`
   the columns will be added at the end of the columns list.
 
@@ -372,9 +372,9 @@ NULL
   \- `2018-10-01` → summer → interpreted using UTC-7
 
   When the data is queried back with
-  [`synQuery`](https://r-docs.synapse.org/latest/reference/Table_Query.md)`(..., convert_to_datetime = TRUE)`,
+  [`synQuery`](https://linglp.github.io/synapser/latest/reference/Table_Query.md)`(..., convert_to_datetime = TRUE)`,
   `DATE` columns are returned as datetimes in UTC. See
-  [`vignette("tables", package = "synapser")`](https://r-docs.synapse.org/latest/articles/tables.md)
+  [`vignette("tables", package = "synapser")`](https://linglp.github.io/synapser/latest/articles/tables.md)
   for how to work with the returned values and view them in another
   timezone.
 
@@ -474,10 +474,10 @@ NULL
 
           Table-->>User: Upload complete
 
-- [`synUnbindSchema`](https://r-docs.synapse.org/latest/reference/Table_UnbindSchema.md)`(instance, synapse_client=NULL)`:
+- [`synUnbindSchema`](https://linglp.github.io/synapser/latest/reference/Table_UnbindSchema.md)`(instance, synapse_client=NULL)`:
   Unbind the JSON schema bound to the entity.
 
-- [`synUpsertRows`](https://r-docs.synapse.org/latest/reference/Table_UpsertRows.md)`(instance, values, primary_keys, dry_run=FALSE, rows_per_query=50000L, update_size_bytes=1992294.4, insert_size_bytes=943718400L, job_timeout=600L, date_columns=NULL, date_format=NULL, synapse_client=NULL)`:
+- [`synUpsertRows`](https://linglp.github.io/synapser/latest/reference/Table_UpsertRows.md)`(instance, values, primary_keys, dry_run=FALSE, rows_per_query=50000L, update_size_bytes=1992294.4, insert_size_bytes=943718400L, job_timeout=600L, date_columns=NULL, date_format=NULL, synapse_client=NULL)`:
   This method allows you to perform an `upsert` (Update and Insert) for
   row(s). This means that you may update a row with only the data that
   you want to change. When supplied with a row that does not match the
@@ -501,10 +501,10 @@ NULL
   request to Synapse for each row that is upserted. If you are upserting
   a large number of rows a better approach may be to query for the data
   you want to update, update the data, then use the
-  [`synStoreRows()`](https://r-docs.synapse.org/latest/reference/Table_StoreRows.md)
+  [`synStoreRows()`](https://linglp.github.io/synapser/latest/reference/Table_StoreRows.md)
   function to update the data in Synapse. Any rows you want to insert
   may be added to the data frame that is passed to the
-  [`synStoreRows()`](https://r-docs.synapse.org/latest/reference/Table_StoreRows.md)
+  [`synStoreRows()`](https://linglp.github.io/synapser/latest/reference/Table_StoreRows.md)
   function.\
   \- When upserting many rows the requests to Synapse will be chunked
   into smaller requests. The limit is 2MB per request. This chunking
@@ -566,7 +566,7 @@ NULL
 
           Table-->>User: Upsert complete
 
-- [`synValidateSchema`](https://r-docs.synapse.org/latest/reference/Table_ValidateSchema.md)`(instance, synapse_client=NULL)`:
+- [`synValidateSchema`](https://linglp.github.io/synapser/latest/reference/Table_ValidateSchema.md)`(instance, synapse_client=NULL)`:
   Validate the entity against the bound JSON schema.
 
 ## Examples

@@ -62,16 +62,16 @@ NULL
 - `JSONSchema(name=NULL, organization_name=NULL, organization_id=NULL, id=NULL, created_on=NULL, created_by=NULL, uri=NULL, last_stored_version_info=NULL)`:
   Constructor for `JSONSchema`
 
-- [`synFromUri`](https://r-docs.synapse.org/latest/reference/JSONSchema_FromUri.md)`(cls, uri)`:
+- [`synFromUri`](https://linglp.github.io/synapser/latest/reference/JSONSchema_FromUri.md)`(cls, uri)`:
   Creates a JSONSchema from a URI. The URI can either be a semantic
   version or not:\
   \- non-semantic: ORGANIZATION.NAME-SCHEMA.NAME\
   \- semantic: ORGANIZATION.NAME-SCHEMA.NAME-MAJOR.MINOR.PATCH
 
-- [`synGetBody`](https://r-docs.synapse.org/latest/reference/JSONSchema_GetBody.md)`(instance, version=NULL, synapse_client=NULL)`:
+- [`synGetBody`](https://linglp.github.io/synapser/latest/reference/JSONSchema_GetBody.md)`(instance, version=NULL, synapse_client=NULL)`:
   Gets the body of this JSONSchema
 
-- [`synGetVersions`](https://r-docs.synapse.org/latest/reference/JSONSchema_GetVersions.md)`(instance, synapse_client=NULL)`:
+- [`synGetVersions`](https://linglp.github.io/synapser/latest/reference/JSONSchema_GetVersions.md)`(instance, synapse_client=NULL)`:
   Gets all versions of this JSONSchema
 
 ## Examples

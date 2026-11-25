@@ -19,10 +19,10 @@ In this vignette you will:
 ### Prerequisites
 
 1.  Make sure that you have completed the
-    [Installation](https://r-docs.synapse.org/latest/articles/installation.md)
+    [Installation](https://linglp.github.io/synapser/latest/articles/installation.md)
     setup.
 2.  Make sure that you have completed the
-    [Authentication](https://r-docs.synapse.org/latest/articles/authentication.md)
+    [Authentication](https://linglp.github.io/synapser/latest/articles/authentication.md)
     setup.
 
 ## 1. Create a new project
@@ -31,14 +31,14 @@ In this vignette you will:
 [`library`](https://rdrr.io/r/base/library.html)`(`[`synapser`](https://github.com/Sage-Bionetworks/synapser)`)`
 
 \
-[`synLogin`](https://r-docs.synapse.org/latest/reference/synLogin.md)`(``)`\
+[`synLogin`](https://linglp.github.io/synapser/latest/reference/synLogin.md)`(``)`\
 \
 `# Project names must be globally unique`\
 `project_name`` ``<-`` `[`paste0`](https://rdrr.io/r/base/paste.html)`(`\
 `  ``"My uniquely named project about Alzheimer's Disease "``,`\
 `  `[`paste`](https://rdrr.io/r/base/paste.html)`(`[`sample`](https://rdrr.io/r/base/sample.html)`(`[`c`](https://rdrr.io/r/base/c.html)`(``letters``, ``LETTERS``, ``0``:``9``)``, ``8``, replace ``=`` ``TRUE``)``, collapse ``=`` ``""``)`\
 `)`\
-`project`` ``<-`` `[`Project`](https://r-docs.synapse.org/latest/reference/Project.md)`(``name ``=`` ``project_name``)`` ``|>`` `[`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)`(``)`\
+`project`` ``<-`` `[`Project`](https://linglp.github.io/synapser/latest/reference/Project.md)`(``name ``=`` ``project_name``)`` ``|>`` `[`synStore`](https://linglp.github.io/synapser/latest/reference/synStore.md)`(``)`\
 [`cat`](https://rdrr.io/r/base/cat.html)`(``"Created project:"``, ``project``$``id``, ``"\n"``)`
 
 Now that you have created your project you are able to inspect the
@@ -69,7 +69,7 @@ Each Project only needs to be created once. Since you’ve already created
 it you can access it again by retrieving it using its name.
 
 \
-`my_project_object`` ``<-`` `[`Project`](https://r-docs.synapse.org/latest/reference/Project.md)`(``name ``=`` ``project_name``)`` ``|>`` `[`synGet`](https://r-docs.synapse.org/latest/reference/synGet.md)`(``)`\
+`my_project_object`` ``<-`` `[`Project`](https://linglp.github.io/synapser/latest/reference/Project.md)`(``name ``=`` ``project_name``)`` ``|>`` `[`synGet`](https://linglp.github.io/synapser/latest/reference/synGet.md)`(``)`\
 [`cat`](https://rdrr.io/r/base/cat.html)`(``"I just got my project:"``, ``my_project_object``$``name``, ``", id:"``, ``my_project_object``$``id``, ``"\n"``)`
 
 The result will look like:
@@ -81,10 +81,10 @@ The result will look like:
 Delete the project and all its contents when done:
 
 \
-[`synDelete`](https://r-docs.synapse.org/latest/reference/synDelete.md)`(``project``)`
+[`synDelete`](https://linglp.github.io/synapser/latest/reference/synDelete.md)`(``project``)`
 
 ## References used in this tutorial
 
-- [`Project`](https://r-docs.synapse.org/latest/reference/Project.md)
-- [`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)
-- [`synGet`](https://r-docs.synapse.org/latest/reference/synGet.md)
+- [`Project`](https://linglp.github.io/synapser/latest/reference/Project.md)
+- [`synStore`](https://linglp.github.io/synapser/latest/reference/synStore.md)
+- [`synGet`](https://linglp.github.io/synapser/latest/reference/synGet.md)

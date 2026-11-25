@@ -78,7 +78,7 @@ NULL
 - `Column(id=NULL, name=NULL, column_type=NULL, facet_type=NULL, default_value=NULL, maximum_size=NULL, maximum_list_length=NULL, enum_values=NULL, json_sub_columns=NULL)`:
   Constructor for `Column`
 
-- [`synList`](https://r-docs.synapse.org/latest/reference/Column_List.md)`(prefix=NULL, limit=100L, offset=0L, synapse_client=NULL)`:
+- [`synList`](https://linglp.github.io/synapser/latest/reference/Column_List.md)`(prefix=NULL, limit=100L, offset=0L, synapse_client=NULL)`:
   List columns with optional prefix filtering.
 
 ## Examples

@@ -38,7 +38,7 @@ synSnapshot(instance, comment=NULL, label=NULL, include_activity=TRUE, associate
   In order to include the activity, the activity must have already been
   stored in Synapse by using the `$activity` attribute on the
   SubmissionView and calling the
-  [`synStore()`](https://r-docs.synapse.org/latest/reference/synStore.md)
+  [`synStore()`](https://linglp.github.io/synapser/latest/reference/synStore.md)
   function on the SubmissionView instance. Adding an activity to a
   snapshot of a table is meant to capture the provenance of the data at
   the time of the snapshot. Defaults to TRUE.

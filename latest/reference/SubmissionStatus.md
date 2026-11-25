@@ -108,10 +108,10 @@ NULL
 - `SubmissionStatus(id=NULL, etag=NULL, modified_on=NULL, status=NULL, score=NULL, report=NULL, annotations=list(), submission_annotations=list(), private_status_annotations=TRUE, entity_id=NULL, version_number=NULL, status_version=NULL, can_cancel=FALSE, cancel_requested=FALSE)`:
   Constructor for `SubmissionStatus`
 
-- [`synBatchUpdateSubmissionStatuses`](https://r-docs.synapse.org/latest/reference/SubmissionStatus_BatchUpdateSubmissionStatuses.md)`(evaluation_id, statuses, is_first_batch=TRUE, is_last_batch=TRUE, batch_token=NULL, synapse_client=NULL)`:
+- [`synBatchUpdateSubmissionStatuses`](https://linglp.github.io/synapser/latest/reference/SubmissionStatus_BatchUpdateSubmissionStatuses.md)`(evaluation_id, statuses, is_first_batch=TRUE, is_last_batch=TRUE, batch_token=NULL, synapse_client=NULL)`:
   Update multiple SubmissionStatuses. The maximum batch size is 500.
 
-- [`synGetAllSubmissionStatuses`](https://r-docs.synapse.org/latest/reference/SubmissionStatus_GetAllSubmissionStatuses.md)`(evaluation_id, status=NULL, limit=10L, offset=0L, synapse_client=NULL)`:
+- [`synGetAllSubmissionStatuses`](https://linglp.github.io/synapser/latest/reference/SubmissionStatus_GetAllSubmissionStatuses.md)`(evaluation_id, status=NULL, limit=10L, offset=0L, synapse_client=NULL)`:
   Gets a collection of SubmissionStatuses to a specified Evaluation.
 
 ## Examples

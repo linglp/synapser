@@ -1,7 +1,7 @@
 # EntityView : update_rows
 
 This method leverages the logic provided by
-[`synUpsertRows()`](https://r-docs.synapse.org/latest/reference/Table_UpsertRows.md)
+[`synUpsertRows()`](https://linglp.github.io/synapser/latest/reference/Table_UpsertRows.md)
 to provide an interface for updating rows in a `View`-like entity.
 Update functionality will only work for values in custom columns within
 a `View`-like entity.

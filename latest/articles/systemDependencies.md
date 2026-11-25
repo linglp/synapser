@@ -7,8 +7,8 @@ software relies on other software in order to be functional. For R
 package dependencies, the installation of the `synapser` package will
 take care of installing other R packages that `synapser` depends on,
 using dependencies specified in the
-[DESCRIPTION](https://r-docs.synapse.org/latest/DESCRIPTION) file.
-However, lower level system dependencies are not automatically
+[DESCRIPTION](https://linglp.github.io/synapser/latest/DESCRIPTION)
+file. However, lower level system dependencies are not automatically
 installed.
 
 Most Windows and Mac machines have the required system dependencies.
@@ -34,7 +34,7 @@ You do not need to install Python yourself: when synapser is loaded,
 reticulate (1.44.0 or later) downloads a compatible Python into a
 managed environment. These limits only matter if you point synapser at a
 Python you manage yourself. See the [Installation
-vignette](https://r-docs.synapse.org/latest/articles/installation.md)
+vignette](https://linglp.github.io/synapser/latest/articles/installation.md)
 for details.
 
 ### Ubuntu Installation

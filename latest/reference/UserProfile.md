@@ -98,7 +98,7 @@ An S3-style class object.
 - preferences:
 
   (Optional\[list\[UserPreference\]\]) A list of
-  [`UserPreference`](https://r-docs.synapse.org/latest/reference/UserPreference.md)
+  [`UserPreference`](https://linglp.github.io/synapser/latest/reference/UserPreference.md)
   objects.
 
 - created_on:
@@ -122,13 +122,13 @@ NULL
 - `UserProfile(id=NULL, username=NULL, etag=NULL, first_name=NULL, last_name=NULL, emails=list(), open_ids=list(), r_studio_url=NULL, summary=NULL, position=NULL, location=NULL, industry=NULL, company=NULL, profile_picure_file_handle_id=NULL, url=NULL, team_name=NULL, send_email_notifications=TRUE, mark_emailed_messages_as_read=FALSE, preferences=list(), created_on=NULL, display_name=NULL, notification_settings=NULL)`:
   Constructor for `UserProfile`
 
-- [`synGetFromId`](https://r-docs.synapse.org/latest/reference/UserProfile_GetFromId.md)`(cls, user_id, synapse_client=NULL)`:
+- [`synGetFromId`](https://linglp.github.io/synapser/latest/reference/UserProfile_GetFromId.md)`(cls, user_id, synapse_client=NULL)`:
   Gets UserProfile object using its integer id.
 
-- [`synGetFromUsername`](https://r-docs.synapse.org/latest/reference/UserProfile_GetFromUsername.md)`(cls, username, synapse_client=NULL)`:
+- [`synGetFromUsername`](https://linglp.github.io/synapser/latest/reference/UserProfile_GetFromUsername.md)`(cls, username, synapse_client=NULL)`:
   Gets UserProfile object using its string name.
 
-- [`synIsCertified`](https://r-docs.synapse.org/latest/reference/UserProfile_IsCertified.md)`(instance, synapse_client=NULL)`:
+- [`synIsCertified`](https://linglp.github.io/synapser/latest/reference/UserProfile_IsCertified.md)`(instance, synapse_client=NULL)`:
   Determine whether a user is certified.
 
 ## Examples

@@ -31,7 +31,7 @@ synSnapshot(instance, comment=NULL, label=NULL, include_activity=TRUE, associate
   exists. In order to include the activity, the activity must have
   already been stored in Synapse by using the `$activity` attribute on
   the Dataset and calling the
-  [`synStore()`](https://r-docs.synapse.org/latest/reference/synStore.md)
+  [`synStore()`](https://linglp.github.io/synapser/latest/reference/synStore.md)
   function on the Dataset instance. Adding an activity to a snapshot of
   a dataset is meant to capture the provenance of the data at the time
   of the snapshot. Defaults to TRUE.

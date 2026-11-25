@@ -84,9 +84,9 @@ An S3-style class object.
   of Provenance in Synapse. It is analogous to the Activity defined in
   the W3C Specification on Provenance. Activity cannot be removed during
   a store operation by setting it to NULL. You must use
-  [`synDelete`](https://r-docs.synapse.org/latest/reference/synDelete.md)
+  [`synDelete`](https://linglp.github.io/synapser/latest/reference/synDelete.md)
   or
-  [`synDisassociateActivityFromEntity`](https://r-docs.synapse.org/latest/reference/Activity_DisassociateActivityFromEntity.md).
+  [`synDisassociateActivityFromEntity`](https://linglp.github.io/synapser/latest/reference/Activity_DisassociateActivityFromEntity.md).
 
 - annotations:
 

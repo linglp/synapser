@@ -2,11 +2,11 @@
 
 Query for data on a table stored in Synapse. This is a more advanced use
 case of the
-[`synQuery()`](https://r-docs.synapse.org/latest/reference/Table_Query.md)
+[`synQuery()`](https://linglp.github.io/synapser/latest/reference/Table_Query.md)
 function that allows you to determine what additional metadata about the
 table or query should also be returned. If you do not need this
 additional information then you are better off using the
-[`synQuery()`](https://r-docs.synapse.org/latest/reference/Table_Query.md)
+[`synQuery()`](https://linglp.github.io/synapser/latest/reference/Table_Query.md)
 function.
 
 The query for this method uses this Rest API:

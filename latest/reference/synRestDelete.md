@@ -18,7 +18,7 @@ synRestDelete(uri, endpoint=NULL, headers=NULL, retry_policy=list(), requests_se
 
   (str) Server endpoint, defaults to the client's configured repository
   endpoint (see
-  [`synSetEndpoints()`](https://r-docs.synapse.org/latest/reference/synSetEndpoints.md)).
+  [`synSetEndpoints()`](https://linglp.github.io/synapser/latest/reference/synSetEndpoints.md)).
 
 - headers:
 

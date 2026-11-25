@@ -3,7 +3,7 @@
 ## Uploading data in bulk
 
 This tutorial will follow a [Flattened Data
-Layout](https://r-docs.synapse.org/latest/articles/structuring_your_project.html#flattened-data-layout-example).
+Layout](https://linglp.github.io/synapser/latest/articles/structuring_your_project.html#flattened-data-layout-example).
 With a project that has this example layout:
 
     .
@@ -37,7 +37,7 @@ In this tutorial you will:
 ## Prerequisites
 
 - Make sure that you have completed the following tutorials:
-  - [Project](https://r-docs.synapse.org/latest/articles/data_upload_download.html#create-a-project)
+  - [Project](https://linglp.github.io/synapser/latest/articles/data_upload_download.html#create-a-project)
 - This tutorial is setup to upload the data from `~/my_ad_project`, make
   sure that this or another desired directory exists.
 - This tutorial uses base R’s
@@ -52,13 +52,13 @@ First let’s set up some constants we’ll use in this script
 
 \
 [`library`](https://rdrr.io/r/base/library.html)`(`[`synapser`](https://github.com/Sage-Bionetworks/synapser)`)`\
-[`synLogin`](https://r-docs.synapse.org/latest/reference/synLogin.md)`(``)`\
+[`synLogin`](https://linglp.github.io/synapser/latest/reference/synLogin.md)`(``)`\
 \
 `# Step 1: Create some constants to store the paths to the data`\
 `DIRECTORY_FOR_MY_PROJECT`` ``<-`` ``"test_folder"`` ``# This should exist with your files in it`\
 `PATH_TO_MANIFEST_FILE`` ``<-`` ``"test_manifest.csv"`` ``# This doesn't need to exist yet`\
 `SYNAPSE_PROJECT_ID`` ``<-`` ``""`` ``# Put your Synapse project ID here. This is the project where you want to upload your data.`\
-`project`` ``<-`` `[`Project`](https://r-docs.synapse.org/latest/reference/Project.md)`(``id ``=`` ``SYNAPSE_PROJECT_ID``)`
+`project`` ``<-`` `[`Project`](https://linglp.github.io/synapser/latest/reference/Project.md)`(``id ``=`` ``SYNAPSE_PROJECT_ID``)`
 
 ## 2. Create a manifest CSV file to upload data in bulk
 
@@ -138,7 +138,7 @@ point.
 ## 5. Create an Activity/Provenance
 
 Let’s create an
-[Activity/Provenance](https://r-docs.synapse.org/latest/articles/domain_models_of_synapse.html#activityprovenance)
+[Activity/Provenance](https://linglp.github.io/synapser/latest/articles/domain_models_of_synapse.html#activityprovenance)
 record for one of our files. In other words, we will record the steps
 taken to generate the file.
 
@@ -191,9 +191,9 @@ edit provenance screen
 
 ## References used in this tutorial
 
-- [`synLogin`](https://r-docs.synapse.org/latest/reference/synLogin.md)
-- [`synGenerateSyncManifest`](https://r-docs.synapse.org/latest/reference/Project_GenerateSyncManifest.md)
-- [`synSyncToSynapse`](https://r-docs.synapse.org/latest/reference/Project_SyncToSynapse.md)
+- [`synLogin`](https://linglp.github.io/synapser/latest/reference/synLogin.md)
+- [`synGenerateSyncManifest`](https://linglp.github.io/synapser/latest/reference/Project_GenerateSyncManifest.md)
+- [`synSyncToSynapse`](https://linglp.github.io/synapser/latest/reference/Project_SyncToSynapse.md)
 - [Manifest CSV
-  format](https://r-docs.synapse.org/latest/articles/manifest_csv.md)
-- [Activity/Provenance](https://r-docs.synapse.org/latest/articles/domain_models_of_synapse.html#activityprovenance)
+  format](https://linglp.github.io/synapser/latest/articles/manifest_csv.md)
+- [Activity/Provenance](https://linglp.github.io/synapser/latest/articles/domain_models_of_synapse.html#activityprovenance)

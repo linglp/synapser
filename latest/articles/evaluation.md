@@ -22,7 +22,8 @@ In this tutorial you will:
 ### Prerequisites
 
 - You have an existing Project on Synapse to work from. If you don’t,
-  the [Project](https://r-docs.synapse.org/latest/articles/project.md)
+  the
+  [Project](https://linglp.github.io/synapser/latest/articles/project.md)
   tutorial shows how to create one.
 - You have a Synapse user or team ID to share the evaluation with
 
@@ -30,24 +31,24 @@ In this tutorial you will:
 
 In this first part, we’ll be showing you how to interact with an
 Evaluation object, and how to create and update it on Synapse with
-[`synStore()`](https://r-docs.synapse.org/latest/reference/synStore.md).
+[`synStore()`](https://linglp.github.io/synapser/latest/reference/synStore.md).
 
 \
 [`library`](https://rdrr.io/r/base/library.html)`(`[`synapser`](https://github.com/Sage-Bionetworks/synapser)`)`\
-[`synLogin`](https://r-docs.synapse.org/latest/reference/synLogin.md)`(``)`\
+[`synLogin`](https://linglp.github.io/synapser/latest/reference/synLogin.md)`(``)`\
 \
 `# REQUIRED: Set this to the Synapse user ID or team ID you want to grant permissions to`\
 `# Do NOT leave this as NULL - the script will not work properly`\
 `PRINCIPAL_ID`` ``<-`` ``NULL`` ``# Replace with actual user/team ID`\
 \
 `# Retrieve the Project where your Evaluation will be stored`\
-`project`` ``<-`` `[`Project`](https://r-docs.synapse.org/latest/reference/Project.md)`(``name ``=`` ``"My uniquely named project about Alzheimer's Disease"``)`` ``|>`` `[`synGet`](https://r-docs.synapse.org/latest/reference/synGet.md)`(``)`\
+`project`` ``<-`` `[`Project`](https://linglp.github.io/synapser/latest/reference/Project.md)`(``name ``=`` ``"My uniquely named project about Alzheimer's Disease"``)`` ``|>`` `[`synGet`](https://linglp.github.io/synapser/latest/reference/synGet.md)`(``)`\
 `project_id`` ``<-`` ``project``$``id`\
 \
 [`cat`](https://rdrr.io/r/base/cat.html)`(``"Working within Project:"``, ``project_id``, ``"\n"``)`\
 \
 `# Create a new Evaluation object`\
-`evaluation`` ``<-`` `[`Evaluation`](https://r-docs.synapse.org/latest/reference/Evaluation.md)`(`\
+`evaluation`` ``<-`` `[`Evaluation`](https://linglp.github.io/synapser/latest/reference/Evaluation.md)`(`\
 `  name ``=`` ``"My Challenge Evaluation for Study ABC - Round 1"``,`\
 `  description ``=`` ``"Evaluation for my data challenge"``,`\
 `  content_source ``=`` ``project_id``,`\
@@ -56,7 +57,7 @@ Evaluation object, and how to create and update it on Synapse with
 `)`\
 \
 `# Create the Evaluation on Synapse`\
-`evaluation`` ``<-`` ``evaluation`` ``|>`` `[`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)`(``)`\
+`evaluation`` ``<-`` ``evaluation`` ``|>`` `[`synStore`](https://linglp.github.io/synapser/latest/reference/synStore.md)`(``)`\
 \
 [`cat`](https://rdrr.io/r/base/cat.html)`(``"Evaluation has been created with the following name and description:\n"``)`\
 [`cat`](https://rdrr.io/r/base/cat.html)`(``evaluation``$``name``, ``"\n"``)`\
@@ -67,7 +68,7 @@ Evaluation object, and how to create and update it on Synapse with
 `evaluation``$``description`` ``<-`` ``"Updated description for my evaluation"`\
 \
 `# Update the Evaluation on Synapse`\
-`evaluation`` ``<-`` ``evaluation`` ``|>`` `[`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)`(``)`\
+`evaluation`` ``<-`` ``evaluation`` ``|>`` `[`synStore`](https://linglp.github.io/synapser/latest/reference/synStore.md)`(``)`\
 \
 [`cat`](https://rdrr.io/r/base/cat.html)`(``"Evaluation has been updated with the following name and description:\n"``)`\
 [`cat`](https://rdrr.io/r/base/cat.html)`(``evaluation``$``name``, ``"\n"``)`\
@@ -116,13 +117,13 @@ project, for example, like what we’re about to do here:
 `# Let's delete the evaluation we created for this tutorial, and any other evaluations in this project (uncomment below to enable deletion)`\
 `for`` ``(``evaluation_to_delete`` ``in`` ``evaluations_list``)`` ``{`\
 `  `[`cat`](https://rdrr.io/r/base/cat.html)`(``"Deleting evaluation:"``, ``evaluation_to_delete``$``name``, ``"\n"``)`\
-`  ``evaluation_to_delete`` ``|>`` `[`synDelete`](https://r-docs.synapse.org/latest/reference/synDelete.md)`(``)`\
+`  ``evaluation_to_delete`` ``|>`` `[`synDelete`](https://linglp.github.io/synapser/latest/reference/synDelete.md)`(``)`\
 `}`
 
 ## References
 
-- [`Evaluation`](https://r-docs.synapse.org/latest/reference/Evaluation.md)
-- [`Project`](https://r-docs.synapse.org/latest/reference/Project.md)
-- [`synLogin`](https://r-docs.synapse.org/latest/reference/synLogin.md)
-- [`synGetEvaluationsByProject`](https://r-docs.synapse.org/latest/reference/Evaluation_GetEvaluationsByProject.md)
-- [`synGetAllEvaluations`](https://r-docs.synapse.org/latest/reference/Evaluation_GetAllEvaluations.md)
+- [`Evaluation`](https://linglp.github.io/synapser/latest/reference/Evaluation.md)
+- [`Project`](https://linglp.github.io/synapser/latest/reference/Project.md)
+- [`synLogin`](https://linglp.github.io/synapser/latest/reference/synLogin.md)
+- [`synGetEvaluationsByProject`](https://linglp.github.io/synapser/latest/reference/Evaluation_GetEvaluationsByProject.md)
+- [`synGetAllEvaluations`](https://linglp.github.io/synapser/latest/reference/Evaluation_GetAllEvaluations.md)

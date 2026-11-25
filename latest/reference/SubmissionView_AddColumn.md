@@ -2,7 +2,7 @@
 
 Add column(s) to the table. Note that this does not store the column(s)
 in Synapse. You must call the
-[`synStore()`](https://r-docs.synapse.org/latest/reference/synStore.md)
+[`synStore()`](https://linglp.github.io/synapser/latest/reference/synStore.md)
 function on this SubmissionView instance to store the column(s) in
 Synapse. This is a convenience function to eliminate the need to
 manually add the column(s) to the `$columns` list.

@@ -33,11 +33,11 @@ synGetEvaluationSubmissions(cls, evaluation_id, status=NULL, synapse_client=NULL
 ## Value
 
 A `GeneratorWrapper` object that yields
-[`Submission`](https://r-docs.synapse.org/latest/reference/Submission.md)
+[`Submission`](https://linglp.github.io/synapser/latest/reference/Submission.md)
 objects as they are retrieved from the API. Use
 [`as.list()`](https://rdrr.io/r/base/list.html) to materialize all
 results into a list, or `nextElem()` to retrieve one
-[`Submission`](https://r-docs.synapse.org/latest/reference/Submission.md)
+[`Submission`](https://linglp.github.io/synapser/latest/reference/Submission.md)
 at a time.
 
 ## Examples

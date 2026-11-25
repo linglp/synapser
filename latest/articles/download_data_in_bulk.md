@@ -3,7 +3,7 @@
 ## Downloading data in bulk
 
 This tutorial will follow a [Flattened Data
-Layout](https://r-docs.synapse.org/latest/articles/structuring_your_project.html#flattened-data-layout-example).
+Layout](https://linglp.github.io/synapser/latest/articles/structuring_your_project.html#flattened-data-layout-example).
 With a project that has this example layout:
 
     .
@@ -32,8 +32,8 @@ In this tutorial you will:
 ## Prerequisites
 
 - Make sure that you have completed the following tutorials:
-  - [Folder](https://r-docs.synapse.org/latest/articles/folder.md)
-  - [File](https://r-docs.synapse.org/latest/articles/file.md)
+  - [Folder](https://linglp.github.io/synapser/latest/articles/folder.md)
+  - [File](https://linglp.github.io/synapser/latest/articles/file.md)
 - This tutorial is setup to download the data to `~/my_ad_project`, make
   sure that this or another desired directory exists.
 
@@ -43,7 +43,7 @@ In this tutorial you will:
 
 \
 [`library`](https://rdrr.io/r/base/library.html)`(`[`synapser`](https://github.com/Sage-Bionetworks/synapser)`)`\
-[`synLogin`](https://r-docs.synapse.org/latest/reference/synLogin.md)`(``)`\
+[`synLogin`](https://linglp.github.io/synapser/latest/reference/synLogin.md)`(``)`\
 \
 `# Create some constants to store the paths to the data`\
 `DIRECTORY_TO_SYNC_PROJECT_TO`` ``<-`` `[`path.expand`](https://rdrr.io/r/base/path.expand.html)`(`[`file.path`](https://rdrr.io/r/base/file.path.html)`(``"~"``, ``"my_ad_project"``)``)`\
@@ -55,7 +55,7 @@ In this tutorial you will:
 #### Next we’ll create an instance of the Project we are going to sync
 
 \
-`project`` ``<-`` `[`Project`](https://r-docs.synapse.org/latest/reference/Project.md)`(``name ``=`` ``"My uniquely named project about Alzheimer's Disease"``)`` ``|>`` `[`synGet`](https://r-docs.synapse.org/latest/reference/synGet.md)`(``)`
+`project`` ``<-`` `[`Project`](https://linglp.github.io/synapser/latest/reference/Project.md)`(``name ``=`` ``"My uniquely named project about Alzheimer's Disease"``)`` ``|>`` `[`synGet`](https://linglp.github.io/synapser/latest/reference/synGet.md)`(``)`
 
 #### Finally we’ll sync the project from synapse to your local machine
 
@@ -89,9 +89,9 @@ While syncing your project you’ll see results like:
 By default (`manifest = "all"`), `synSyncFromSynapse()` writes a
 `manifest.csv` into every synced directory. The manifest.csv is
 interoperable with
-[`synSyncToSynapse()`](https://r-docs.synapse.org/latest/reference/Project_SyncToSynapse.md),
+[`synSyncToSynapse()`](https://linglp.github.io/synapser/latest/reference/Project_SyncToSynapse.md),
 the Synapse UI download cart, and
-[`synDownloadListFiles()`](https://r-docs.synapse.org/latest/reference/synDownloadListFiles.md).
+[`synDownloadListFiles()`](https://linglp.github.io/synapser/latest/reference/synDownloadListFiles.md).
 
 Use `manifest = "root"` to write a single manifest at the root path, or
 `manifest = "suppress"` to skip manifest generation entirely.
@@ -109,7 +109,7 @@ Use `manifest = "root"` to write a single manifest at the root path, or
 Following the same set of steps let’s sync a specific folder
 
 \
-`folder`` ``<-`` `[`Folder`](https://r-docs.synapse.org/latest/reference/Folder.md)`(``name ``=`` ``FOLDER_NAME_TO_SYNC``, parent_id ``=`` ``project``$``id``)`\
+`folder`` ``<-`` `[`Folder`](https://linglp.github.io/synapser/latest/reference/Folder.md)`(``name ``=`` ``FOLDER_NAME_TO_SYNC``, parent_id ``=`` ``project``$``id``)`\
 \
 `folder`` ``|>`` ``synSyncFromSynapse``(``path ``=`` ``DIRECTORY_TO_SYNC_FOLDER_TO``, if_collision ``=`` ``"keep.local"``)`\
 \
@@ -170,9 +170,9 @@ like:
 
 ## References used in this tutorial
 
-- [`Project`](https://r-docs.synapse.org/latest/reference/Project.md)
-- [`Folder`](https://r-docs.synapse.org/latest/reference/Folder.md)
-- [`synSyncFromSynapse`](https://r-docs.synapse.org/latest/reference/Project_SyncFromSynapse.md)
-- [`synSyncToSynapse`](https://r-docs.synapse.org/latest/reference/Project_SyncToSynapse.md)
-- [`synDownloadListFiles`](https://r-docs.synapse.org/latest/reference/synDownloadListFiles.md)
-- [`synLogin`](https://r-docs.synapse.org/latest/reference/synLogin.md)
+- [`Project`](https://linglp.github.io/synapser/latest/reference/Project.md)
+- [`Folder`](https://linglp.github.io/synapser/latest/reference/Folder.md)
+- [`synSyncFromSynapse`](https://linglp.github.io/synapser/latest/reference/Project_SyncFromSynapse.md)
+- [`synSyncToSynapse`](https://linglp.github.io/synapser/latest/reference/Project_SyncToSynapse.md)
+- [`synDownloadListFiles`](https://linglp.github.io/synapser/latest/reference/synDownloadListFiles.md)
+- [`synLogin`](https://linglp.github.io/synapser/latest/reference/synLogin.md)

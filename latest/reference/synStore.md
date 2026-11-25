@@ -31,21 +31,21 @@ synStore(entity, parent=NULL, file_options=NULL, container_options=NULL, table_o
 - file_options:
 
   (Optional\[StoreFileOptions\])
-  [`StoreFileOptions`](https://r-docs.synapse.org/latest/reference/StoreFileOptions.md)
+  [`StoreFileOptions`](https://linglp.github.io/synapser/latest/reference/StoreFileOptions.md)
   to apply. Only applies to File and RecordSet entities. Ignored for
   other entity types.
 
 - container_options:
 
   (Optional\[StoreContainerOptions\])
-  [`StoreContainerOptions`](https://r-docs.synapse.org/latest/reference/StoreContainerOptions.md)
+  [`StoreContainerOptions`](https://linglp.github.io/synapser/latest/reference/StoreContainerOptions.md)
   to apply. Only applies to Project and Folder entities. Ignored for
   other entity types.
 
 - table_options:
 
   (Optional\[StoreTableOptions\])
-  [`StoreTableOptions`](https://r-docs.synapse.org/latest/reference/StoreTableOptions.md)
+  [`StoreTableOptions`](https://linglp.github.io/synapser/latest/reference/StoreTableOptions.md)
   to apply. Only applies to Table-like entities (Table, Dataset,
   EntityView, MaterializedView, SubmissionView, VirtualTable,
   DatasetCollection). Ignored for other entity types.
@@ -53,14 +53,14 @@ synStore(entity, parent=NULL, file_options=NULL, container_options=NULL, table_o
 - json_schema_options:
 
   (Optional\[StoreJSONSchemaOptions\])
-  [`StoreJSONSchemaOptions`](https://r-docs.synapse.org/latest/reference/StoreJSONSchemaOptions.md)
+  [`StoreJSONSchemaOptions`](https://linglp.github.io/synapser/latest/reference/StoreJSONSchemaOptions.md)
   to apply. Only applies to JSONSchema entities. Required for
   JSONSchema. Ignored for other entity types.
 
 - grid_options:
 
   (Optional\[StoreGridOptions\])
-  [`StoreGridOptions`](https://r-docs.synapse.org/latest/reference/StoreGridOptions.md)
+  [`StoreGridOptions`](https://linglp.github.io/synapser/latest/reference/StoreGridOptions.md)
   to apply. Only applies to Grid entities. Ignored for other entity
   types.
 

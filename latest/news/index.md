@@ -17,15 +17,15 @@ vignette.
 - `entity$properties` has been removed. Read properties directly from
   the object, for example `entity$id` instead of `entity$properties$id`.
   To change properties or annotations, use
-  [`synSetProperties()`](https://r-docs.synapse.org/latest/reference/synSetProperties.md)
+  [`synSetProperties()`](https://linglp.github.io/synapser/latest/reference/synSetProperties.md)
   and then
-  [`synStore()`](https://r-docs.synapse.org/latest/reference/synStore.md):
+  [`synStore()`](https://linglp.github.io/synapser/latest/reference/synStore.md):
   `entity |> synSetProperties(name = "new name", annotations = list(key = "value")) |> synStore()`.
   Setting `annotations` replaces all existing annotations.
-- [`synStore()`](https://r-docs.synapse.org/latest/reference/synStore.md),
-  [`synGet()`](https://r-docs.synapse.org/latest/reference/synGet.md)
+- [`synStore()`](https://linglp.github.io/synapser/latest/reference/synStore.md),
+  [`synGet()`](https://linglp.github.io/synapser/latest/reference/synGet.md)
   and
-  [`synDelete()`](https://r-docs.synapse.org/latest/reference/synDelete.md)
+  [`synDelete()`](https://linglp.github.io/synapser/latest/reference/synDelete.md)
   now take settings as fields on the entity or as options objects
   instead of loose arguments.
 - `EntityViewSchema`, `MaterializedViewSchema` and
@@ -34,17 +34,17 @@ vignette.
 - Many 2.x functions have been removed or renamed, for example
   `synTableQuery()` is now `synQuery()`, `synCreateSnapshotVersion()` is
   now `synSnapshot()`, and `synRestGET()` and its siblings are now
-  [`synRestGet()`](https://r-docs.synapse.org/latest/reference/synRestGet.md),
-  [`synRestPost()`](https://r-docs.synapse.org/latest/reference/synRestPost.md),
-  [`synRestPut()`](https://r-docs.synapse.org/latest/reference/synRestPut.md)
+  [`synRestGet()`](https://linglp.github.io/synapser/latest/reference/synRestGet.md),
+  [`synRestPost()`](https://linglp.github.io/synapser/latest/reference/synRestPost.md),
+  [`synRestPut()`](https://linglp.github.io/synapser/latest/reference/synRestPut.md)
   and
-  [`synRestDelete()`](https://r-docs.synapse.org/latest/reference/synRestDelete.md).
+  [`synRestDelete()`](https://linglp.github.io/synapser/latest/reference/synRestDelete.md).
   The download list functions are now
-  [`synDownloadListRemove()`](https://r-docs.synapse.org/latest/reference/synDownloadListRemove.md),
-  [`synDownloadListClear()`](https://r-docs.synapse.org/latest/reference/synDownloadListClear.md),
-  [`synDownloadListFiles()`](https://r-docs.synapse.org/latest/reference/synDownloadListFiles.md)
+  [`synDownloadListRemove()`](https://linglp.github.io/synapser/latest/reference/synDownloadListRemove.md),
+  [`synDownloadListClear()`](https://linglp.github.io/synapser/latest/reference/synDownloadListClear.md),
+  [`synDownloadListFiles()`](https://linglp.github.io/synapser/latest/reference/synDownloadListFiles.md)
   and
-  [`synDownloadListManifest()`](https://r-docs.synapse.org/latest/reference/synDownloadListManifest.md).
+  [`synDownloadListManifest()`](https://linglp.github.io/synapser/latest/reference/synDownloadListManifest.md).
   The removed functions include `synBuildTable()`, `synMove()`,
   `synGetChildren()`, `synCreateExternalS3FileHandle()`,
   `synUploadFileHandle()`, `synDownloadTableColumns()`,
@@ -319,14 +319,14 @@ using the remember me option.
 
 - Login using an access token is now supported,
   e.g. `synLogin(authToken="token")`. See [Manage Synapse
-  Credentials](https://r-docs.synapse.org/latest/articles/manageSynapseCredentials.md)
+  Credentials](https://linglp.github.io/synapser/latest/articles/manageSynapseCredentials.md)
   for more details.
 - The following additional functions are exposed:
-  - [synCreateExternalS3FileHandle](https://r-docs.synapse.org/latest/reference/synCreateExternalS3FileHandle.md)
-  - [synCreateS3StorageLocation](https://r-docs.synapse.org/latest/reference/synCreateS3StorageLocation.md)
-  - [synCreateSnapshotVersion](https://r-docs.synapse.org/latest/reference/synCreateSnapshotVersion.md)
-  - [synGetStsStorageToken](https://r-docs.synapse.org/latest/reference/synGetStsStorageToken.md)
-  - [synIsCertified](https://r-docs.synapse.org/latest/reference/synIsCertified.md)
+  - [synCreateExternalS3FileHandle](https://linglp.github.io/synapser/latest/reference/synCreateExternalS3FileHandle.md)
+  - [synCreateS3StorageLocation](https://linglp.github.io/synapser/latest/reference/synCreateS3StorageLocation.md)
+  - [synCreateSnapshotVersion](https://linglp.github.io/synapser/latest/reference/synCreateSnapshotVersion.md)
+  - [synGetStsStorageToken](https://linglp.github.io/synapser/latest/reference/synGetStsStorageToken.md)
+  - [synIsCertified](https://linglp.github.io/synapser/latest/reference/synIsCertified.md)
 
 ### Bug fixes
 
@@ -391,7 +391,8 @@ using the remember me option.
 - `synSetAnnotations()` documentation now clearly states that the
   function will replace the existing annotations.
   ([SYNR-1361](https://sagebionetworks.jira.com/browse/SYNR-1361))
-- The [`Table()`](https://r-docs.synapse.org/latest/reference/Table.md)
+- The
+  [`Table()`](https://linglp.github.io/synapser/latest/reference/Table.md)
   reference documentation now has a link to the Table vignette.
   ([SYNR-1365](https://sagebionetworks.jira.com/browse/SYNR-1365))
 - The synapser vignette now has a link to the Manage Synapse Credentials
@@ -433,15 +434,16 @@ using the remember me option.
 ### Improvements
 
 - New
-  [Troubleshooting](https://r-docs.synapse.org/latest/news/troubleshooting.md)
+  [Troubleshooting](https://linglp.github.io/synapser/latest/news/troubleshooting.md)
   vignette with more information about package installation on Windows
   with network drive configuration.
   ([SYNR-1248](https://sagebionetworks.jira.com/browse/SYNR-1248))
-- New [File Upload](https://r-docs.synapse.org/latest/news/upload.md)
+- New [File
+  Upload](https://linglp.github.io/synapser/latest/news/upload.md)
   vignette with more information about uploading a new version of a
   file. ([SYNR-1360](https://sagebionetworks.jira.com/browse/SYNR-1360))
 - New [Manage Synapse
-  Credentials](https://r-docs.synapse.org/latest/news/manageSynapseCredentials.md)
+  Credentials](https://linglp.github.io/synapser/latest/news/manageSynapseCredentials.md)
   vignette with more ways to login to Synapse.
   ([SYNR-1367](https://sagebionetworks.jira.com/browse/SYNR-1367))
 - Improve `synGetChildren()` documentation.
@@ -452,14 +454,14 @@ using the remember me option.
 - Simplify docs for deleting Table rows.
   ([SYNR-1340](https://sagebionetworks.jira.com/browse/SYNR-1340))
 - Document accessing md5 with
-  [`synGet()`](https://r-docs.synapse.org/latest/reference/synGet.md).
+  [`synGet()`](https://linglp.github.io/synapser/latest/reference/synGet.md).
   ([SYNR-1359](https://sagebionetworks.jira.com/browse/SYNR-1359))
 - Document
-  [`synSendMessage()`](https://r-docs.synapse.org/latest/reference/synSendMessage.md)
+  [`synSendMessage()`](https://linglp.github.io/synapser/latest/reference/synSendMessage.md)
   for one receipient.
   ([SYNR-1362](https://sagebionetworks.jira.com/browse/SYNR-1362))
 - Improve
-  [`Table()`](https://r-docs.synapse.org/latest/reference/Table.md)
+  [`Table()`](https://linglp.github.io/synapser/latest/reference/Table.md)
   documentation.
   ([SYNR-1365](https://sagebionetworks.jira.com/browse/SYNR-1365))
 
@@ -506,11 +508,11 @@ using the remember me option.
 - New NEWS.md provides the change log for each released version
   ([SYNR-1315](https://sagebionetworks.jira.com/browse/SYNR-1325)).
 - New [System Dependencies
-  vignette](https://r-docs.synapse.org/latest/news/articles/systemDependencies.md)
+  vignette](https://linglp.github.io/synapser/latest/news/articles/systemDependencies.md)
   explains what dependencies are required and how to install them
   ([SYNR-1328](https://sagebionetworks.jira.com/browse/SYNR-1328)).
 - New examples on [how to move a
-  file](https://r-docs.synapse.org/latest/news/articles/synapser.html#organizing-data-in-a-project)
+  file](https://linglp.github.io/synapser/latest/news/articles/synapser.html#organizing-data-in-a-project)
   shows how `synMove` can be used
   ([SYNR-1296](https://sagebionetworks.jira.com/browse/SYNR-1296)).
 - New [example R packages that depends on
@@ -518,6 +520,6 @@ using the remember me option.
   showcases two R packages developed by Sage Bionetworks’ scientists
   ([SYNR-1317](https://sagebionetworks.jira.com/browse/SYNR-1317)).
 - New section [Synapse
-  Utilities](https://r-docs.synapse.org/latest/news/articles/synapser.html#synapse-utilities)
+  Utilities](https://linglp.github.io/synapser/latest/news/articles/synapser.html#synapse-utilities)
   links to `synapserutils` package for high level utilities functions
   ([SYNR-1314](https://sagebionetworks.jira.com/browse/SYNR-1314)).

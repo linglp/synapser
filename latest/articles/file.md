@@ -10,16 +10,16 @@ folder. You can organize collections of files into folders and
 sub-folders, just as you would on your local computer.
 
 See [Domain Models of
-Synapse](https://r-docs.synapse.org/latest/articles/domain_models_of_synapse.html#files)
+Synapse](https://linglp.github.io/synapser/latest/articles/domain_models_of_synapse.html#files)
 for more background on Files.
 
 **Note:** You may optionally follow the [Uploading data in
-bulk](https://r-docs.synapse.org/latest/articles/upload_data_in_bulk.md)
+bulk](https://linglp.github.io/synapser/latest/articles/upload_data_in_bulk.md)
 tutorial instead. The bulk tutorial may fit your needs better as it
 limits the amount of code that you are required to write and maintain.
 
 This tutorial follows a [Flattened Data
-Layout](https://r-docs.synapse.org/latest/articles/structuring_your_project.html#flattened-data-layout-example).
+Layout](https://linglp.github.io/synapser/latest/articles/structuring_your_project.html#flattened-data-layout-example).
 With this example layout:
 
     .
@@ -45,7 +45,7 @@ In this tutorial you will:
 ## Prerequisites
 
 - Make sure that you have completed the
-  [Folders](https://r-docs.synapse.org/latest/articles/folder.md)
+  [Folders](https://linglp.github.io/synapser/latest/articles/folder.md)
   vignette.
 - This vignette assumes you have a number of files ready to upload. If
   you do not, create test or dummy files. You may also use [these dummy
@@ -56,62 +56,62 @@ In this tutorial you will:
 
 ## 1. Upload several files to Synapse
 
-### First, retrieve the project and folders created in the [Folders](https://r-docs.synapse.org/latest/articles/folder.md) vignette
+### First, retrieve the project and folders created in the [Folders](https://linglp.github.io/synapser/latest/articles/folder.md) vignette
 
 \
 [`library`](https://rdrr.io/r/base/library.html)`(`[`synapser`](https://github.com/Sage-Bionetworks/synapser)`)`\
-[`synLogin`](https://r-docs.synapse.org/latest/reference/synLogin.md)`(``)`\
+[`synLogin`](https://linglp.github.io/synapser/latest/reference/synLogin.md)`(``)`\
 \
-`my_project`` ``<-`` `[`Project`](https://r-docs.synapse.org/latest/reference/Project.md)`(``name ``=`` ``"My uniquely named project about Alzheimer's Disease"``)`` ``|>`` `[`synGet`](https://r-docs.synapse.org/latest/reference/synGet.md)`(``)`\
+`my_project`` ``<-`` `[`Project`](https://linglp.github.io/synapser/latest/reference/Project.md)`(``name ``=`` ``"My uniquely named project about Alzheimer's Disease"``)`` ``|>`` `[`synGet`](https://linglp.github.io/synapser/latest/reference/synGet.md)`(``)`\
 \
 `# Retrieve the folders I want to upload to`\
-`batch_1_folder`` ``<-`` `[`Folder`](https://r-docs.synapse.org/latest/reference/Folder.md)`(``parent_id ``=`` ``my_project``$``id``, name ``=`` ``"single_cell_RNAseq_batch_1"``)`` ``|>`` `[`synGet`](https://r-docs.synapse.org/latest/reference/synGet.md)`(``)`\
-`batch_2_folder`` ``<-`` `[`Folder`](https://r-docs.synapse.org/latest/reference/Folder.md)`(``parent_id ``=`` ``my_project``$``id``, name ``=`` ``"single_cell_RNAseq_batch_2"``)`` ``|>`` `[`synGet`](https://r-docs.synapse.org/latest/reference/synGet.md)`(``)`\
-`biospecimen_experiment_1_folder`` ``<-`` `[`Folder`](https://r-docs.synapse.org/latest/reference/Folder.md)`(``parent_id ``=`` ``my_project``$``id``, name ``=`` ``"biospecimen_experiment_1"``)`` ``|>`` `[`synGet`](https://r-docs.synapse.org/latest/reference/synGet.md)`(``)`\
-`biospecimen_experiment_2_folder`` ``<-`` `[`Folder`](https://r-docs.synapse.org/latest/reference/Folder.md)`(``parent_id ``=`` ``my_project``$``id``, name ``=`` ``"biospecimen_experiment_2"``)`` ``|>`` `[`synGet`](https://r-docs.synapse.org/latest/reference/synGet.md)`(``)`
+`batch_1_folder`` ``<-`` `[`Folder`](https://linglp.github.io/synapser/latest/reference/Folder.md)`(``parent_id ``=`` ``my_project``$``id``, name ``=`` ``"single_cell_RNAseq_batch_1"``)`` ``|>`` `[`synGet`](https://linglp.github.io/synapser/latest/reference/synGet.md)`(``)`\
+`batch_2_folder`` ``<-`` `[`Folder`](https://linglp.github.io/synapser/latest/reference/Folder.md)`(``parent_id ``=`` ``my_project``$``id``, name ``=`` ``"single_cell_RNAseq_batch_2"``)`` ``|>`` `[`synGet`](https://linglp.github.io/synapser/latest/reference/synGet.md)`(``)`\
+`biospecimen_experiment_1_folder`` ``<-`` `[`Folder`](https://linglp.github.io/synapser/latest/reference/Folder.md)`(``parent_id ``=`` ``my_project``$``id``, name ``=`` ``"biospecimen_experiment_1"``)`` ``|>`` `[`synGet`](https://linglp.github.io/synapser/latest/reference/synGet.md)`(``)`\
+`biospecimen_experiment_2_folder`` ``<-`` `[`Folder`](https://linglp.github.io/synapser/latest/reference/Folder.md)`(``parent_id ``=`` ``my_project``$``id``, name ``=`` ``"biospecimen_experiment_2"``)`` ``|>`` `[`synGet`](https://linglp.github.io/synapser/latest/reference/synGet.md)`(``)`
 
 ### Next let’s create all of the File objects to upload content
 
 \
-`biospecimen_experiment_1_a_2022`` ``<-`` `[`File`](https://r-docs.synapse.org/latest/reference/File.md)`(`\
+`biospecimen_experiment_1_a_2022`` ``<-`` `[`File`](https://linglp.github.io/synapser/latest/reference/File.md)`(`\
 `  path ``=`` ``"~/my_ad_project/biospecimen_experiment_1/fileA.txt"``,`\
 `  parent_id ``=`` ``biospecimen_experiment_1_folder``$``id`\
-`)`` ``|>`` `[`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)`(``)`\
+`)`` ``|>`` `[`synStore`](https://linglp.github.io/synapser/latest/reference/synStore.md)`(``)`\
 \
-`biospecimen_experiment_1_b_2022`` ``<-`` `[`File`](https://r-docs.synapse.org/latest/reference/File.md)`(`\
+`biospecimen_experiment_1_b_2022`` ``<-`` `[`File`](https://linglp.github.io/synapser/latest/reference/File.md)`(`\
 `  path ``=`` ``"~/my_ad_project/biospecimen_experiment_1/fileB.txt"``,`\
 `  parent_id ``=`` ``biospecimen_experiment_1_folder``$``id`\
-`)`` ``|>`` `[`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)`(``)`\
+`)`` ``|>`` `[`synStore`](https://linglp.github.io/synapser/latest/reference/synStore.md)`(``)`\
 \
-`biospecimen_experiment_2_c_2023`` ``<-`` `[`File`](https://r-docs.synapse.org/latest/reference/File.md)`(`\
+`biospecimen_experiment_2_c_2023`` ``<-`` `[`File`](https://linglp.github.io/synapser/latest/reference/File.md)`(`\
 `  path ``=`` ``"~/my_ad_project/biospecimen_experiment_2/fileC.txt"``,`\
 `  parent_id ``=`` ``biospecimen_experiment_2_folder``$``id`\
-`)`` ``|>`` `[`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)`(``)`\
+`)`` ``|>`` `[`synStore`](https://linglp.github.io/synapser/latest/reference/synStore.md)`(``)`\
 \
-`biospecimen_experiment_2_d_2023`` ``<-`` `[`File`](https://r-docs.synapse.org/latest/reference/File.md)`(`\
+`biospecimen_experiment_2_d_2023`` ``<-`` `[`File`](https://linglp.github.io/synapser/latest/reference/File.md)`(`\
 `  path ``=`` ``"~/my_ad_project/biospecimen_experiment_2/fileD.txt"``,`\
 `  parent_id ``=`` ``biospecimen_experiment_2_folder``$``id`\
-`)`` ``|>`` `[`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)`(``)`\
+`)`` ``|>`` `[`synStore`](https://linglp.github.io/synapser/latest/reference/synStore.md)`(``)`\
 \
-`batch_1_scrnaseq_file_1`` ``<-`` `[`File`](https://r-docs.synapse.org/latest/reference/File.md)`(`\
+`batch_1_scrnaseq_file_1`` ``<-`` `[`File`](https://linglp.github.io/synapser/latest/reference/File.md)`(`\
 `  path ``=`` ``"~/my_ad_project/single_cell_RNAseq_batch_1/SRR12345678_R1.fastq.gz"``,`\
 `  parent_id ``=`` ``batch_1_folder``$``id`\
-`)`` ``|>`` `[`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)`(``)`\
+`)`` ``|>`` `[`synStore`](https://linglp.github.io/synapser/latest/reference/synStore.md)`(``)`\
 \
-`batch_1_scrnaseq_file_2`` ``<-`` `[`File`](https://r-docs.synapse.org/latest/reference/File.md)`(`\
+`batch_1_scrnaseq_file_2`` ``<-`` `[`File`](https://linglp.github.io/synapser/latest/reference/File.md)`(`\
 `  path ``=`` ``"~/my_ad_project/single_cell_RNAseq_batch_1/SRR12345678_R2.fastq.gz"``,`\
 `  parent_id ``=`` ``batch_1_folder``$``id`\
-`)`` ``|>`` `[`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)`(``)`\
+`)`` ``|>`` `[`synStore`](https://linglp.github.io/synapser/latest/reference/synStore.md)`(``)`\
 \
-`batch_2_scrnaseq_file_1`` ``<-`` `[`File`](https://r-docs.synapse.org/latest/reference/File.md)`(`\
+`batch_2_scrnaseq_file_1`` ``<-`` `[`File`](https://linglp.github.io/synapser/latest/reference/File.md)`(`\
 `  path ``=`` ``"~/my_ad_project/single_cell_RNAseq_batch_2/SRR12345678_R1.fastq.gz"``,`\
 `  parent_id ``=`` ``batch_2_folder``$``id`\
-`)`` ``|>`` `[`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)`(``)`\
+`)`` ``|>`` `[`synStore`](https://linglp.github.io/synapser/latest/reference/synStore.md)`(``)`\
 \
-`batch_2_scrnaseq_file_2`` ``<-`` `[`File`](https://r-docs.synapse.org/latest/reference/File.md)`(`\
+`batch_2_scrnaseq_file_2`` ``<-`` `[`File`](https://linglp.github.io/synapser/latest/reference/File.md)`(`\
 `  path ``=`` ``"~/my_ad_project/single_cell_RNAseq_batch_2/SRR12345678_R2.fastq.gz"``,`\
 `  parent_id ``=`` ``batch_2_folder``$``id`\
-`)`` ``|>`` `[`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)`(``)`
+`)`` ``|>`` `[`synStore`](https://linglp.github.io/synapser/latest/reference/synStore.md)`(``)`
 
 ## 2. Print stored attributes about your files
 
@@ -178,16 +178,16 @@ File hierarchy shown on the Files tab of a Synapse project
 Delete the project and everything in it when done:
 
 \
-[`synDelete`](https://r-docs.synapse.org/latest/reference/synDelete.md)`(``my_project``)`
+[`synDelete`](https://linglp.github.io/synapser/latest/reference/synDelete.md)`(``my_project``)`
 
 ## References used in this tutorial
 
-- [`File`](https://r-docs.synapse.org/latest/reference/File.md)
-- [`Folder`](https://r-docs.synapse.org/latest/reference/Folder.md)
-- [`Project`](https://r-docs.synapse.org/latest/reference/Project.md)
-- [`synLogin`](https://r-docs.synapse.org/latest/reference/synLogin.md)
-- [`synGet`](https://r-docs.synapse.org/latest/reference/synGet.md)
-- [`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)
-- [`synSyncFromSynapse`](https://r-docs.synapse.org/latest/reference/Project_SyncFromSynapse.md)
-- [`synMapDirectoryToAllContainedFiles`](https://r-docs.synapse.org/latest/reference/Project_MapDirectoryToAllContainedFiles.md)
-- [`synDelete`](https://r-docs.synapse.org/latest/reference/synDelete.md)
+- [`File`](https://linglp.github.io/synapser/latest/reference/File.md)
+- [`Folder`](https://linglp.github.io/synapser/latest/reference/Folder.md)
+- [`Project`](https://linglp.github.io/synapser/latest/reference/Project.md)
+- [`synLogin`](https://linglp.github.io/synapser/latest/reference/synLogin.md)
+- [`synGet`](https://linglp.github.io/synapser/latest/reference/synGet.md)
+- [`synStore`](https://linglp.github.io/synapser/latest/reference/synStore.md)
+- [`synSyncFromSynapse`](https://linglp.github.io/synapser/latest/reference/Project_SyncFromSynapse.md)
+- [`synMapDirectoryToAllContainedFiles`](https://linglp.github.io/synapser/latest/reference/Project_MapDirectoryToAllContainedFiles.md)
+- [`synDelete`](https://linglp.github.io/synapser/latest/reference/synDelete.md)

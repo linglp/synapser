@@ -34,8 +34,8 @@ error occurs.
 ## Note
 
 Unlike `synGetAcl()` on an entity such as a
-[`Folder`](https://r-docs.synapse.org/latest/reference/Folder.md), this
-takes no `principal_id` or `check_benefactor` argument, and passing
+[`Folder`](https://linglp.github.io/synapser/latest/reference/Folder.md),
+this takes no `principal_id` or `check_benefactor` argument, and passing
 either one is an error. It returns the ACL for every principal on the
 evaluation, under `resourceAccess`.
 

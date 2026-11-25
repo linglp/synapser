@@ -79,9 +79,9 @@ An S3-style class object.
   the [W3C Specification](https://www.w3.org/TR/prov-n/) on Provenance.
   Activity cannot be removed during a store operation by setting it to
   NULL. You must use:
-  [`synDelete`](https://r-docs.synapse.org/latest/reference/synDelete.md)
+  [`synDelete`](https://linglp.github.io/synapser/latest/reference/synDelete.md)
   or
-  [`synDisassociateActivityFromEntity`](https://r-docs.synapse.org/latest/reference/Activity_DisassociateActivityFromEntity.md).
+  [`synDisassociateActivityFromEntity`](https://linglp.github.io/synapser/latest/reference/Activity_DisassociateActivityFromEntity.md).
 
 - annotations:
 
@@ -105,7 +105,7 @@ An S3-style class object.
   This can be specified only during the initial store of this file or
   any time there is a new file to upload. In order to change this after
   the File has been created use
-  [`synChangeMetadata`](https://r-docs.synapse.org/latest/reference/File_ChangeMetadata.md).
+  [`synChangeMetadata`](https://linglp.github.io/synapser/latest/reference/File_ChangeMetadata.md).
 
 - content_size:
 
@@ -177,7 +177,7 @@ An S3-style class object.
 
   (bool) (Store only) Whether the File should be uploaded or if FALSE:
   only the path should be stored when
-  [`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)
+  [`synStore`](https://linglp.github.io/synapser/latest/reference/synStore.md)
   is called.
 
 - download_file:
@@ -248,18 +248,18 @@ NULL
 - `File(id=NULL, name=NULL, path=NULL, description=NULL, parent_id=NULL, version_label=NULL, version_comment=NULL, data_file_handle_id=NULL, external_url=NULL, activity=NULL, annotations=list(), content_type=NULL, content_size=NULL, content_md5=NULL, create_or_update=TRUE, force_version=TRUE, is_restricted=FALSE, merge_existing_annotations=TRUE, associate_activity_to_new_version=FALSE, synapse_store=TRUE, download_file=TRUE, if_collision="keep.both", synapse_container_limit=NULL, etag=NULL, created_on=NULL, modified_on=NULL, created_by=NULL, modified_by=NULL, version_number=NULL, is_latest_version=NULL, file_handle=NULL)`:
   Constructor for `File`
 
-- [`synBindSchema`](https://r-docs.synapse.org/latest/reference/File_BindSchema.md)`(instance, json_schema_uri, enable_derived_annotations=FALSE, synapse_client=NULL)`:
+- [`synBindSchema`](https://linglp.github.io/synapser/latest/reference/File_BindSchema.md)`(instance, json_schema_uri, enable_derived_annotations=FALSE, synapse_client=NULL)`:
   Bind a JSON schema to the entity.
 
-- [`synChangeMetadata`](https://r-docs.synapse.org/latest/reference/File_ChangeMetadata.md)`(instance, name=NULL, download_as=NULL, content_type=NULL, synapse_client=NULL)`:
+- [`synChangeMetadata`](https://linglp.github.io/synapser/latest/reference/File_ChangeMetadata.md)`(instance, name=NULL, download_as=NULL, content_type=NULL, synapse_client=NULL)`:
   Change File Entity metadata for properties that are immutable after
   creation through the store method.
 
-- [`synCopy`](https://r-docs.synapse.org/latest/reference/File_Copy.md)`(instance, parent_id, update_existing=FALSE, copy_annotations=TRUE, copy_activity="traceback", synapse_client=NULL)`:
+- [`synCopy`](https://linglp.github.io/synapser/latest/reference/File_Copy.md)`(instance, parent_id, update_existing=FALSE, copy_annotations=TRUE, copy_activity="traceback", synapse_client=NULL)`:
   Copy the file to another Synapse location. Defaults to the latest
   version of the file, or the version_number specified in the instance.
 
-- [`synDeletePermissions`](https://r-docs.synapse.org/latest/reference/File_DeletePermissions.md)`(instance, include_self=TRUE, include_container_content=FALSE, recursive=FALSE, target_entity_types=NULL, dry_run=FALSE, show_acl_details=TRUE, show_files_in_containers=TRUE, synapse_client=NULL)`:
+- [`synDeletePermissions`](https://linglp.github.io/synapser/latest/reference/File_DeletePermissions.md)`(instance, include_self=TRUE, include_container_content=FALSE, recursive=FALSE, target_entity_types=NULL, dry_run=FALSE, show_acl_details=TRUE, show_files_in_containers=TRUE, synapse_client=NULL)`:
   Delete the entire **local** Access Control List (ACL) for a given
   Entity. This is not scoped to a specific user or group, but rather
   removes all permissions associated with the Entity. After this
@@ -268,7 +268,7 @@ NULL
 
   In order to remove permissions for a specific user or group, you
   should use the
-  [`synSetPermissions()`](https://r-docs.synapse.org/latest/reference/File_SetPermissions.md)
+  [`synSetPermissions()`](https://linglp.github.io/synapser/latest/reference/File_SetPermissions.md)
   function with the `access_type` set to an empty list.
 
   By default, Entities such as FileEntity and Folder inherit their
@@ -285,35 +285,35 @@ NULL
   deleted, you must individually update or revoke the permissions for
   each user or group.
 
-- [`synGetFromId`](https://r-docs.synapse.org/latest/reference/File_GetFromId.md)`(cls, synapse_id, synapse_client=NULL)`:
+- [`synGetFromId`](https://linglp.github.io/synapser/latest/reference/File_GetFromId.md)`(cls, synapse_id, synapse_client=NULL)`:
   Wrapper for
-  [`synGet`](https://r-docs.synapse.org/latest/reference/synGet.md).
+  [`synGet`](https://linglp.github.io/synapser/latest/reference/synGet.md).
 
-- [`synGetFromPath`](https://r-docs.synapse.org/latest/reference/File_GetFromPath.md)`(cls, path, synapse_client=NULL)`:
+- [`synGetFromPath`](https://linglp.github.io/synapser/latest/reference/File_GetFromPath.md)`(cls, path, synapse_client=NULL)`:
   Get the file from Synapse. If the path of the file matches multiple
   files within Synapse the first one found will be returned. The other
   matching files will be printed to the console.
 
   Wrapper for
-  [`synGet`](https://r-docs.synapse.org/latest/reference/synGet.md).
+  [`synGet`](https://linglp.github.io/synapser/latest/reference/synGet.md).
 
-- [`synGetAcl`](https://r-docs.synapse.org/latest/reference/File_GetAcl.md)`(instance, principal_id=NULL, check_benefactor=TRUE, synapse_client=NULL)`:
+- [`synGetAcl`](https://linglp.github.io/synapser/latest/reference/File_GetAcl.md)`(instance, principal_id=NULL, check_benefactor=TRUE, synapse_client=NULL)`:
   Get the
   [ACL](https://rest-docs.synapse.org/rest/org/sagebionetworks/repo/model/ACCESS_TYPE.html)
   that a user or group has on an Entity.
 
-- [`synGetPermissions`](https://r-docs.synapse.org/latest/reference/File_GetPermissions.md)`(instance, synapse_client=NULL)`:
+- [`synGetPermissions`](https://linglp.github.io/synapser/latest/reference/File_GetPermissions.md)`(instance, synapse_client=NULL)`:
   Get the
   [permissions](https://python-docs.synapse.org/reference/permissions/)
   that the caller has on an Entity.
 
-- [`synGetSchema`](https://r-docs.synapse.org/latest/reference/File_GetSchema.md)`(instance, synapse_client=NULL)`:
+- [`synGetSchema`](https://linglp.github.io/synapser/latest/reference/File_GetSchema.md)`(instance, synapse_client=NULL)`:
   Get the JSON schema bound to the entity.
 
-- [`synGetSchemaDerivedKeys`](https://r-docs.synapse.org/latest/reference/File_GetSchemaDerivedKeys.md)`(instance, synapse_client=NULL)`:
+- [`synGetSchemaDerivedKeys`](https://linglp.github.io/synapser/latest/reference/File_GetSchemaDerivedKeys.md)`(instance, synapse_client=NULL)`:
   Retrieve derived JSON schema keys for the entity.
 
-- [`synListAcl`](https://r-docs.synapse.org/latest/reference/File_ListAcl.md)`(instance, recursive=FALSE, include_container_content=FALSE, target_entity_types=NULL, log_tree=FALSE, synapse_client=NULL)`:
+- [`synListAcl`](https://linglp.github.io/synapser/latest/reference/File_ListAcl.md)`(instance, recursive=FALSE, include_container_content=FALSE, target_entity_types=NULL, log_tree=FALSE, synapse_client=NULL)`:
   List the Access Control Lists (ACLs) for this entity and optionally
   its children.
 
@@ -327,14 +327,14 @@ NULL
   Team that the user has access to that has permissions on the entity,
   or through inheritance from parent entities.
 
-- [`synSetPermissions`](https://r-docs.synapse.org/latest/reference/File_SetPermissions.md)`(instance, principal_id=NULL, access_type=NULL, modify_benefactor=FALSE, warn_if_inherits=TRUE, overwrite=TRUE, synapse_client=NULL)`:
+- [`synSetPermissions`](https://linglp.github.io/synapser/latest/reference/File_SetPermissions.md)`(instance, principal_id=NULL, access_type=NULL, modify_benefactor=FALSE, warn_if_inherits=TRUE, overwrite=TRUE, synapse_client=NULL)`:
   Sets permission that a user or group has on an Entity. An Entity may
   have its own ACL or inherit its ACL from a benefactor.
 
-- [`synUnbindSchema`](https://r-docs.synapse.org/latest/reference/File_UnbindSchema.md)`(instance, synapse_client=NULL)`:
+- [`synUnbindSchema`](https://linglp.github.io/synapser/latest/reference/File_UnbindSchema.md)`(instance, synapse_client=NULL)`:
   Unbind the JSON schema bound to the entity.
 
-- [`synValidateSchema`](https://r-docs.synapse.org/latest/reference/File_ValidateSchema.md)`(instance, synapse_client=NULL)`:
+- [`synValidateSchema`](https://linglp.github.io/synapser/latest/reference/File_ValidateSchema.md)`(instance, synapse_client=NULL)`:
   Validate the entity against the bound JSON schema.
 
 ## Examples

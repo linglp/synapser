@@ -17,19 +17,19 @@ choose the method that fits their workflow best.
   of the options below.
 
 **Note:** Credentials are looked up in this order: arguments passed to
-[`synLogin()`](https://r-docs.synapse.org/latest/reference/synLogin.md),
+[`synLogin()`](https://linglp.github.io/synapser/latest/reference/synLogin.md),
 then the `~/.synapseConfig` file, then the `SYNAPSE_AUTH_TOKEN`
 environment variable.
 
 ## One Time Login
 
 Use the
-[`synLogin()`](https://r-docs.synapse.org/latest/reference/synLogin.md)
+[`synLogin()`](https://linglp.github.io/synapser/latest/reference/synLogin.md)
 function.
 
 \
 [`library`](https://rdrr.io/r/base/library.html)`(`[`synapser`](https://github.com/Sage-Bionetworks/synapser)`)`\
-[`synLogin`](https://r-docs.synapse.org/latest/reference/synLogin.md)`(``authToken ``=`` ``"authtoken"``)`\
+[`synLogin`](https://linglp.github.io/synapser/latest/reference/synLogin.md)`(``authToken ``=`` ``"authtoken"``)`\
 `# Prints: Welcome, First Last!`
 
 ## Use Environment Variable
@@ -59,7 +59,7 @@ To make the variable available in the R session, add it to your
 
     \
     [`library`](https://rdrr.io/r/base/library.html)`(`[`synapser`](https://github.com/Sage-Bionetworks/synapser)`)`\
-    [`synLogin`](https://r-docs.synapse.org/latest/reference/synLogin.md)`(``)`
+    [`synLogin`](https://linglp.github.io/synapser/latest/reference/synLogin.md)`(``)`
 
 Because `.Renviron` contains your token, keep it out of version control.
 If you use a project-level `.Renviron` inside a git repository, add it
@@ -140,18 +140,18 @@ used and `default` is not present in the configuration file.
 
 \
 [`library`](https://rdrr.io/r/base/library.html)`(`[`synapser`](https://github.com/Sage-Bionetworks/synapser)`)`\
-[`synLogin`](https://r-docs.synapse.org/latest/reference/synLogin.md)`(``)`
+[`synLogin`](https://linglp.github.io/synapser/latest/reference/synLogin.md)`(``)`
 
 If you want to log in with a specific profile, simply pass the profile
 name as an argument to
-[`synLogin()`](https://r-docs.synapse.org/latest/reference/synLogin.md):
+[`synLogin()`](https://linglp.github.io/synapser/latest/reference/synLogin.md):
 
 \
-[`synLogin`](https://r-docs.synapse.org/latest/reference/synLogin.md)`(``profile ``=`` ``"user1"``)`
+[`synLogin`](https://linglp.github.io/synapser/latest/reference/synLogin.md)`(``profile ``=`` ``"user1"``)`
 
 ### For more information, see:
 
-- [synLogin](https://r-docs.synapse.org/latest/reference/synLogin.md)
-- [synLogout](https://r-docs.synapse.org/latest/reference/synLogout.md)
+- [synLogin](https://linglp.github.io/synapser/latest/reference/synLogin.md)
+- [synLogout](https://linglp.github.io/synapser/latest/reference/synLogout.md)
 - [synapse
-  config](https://r-docs.synapse.org/latest/articles/configuration.md)
+  config](https://linglp.github.io/synapser/latest/articles/configuration.md)

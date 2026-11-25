@@ -11,7 +11,7 @@ installed, starting from either the
 
 R on Linux installs packages from source, so the image needs what is
 listed under
-[Linux](https://r-docs.synapse.org/latest/articles/installation.html#linux)
+[Linux](https://linglp.github.io/synapser/latest/articles/installation.html#linux)
 in the Installation vignette:
 
 - **A C/C++ compiler.** Most of synapser’s dependencies (such as
@@ -27,7 +27,7 @@ that reticulate manages: the first time
 runs, reticulate uses [uv](https://docs.astral.sh/uv/) to download a
 compatible Python and the Synapse Python client. Any Python you install
 with `apt-get` is left unused. See [How synapser finds
-Python](https://r-docs.synapse.org/latest/articles/installation.html#how-synapser-finds-python).
+Python](https://linglp.github.io/synapser/latest/articles/installation.html#how-synapser-finds-python).
 
 synapser 3.0.0 is installed from
 [R-universe](https://sage-bionetworks.r-universe.dev). RAN
@@ -117,14 +117,14 @@ docker run -it --rm -v ~/.synapseConfig:/root/.synapseConfig:ro synapser R
 ```
 
 Either way, you still log in inside R.
-[`synLogin()`](https://r-docs.synapse.org/latest/reference/synLogin.md)
+[`synLogin()`](https://linglp.github.io/synapser/latest/reference/synLogin.md)
 with no arguments finds the token in the environment variable or the
 mounted config file:
 
 \
 [`library`](https://rdrr.io/r/base/library.html)`(`[`synapser`](https://github.com/Sage-Bionetworks/synapser)`)`\
-[`synLogin`](https://r-docs.synapse.org/latest/reference/synLogin.md)`(``)`
+[`synLogin`](https://linglp.github.io/synapser/latest/reference/synLogin.md)`(``)`
 
 See the
-[Authentication](https://r-docs.synapse.org/latest/articles/authentication.md)
+[Authentication](https://linglp.github.io/synapser/latest/articles/authentication.md)
 vignette for other ways to log in.

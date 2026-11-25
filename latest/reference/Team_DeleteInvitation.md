@@ -16,7 +16,7 @@ synDeleteInvitation(invitation_id, synapse_client=NULL)
 
   (character) The ID of the invitation to delete. This can be found on
   the invitations returned by
-  [`synGetOpenInvitations()`](https://r-docs.synapse.org/latest/reference/Team_GetOpenInvitations.md).
+  [`synGetOpenInvitations()`](https://linglp.github.io/synapser/latest/reference/Team_GetOpenInvitations.md).
 
 - synapse_client:
 

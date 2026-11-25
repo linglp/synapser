@@ -3,16 +3,16 @@
 Set one or more properties of a Synapse entity object, such as its
 `name`, `description`, `version_label`, `activity`, or `annotations`,
 and return the entity so it can be piped into
-[`synStore()`](https://r-docs.synapse.org/latest/reference/synStore.md).
+[`synStore()`](https://linglp.github.io/synapser/latest/reference/synStore.md).
 
 The changes are only made to the local entity object; call
-[`synStore()`](https://r-docs.synapse.org/latest/reference/synStore.md)
+[`synStore()`](https://linglp.github.io/synapser/latest/reference/synStore.md)
 to save them to Synapse.
 
 Each argument must be named, and every name must be an attribute of the
 entity's model class (for example a field of
-[`File`](https://r-docs.synapse.org/latest/reference/File.md) or
-[`Folder`](https://r-docs.synapse.org/latest/reference/Folder.md));
+[`File`](https://linglp.github.io/synapser/latest/reference/File.md) or
+[`Folder`](https://linglp.github.io/synapser/latest/reference/Folder.md));
 otherwise an error is raised listing the names that are not valid. When
 duplicate properties are provided, the first one will be used. Calling
 `synSetProperties()` with no properties returns the entity unchanged.
@@ -33,11 +33,12 @@ synSetProperties(entity, ...)
 - entity:
 
   A Synapse entity object, for example one created with
-  [`File()`](https://r-docs.synapse.org/latest/reference/File.md),
-  [`Folder()`](https://r-docs.synapse.org/latest/reference/Folder.md) or
-  [`Project()`](https://r-docs.synapse.org/latest/reference/Project.md),
+  [`File()`](https://linglp.github.io/synapser/latest/reference/File.md),
+  [`Folder()`](https://linglp.github.io/synapser/latest/reference/Folder.md)
+  or
+  [`Project()`](https://linglp.github.io/synapser/latest/reference/Project.md),
   or returned by
-  [`synGet()`](https://r-docs.synapse.org/latest/reference/synGet.md).
+  [`synGet()`](https://linglp.github.io/synapser/latest/reference/synGet.md).
 
 - ...:
 

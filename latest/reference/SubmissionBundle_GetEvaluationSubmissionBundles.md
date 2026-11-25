@@ -33,11 +33,11 @@ synGetEvaluationSubmissionBundles(cls, evaluation_id, status=NULL, synapse_clien
 ## Value
 
 A `GeneratorWrapper` object that yields
-[`SubmissionBundle`](https://r-docs.synapse.org/latest/reference/SubmissionBundle.md)
+[`SubmissionBundle`](https://linglp.github.io/synapser/latest/reference/SubmissionBundle.md)
 objects as they are retrieved from the API. Use
 [`as.list()`](https://rdrr.io/r/base/list.html) to materialize all
 results into a list, or `nextElem()` to retrieve one
-[`SubmissionBundle`](https://r-docs.synapse.org/latest/reference/SubmissionBundle.md)
+[`SubmissionBundle`](https://linglp.github.io/synapser/latest/reference/SubmissionBundle.md)
 at a time.
 
 ## Note

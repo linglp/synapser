@@ -3,57 +3,57 @@
 ### Getting Started
 
 - [Synapse R Client
-  Overview](https://r-docs.synapse.org/latest/articles/synapser.md):
+  Overview](https://linglp.github.io/synapser/latest/articles/synapser.md):
 
 ### Setup
 
-- [Installation](https://r-docs.synapse.org/latest/articles/installation.md):
-- [Authentication](https://r-docs.synapse.org/latest/articles/authentication.md):
-- [Configuration](https://r-docs.synapse.org/latest/articles/configuration.md):
+- [Installation](https://linglp.github.io/synapser/latest/articles/installation.md):
+- [Authentication](https://linglp.github.io/synapser/latest/articles/authentication.md):
+- [Configuration](https://linglp.github.io/synapser/latest/articles/configuration.md):
 - [Migrating to synapser
-  3.0](https://r-docs.synapse.org/latest/articles/migration_to_synapser_3_0.md):
+  3.0](https://linglp.github.io/synapser/latest/articles/migration_to_synapser_3_0.md):
 - [System
-  Dependencies](https://r-docs.synapse.org/latest/articles/systemDependencies.md):
+  Dependencies](https://linglp.github.io/synapser/latest/articles/systemDependencies.md):
 
 ### Tutorials
 
 - [Data Upload, Download, and
-  Delete](https://r-docs.synapse.org/latest/articles/data_upload_download.md):
-- [Project](https://r-docs.synapse.org/latest/articles/project.md):
-- [Folders](https://r-docs.synapse.org/latest/articles/folder.md):
-- [Files](https://r-docs.synapse.org/latest/articles/file.md):
-- [Annotations](https://r-docs.synapse.org/latest/articles/annotation.md):
-- [Tables](https://r-docs.synapse.org/latest/articles/tables.md):
-- [EntityViews](https://r-docs.synapse.org/latest/articles/entityview.md):
+  Delete](https://linglp.github.io/synapser/latest/articles/data_upload_download.md):
+- [Project](https://linglp.github.io/synapser/latest/articles/project.md):
+- [Folders](https://linglp.github.io/synapser/latest/articles/folder.md):
+- [Files](https://linglp.github.io/synapser/latest/articles/file.md):
+- [Annotations](https://linglp.github.io/synapser/latest/articles/annotation.md):
+- [Tables](https://linglp.github.io/synapser/latest/articles/tables.md):
+- [EntityViews](https://linglp.github.io/synapser/latest/articles/entityview.md):
 - [Virtual
-  Tables](https://r-docs.synapse.org/latest/articles/virtualtable.md):
-- [Datasets](https://r-docs.synapse.org/latest/articles/dataset.md):
+  Tables](https://linglp.github.io/synapser/latest/articles/virtualtable.md):
+- [Datasets](https://linglp.github.io/synapser/latest/articles/dataset.md):
 - [Dataset
-  Collections](https://r-docs.synapse.org/latest/articles/datasetcollection.md):
-- [Wikis](https://r-docs.synapse.org/latest/articles/wiki.md):
-- [Evaluations](https://r-docs.synapse.org/latest/articles/evaluation.md):
+  Collections](https://linglp.github.io/synapser/latest/articles/datasetcollection.md):
+- [Wikis](https://linglp.github.io/synapser/latest/articles/wiki.md):
+- [Evaluations](https://linglp.github.io/synapser/latest/articles/evaluation.md):
 - [Submissions, SubmissionStatuses,
-  SubmissionBundles](https://r-docs.synapse.org/latest/articles/submission.md):
+  SubmissionBundles](https://linglp.github.io/synapser/latest/articles/submission.md):
 - [Sharing Settings (ACL
-  Management)](https://r-docs.synapse.org/latest/articles/sharing_settings.md):
+  Management)](https://linglp.github.io/synapser/latest/articles/sharing_settings.md):
 - [Uploading data in
-  bulk](https://r-docs.synapse.org/latest/articles/upload_data_in_bulk.md):
+  bulk](https://linglp.github.io/synapser/latest/articles/upload_data_in_bulk.md):
 - [Downloading data in
-  bulk](https://r-docs.synapse.org/latest/articles/download_data_in_bulk.md):
+  bulk](https://linglp.github.io/synapser/latest/articles/download_data_in_bulk.md):
 - [Downloading data by Synapse
-  ID](https://r-docs.synapse.org/latest/articles/download_data_by_synid.md):
+  ID](https://linglp.github.io/synapser/latest/articles/download_data_by_synid.md):
 
 ### Advanced
 
 - [Domain Models of
-  Synapse](https://r-docs.synapse.org/latest/articles/domain_models_of_synapse.md):
+  Synapse](https://linglp.github.io/synapser/latest/articles/domain_models_of_synapse.md):
 - [Access
-  Control](https://r-docs.synapse.org/latest/articles/access_control.md):
+  Control](https://linglp.github.io/synapser/latest/articles/access_control.md):
 - [Properties and
-  annotations](https://r-docs.synapse.org/latest/articles/properties_vs_annotations.md):
+  annotations](https://linglp.github.io/synapser/latest/articles/properties_vs_annotations.md):
 - [Structuring Your Synapse
-  Project](https://r-docs.synapse.org/latest/articles/structuring_your_project.md):
+  Project](https://linglp.github.io/synapser/latest/articles/structuring_your_project.md):
 - [Manifest
-  CSV](https://r-docs.synapse.org/latest/articles/manifest_csv.md):
-- [Troubleshooting](https://r-docs.synapse.org/latest/articles/troubleshooting.md):
-- [Docker](https://r-docs.synapse.org/latest/articles/docker.md):
+  CSV](https://linglp.github.io/synapser/latest/articles/manifest_csv.md):
+- [Troubleshooting](https://linglp.github.io/synapser/latest/articles/troubleshooting.md):
+- [Docker](https://linglp.github.io/synapser/latest/articles/docker.md):

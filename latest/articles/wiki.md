@@ -43,13 +43,13 @@ In this tutorial you will:
 ## Prerequisites
 
 - Make sure that you have completed the
-  [Installation](https://r-docs.synapse.org/latest/articles/installation.md)
+  [Installation](https://linglp.github.io/synapser/latest/articles/installation.md)
   and
-  [Authentication](https://r-docs.synapse.org/latest/articles/authentication.md)
+  [Authentication](https://linglp.github.io/synapser/latest/articles/authentication.md)
   setup.
 - This tutorial assumes you have a basic understanding of Synapse
   projects. If you need to create one, see the
-  [Project](https://r-docs.synapse.org/latest/articles/project.md).
+  [Project](https://linglp.github.io/synapser/latest/articles/project.md).
 
 ## 1. Create a Wiki page
 
@@ -57,38 +57,38 @@ In this tutorial you will:
 
 \
 [`library`](https://rdrr.io/r/base/library.html)`(`[`synapser`](https://github.com/Sage-Bionetworks/synapser)`)`\
-[`synLogin`](https://r-docs.synapse.org/latest/reference/synLogin.md)`(``)`\
+[`synLogin`](https://linglp.github.io/synapser/latest/reference/synLogin.md)`(``)`\
 \
-`project`` ``<-`` `[`Project`](https://r-docs.synapse.org/latest/reference/Project.md)`(`\
+`project`` ``<-`` `[`Project`](https://linglp.github.io/synapser/latest/reference/Project.md)`(`\
 `  name ``=`` `[`paste0`](https://rdrr.io/r/base/paste.html)`(`\
 `    ``"My uniquely named project about Alzheimer's Disease "``,`\
 `    `[`paste`](https://rdrr.io/r/base/paste.html)`(`[`sample`](https://rdrr.io/r/base/sample.html)`(`[`c`](https://rdrr.io/r/base/c.html)`(``letters``, ``LETTERS``, ``0``:``9``)``, ``8``, replace ``=`` ``TRUE``)``, collapse ``=`` ``""``)`\
 `  ``)`\
-`)`` ``|>`` `[`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)`(``)`\
+`)`` ``|>`` `[`synStore`](https://linglp.github.io/synapser/latest/reference/synStore.md)`(``)`\
 [`cat`](https://rdrr.io/r/base/cat.html)`(``"Created project:"``, ``project``$``id``, ``"\n"``)`\
-`project`` ``<-`` `[`Project`](https://r-docs.synapse.org/latest/reference/Project.md)`(``name ``=`` ``"My uniquely named project about Alzheimer's Disease"``)`` ``|>`` `[`synGet`](https://r-docs.synapse.org/latest/reference/synGet.md)`(``)`
+`project`` ``<-`` `[`Project`](https://linglp.github.io/synapser/latest/reference/Project.md)`(``name ``=`` ``"My uniquely named project about Alzheimer's Disease"``)`` ``|>`` `[`synGet`](https://linglp.github.io/synapser/latest/reference/synGet.md)`(``)`
 
 A Wiki page requires an owner object, a title, and markdown. Here is an
 example to create a new root Wiki page for your project with plain text
 markdown:
 
 \
-`root_wiki_page`` ``<-`` `[`WikiPage`](https://r-docs.synapse.org/latest/reference/WikiPage.md)`(`\
+`root_wiki_page`` ``<-`` `[`WikiPage`](https://linglp.github.io/synapser/latest/reference/WikiPage.md)`(`\
 `  owner_id ``=`` ``project``$``id``,`\
 `  title ``=`` ``"My Root Wiki Page"``,`\
 `  markdown ``=`` ``"# Welcome to My Root Wiki\n\nThis is a sample root wiki page created with the Synapse client."`\
-`)`` ``|>`` `[`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)`(``)`
+`)`` ``|>`` `[`synStore`](https://linglp.github.io/synapser/latest/reference/synStore.md)`(``)`
 
 Alternatively, you can create a Wiki page from an existing markdown
 file.
 
 \
 `markdown_file_path`` ``<-`` ``"path/to/your_markdown_file.md"`\
-`root_wiki_page`` ``<-`` `[`WikiPage`](https://r-docs.synapse.org/latest/reference/WikiPage.md)`(`\
+`root_wiki_page`` ``<-`` `[`WikiPage`](https://linglp.github.io/synapser/latest/reference/WikiPage.md)`(`\
 `  owner_id ``=`` ``project``$``id``,`\
 `  title ``=`` ``"My First Root Wiki Page Version with existing markdown file"``,`\
 `  markdown ``=`` ``markdown_file_path`\
-`)`` ``|>`` `[`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)`(``)`
+`)`` ``|>`` `[`synStore`](https://linglp.github.io/synapser/latest/reference/synStore.md)`(``)`
 
 You’ll see output like:
 
@@ -102,12 +102,12 @@ To update an existing Wiki page, create a new WikiPage object with the
 same `id` and new content:
 
 \
-`root_wiki_page_new`` ``<-`` `[`WikiPage`](https://r-docs.synapse.org/latest/reference/WikiPage.md)`(`\
+`root_wiki_page_new`` ``<-`` `[`WikiPage`](https://linglp.github.io/synapser/latest/reference/WikiPage.md)`(`\
 `  owner_id ``=`` ``project``$``id``,`\
 `  title ``=`` ``"My First Root Wiki Page NEW"``,`\
 `  markdown ``=`` ``"# Welcome to My Root Wiki NEW\n\nThis is a sample root wiki page created with the Synapse client."``,`\
 `  id ``=`` ``root_wiki_page``$``id`\
-`)`` ``|>`` `[`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)`(``)`
+`)`` ``|>`` `[`synStore`](https://linglp.github.io/synapser/latest/reference/synStore.md)`(``)`
 
 You’ll see output like:
 
@@ -121,7 +121,7 @@ You can restore a Wiki page to any previous version by specifying the
 `wiki_version` parameter:
 
 \
-`wiki_page_restored`` ``<-`` `[`WikiPage`](https://r-docs.synapse.org/latest/reference/WikiPage.md)`(`\
+`wiki_page_restored`` ``<-`` `[`WikiPage`](https://linglp.github.io/synapser/latest/reference/WikiPage.md)`(`\
 `  owner_id ``=`` ``project``$``id``, id ``=`` ``root_wiki_page``$``id``, wiki_version ``=`` ``"0"`\
 `)`` ``|>`` ``synRestore``(``)`
 
@@ -141,12 +141,12 @@ the WikiHeader section below).
 Once you know the Wiki page id, you can retrieve a specific Wiki page:
 
 \
-`retrieved_wiki`` ``<-`` `[`WikiPage`](https://r-docs.synapse.org/latest/reference/WikiPage.md)`(``owner_id ``=`` ``project``$``id``, id ``=`` ``root_wiki_page``$``id``)`` ``|>`` `[`synGet`](https://r-docs.synapse.org/latest/reference/synGet.md)`(``)`
+`retrieved_wiki`` ``<-`` `[`WikiPage`](https://linglp.github.io/synapser/latest/reference/WikiPage.md)`(``owner_id ``=`` ``project``$``id``, id ``=`` ``root_wiki_page``$``id``)`` ``|>`` `[`synGet`](https://linglp.github.io/synapser/latest/reference/synGet.md)`(``)`
 
 Alternatively, you can retrieve a Wiki page by its title:
 
 \
-`retrieved_wiki`` ``<-`` `[`WikiPage`](https://r-docs.synapse.org/latest/reference/WikiPage.md)`(``owner_id ``=`` ``project``$``id``, title ``=`` ``root_wiki_page``$``title``)`` ``|>`` `[`synGet`](https://r-docs.synapse.org/latest/reference/synGet.md)`(``)`
+`retrieved_wiki`` ``<-`` `[`WikiPage`](https://linglp.github.io/synapser/latest/reference/WikiPage.md)`(``owner_id ``=`` ``project``$``id``, title ``=`` ``root_wiki_page``$``title``)`` ``|>`` `[`synGet`](https://linglp.github.io/synapser/latest/reference/synGet.md)`(``)`
 
 Verify that the retrieved Wiki page matches the original Wiki page:
 
@@ -160,12 +160,12 @@ Verify that the retrieved Wiki page matches the original Wiki page:
 You can create a sub-Wiki page under an existing Wiki page.
 
 \
-`sub_wiki_1`` ``<-`` `[`WikiPage`](https://r-docs.synapse.org/latest/reference/WikiPage.md)`(`\
+`sub_wiki_1`` ``<-`` `[`WikiPage`](https://linglp.github.io/synapser/latest/reference/WikiPage.md)`(`\
 `  owner_id ``=`` ``project``$``id``,`\
 `  title ``=`` ``"Sub Wiki Page 1"``,`\
 `  parent_id ``=`` ``root_wiki_page``$``id``,`\
 `  markdown ``=`` ``"# Sub Page 1\n\nThis is a sub-page of another wiki."`\
-`)`` ``|>`` `[`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)`(``)`
+`)`` ``|>`` `[`synStore`](https://linglp.github.io/synapser/latest/reference/synStore.md)`(``)`
 
 You’ll see output like:
 
@@ -196,12 +196,12 @@ is an example of creating a Wiki page from multi-line markdown text:
 `- List item 2`\
 `- List item 3`\
 `"`\
-`sub_wiki_2`` ``<-`` `[`WikiPage`](https://r-docs.synapse.org/latest/reference/WikiPage.md)`(`\
+`sub_wiki_2`` ``<-`` `[`WikiPage`](https://linglp.github.io/synapser/latest/reference/WikiPage.md)`(`\
 `  owner_id ``=`` ``project``$``id``,`\
 `  parent_id ``=`` ``root_wiki_page``$``id``,`\
 `  title ``=`` ``"Sub Page 2 created from markdown text"``,`\
 `  markdown ``=`` ``markdown_content`\
-`)`` ``|>`` `[`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)`(``)`
+`)`` ``|>`` `[`synStore`](https://linglp.github.io/synapser/latest/reference/synStore.md)`(``)`
 
 ### Create a Wiki page from a markdown file
 
@@ -211,12 +211,12 @@ files may be uploaded in either non-gzipped or gzipped format:
 \
 `markdown_file_path`` ``<-`` ``"~/temp/temp_markdown_file.md.gz"`\
 \
-`sub_wiki_3`` ``<-`` `[`WikiPage`](https://r-docs.synapse.org/latest/reference/WikiPage.md)`(`\
+`sub_wiki_3`` ``<-`` `[`WikiPage`](https://linglp.github.io/synapser/latest/reference/WikiPage.md)`(`\
 `  owner_id ``=`` ``project``$``id``,`\
 `  parent_id ``=`` ``root_wiki_page``$``id``,`\
 `  title ``=`` ``"Sub Page 3 created from markdown file"``,`\
 `  markdown ``=`` ``markdown_file_path`\
-`)`` ``|>`` `[`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)`(``)`
+`)`` ``|>`` `[`synStore`](https://linglp.github.io/synapser/latest/reference/synStore.md)`(``)`
 
 ## 7. Download Wiki page markdown
 
@@ -225,7 +225,7 @@ You can download the markdown content of a Wiki page back to a file.
 ### Download the markdown file URL for a Wiki page
 
 \
-`wiki_page_markdown_2_url`` ``<-`` `[`WikiPage`](https://r-docs.synapse.org/latest/reference/WikiPage.md)`(`\
+`wiki_page_markdown_2_url`` ``<-`` `[`WikiPage`](https://linglp.github.io/synapser/latest/reference/WikiPage.md)`(`\
 `  owner_id ``=`` ``project``$``id``,`\
 `  id ``=`` ``sub_wiki_2``$``id`\
 `)`` ``|>`` ``synGetMarkdownFile``(``download_file ``=`` ``FALSE``)`
@@ -235,7 +235,7 @@ You can download the markdown content of a Wiki page back to a file.
 The downloaded file will be named `wiki_markdown_<wiki_page_title>.md`:
 
 \
-`wiki_page_markdown_2`` ``<-`` `[`WikiPage`](https://r-docs.synapse.org/latest/reference/WikiPage.md)`(`\
+`wiki_page_markdown_2`` ``<-`` `[`WikiPage`](https://linglp.github.io/synapser/latest/reference/WikiPage.md)`(`\
 `  owner_id ``=`` ``project``$``id``, id ``=`` ``sub_wiki_2``$``id`\
 `)`` ``|>`` ``synGetMarkdownFile``(``download_file ``=`` ``TRUE``, download_location ``=`` ``"."``)`
 
@@ -247,7 +247,7 @@ You’ll see output like:
 ### Download the markdown file for a Wiki page created from a markdown file
 
 \
-`wiki_page_markdown_3`` ``<-`` `[`WikiPage`](https://r-docs.synapse.org/latest/reference/WikiPage.md)`(`\
+`wiki_page_markdown_3`` ``<-`` `[`WikiPage`](https://linglp.github.io/synapser/latest/reference/WikiPage.md)`(`\
 `  owner_id ``=`` ``project``$``id``, id ``=`` ``sub_wiki_3``$``id`\
 `)`` ``|>`` ``synGetMarkdownFile``(``download_file ``=`` ``TRUE``, download_location ``=`` ``"."``)`
 
@@ -275,13 +275,13 @@ formatting: replace `.` with `%2E` and `_` with `%5F`. You can use
 `# Reformat "." and "_" in the attachment file name to be a valid attachment path`\
 `attachment_file_name_reformatted`` ``<-`` ``synReformatAttachmentFileName``(`[`basename`](https://rdrr.io/r/base/basename.html)`(``attachment_file_name``)``)`\
 \
-`sub_wiki_4`` ``<-`` `[`WikiPage`](https://r-docs.synapse.org/latest/reference/WikiPage.md)`(`\
+`sub_wiki_4`` ``<-`` `[`WikiPage`](https://linglp.github.io/synapser/latest/reference/WikiPage.md)`(`\
 `  owner_id ``=`` ``project``$``id``,`\
 `  parent_id ``=`` ``root_wiki_page``$``id``,`\
 `  title ``=`` ``"Sub Page 4 with Attachments"``,`\
 `  markdown ``=`` `[`sprintf`](https://rdrr.io/r/base/sprintf.html)`(``"# Sub Page 4 with Attachments\n\nThis is a attachment: ${previewattachment?fileName=%s}"``, ``attachment_file_name_reformatted``)``,`\
 `  attachments ``=`` `[`list`](https://rdrr.io/r/base/list.html)`(``attachment_file_name``)`\
-`)`` ``|>`` `[`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)`(``)`
+`)`` ``|>`` `[`synStore`](https://linglp.github.io/synapser/latest/reference/synStore.md)`(``)`
 
 You’ll see output like:
 
@@ -295,13 +295,13 @@ file name for image files (e.g., PNG, JPG, JPEG).
 \
 `image_file_path`` ``<-`` ``"path/to/test_image.png"`\
 `markdown_content`` ``<-`` ``"# Sub Page 5 with images\n\nThis is an attached image: ${image?fileName=test_image.png&align=None&scale=100&responsive=true&altText=}"`\
-`sub_wiki_5`` ``<-`` `[`WikiPage`](https://r-docs.synapse.org/latest/reference/WikiPage.md)`(`\
+`sub_wiki_5`` ``<-`` `[`WikiPage`](https://linglp.github.io/synapser/latest/reference/WikiPage.md)`(`\
 `  owner_id ``=`` ``project``$``id``,`\
 `  parent_id ``=`` ``root_wiki_page``$``id``,`\
 `  title ``=`` ``"Sub Page 5 with Images"``,`\
 `  markdown ``=`` ``markdown_content``,`\
 `  attachments ``=`` `[`list`](https://rdrr.io/r/base/list.html)`(``image_file_path``)`\
-`)`` ``|>`` `[`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)`(``)`
+`)`` ``|>`` `[`synStore`](https://linglp.github.io/synapser/latest/reference/synStore.md)`(``)`
 
 You’ll see output like:
 
@@ -316,7 +316,7 @@ You’ll see output like:
 Retrieve the file handles of all attachments on a Wiki page:
 
 \
-`attachment_handles`` ``<-`` `[`WikiPage`](https://r-docs.synapse.org/latest/reference/WikiPage.md)`(`\
+`attachment_handles`` ``<-`` `[`WikiPage`](https://linglp.github.io/synapser/latest/reference/WikiPage.md)`(`\
 `  owner_id ``=`` ``project``$``id``, id ``=`` ``sub_wiki_4``$``id`\
 `)`` ``|>`` ``synGetAttachmentHandles``(``)`
 
@@ -330,7 +330,7 @@ You can retrieve the URL of an attachment without downloading it. The
 attachment file name can be in either non-gzipped or gzipped format.
 
 \
-`wiki_page_attachment_url`` ``<-`` `[`WikiPage`](https://r-docs.synapse.org/latest/reference/WikiPage.md)`(`\
+`wiki_page_attachment_url`` ``<-`` `[`WikiPage`](https://linglp.github.io/synapser/latest/reference/WikiPage.md)`(`\
 `  owner_id ``=`` ``project``$``id``, id ``=`` ``sub_wiki_4``$``id`\
 `)`` ``|>`` ``synGetAttachment``(`\
 `  file_name ``=`` `[`basename`](https://rdrr.io/r/base/basename.html)`(``attachment_file_name``)``,`\
@@ -347,7 +347,7 @@ Download an attachment file to your local machine and unzip it using
 `synUnzipGzippedFile()`:
 
 \
-`wiki_page_attachment`` ``<-`` `[`WikiPage`](https://r-docs.synapse.org/latest/reference/WikiPage.md)`(``owner_id ``=`` ``project``$``id``, id ``=`` ``sub_wiki_4``$``id``)`` ``|>`` ``synGetAttachment``(`\
+`wiki_page_attachment`` ``<-`` `[`WikiPage`](https://linglp.github.io/synapser/latest/reference/WikiPage.md)`(``owner_id ``=`` ``project``$``id``, id ``=`` ``sub_wiki_4``$``id``)`` ``|>`` ``synGetAttachment``(`\
 `  file_name ``=`` `[`basename`](https://rdrr.io/r/base/basename.html)`(``attachment_file_name``)``,`\
 `  download_file ``=`` ``TRUE``,`\
 `  download_location ``=`` ``"."`\
@@ -367,7 +367,7 @@ name provided in the response when `isPreview=TRUE`. Note that image
 attachments do not have preview files.
 
 \
-`attachment_preview_url`` ``<-`` `[`WikiPage`](https://r-docs.synapse.org/latest/reference/WikiPage.md)`(`\
+`attachment_preview_url`` ``<-`` `[`WikiPage`](https://linglp.github.io/synapser/latest/reference/WikiPage.md)`(`\
 `  owner_id ``=`` ``project``$``id``, id ``=`` ``sub_wiki_4``$``id`\
 `)`` ``|>`` ``synGetAttachmentPreview``(`\
 `  file_name ``=`` `[`basename`](https://rdrr.io/r/base/basename.html)`(``attachment_file_name``)``,`\
@@ -379,7 +379,7 @@ attachments do not have preview files.
 Download the preview version of an attachment:
 
 \
-`attachment_preview`` ``<-`` `[`WikiPage`](https://r-docs.synapse.org/latest/reference/WikiPage.md)`(`\
+`attachment_preview`` ``<-`` `[`WikiPage`](https://linglp.github.io/synapser/latest/reference/WikiPage.md)`(`\
 `  owner_id ``=`` ``project``$``id``, id ``=`` ``sub_wiki_4``$``id`\
 `)`` ``|>`` ``synGetAttachmentPreview``(`\
 `  file_name ``=`` `[`basename`](https://rdrr.io/r/base/basename.html)`(``attachment_file_name``)``,`\
@@ -397,14 +397,15 @@ WikiHeader represents the hierarchical structure of Wiki pages within an
 entity.
 
 Retrieve the Wiki page hierarchy of an entity by piping an empty
-[`WikiHeader()`](https://r-docs.synapse.org/latest/reference/WikiHeader.md)
-into [`synGet()`](https://r-docs.synapse.org/latest/reference/synGet.md)
+[`WikiHeader()`](https://linglp.github.io/synapser/latest/reference/WikiHeader.md)
+into
+[`synGet()`](https://linglp.github.io/synapser/latest/reference/synGet.md)
 with the entity’s `owner_id`. The result is a lazy iterator, so call
 [`as.list()`](https://rdrr.io/r/base/list.html) on it to get a list of
 `WikiHeader` objects, each with an `id`, `title`, and `parent_id`:
 
 \
-`wiki_headers`` ``<-`` `[`as.list`](https://rdrr.io/r/base/list.html)`(`[`WikiHeader`](https://r-docs.synapse.org/latest/reference/WikiHeader.md)`(``)`` ``|>`` `[`synGet`](https://r-docs.synapse.org/latest/reference/synGet.md)`(``owner_id ``=`` ``project``$``id``)``)`\
+`wiki_headers`` ``<-`` `[`as.list`](https://rdrr.io/r/base/list.html)`(`[`WikiHeader`](https://linglp.github.io/synapser/latest/reference/WikiHeader.md)`(``)`` ``|>`` `[`synGet`](https://linglp.github.io/synapser/latest/reference/synGet.md)`(``owner_id ``=`` ``project``$``id``)``)`\
 `for`` ``(``header`` ``in`` ``wiki_headers``)`` ``{`\
 `  `[`print`](https://rdrr.io/r/base/print.html)`(``header``)`\
 `}`
@@ -415,8 +416,9 @@ WikiHistorySnapshot provides access to the version history of Wiki
 pages, letting you see all previous versions and their metadata.
 
 Retrieve the version history of a Wiki page by piping an empty
-[`WikiHistorySnapshot()`](https://r-docs.synapse.org/latest/reference/WikiHistorySnapshot.md)
-into [`synGet()`](https://r-docs.synapse.org/latest/reference/synGet.md)
+[`WikiHistorySnapshot()`](https://linglp.github.io/synapser/latest/reference/WikiHistorySnapshot.md)
+into
+[`synGet()`](https://linglp.github.io/synapser/latest/reference/synGet.md)
 with the `owner_id` and the Wiki page `id`. As with `WikiHeader`, call
 [`as.list()`](https://rdrr.io/r/base/list.html) on the result to get a
 list of `WikiHistorySnapshot` objects, each with a `version`,
@@ -424,7 +426,7 @@ list of `WikiHistorySnapshot` objects, each with a `version`,
 
 \
 `wiki_history`` ``<-`` `[`as.list`](https://rdrr.io/r/base/list.html)`(`\
-`  `[`WikiHistorySnapshot`](https://r-docs.synapse.org/latest/reference/WikiHistorySnapshot.md)`(``)`` ``|>`` `[`synGet`](https://r-docs.synapse.org/latest/reference/synGet.md)`(``owner_id ``=`` ``project``$``id``, id ``=`` ``root_wiki_page``$``id``)`\
+`  `[`WikiHistorySnapshot`](https://linglp.github.io/synapser/latest/reference/WikiHistorySnapshot.md)`(``)`` ``|>`` `[`synGet`](https://linglp.github.io/synapser/latest/reference/synGet.md)`(``owner_id ``=`` ``project``$``id``, id ``=`` ``root_wiki_page``$``id``)`\
 `)`\
 `for`` ``(``snapshot`` ``in`` ``wiki_history``)`` ``{`\
 `  `[`print`](https://rdrr.io/r/base/print.html)`(``snapshot``)`\
@@ -441,7 +443,7 @@ need to set it explicitly.
 First, retrieve the current order hint (which may be empty initially):
 
 \
-`order_hint`` ``<-`` `[`WikiOrderHint`](https://r-docs.synapse.org/latest/reference/WikiOrderHint.md)`(``owner_id ``=`` ``project``$``id``)`` ``|>`` `[`synGet`](https://r-docs.synapse.org/latest/reference/synGet.md)`(``)`
+`order_hint`` ``<-`` `[`WikiOrderHint`](https://linglp.github.io/synapser/latest/reference/WikiOrderHint.md)`(``owner_id ``=`` ``project``$``id``)`` ``|>`` `[`synGet`](https://linglp.github.io/synapser/latest/reference/synGet.md)`(``)`
 
 You’ll see output like:
 
@@ -454,7 +456,7 @@ desired order:
 
 \
 `order_hint`` ``<-`` ``order_hint`` ``|>`\
-`  `[`synSetProperties`](https://r-docs.synapse.org/latest/reference/synSetProperties.md)`(`\
+`  `[`synSetProperties`](https://linglp.github.io/synapser/latest/reference/synSetProperties.md)`(`\
 `    id_list ``=`` `[`list`](https://rdrr.io/r/base/list.html)`(`\
 `      ``root_wiki_page``$``id``,`\
 `      ``sub_wiki_3``$``id``,`\
@@ -464,7 +466,7 @@ desired order:
 `      ``sub_wiki_5``$``id`\
 `    ``)`\
 `  ``)`` ``|>`\
-`  `[`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)`(``)`
+`  `[`synStore`](https://linglp.github.io/synapser/latest/reference/synStore.md)`(``)`
 
 You’ll see output like:
 
@@ -476,9 +478,9 @@ You can update the order hint at any time by retrieving it, modifying
 the `id_list`, and storing it again:
 
 \
-`order_hint`` ``<-`` `[`WikiOrderHint`](https://r-docs.synapse.org/latest/reference/WikiOrderHint.md)`(``owner_id ``=`` ``project``$``id``)`` ``|>`` `[`synGet`](https://r-docs.synapse.org/latest/reference/synGet.md)`(``)`\
+`order_hint`` ``<-`` `[`WikiOrderHint`](https://linglp.github.io/synapser/latest/reference/WikiOrderHint.md)`(``owner_id ``=`` ``project``$``id``)`` ``|>`` `[`synGet`](https://linglp.github.io/synapser/latest/reference/synGet.md)`(``)`\
 `order_hint`` ``<-`` ``order_hint`` ``|>`\
-`  `[`synSetProperties`](https://r-docs.synapse.org/latest/reference/synSetProperties.md)`(`\
+`  `[`synSetProperties`](https://linglp.github.io/synapser/latest/reference/synSetProperties.md)`(`\
 `    id_list ``=`` `[`list`](https://rdrr.io/r/base/list.html)`(`\
 `      ``root_wiki_page``$``id``,`\
 `      ``sub_wiki_1``$``id``,`\
@@ -488,35 +490,35 @@ the `id_list`, and storing it again:
 `      ``sub_wiki_5``$``id`\
 `    ``)`\
 `  ``)`` ``|>`\
-`  `[`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)`(``)`
+`  `[`synStore`](https://linglp.github.io/synapser/latest/reference/synStore.md)`(``)`
 
 ## 13. Delete Wiki pages
 
 Delete a Wiki page by providing the owner ID and Wiki page ID:
 
 \
-`sub_wiki_6`` ``<-`` `[`WikiPage`](https://r-docs.synapse.org/latest/reference/WikiPage.md)`(`\
+`sub_wiki_6`` ``<-`` `[`WikiPage`](https://linglp.github.io/synapser/latest/reference/WikiPage.md)`(`\
 `  owner_id ``=`` ``project``$``id``,`\
 `  parent_id ``=`` ``root_wiki_page``$``id``,`\
 `  title ``=`` ``"Sub Page 6 to be deleted"``,`\
 `  markdown ``=`` ``"# Sub Page 6 to be deleted\n\nThis is a sub page to be deleted."`\
-`)`` ``|>`` `[`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)`(``)`\
+`)`` ``|>`` `[`synStore`](https://linglp.github.io/synapser/latest/reference/synStore.md)`(``)`\
 \
-[`WikiPage`](https://r-docs.synapse.org/latest/reference/WikiPage.md)`(``owner_id ``=`` ``project``$``id``, id ``=`` ``sub_wiki_6``$``id``)`` ``|>`` `[`synDelete`](https://r-docs.synapse.org/latest/reference/synDelete.md)`(``)`
+[`WikiPage`](https://linglp.github.io/synapser/latest/reference/WikiPage.md)`(``owner_id ``=`` ``project``$``id``, id ``=`` ``sub_wiki_6``$``id``)`` ``|>`` `[`synDelete`](https://linglp.github.io/synapser/latest/reference/synDelete.md)`(``)`
 
 ## Where to go next
 
 - The [WikiPage reference
-  page](https://r-docs.synapse.org/latest/reference/WikiPage.md)
+  page](https://linglp.github.io/synapser/latest/reference/WikiPage.md)
   documents every constructor argument and method available on a
   WikiPage, including `synGetAttachment()`, `synGetAttachmentPreview()`,
   `synGetMarkdownFile()`, `synRestore()`,
   `synReformatAttachmentFileName()`, and `synUnzipGzippedFile()`.
-- [WikiHeader](https://r-docs.synapse.org/latest/reference/WikiHeader.md),
-  [WikiHistorySnapshot](https://r-docs.synapse.org/latest/reference/WikiHistorySnapshot.md),
+- [WikiHeader](https://linglp.github.io/synapser/latest/reference/WikiHeader.md),
+  [WikiHistorySnapshot](https://linglp.github.io/synapser/latest/reference/WikiHistorySnapshot.md),
   and
-  [WikiOrderHint](https://r-docs.synapse.org/latest/reference/WikiOrderHint.md)
+  [WikiOrderHint](https://linglp.github.io/synapser/latest/reference/WikiOrderHint.md)
   document the supporting Wiki metadata models.
 - [Data Upload, Download, and
-  Delete](https://r-docs.synapse.org/latest/articles/data_upload_download.md)
+  Delete](https://linglp.github.io/synapser/latest/articles/data_upload_download.md)
   covers the Project/Folder/File workflow this tutorial builds on.

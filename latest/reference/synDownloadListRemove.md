@@ -17,7 +17,7 @@ synDownloadListRemove(files, synapse_client=NULL)
 - files:
 
   (list\[DownloadListItem\]) List of
-  [`DownloadListItem`](https://r-docs.synapse.org/latest/reference/DownloadListItem.md)
+  [`DownloadListItem`](https://linglp.github.io/synapser/latest/reference/DownloadListItem.md)
   objects identifying the file versions to remove.
 
 - synapse_client:

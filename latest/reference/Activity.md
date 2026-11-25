@@ -57,9 +57,9 @@ An S3-style class object.
 
   (list\[Union\[UsedEntity, UsedURL\]\]) The entities or URLs used by
   this Activity. Only
-  [`UsedEntity`](https://r-docs.synapse.org/latest/reference/UsedEntity.md)
+  [`UsedEntity`](https://linglp.github.io/synapser/latest/reference/UsedEntity.md)
   and
-  [`UsedURL`](https://r-docs.synapse.org/latest/reference/UsedURL.md)
+  [`UsedURL`](https://linglp.github.io/synapser/latest/reference/UsedURL.md)
   objects are accepted. Other values, such as a plain Synapse ID string
   (for example `"syn123"`), are dropped with no error.
 
@@ -67,9 +67,9 @@ An S3-style class object.
 
   (list\[Union\[UsedEntity, UsedURL\]\]) The entities or URLs executed
   by this Activity. Only
-  [`UsedEntity`](https://r-docs.synapse.org/latest/reference/UsedEntity.md)
+  [`UsedEntity`](https://linglp.github.io/synapser/latest/reference/UsedEntity.md)
   and
-  [`UsedURL`](https://r-docs.synapse.org/latest/reference/UsedURL.md)
+  [`UsedURL`](https://linglp.github.io/synapser/latest/reference/UsedURL.md)
   objects are accepted. Other values, such as a plain Synapse ID string
   (for example `"syn123"`), are dropped with no error.
 
@@ -82,13 +82,13 @@ NULL
 - `Activity(id=NULL, name=NULL, description=NULL, etag=NULL, created_on=NULL, modified_on=NULL, created_by=NULL, modified_by=NULL, used=list(), executed=list())`:
   Constructor for `Activity`
 
-- [`synDisassociateActivityFromEntity`](https://r-docs.synapse.org/latest/reference/Activity_DisassociateActivityFromEntity.md)`(cls, parent, synapse_client=NULL)`:
+- [`synDisassociateActivityFromEntity`](https://linglp.github.io/synapser/latest/reference/Activity_DisassociateActivityFromEntity.md)`(cls, parent, synapse_client=NULL)`:
   Disassociate the Activity from the parent entity. This is the first
   step in deleting the Activity. If you have other entities that are
   associated with this Activity you must disassociate them by calling
   this method on them as well.
 
-- [`synGetFromParent`](https://r-docs.synapse.org/latest/reference/Activity_GetFromParent.md)`(cls, parent, parent_version_number=NULL, synapse_client=NULL)`:
+- [`synGetFromParent`](https://linglp.github.io/synapser/latest/reference/Activity_GetFromParent.md)`(cls, parent, parent_version_number=NULL, synapse_client=NULL)`:
   Get the Activity from Synapse based on the parent entity.
 
 ## Examples

@@ -169,11 +169,11 @@ An S3-style class object.
   The order of the columns will be the order they are stored in Synapse.
   If you need to reorder the columns the recommended approach is to use
   the
-  [`synReorderColumn()`](https://r-docs.synapse.org/latest/reference/Dataset_ReorderColumn.md)
+  [`synReorderColumn()`](https://linglp.github.io/synapser/latest/reference/Dataset_ReorderColumn.md)
   function. Additionally, you may add, and delete columns using the
-  [`synAddColumn()`](https://r-docs.synapse.org/latest/reference/Dataset_AddColumn.md),
+  [`synAddColumn()`](https://linglp.github.io/synapser/latest/reference/Dataset_AddColumn.md),
   and
-  [`synDeleteColumn()`](https://r-docs.synapse.org/latest/reference/Dataset_DeleteColumn.md)
+  [`synDeleteColumn()`](https://linglp.github.io/synapser/latest/reference/Dataset_DeleteColumn.md)
   functions on your dataset class instance.\
   \
   You may modify the attributes of the Column object to change the
@@ -218,10 +218,10 @@ NULL
 - `Dataset(id=NULL, name=NULL, parent_id=NULL, activity=NULL, version_number=NULL, view_entity_type="dataset", view_type_mask=128L, include_default_columns=TRUE, description=NULL, etag=NULL, created_on=NULL, modified_on=NULL, created_by=NULL, modified_by=NULL, version_label=NULL, version_comment=NULL, is_latest_version=NULL, is_search_enabled=NULL, items=list(), size=NULL, checksum=NULL, count=NULL, columns=list(), annotations=list())`:
   Constructor for `Dataset`
 
-- [`synAddColumn`](https://r-docs.synapse.org/latest/reference/Dataset_AddColumn.md)`(instance, column, index=NULL)`:
+- [`synAddColumn`](https://linglp.github.io/synapser/latest/reference/Dataset_AddColumn.md)`(instance, column, index=NULL)`:
   Add column(s) to the table. Note that this does not store the
   column(s) in Synapse. You must call the
-  [`synStore()`](https://r-docs.synapse.org/latest/reference/synStore.md)
+  [`synStore()`](https://linglp.github.io/synapser/latest/reference/synStore.md)
   function on this Dataset instance to store the column(s) in Synapse.
   This is a convenience function to eliminate the need to manually add
   the column(s) to the `$columns` list.\
@@ -230,19 +230,19 @@ NULL
   Dataset instance. `$columns` is a named list where the key is the name
   of the column and the value is the Column object.
 
-- [`synAddItem`](https://r-docs.synapse.org/latest/reference/Dataset_AddItem.md)`(instance, item, synapse_client=NULL)`:
+- [`synAddItem`](https://linglp.github.io/synapser/latest/reference/Dataset_AddItem.md)`(instance, item, synapse_client=NULL)`:
   Adds an item in the form of an
-  [`EntityRef`](https://r-docs.synapse.org/latest/reference/EntityRef.md)
+  [`EntityRef`](https://linglp.github.io/synapser/latest/reference/EntityRef.md)
   to the dataset. For Folders, children are added recursively. Effect is
   not seen until the dataset is stored.
 
-- [`synDeleteColumn`](https://r-docs.synapse.org/latest/reference/Dataset_DeleteColumn.md)`(instance, name)`:
+- [`synDeleteColumn`](https://linglp.github.io/synapser/latest/reference/Dataset_DeleteColumn.md)`(instance, name)`:
   Mark a column for deletion. Note that this does not delete the column
   from Synapse. You must call the
-  [`synStore()`](https://r-docs.synapse.org/latest/reference/synStore.md)
+  [`synStore()`](https://linglp.github.io/synapser/latest/reference/synStore.md)
   function on this Dataset instance to delete the column from Synapse.
 
-- [`synDeletePermissions`](https://r-docs.synapse.org/latest/reference/Dataset_DeletePermissions.md)`(instance, include_self=TRUE, include_container_content=FALSE, recursive=FALSE, target_entity_types=NULL, dry_run=FALSE, show_acl_details=TRUE, show_files_in_containers=TRUE, synapse_client=NULL)`:
+- [`synDeletePermissions`](https://linglp.github.io/synapser/latest/reference/Dataset_DeletePermissions.md)`(instance, include_self=TRUE, include_container_content=FALSE, recursive=FALSE, target_entity_types=NULL, dry_run=FALSE, show_acl_details=TRUE, show_files_in_containers=TRUE, synapse_client=NULL)`:
   Delete the entire Access Control List (ACL) for a given Entity. This
   is not scoped to a specific user or group, but rather removes all
   permissions associated with the Entity. After this operation, the
@@ -251,7 +251,7 @@ NULL
   \
   In order to remove permissions for a specific user or group, you
   should use the
-  [`synSetPermissions()`](https://r-docs.synapse.org/latest/reference/Dataset_SetPermissions.md)
+  [`synSetPermissions()`](https://linglp.github.io/synapser/latest/reference/Dataset_SetPermissions.md)
   function with the `access_type` set to an empty list.\
   \
   By default, Entities such as FileEntity and Folder inherit their
@@ -268,17 +268,17 @@ NULL
   deleted, you must individually update or revoke the permissions for
   each user or group.
 
-- [`synGetAcl`](https://r-docs.synapse.org/latest/reference/Dataset_GetAcl.md)`(instance, principal_id=NULL, check_benefactor=TRUE, synapse_client=NULL)`:
+- [`synGetAcl`](https://linglp.github.io/synapser/latest/reference/Dataset_GetAcl.md)`(instance, principal_id=NULL, check_benefactor=TRUE, synapse_client=NULL)`:
   Get the
   [ACL](https://rest-docs.synapse.org/rest/org/sagebionetworks/repo/model/ACCESS_TYPE.html)
   that a user or group has on an Entity.
 
-- [`synGetPermissions`](https://r-docs.synapse.org/latest/reference/Dataset_GetPermissions.md)`(instance, synapse_client=NULL)`:
+- [`synGetPermissions`](https://linglp.github.io/synapser/latest/reference/Dataset_GetPermissions.md)`(instance, synapse_client=NULL)`:
   Get the
   [permissions](https://python-docs.synapse.org/reference/permissions/)
   that the caller has on an Entity.
 
-- [`synListAcl`](https://r-docs.synapse.org/latest/reference/Dataset_ListAcl.md)`(instance, recursive=FALSE, include_container_content=FALSE, target_entity_types=NULL, log_tree=FALSE, synapse_client=NULL)`:
+- [`synListAcl`](https://linglp.github.io/synapser/latest/reference/Dataset_ListAcl.md)`(instance, recursive=FALSE, include_container_content=FALSE, target_entity_types=NULL, log_tree=FALSE, synapse_client=NULL)`:
   List the Access Control Lists (ACLs) for this entity and optionally
   its children.\
   \
@@ -292,7 +292,7 @@ NULL
   Team that the user has access to that has permissions on the entity,
   or through inheritance from parent entities.
 
-- [`synQuery`](https://r-docs.synapse.org/latest/reference/Dataset_Query.md)`(query, include_row_id_and_row_version=TRUE, convert_to_datetime=FALSE, download_location=NULL, quote_character="\"", escape_character=r"(\)", line_end="\n", separator=",", header=TRUE, timeout=250L, synapse_client=NULL)`:
+- [`synQuery`](https://linglp.github.io/synapser/latest/reference/Dataset_Query.md)`(query, include_row_id_and_row_version=TRUE, convert_to_datetime=FALSE, download_location=NULL, quote_character="\"", escape_character=r"(\)", line_end="\n", separator=",", header=TRUE, timeout=250L, synapse_client=NULL)`:
   Query for data on a table stored in Synapse. The results will always
   be returned as a data frame unless you specify a `download_location`
   in which case the results will be downloaded to that location. There
@@ -300,28 +300,28 @@ NULL
   on if you are getting the results back as a data frame or downloading
   the results to a file.
 
-- [`synQueryPartMask`](https://r-docs.synapse.org/latest/reference/Dataset_QueryPartMask.md)`(query, part_mask, timeout=250L, synapse_client=NULL)`:
+- [`synQueryPartMask`](https://linglp.github.io/synapser/latest/reference/Dataset_QueryPartMask.md)`(query, part_mask, timeout=250L, synapse_client=NULL)`:
   Query for data on a table stored in Synapse. This is a more advanced
   use case of the
-  [`synQuery()`](https://r-docs.synapse.org/latest/reference/Dataset_Query.md)
+  [`synQuery()`](https://linglp.github.io/synapser/latest/reference/Dataset_Query.md)
   function that allows you to determine what additional metadata about
   the table or query should also be returned. If you do not need this
   additional information then you are better off using the
-  [`synQuery()`](https://r-docs.synapse.org/latest/reference/Dataset_Query.md)
+  [`synQuery()`](https://linglp.github.io/synapser/latest/reference/Dataset_Query.md)
   function.\
   \
   The query for this method uses this Rest API:
   <https://rest-docs.synapse.org/rest/POST/entity/id/table/query/async/start.html>
 
-- [`synRemoveItem`](https://r-docs.synapse.org/latest/reference/Dataset_RemoveItem.md)`(instance, item, synapse_client=NULL)`:
+- [`synRemoveItem`](https://linglp.github.io/synapser/latest/reference/Dataset_RemoveItem.md)`(instance, item, synapse_client=NULL)`:
   Removes an item from the dataset. For Folders, all children of the
   folder are removed recursively. Effect is not seen until the dataset
   is stored.
 
-- [`synReorderColumn`](https://r-docs.synapse.org/latest/reference/Dataset_ReorderColumn.md)`(instance, name, index)`:
+- [`synReorderColumn`](https://linglp.github.io/synapser/latest/reference/Dataset_ReorderColumn.md)`(instance, name, index)`:
   Reorder a column in the table. Note that this does not store the
   column in Synapse. You must call the
-  [`synStore()`](https://r-docs.synapse.org/latest/reference/synStore.md)
+  [`synStore()`](https://linglp.github.io/synapser/latest/reference/synStore.md)
   function on this Dataset instance to store the column in Synapse. This
   is a convenience function to eliminate the need to manually reorder
   the named list stored in the `$columns` attribute.\
@@ -330,16 +330,16 @@ NULL
   columns in the table. If you pass in an index that is out of bounds
   the column will be added to the end of the list.
 
-- [`synSetPermissions`](https://r-docs.synapse.org/latest/reference/Dataset_SetPermissions.md)`(instance, principal_id=NULL, access_type=NULL, modify_benefactor=FALSE, warn_if_inherits=TRUE, overwrite=TRUE, synapse_client=NULL)`:
+- [`synSetPermissions`](https://linglp.github.io/synapser/latest/reference/Dataset_SetPermissions.md)`(instance, principal_id=NULL, access_type=NULL, modify_benefactor=FALSE, warn_if_inherits=TRUE, overwrite=TRUE, synapse_client=NULL)`:
   Sets permission that a user or group has on an Entity. An Entity may
   have its own ACL or inherit its ACL from a benefactor.
 
-- [`synSnapshot`](https://r-docs.synapse.org/latest/reference/Dataset_Snapshot.md)`(instance, comment=NULL, label=NULL, include_activity=TRUE, associate_activity_to_new_version=TRUE, timeout=120L, synapse_client=NULL)`:
+- [`synSnapshot`](https://linglp.github.io/synapser/latest/reference/Dataset_Snapshot.md)`(instance, comment=NULL, label=NULL, include_activity=TRUE, associate_activity_to_new_version=TRUE, timeout=120L, synapse_client=NULL)`:
   Creates a snapshot of the dataset. A snapshot is a saved, read-only
   version of the dataset at the time it was created. Dataset snapshots
   are created using the asynchronous job API.
 
-- [`synUpdateRows`](https://r-docs.synapse.org/latest/reference/Dataset_UpdateRows.md)`(instance, values, primary_keys, dry_run=FALSE, rows_per_query=50000L, update_size_bytes=1992294.4, insert_size_bytes=943718400L, job_timeout=600L, date_columns=NULL, date_format=NULL, wait_for_eventually_consistent_view=FALSE, wait_for_eventually_consistent_view_timeout=600L, synapse_client=NULL)`:
+- [`synUpdateRows`](https://linglp.github.io/synapser/latest/reference/Dataset_UpdateRows.md)`(instance, values, primary_keys, dry_run=FALSE, rows_per_query=50000L, update_size_bytes=1992294.4, insert_size_bytes=943718400L, job_timeout=600L, date_columns=NULL, date_format=NULL, wait_for_eventually_consistent_view=FALSE, wait_for_eventually_consistent_view_timeout=600L, synapse_client=NULL)`:
   Update the values of rows in the dataset. This method can only be used
   to update values in custom columns. Default columns cannot be updated,
   but may be used as primary keys.\

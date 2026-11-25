@@ -16,8 +16,8 @@ not need to set up Python yourself: reticulate installs a compatible
 Python and the Synapse Python client the first time synapser is loaded.
 
 If you run into problems, see the [Troubleshooting
-guide](https://r-docs.synapse.org/articles/troubleshooting.html) or
-[open an issue](https://github.com/Sage-Bionetworks/synapser/issues).
+guide](https://linglp.github.io/synapser/latest/articles/troubleshooting.md)
+or [open an issue](https://github.com/Sage-Bionetworks/synapser/issues).
 New features usually appear in the Python client first, so if you need
 one that synapser does not have yet, you can use the Python client
 directly. If you continue to run into environment or package version
@@ -35,8 +35,9 @@ Python client. It introduces object-oriented models: create an instance
 of a Synapse object, such as
 `File(path = “data.csv”, parent_id = “syn123”)`, then pipe it into verb
 functions like
-[`synStore()`](https://r-docs.synapse.org/latest/reference/synStore.md)
-and [`synGet()`](https://r-docs.synapse.org/latest/reference/synGet.md).
+[`synStore()`](https://linglp.github.io/synapser/latest/reference/synStore.md)
+and
+[`synGet()`](https://linglp.github.io/synapser/latest/reference/synGet.md).
 It also brings:
 
 - **No Python setup.** When synapser is loaded, reticulate installs a
@@ -48,7 +49,7 @@ It also brings:
 **This release is not backward compatible.** Functions from earlier
 versions, such as `synGetChildren()` and `synGetAnnotations()`, have
 been removed. Before upgrading, see [Key differences from the legacy
-API](https://r-docs.synapse.org/latest/articles/data_upload_download.html#key-differences-from-the-legacy-api)
+API](https://linglp.github.io/synapser/latest/articles/data_upload_download.html#key-differences-from-the-legacy-api)
 for how earlier calls map to the new API, and [Supported Models and
 Functions](#supported-models-and-functions) for what this release
 supports.
@@ -78,30 +79,30 @@ reference page also lists the functions that work on it, such as
 
 | Area | Models |
 |----|----|
-| Projects, folders, and files | [`Project`](https://r-docs.synapse.org/latest/reference/Project.md), [`Folder`](https://r-docs.synapse.org/latest/reference/Folder.md), [`File`](https://r-docs.synapse.org/latest/reference/File.md), [`Link`](https://r-docs.synapse.org/latest/reference/Link.md) |
-| Tables and views | [`Table`](https://r-docs.synapse.org/latest/reference/Table.md), [`Column`](https://r-docs.synapse.org/latest/reference/Column.md), [`JsonSubColumn`](https://r-docs.synapse.org/latest/reference/JsonSubColumn.md), [`VirtualTable`](https://r-docs.synapse.org/latest/reference/VirtualTable.md), [`EntityView`](https://r-docs.synapse.org/latest/reference/EntityView.md), [`MaterializedView`](https://r-docs.synapse.org/latest/reference/MaterializedView.md), [`SubmissionView`](https://r-docs.synapse.org/latest/reference/SubmissionView.md), [`Dataset`](https://r-docs.synapse.org/latest/reference/Dataset.md), [`DatasetCollection`](https://r-docs.synapse.org/latest/reference/DatasetCollection.md), [`EntityRef`](https://r-docs.synapse.org/latest/reference/EntityRef.md) |
-| Provenance | [`Activity`](https://r-docs.synapse.org/latest/reference/Activity.md), [`UsedEntity`](https://r-docs.synapse.org/latest/reference/UsedEntity.md), [`UsedURL`](https://r-docs.synapse.org/latest/reference/UsedURL.md) |
-| Wikis | [`WikiPage`](https://r-docs.synapse.org/latest/reference/WikiPage.md), [`WikiHeader`](https://r-docs.synapse.org/latest/reference/WikiHeader.md), [`WikiHistorySnapshot`](https://r-docs.synapse.org/latest/reference/WikiHistorySnapshot.md), [`WikiOrderHint`](https://r-docs.synapse.org/latest/reference/WikiOrderHint.md) |
-| Challenges and evaluations | [`Evaluation`](https://r-docs.synapse.org/latest/reference/Evaluation.md), [`Submission`](https://r-docs.synapse.org/latest/reference/Submission.md), [`SubmissionStatus`](https://r-docs.synapse.org/latest/reference/SubmissionStatus.md), [`SubmissionBundle`](https://r-docs.synapse.org/latest/reference/SubmissionBundle.md) |
-| Users, teams, and organizations | [`Team`](https://r-docs.synapse.org/latest/reference/Team.md), [`UserProfile`](https://r-docs.synapse.org/latest/reference/UserProfile.md), [`UserPreference`](https://r-docs.synapse.org/latest/reference/UserPreference.md), [`Organization`](https://r-docs.synapse.org/latest/reference/Organization.md), [`JSONSchema`](https://r-docs.synapse.org/latest/reference/JSONSchema.md) |
-| Storage | [`StorageLocation`](https://r-docs.synapse.org/latest/reference/StorageLocation.md), [`StorageLocationType`](https://r-docs.synapse.org/latest/reference/StorageLocationType.md) |
-| AI agents | [`Agent`](https://r-docs.synapse.org/latest/reference/Agent.md), [`AgentSession`](https://r-docs.synapse.org/latest/reference/AgentSession.md), [`AgentPrompt`](https://r-docs.synapse.org/latest/reference/AgentPrompt.md) |
+| Projects, folders, and files | [`Project`](https://linglp.github.io/synapser/latest/reference/Project.md), [`Folder`](https://linglp.github.io/synapser/latest/reference/Folder.md), [`File`](https://linglp.github.io/synapser/latest/reference/File.md), [`Link`](https://linglp.github.io/synapser/latest/reference/Link.md) |
+| Tables and views | [`Table`](https://linglp.github.io/synapser/latest/reference/Table.md), [`Column`](https://linglp.github.io/synapser/latest/reference/Column.md), [`JsonSubColumn`](https://linglp.github.io/synapser/latest/reference/JsonSubColumn.md), [`VirtualTable`](https://linglp.github.io/synapser/latest/reference/VirtualTable.md), [`EntityView`](https://linglp.github.io/synapser/latest/reference/EntityView.md), [`MaterializedView`](https://linglp.github.io/synapser/latest/reference/MaterializedView.md), [`SubmissionView`](https://linglp.github.io/synapser/latest/reference/SubmissionView.md), [`Dataset`](https://linglp.github.io/synapser/latest/reference/Dataset.md), [`DatasetCollection`](https://linglp.github.io/synapser/latest/reference/DatasetCollection.md), [`EntityRef`](https://linglp.github.io/synapser/latest/reference/EntityRef.md) |
+| Provenance | [`Activity`](https://linglp.github.io/synapser/latest/reference/Activity.md), [`UsedEntity`](https://linglp.github.io/synapser/latest/reference/UsedEntity.md), [`UsedURL`](https://linglp.github.io/synapser/latest/reference/UsedURL.md) |
+| Wikis | [`WikiPage`](https://linglp.github.io/synapser/latest/reference/WikiPage.md), [`WikiHeader`](https://linglp.github.io/synapser/latest/reference/WikiHeader.md), [`WikiHistorySnapshot`](https://linglp.github.io/synapser/latest/reference/WikiHistorySnapshot.md), [`WikiOrderHint`](https://linglp.github.io/synapser/latest/reference/WikiOrderHint.md) |
+| Challenges and evaluations | [`Evaluation`](https://linglp.github.io/synapser/latest/reference/Evaluation.md), [`Submission`](https://linglp.github.io/synapser/latest/reference/Submission.md), [`SubmissionStatus`](https://linglp.github.io/synapser/latest/reference/SubmissionStatus.md), [`SubmissionBundle`](https://linglp.github.io/synapser/latest/reference/SubmissionBundle.md) |
+| Users, teams, and organizations | [`Team`](https://linglp.github.io/synapser/latest/reference/Team.md), [`UserProfile`](https://linglp.github.io/synapser/latest/reference/UserProfile.md), [`UserPreference`](https://linglp.github.io/synapser/latest/reference/UserPreference.md), [`Organization`](https://linglp.github.io/synapser/latest/reference/Organization.md), [`JSONSchema`](https://linglp.github.io/synapser/latest/reference/JSONSchema.md) |
+| Storage | [`StorageLocation`](https://linglp.github.io/synapser/latest/reference/StorageLocation.md), [`StorageLocationType`](https://linglp.github.io/synapser/latest/reference/StorageLocationType.md) |
+| AI agents | [`Agent`](https://linglp.github.io/synapser/latest/reference/Agent.md), [`AgentSession`](https://linglp.github.io/synapser/latest/reference/AgentSession.md), [`AgentPrompt`](https://linglp.github.io/synapser/latest/reference/AgentPrompt.md) |
 
 These functions work across models:
 
 | Task | Functions |
 |----|----|
-| Connecting to Synapse | [`synLogin`](https://r-docs.synapse.org/latest/reference/synLogin.md), [`synLogout`](https://r-docs.synapse.org/latest/reference/synLogout.md), [`synSetEndpoints`](https://r-docs.synapse.org/latest/reference/synSetEndpoints.md) |
-| Getting, storing, and deleting entities | [`synGet`](https://r-docs.synapse.org/latest/reference/synGet.md), [`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md), [`synDelete`](https://r-docs.synapse.org/latest/reference/synDelete.md), [`synSetProperties`](https://r-docs.synapse.org/latest/reference/synSetProperties.md) |
-| Options for getting and storing | [`FileOptions`](https://r-docs.synapse.org/latest/reference/FileOptions.md), [`ActivityOptions`](https://r-docs.synapse.org/latest/reference/ActivityOptions.md), [`TableOptions`](https://r-docs.synapse.org/latest/reference/TableOptions.md), [`LinkOptions`](https://r-docs.synapse.org/latest/reference/LinkOptions.md), [`StoreFileOptions`](https://r-docs.synapse.org/latest/reference/StoreFileOptions.md), [`StoreContainerOptions`](https://r-docs.synapse.org/latest/reference/StoreContainerOptions.md), [`StoreTableOptions`](https://r-docs.synapse.org/latest/reference/StoreTableOptions.md), [`StoreJSONSchemaOptions`](https://r-docs.synapse.org/latest/reference/StoreJSONSchemaOptions.md), [`StoreGridOptions`](https://r-docs.synapse.org/latest/reference/StoreGridOptions.md) |
-| Querying tables and views | [`synQuery`](https://r-docs.synapse.org/latest/reference/Table_Query.md), [`synQueryPartMask`](https://r-docs.synapse.org/latest/reference/Table_QueryPartMask.md) |
-| Download list (cart) | [`synDownloadListAdd`](https://r-docs.synapse.org/latest/reference/synDownloadListAdd.md), [`synDownloadListRemove`](https://r-docs.synapse.org/latest/reference/synDownloadListRemove.md), [`synDownloadListClear`](https://r-docs.synapse.org/latest/reference/synDownloadListClear.md), [`synDownloadListManifest`](https://r-docs.synapse.org/latest/reference/synDownloadListManifest.md), [`synDownloadListFiles`](https://r-docs.synapse.org/latest/reference/synDownloadListFiles.md), [`DownloadListItem`](https://r-docs.synapse.org/latest/reference/DownloadListItem.md) |
-| Utilities | [`synFindEntityId`](https://r-docs.synapse.org/latest/reference/synFindEntityId.md), [`synIsSynapseId`](https://r-docs.synapse.org/latest/reference/synIsSynapseId.md), [`synOnweb`](https://r-docs.synapse.org/latest/reference/synOnweb.md), [`synPrintEntity`](https://r-docs.synapse.org/latest/reference/synPrintEntity.md), [`synMd5Query`](https://r-docs.synapse.org/latest/reference/synMd5Query.md), [`synSendMessage`](https://r-docs.synapse.org/latest/reference/synSendMessage.md) |
-| REST API | [`synRestGet`](https://r-docs.synapse.org/latest/reference/synRestGet.md), [`synRestPost`](https://r-docs.synapse.org/latest/reference/synRestPost.md), [`synRestPut`](https://r-docs.synapse.org/latest/reference/synRestPut.md), [`synRestDelete`](https://r-docs.synapse.org/latest/reference/synRestDelete.md) |
+| Connecting to Synapse | [`synLogin`](https://linglp.github.io/synapser/latest/reference/synLogin.md), [`synLogout`](https://linglp.github.io/synapser/latest/reference/synLogout.md), [`synSetEndpoints`](https://linglp.github.io/synapser/latest/reference/synSetEndpoints.md) |
+| Getting, storing, and deleting entities | [`synGet`](https://linglp.github.io/synapser/latest/reference/synGet.md), [`synStore`](https://linglp.github.io/synapser/latest/reference/synStore.md), [`synDelete`](https://linglp.github.io/synapser/latest/reference/synDelete.md), [`synSetProperties`](https://linglp.github.io/synapser/latest/reference/synSetProperties.md) |
+| Options for getting and storing | [`FileOptions`](https://linglp.github.io/synapser/latest/reference/FileOptions.md), [`ActivityOptions`](https://linglp.github.io/synapser/latest/reference/ActivityOptions.md), [`TableOptions`](https://linglp.github.io/synapser/latest/reference/TableOptions.md), [`LinkOptions`](https://linglp.github.io/synapser/latest/reference/LinkOptions.md), [`StoreFileOptions`](https://linglp.github.io/synapser/latest/reference/StoreFileOptions.md), [`StoreContainerOptions`](https://linglp.github.io/synapser/latest/reference/StoreContainerOptions.md), [`StoreTableOptions`](https://linglp.github.io/synapser/latest/reference/StoreTableOptions.md), [`StoreJSONSchemaOptions`](https://linglp.github.io/synapser/latest/reference/StoreJSONSchemaOptions.md), [`StoreGridOptions`](https://linglp.github.io/synapser/latest/reference/StoreGridOptions.md) |
+| Querying tables and views | [`synQuery`](https://linglp.github.io/synapser/latest/reference/Table_Query.md), [`synQueryPartMask`](https://linglp.github.io/synapser/latest/reference/Table_QueryPartMask.md) |
+| Download list (cart) | [`synDownloadListAdd`](https://linglp.github.io/synapser/latest/reference/synDownloadListAdd.md), [`synDownloadListRemove`](https://linglp.github.io/synapser/latest/reference/synDownloadListRemove.md), [`synDownloadListClear`](https://linglp.github.io/synapser/latest/reference/synDownloadListClear.md), [`synDownloadListManifest`](https://linglp.github.io/synapser/latest/reference/synDownloadListManifest.md), [`synDownloadListFiles`](https://linglp.github.io/synapser/latest/reference/synDownloadListFiles.md), [`DownloadListItem`](https://linglp.github.io/synapser/latest/reference/DownloadListItem.md) |
+| Utilities | [`synFindEntityId`](https://linglp.github.io/synapser/latest/reference/synFindEntityId.md), [`synIsSynapseId`](https://linglp.github.io/synapser/latest/reference/synIsSynapseId.md), [`synOnweb`](https://linglp.github.io/synapser/latest/reference/synOnweb.md), [`synPrintEntity`](https://linglp.github.io/synapser/latest/reference/synPrintEntity.md), [`synMd5Query`](https://linglp.github.io/synapser/latest/reference/synMd5Query.md), [`synSendMessage`](https://linglp.github.io/synapser/latest/reference/synSendMessage.md) |
+| REST API | [`synRestGet`](https://linglp.github.io/synapser/latest/reference/synRestGet.md), [`synRestPost`](https://linglp.github.io/synapser/latest/reference/synRestPost.md), [`synRestPut`](https://linglp.github.io/synapser/latest/reference/synRestPut.md), [`synRestDelete`](https://linglp.github.io/synapser/latest/reference/synRestDelete.md) |
 
 See the [reference
-index](https://r-docs.synapse.org/latest/reference/index.md) for the
-full list.
+index](https://linglp.github.io/synapser/latest/reference/index.md) for
+the full list.
 
 ## Requirements
 
@@ -172,12 +173,12 @@ take a minute while reticulate downloads Python and the Synapse Python
 client. Later loads reuse the cached environment.
 
 [**See the install
-guide**](https://r-docs.synapse.org/latest/articles/installation.md) for
-upgrading from synapser 2.x, installing an older version (2.x releases
-remain on [RAN](http://ran.synapse.org)), installing from GitHub, and
-how synapser finds Python. If installation fails, see the
+guide**](https://linglp.github.io/synapser/latest/articles/installation.md)
+for upgrading from synapser 2.x, installing an older version (2.x
+releases remain on [RAN](http://ran.synapse.org)), installing from
+GitHub, and how synapser finds Python. If installation fails, see the
 [Troubleshooting
-guide](https://r-docs.synapse.org/latest/articles/troubleshooting.md).
+guide](https://linglp.github.io/synapser/latest/articles/troubleshooting.md).
 
 ## Usage
 
@@ -186,7 +187,7 @@ Synapse account, register [here](https://www.synapse.org/register):
 
 \
 [`library`](https://rdrr.io/r/base/library.html)`(`[`synapser`](https://github.com/Sage-Bionetworks/synapser)`)`\
-[`synLogin`](https://r-docs.synapse.org/latest/reference/synLogin.md)`(``)`
+[`synLogin`](https://linglp.github.io/synapser/latest/reference/synLogin.md)`(``)`
 
 To learn more about using `synapser`, visit the [docs
 site](https://r-docs.synapse.org/) or browse the package vignettes:

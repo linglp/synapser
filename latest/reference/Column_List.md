@@ -32,10 +32,10 @@ synList(prefix=NULL, limit=100L, offset=0L, synapse_client=NULL)
 ## Value
 
 A `GeneratorWrapper` object that yields
-[`Column`](https://r-docs.synapse.org/latest/reference/Column.md)
+[`Column`](https://linglp.github.io/synapser/latest/reference/Column.md)
 instances. Use [`as.list()`](https://rdrr.io/r/base/list.html) to
 materialize all results into a list, or `nextElem()` to retrieve one
-[`Column`](https://r-docs.synapse.org/latest/reference/Column.md)
+[`Column`](https://linglp.github.io/synapser/latest/reference/Column.md)
 instance at a time.
 
 ## Examples

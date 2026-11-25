@@ -1,7 +1,7 @@
 # File : from_id
 
 Wrapper for
-[`synGet`](https://r-docs.synapse.org/latest/reference/synGet.md).
+[`synGet`](https://linglp.github.io/synapser/latest/reference/synGet.md).
 
 ## Usage
 

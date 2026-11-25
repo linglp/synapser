@@ -8,7 +8,7 @@ which is typically its parent entity or the Project it belongs to.
 
 In order to remove permissions for a specific user or group, you should
 use the
-[`synSetPermissions()`](https://r-docs.synapse.org/latest/reference/Folder_SetPermissions.md)
+[`synSetPermissions()`](https://linglp.github.io/synapser/latest/reference/Folder_SetPermissions.md)
 function with the `access_type` set to an empty list.
 
 By default, Entities such as FileEntity and Folder inherit their
@@ -55,7 +55,7 @@ synDeletePermissions(instance, include_self=TRUE, include_container_content=FALS
   used with include_container_content=TRUE to have any effect. Setting
   recursive=TRUE with include_container_content=FALSE will raise an
   error. Only works on classes that support the
-  [`synSyncFromSynapse()`](https://r-docs.synapse.org/latest/reference/Folder_SyncFromSynapse.md)
+  [`synSyncFromSynapse()`](https://linglp.github.io/synapser/latest/reference/Folder_SyncFromSynapse.md)
   function.
 
 - target_entity_types:

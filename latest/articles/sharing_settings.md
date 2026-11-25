@@ -12,7 +12,7 @@ This tutorial demonstrates how to use synapser to manage permissions and
 sharing settings for your Synapse entities.
 
 [Read more about Access
-Control](https://r-docs.synapse.org/latest/articles/access_control.md)
+Control](https://linglp.github.io/synapser/latest/articles/access_control.md)
 
 ## Tutorial Purpose
 
@@ -32,15 +32,15 @@ In this tutorial you will:
 ## Prerequisites
 
 - Make sure that you have completed the
-  [Installation](https://r-docs.synapse.org/latest/articles/installation.md)
+  [Installation](https://linglp.github.io/synapser/latest/articles/installation.md)
   and
-  [Authentication](https://r-docs.synapse.org/latest/articles/authentication.md)
+  [Authentication](https://linglp.github.io/synapser/latest/articles/authentication.md)
   setup.
 - **IMPORTANT**: You must set a valid `PRINCIPAL_ID` in the tutorial
   script before running it. This should be a Synapse user ID or team ID
   that you want to grant permissions to.
 - You must have a
-  [Project](https://r-docs.synapse.org/latest/articles/project.md)
+  [Project](https://linglp.github.io/synapser/latest/articles/project.md)
   created and replace the one used in this tutorial.
 
 ## Understanding Permission Types
@@ -132,22 +132,22 @@ set a valid `PRINCIPAL_ID`.
 `# Helper to print a list of permissions on one line`\
 `format_permissions`` ``<-`` ``function``(``x``)`` `[`paste`](https://rdrr.io/r/base/paste.html)`(`[`unlist`](https://rdrr.io/r/base/unlist.html)`(``x``)``, collapse ``=`` ``", "``)`\
 \
-[`synLogin`](https://r-docs.synapse.org/latest/reference/synLogin.md)`(``)`\
+[`synLogin`](https://linglp.github.io/synapser/latest/reference/synLogin.md)`(``)`\
 \
 `# Step 1: Get or create a project for this tutorial`\
 [`cat`](https://rdrr.io/r/base/cat.html)`(``"=== Step 1: Getting project ===\n"``)`\
-`project`` ``<-`` `[`Project`](https://r-docs.synapse.org/latest/reference/Project.md)`(``name ``=`` ``"My uniquely named project about Alzheimer's Disease"``)`` ``|>`` `[`synGet`](https://r-docs.synapse.org/latest/reference/synGet.md)`(``)`
+`project`` ``<-`` `[`Project`](https://linglp.github.io/synapser/latest/reference/Project.md)`(``name ``=`` ``"My uniquely named project about Alzheimer's Disease"``)`` ``|>`` `[`synGet`](https://linglp.github.io/synapser/latest/reference/synGet.md)`(``)`
 
 ## 2. Create a main folder to set custom sharing settings
 
 \
 `# Step 2: Create a main folder to set custom sharing settings`\
 [`cat`](https://rdrr.io/r/base/cat.html)`(``"\n=== Step 2: Creating main to set custom permissions ===\n"``)`\
-`main_folder`` ``<-`` `[`Folder`](https://r-docs.synapse.org/latest/reference/Folder.md)`(`\
+`main_folder`` ``<-`` `[`Folder`](https://linglp.github.io/synapser/latest/reference/Folder.md)`(`\
 `  name ``=`` ``"Research Data"``,`\
 `  description ``=`` ``"Main folder for research data with custom sharing settings"``,`\
 `  parent_id ``=`` ``project``$``id`\
-`)`` ``|>`` `[`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)`(``)`\
+`)`` ``|>`` `[`synStore`](https://linglp.github.io/synapser/latest/reference/synStore.md)`(``)`\
 [`cat`](https://rdrr.io/r/base/cat.html)`(`[`sprintf`](https://rdrr.io/r/base/sprintf.html)`(``"Created main folder: %s (ID: %s)\n"``, ``main_folder``$``name``, ``main_folder``$``id``)``)`
 
 ## 3. Examine Current Permissions
@@ -240,11 +240,11 @@ parent:
 \
 `# Step 6: Create a sub-folder with different sharing settings`\
 [`cat`](https://rdrr.io/r/base/cat.html)`(``"\n=== Step 6: Creating sub-folder with different permissions ===\n"``)`\
-`sub_folder`` ``<-`` `[`Folder`](https://r-docs.synapse.org/latest/reference/Folder.md)`(`\
+`sub_folder`` ``<-`` `[`Folder`](https://linglp.github.io/synapser/latest/reference/Folder.md)`(`\
 `  name ``=`` ``"Sensitive Analysis"``,`\
 `  description ``=`` ``"Sub-folder with more restrictive permissions"``,`\
 `  parent_id ``=`` ``main_folder``$``id`\
-`)`` ``|>`` `[`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)`(``)`\
+`)`` ``|>`` `[`synStore`](https://linglp.github.io/synapser/latest/reference/synStore.md)`(``)`\
 [`cat`](https://rdrr.io/r/base/cat.html)`(`[`sprintf`](https://rdrr.io/r/base/sprintf.html)`(``"Created sub-folder: %s (ID: %s)\n"``, ``sub_folder``$``name``, ``sub_folder``$``id``)``)`\
 \
 `# Set more restrictive permissions on the sub-folder`\
@@ -504,11 +504,11 @@ You’ll notice the output looks like:
 
 ## References used in this tutorial
 
-- [`Folder`](https://r-docs.synapse.org/latest/reference/Folder.md)
-- [`Project`](https://r-docs.synapse.org/latest/reference/Project.md)
-- [`synGetPermissions`](https://r-docs.synapse.org/latest/reference/Folder_GetPermissions.md)
-- [`synGetAcl`](https://r-docs.synapse.org/latest/reference/Folder_GetAcl.md)
-- [`synSetPermissions`](https://r-docs.synapse.org/latest/reference/Folder_SetPermissions.md)
-- [`synListAcl`](https://r-docs.synapse.org/latest/reference/Folder_ListAcl.md)
-- [`synDeletePermissions`](https://r-docs.synapse.org/latest/reference/Folder_DeletePermissions.md)
-- [`synLogin`](https://r-docs.synapse.org/latest/reference/synLogin.md)
+- [`Folder`](https://linglp.github.io/synapser/latest/reference/Folder.md)
+- [`Project`](https://linglp.github.io/synapser/latest/reference/Project.md)
+- [`synGetPermissions`](https://linglp.github.io/synapser/latest/reference/Folder_GetPermissions.md)
+- [`synGetAcl`](https://linglp.github.io/synapser/latest/reference/Folder_GetAcl.md)
+- [`synSetPermissions`](https://linglp.github.io/synapser/latest/reference/Folder_SetPermissions.md)
+- [`synListAcl`](https://linglp.github.io/synapser/latest/reference/Folder_ListAcl.md)
+- [`synDeletePermissions`](https://linglp.github.io/synapser/latest/reference/Folder_DeletePermissions.md)
+- [`synLogin`](https://linglp.github.io/synapser/latest/reference/synLogin.md)

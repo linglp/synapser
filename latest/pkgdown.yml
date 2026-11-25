@@ -32,7 +32,7 @@ articles:
   upload_data_in_bulk: upload_data_in_bulk.html
   virtualtable: virtualtable.html
   wiki: wiki.html
-last_built: 2026-11-25T15:53Z
+last_built: 2026-11-25T17:12Z
 urls:
-  reference: https://r-docs.synapse.org/latest/reference
-  article: https://r-docs.synapse.org/latest/articles
+  reference: https://linglp.github.io/synapser/latest/reference
+  article: https://linglp.github.io/synapser/latest/articles

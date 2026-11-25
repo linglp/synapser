@@ -1,7 +1,7 @@
 # Dataset : add_item
 
 Adds an item in the form of an
-[`EntityRef`](https://r-docs.synapse.org/latest/reference/EntityRef.md)
+[`EntityRef`](https://linglp.github.io/synapser/latest/reference/EntityRef.md)
 to the dataset. For Folders, children are added recursively. Effect is
 not seen until the dataset is stored.
 
@@ -20,7 +20,7 @@ synAddItem(instance, item, synapse_client=NULL)
 - item:
 
   (EntityRef, File, or Folder) Entity to add to the dataset. Must be an
-  [`EntityRef`](https://r-docs.synapse.org/latest/reference/EntityRef.md),
+  [`EntityRef`](https://linglp.github.io/synapser/latest/reference/EntityRef.md),
   File, or Folder.
 
 - synapse_client:

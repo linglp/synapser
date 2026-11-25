@@ -7,7 +7,7 @@ files uploaded to this entity will be stored.
 value(s) will **replace** any storage locations previously configured on
 this entity. To add a storage location without removing existing ones,
 first retrieve the current setting with
-[`synGetProjectSetting()`](https://r-docs.synapse.org/latest/reference/Project_GetProjectSetting.md),
+[`synGetProjectSetting()`](https://linglp.github.io/synapser/latest/reference/Project_GetProjectSetting.md),
 then pass its existing `locations` together with the new ID as
 `storage_location_id`. The first ID in the list is the default upload
 destination.

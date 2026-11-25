@@ -25,9 +25,9 @@ An S3-style class object.
 - storage_type:
 
   (Optional\[StorageLocationType\]) The type of storage location, a
-  [`StorageLocationType`](https://r-docs.synapse.org/latest/reference/StorageLocationType.md).
+  [`StorageLocationType`](https://linglp.github.io/synapser/latest/reference/StorageLocationType.md).
   Required when creating a new storage location via
-  [`synStore()`](https://r-docs.synapse.org/latest/reference/synStore.md).
+  [`synStore()`](https://linglp.github.io/synapser/latest/reference/synStore.md).
   Determines the `concreteType` sent to the Synapse REST API.
 
 - concrete_type:

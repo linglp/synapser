@@ -4,7 +4,7 @@ Index files in this entity for migration to a new storage location.
 
 This is the first step in migrating files to a new storage location.
 After indexing, use
-[`synMigrateIndexedFiles()`](https://r-docs.synapse.org/latest/reference/Project_MigrateIndexedFiles.md)
+[`synMigrateIndexedFiles()`](https://linglp.github.io/synapser/latest/reference/Project_MigrateIndexedFiles.md)
 to perform the actual migration.
 
 ## Usage

@@ -60,24 +60,24 @@ NULL
 - `AgentSession(id=NULL, access_level="PUBLICLY_ACCESSIBLE", started_on=NULL, started_by=NULL, modified_on=NULL, agent_registration_id=NULL, etag=NULL, chat_history=list())`:
   Constructor for `AgentSession`
 
-- [`synPrompt`](https://r-docs.synapse.org/latest/reference/AgentSession_Prompt.md)`(instance, prompt, enable_trace=FALSE, print_response=FALSE, newer_than=NULL, timeout=120L, synapse_client=NULL)`:
+- [`synPrompt`](https://linglp.github.io/synapser/latest/reference/AgentSession_Prompt.md)`(instance, prompt, enable_trace=FALSE, print_response=FALSE, newer_than=NULL, timeout=120L, synapse_client=NULL)`:
   Sends a prompt to the agent and adds the response to the
   AgentSession's chat history. A session must be started before sending
   a prompt.
 
-- [`synStart`](https://r-docs.synapse.org/latest/reference/AgentSession_Start.md)`(instance, synapse_client=NULL)`:
+- [`synStart`](https://linglp.github.io/synapser/latest/reference/AgentSession_Start.md)`(instance, synapse_client=NULL)`:
   Starts an agent session.
 
-- [`synUpdate`](https://r-docs.synapse.org/latest/reference/AgentSession_Update.md)`(instance, synapse_client=NULL)`:
+- [`synUpdate`](https://linglp.github.io/synapser/latest/reference/AgentSession_Update.md)`(instance, synapse_client=NULL)`:
   Updates an agent session. Only updates to the access level are
   currently supported.
 
 ## Note
 
 It is recommended to use the
-[`Agent`](https://r-docs.synapse.org/latest/reference/Agent.md) class to
-conduct chat sessions, but you are free to use AgentSession directly if
-you wish.
+[`Agent`](https://linglp.github.io/synapser/latest/reference/Agent.md)
+class to conduct chat sessions, but you are free to use AgentSession
+directly if you wish.
 
 ## Examples
 

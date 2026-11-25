@@ -34,26 +34,26 @@ your project.
 
 \
 [`library`](https://rdrr.io/r/base/library.html)`(`[`synapser`](https://github.com/Sage-Bionetworks/synapser)`)`\
-[`synLogin`](https://r-docs.synapse.org/latest/reference/synLogin.md)`(``)`\
+[`synLogin`](https://linglp.github.io/synapser/latest/reference/synLogin.md)`(``)`\
 \
 `# Get the project where we want to create the virtual table`\
-`project`` ``<-`` `[`Project`](https://r-docs.synapse.org/latest/reference/Project.md)`(``name ``=`` ``"My uniquely named project about Alzheimer's Disease"``)`` ``|>`` `[`synGet`](https://r-docs.synapse.org/latest/reference/synGet.md)`(``)`\
+`project`` ``<-`` `[`Project`](https://linglp.github.io/synapser/latest/reference/Project.md)`(``name ``=`` ``"My uniquely named project about Alzheimer's Disease"``)`` ``|>`` `[`synGet`](https://linglp.github.io/synapser/latest/reference/synGet.md)`(``)`\
 `project_id`` ``<-`` ``project``$``id`\
 [`cat`](https://rdrr.io/r/base/cat.html)`(``"Got project with ID:"``, ``project_id``, ``"\n"``)`\
 \
 `# Create the first table with some columns and rows`\
 `table1_columns`` ``<-`` `[`list`](https://rdrr.io/r/base/list.html)`(`\
-`  `[`Column`](https://r-docs.synapse.org/latest/reference/Column.md)`(``name ``=`` ``"sample_id"``, column_type ``=`` ``"STRING"``)``,`\
-`  `[`Column`](https://r-docs.synapse.org/latest/reference/Column.md)`(``name ``=`` ``"patient_id"``, column_type ``=`` ``"STRING"``)``,`\
-`  `[`Column`](https://r-docs.synapse.org/latest/reference/Column.md)`(``name ``=`` ``"age"``, column_type ``=`` ``"INTEGER"``)``,`\
-`  `[`Column`](https://r-docs.synapse.org/latest/reference/Column.md)`(``name ``=`` ``"diagnosis"``, column_type ``=`` ``"STRING"``)`\
+`  `[`Column`](https://linglp.github.io/synapser/latest/reference/Column.md)`(``name ``=`` ``"sample_id"``, column_type ``=`` ``"STRING"``)``,`\
+`  `[`Column`](https://linglp.github.io/synapser/latest/reference/Column.md)`(``name ``=`` ``"patient_id"``, column_type ``=`` ``"STRING"``)``,`\
+`  `[`Column`](https://linglp.github.io/synapser/latest/reference/Column.md)`(``name ``=`` ``"age"``, column_type ``=`` ``"INTEGER"``)``,`\
+`  `[`Column`](https://linglp.github.io/synapser/latest/reference/Column.md)`(``name ``=`` ``"diagnosis"``, column_type ``=`` ``"STRING"``)`\
 `)`\
 \
-`table1`` ``<-`` `[`Table`](https://r-docs.synapse.org/latest/reference/Table.md)`(`\
+`table1`` ``<-`` `[`Table`](https://linglp.github.io/synapser/latest/reference/Table.md)`(`\
 `  name ``=`` ``"Patient Demographics"``,`\
 `  parent_id ``=`` ``project_id``,`\
 `  columns ``=`` ``table1_columns`\
-`)`` ``|>`` `[`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)`(``)`\
+`)`` ``|>`` `[`synStore`](https://linglp.github.io/synapser/latest/reference/synStore.md)`(``)`\
 [`cat`](https://rdrr.io/r/base/cat.html)`(``"Created table 1 with ID:"``, ``table1``$``id``, ``"\n"``)`\
 \
 `# Add rows to the first table`\
@@ -67,16 +67,16 @@ your project.
 \
 `# Create the second table with some columns and rows`\
 `table2_columns`` ``<-`` `[`list`](https://rdrr.io/r/base/list.html)`(`\
-`  `[`Column`](https://r-docs.synapse.org/latest/reference/Column.md)`(``name ``=`` ``"sample_id"``, column_type ``=`` ``"STRING"``)``,`\
-`  `[`Column`](https://r-docs.synapse.org/latest/reference/Column.md)`(``name ``=`` ``"gene"``, column_type ``=`` ``"STRING"``)``,`\
-`  `[`Column`](https://r-docs.synapse.org/latest/reference/Column.md)`(``name ``=`` ``"expression_level"``, column_type ``=`` ``"DOUBLE"``)`\
+`  `[`Column`](https://linglp.github.io/synapser/latest/reference/Column.md)`(``name ``=`` ``"sample_id"``, column_type ``=`` ``"STRING"``)``,`\
+`  `[`Column`](https://linglp.github.io/synapser/latest/reference/Column.md)`(``name ``=`` ``"gene"``, column_type ``=`` ``"STRING"``)``,`\
+`  `[`Column`](https://linglp.github.io/synapser/latest/reference/Column.md)`(``name ``=`` ``"expression_level"``, column_type ``=`` ``"DOUBLE"``)`\
 `)`\
 \
-`table2`` ``<-`` `[`Table`](https://r-docs.synapse.org/latest/reference/Table.md)`(`\
+`table2`` ``<-`` `[`Table`](https://linglp.github.io/synapser/latest/reference/Table.md)`(`\
 `  name ``=`` ``"Gene Expression Data"``,`\
 `  parent_id ``=`` ``project_id``,`\
 `  columns ``=`` ``table2_columns`\
-`)`` ``|>`` `[`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)`(``)`\
+`)`` ``|>`` `[`synStore`](https://linglp.github.io/synapser/latest/reference/synStore.md)`(``)`\
 [`cat`](https://rdrr.io/r/base/cat.html)`(``"Created table 2 with ID:"``, ``table2``$``id``, ``"\n"``)`\
 \
 `# Add rows to the second table`\
@@ -97,12 +97,12 @@ First, we will create a simple Virtual Table that selects all rows from
 a table and then query it to retrieve the results.
 
 \
-`virtual_table`` ``<-`` `[`VirtualTable`](https://r-docs.synapse.org/latest/reference/VirtualTable.md)`(`\
+`virtual_table`` ``<-`` `[`VirtualTable`](https://linglp.github.io/synapser/latest/reference/VirtualTable.md)`(`\
 `  name ``=`` ``"Patient Data View"``,`\
 `  description ``=`` ``"A virtual table showing patient demographics"``,`\
 `  parent_id ``=`` ``project_id``,`\
 `  defining_sql ``=`` `[`sprintf`](https://rdrr.io/r/base/sprintf.html)`(``"SELECT * FROM %s"``, ``table1``$``id``)`\
-`)`` ``|>`` `[`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)`(``)`\
+`)`` ``|>`` `[`synStore`](https://linglp.github.io/synapser/latest/reference/synStore.md)`(``)`\
 [`cat`](https://rdrr.io/r/base/cat.html)`(``"Created Virtual Table with ID:"``, ``virtual_table``$``id``, ``"\n"``)`\
 \
 `query_result`` ``<-`` ``synQuery``(`\
@@ -129,12 +129,12 @@ Next, we’ll create a Virtual Table that selects only specific columns
 from the source table.
 
 \
-`virtual_table`` ``<-`` `[`VirtualTable`](https://r-docs.synapse.org/latest/reference/VirtualTable.md)`(`\
+`virtual_table`` ``<-`` `[`VirtualTable`](https://linglp.github.io/synapser/latest/reference/VirtualTable.md)`(`\
 `  name ``=`` ``"Patient Age View"``,`\
 `  description ``=`` ``"A virtual table showing only patient IDs and ages"``,`\
 `  parent_id ``=`` ``project_id``,`\
 `  defining_sql ``=`` `[`sprintf`](https://rdrr.io/r/base/sprintf.html)`(``"SELECT patient_id, age FROM %s"``, ``table1``$``id``)`\
-`)`` ``|>`` `[`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)`(``)`\
+`)`` ``|>`` `[`synStore`](https://linglp.github.io/synapser/latest/reference/synStore.md)`(``)`\
 [`cat`](https://rdrr.io/r/base/cat.html)`(``"Created Virtual Table with ID:"``, ``virtual_table``$``id``, ``"\n"``)`\
 \
 `query_result`` ``<-`` ``synQuery``(`\
@@ -162,12 +162,12 @@ We can create a Virtual Table that filters rows from the source table
 using a WHERE clause.
 
 \
-`virtual_table`` ``<-`` `[`VirtualTable`](https://r-docs.synapse.org/latest/reference/VirtualTable.md)`(`\
+`virtual_table`` ``<-`` `[`VirtualTable`](https://linglp.github.io/synapser/latest/reference/VirtualTable.md)`(`\
 `  name ``=`` ``"Alzheimer's Patients"``,`\
 `  description ``=`` ``"A virtual table showing only patients with Alzheimer's"``,`\
 `  parent_id ``=`` ``project_id``,`\
 `  defining_sql ``=`` `[`sprintf`](https://rdrr.io/r/base/sprintf.html)`(``"SELECT * FROM %s WHERE diagnosis = 'Alzheimer''s'"``, ``table1``$``id``)`\
-`)`` ``|>`` `[`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)`(``)`\
+`)`` ``|>`` `[`synStore`](https://linglp.github.io/synapser/latest/reference/synStore.md)`(``)`\
 [`cat`](https://rdrr.io/r/base/cat.html)`(``"Created Virtual Table with ID:"``, ``virtual_table``$``id``, ``"\n"``)`\
 \
 `query_result`` ``<-`` ``synQuery``(`\
@@ -192,12 +192,12 @@ You can also create a Virtual Table that orders the rows from the source
 table using an ORDER BY clause.
 
 \
-`virtual_table`` ``<-`` `[`VirtualTable`](https://r-docs.synapse.org/latest/reference/VirtualTable.md)`(`\
+`virtual_table`` ``<-`` `[`VirtualTable`](https://linglp.github.io/synapser/latest/reference/VirtualTable.md)`(`\
 `  name ``=`` ``"Patients by Age"``,`\
 `  description ``=`` ``"A virtual table showing patients ordered by age"``,`\
 `  parent_id ``=`` ``project_id``,`\
 `  defining_sql ``=`` `[`sprintf`](https://rdrr.io/r/base/sprintf.html)`(``"SELECT * FROM %s ORDER BY age DESC"``, ``table1``$``id``)`\
-`)`` ``|>`` `[`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)`(``)`\
+`)`` ``|>`` `[`synStore`](https://linglp.github.io/synapser/latest/reference/synStore.md)`(``)`\
 [`cat`](https://rdrr.io/r/base/cat.html)`(``"Created Virtual Table with ID:"``, ``virtual_table``$``id``, ``"\n"``)`\
 \
 `query_result`` ``<-`` ``synQuery``(`\
@@ -225,12 +225,12 @@ Finally, we can create a Virtual Table that aggregates data using
 functions like COUNT, along with GROUP BY.
 
 \
-`virtual_table`` ``<-`` `[`VirtualTable`](https://r-docs.synapse.org/latest/reference/VirtualTable.md)`(`\
+`virtual_table`` ``<-`` `[`VirtualTable`](https://linglp.github.io/synapser/latest/reference/VirtualTable.md)`(`\
 `  name ``=`` ``"Diagnosis Count"``,`\
 `  description ``=`` ``"A virtual table showing the count of patients by diagnosis"``,`\
 `  parent_id ``=`` ``project_id``,`\
 `  defining_sql ``=`` `[`sprintf`](https://rdrr.io/r/base/sprintf.html)`(``"SELECT diagnosis, COUNT(*) AS patient_count FROM %s GROUP BY diagnosis"``, ``table1``$``id``)`\
-`)`` ``|>`` `[`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)`(``)`\
+`)`` ``|>`` `[`synStore`](https://linglp.github.io/synapser/latest/reference/synStore.md)`(``)`\
 [`cat`](https://rdrr.io/r/base/cat.html)`(``"Created Virtual Table with ID:"``, ``virtual_table``$``id``, ``"\n"``)`\
 \
 `query_result`` ``<-`` ``synQuery``(`\
@@ -253,13 +253,13 @@ like:
 Delete the project and all its contents when done:
 
 \
-[`synDelete`](https://r-docs.synapse.org/latest/reference/synDelete.md)`(``project``)`
+[`synDelete`](https://linglp.github.io/synapser/latest/reference/synDelete.md)`(``project``)`
 
 ## References
 
-- [`VirtualTable`](https://r-docs.synapse.org/latest/reference/VirtualTable.md)
-- [`Column`](https://r-docs.synapse.org/latest/reference/Column.md)
-- [`Project`](https://r-docs.synapse.org/latest/reference/Project.md)
-- [`synLogin`](https://r-docs.synapse.org/latest/reference/synLogin.md)
+- [`VirtualTable`](https://linglp.github.io/synapser/latest/reference/VirtualTable.md)
+- [`Column`](https://linglp.github.io/synapser/latest/reference/Column.md)
+- [`Project`](https://linglp.github.io/synapser/latest/reference/Project.md)
+- [`synLogin`](https://linglp.github.io/synapser/latest/reference/synLogin.md)
 - [query
   examples](https://rest-docs.synapse.org/rest/org/sagebionetworks/repo/web/controller/TableExamples.html)

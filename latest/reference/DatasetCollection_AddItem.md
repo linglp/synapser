@@ -19,7 +19,7 @@ synAddItem(instance, item)
 
   (Dataset or EntityRef) Dataset to add to the collection. Must be a
   Dataset or an
-  [`EntityRef`](https://r-docs.synapse.org/latest/reference/EntityRef.md)
+  [`EntityRef`](https://linglp.github.io/synapser/latest/reference/EntityRef.md)
   pointing to one.
 
 ## Value

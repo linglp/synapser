@@ -48,7 +48,7 @@ synUpdateAcl(instance, principal_id=NULL, access_type=NULL, acl=NULL, synapse_cl
 
   (Optional\[named list\]) A named list containing the complete ACL data
   to update. You can retrieve the current ACL using
-  [`synGetAcl()`](https://r-docs.synapse.org/latest/reference/Evaluation_GetAcl.md).
+  [`synGetAcl()`](https://linglp.github.io/synapser/latest/reference/Evaluation_GetAcl.md).
   If provided, `principal_id` and `access_type` are ignored.
 
 - synapse_client:

@@ -11,7 +11,7 @@ This works similar to the Python `synapseutils.syncFromSynapse` utility
 function, and generates a `manifest.csv` file in each synced directory.
 The manifest uses CSV format with `parentId` and `ID` columns,
 interoperable with the Synapse UI download cart and
-[`synDownloadListFiles()`](https://r-docs.synapse.org/latest/reference/synDownloadListFiles.md)
+[`synDownloadListFiles()`](https://linglp.github.io/synapser/latest/reference/synDownloadListFiles.md)
 output.
 
 Supports syncing Files, Folders, Tables, EntityViews, SubmissionViews,

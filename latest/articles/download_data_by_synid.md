@@ -18,8 +18,8 @@ In this tutorial you will:
 ## Prerequisites
 
 - Make sure that you have completed the following tutorials:
-  - [Folder](https://r-docs.synapse.org/latest/articles/folder.md)
-  - [File](https://r-docs.synapse.org/latest/articles/file.md)
+  - [Folder](https://linglp.github.io/synapser/latest/articles/folder.md)
+  - [File](https://linglp.github.io/synapser/latest/articles/file.md)
 - The target directories (`~/temp/subdir1`, etc.) must exist before
   running the script. Create them or replace them with directories of
   your choice.
@@ -32,7 +32,7 @@ directories as needed.
 
 \
 [`library`](https://rdrr.io/r/base/library.html)`(`[`synapser`](https://github.com/Sage-Bionetworks/synapser)`)`\
-[`synLogin`](https://r-docs.synapse.org/latest/reference/synLogin.md)`(``)`\
+[`synLogin`](https://linglp.github.io/synapser/latest/reference/synLogin.md)`(``)`\
 \
 `# A mapping of Synapse IDs to the local directory each file should be downloaded to.`\
 `# Files can be directed to different directories as needed.`\
@@ -54,16 +54,16 @@ directories as needed.
 ## 2. Download all files
 
 Loop over the mapping and use
-[`synGet()`](https://r-docs.synapse.org/latest/reference/synGet.md) with
-`FileOptions(download_location = ...)` to download each file to its
+[`synGet()`](https://linglp.github.io/synapser/latest/reference/synGet.md)
+with `FileOptions(download_location = ...)` to download each file to its
 mapped directory.
 
 \
 `results`` ``<-`` `[`list`](https://rdrr.io/r/base/list.html)`(``)`\
 `for`` ``(``syn_id`` ``in`` `[`names`](https://rdrr.io/r/base/names.html)`(``SYN_IDS_AND_PATHS``)``)`` ``{`\
-`  ``results``[[``syn_id``]``]`` ``<-`` `[`synGet`](https://r-docs.synapse.org/latest/reference/synGet.md)`(`\
+`  ``results``[[``syn_id``]``]`` ``<-`` `[`synGet`](https://linglp.github.io/synapser/latest/reference/synGet.md)`(`\
 `    ``syn_id``,`\
-`    file_options ``=`` `[`FileOptions`](https://r-docs.synapse.org/latest/reference/FileOptions.md)`(``download_location ``=`` ``SYN_IDS_AND_PATHS``[[``syn_id``]``]``)`\
+`    file_options ``=`` `[`FileOptions`](https://linglp.github.io/synapser/latest/reference/FileOptions.md)`(``download_location ``=`` ``SYN_IDS_AND_PATHS``[[``syn_id``]``]``)`\
 `  ``)`\
 `}`\
 \
@@ -75,7 +75,7 @@ After all downloads finish you’ll see output like:
 
 ## References used in this tutorial
 
-- [`File`](https://r-docs.synapse.org/latest/reference/File.md)
-- [`FileOptions`](https://r-docs.synapse.org/latest/reference/FileOptions.md)
-- [`synGet`](https://r-docs.synapse.org/latest/reference/synGet.md)
-- [`synLogin`](https://r-docs.synapse.org/latest/reference/synLogin.md)
+- [`File`](https://linglp.github.io/synapser/latest/reference/File.md)
+- [`FileOptions`](https://linglp.github.io/synapser/latest/reference/FileOptions.md)
+- [`synGet`](https://linglp.github.io/synapser/latest/reference/synGet.md)
+- [`synLogin`](https://linglp.github.io/synapser/latest/reference/synLogin.md)

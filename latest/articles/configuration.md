@@ -10,7 +10,7 @@ Create or edit the `.synapseConfig` file in your home directory to
 configure these settings. This file stores configuration options
 including your Synapse auth token, cache location, multi-threading
 settings, and storage credentials. See the
-[authentication](https://r-docs.synapse.org/latest/articles/authentication.md)
+[authentication](https://linglp.github.io/synapser/latest/articles/authentication.md)
 page for how to set up your credentials in this file.
 
 For a reference showing the available settings and their meanings, see
@@ -23,7 +23,7 @@ repository](https://github.com/Sage-Bionetworks/synapsePythonClient/blob/develop
 
 Holds Synapse login credentials. `[default]` is used when no profile is
 specified; named profiles use `[profile <name>]` syntax. See the
-[authentication](https://r-docs.synapse.org/latest/articles/authentication.md)
+[authentication](https://linglp.github.io/synapser/latest/articles/authentication.md)
 vignette for full details including how to create tokens, select
 profiles, and use environment variables.
 
@@ -120,5 +120,5 @@ use_boto_sts = false
 
 **Note:** unlike the Python client, `synapser` does not currently expose
 a function to change `max_threads` programmatically after
-[`synLogin()`](https://r-docs.synapse.org/latest/reference/synLogin.md)
+[`synLogin()`](https://linglp.github.io/synapser/latest/reference/synLogin.md)
 — use the `.synapseConfig` file shown above to configure this value.

@@ -19,8 +19,9 @@ silently returning wrong results. Typical errors look like this:
 
 If you’re writing new code rather than porting old code, you don’t need
 this guide at all: start from [Data Upload, Download, and
-Delete](https://r-docs.synapse.org/latest/articles/data_upload_download.md)
-and [Tables](https://r-docs.synapse.org/latest/articles/tables.md).
+Delete](https://linglp.github.io/synapser/latest/articles/data_upload_download.md)
+and
+[Tables](https://linglp.github.io/synapser/latest/articles/tables.md).
 
 ## Why upgrade now
 
@@ -51,8 +52,8 @@ existing synapser scripts will need updates.
 This guide covers the Project/Folder/File/Table workflow — the paths
 most scripts use. The same patterns apply to every other entity type
 (Dataset, Views, Evaluation, Team, Wiki, …); see the [full
-reference](https://r-docs.synapse.org/latest/articles/index.md) for
-exact signatures.
+reference](https://linglp.github.io/synapser/latest/articles/index.md)
+for exact signatures.
 
 ## What you gain in 3.0
 
@@ -93,9 +94,9 @@ real capability, not just a version bump:
 - **Comprehensive documentation.** Every entity and every function has
   its own reference page with R examples, organized by entity type on
   the [reference
-  site](https://r-docs.synapse.org/latest/articles/index.md). Beyond the
-  reference, there are step-by-step tutorials for each entity type
-  (Projects, Folders, Files, Tables, Views, Datasets, Wikis,
+  site](https://linglp.github.io/synapser/latest/articles/index.md).
+  Beyond the reference, there are step-by-step tutorials for each entity
+  type (Projects, Folders, Files, Tables, Views, Datasets, Wikis,
   Evaluations, Submissions, …), workflow guides for tasks such as bulk
   upload and download and sharing settings, and concept articles on
   Synapse’s data model, access control, and annotations. See [Where to
@@ -133,7 +134,7 @@ environment via [uv](https://docs.astral.sh/uv/). Then restart R:
 Run
 [`reticulate::py_config()`](https://rstudio.github.io/reticulate/reference/py_config.html)
 to check which Python synapser is using. See
-[Installation](https://r-docs.synapse.org/latest/articles/installation.md)
+[Installation](https://linglp.github.io/synapser/latest/articles/installation.md)
 for details.
 
 ## Four patterns to relearn
@@ -143,9 +144,9 @@ for details.
 Every entity is now a real object you construct directly — `File(...)`,
 `Folder(...)`, `Table(...)`, `Project(...)`, … — and every operation on
 it is a “verb” function
-([`synStore()`](https://r-docs.synapse.org/latest/reference/synStore.md),
-[`synGet()`](https://r-docs.synapse.org/latest/reference/synGet.md),
-[`synSetProperties()`](https://r-docs.synapse.org/latest/reference/synSetProperties.md),
+([`synStore()`](https://linglp.github.io/synapser/latest/reference/synStore.md),
+[`synGet()`](https://linglp.github.io/synapser/latest/reference/synGet.md),
+[`synSetProperties()`](https://linglp.github.io/synapser/latest/reference/synSetProperties.md),
 `synAddColumn()`, `synDeleteRows()`, …) that takes the instance as its
 first argument. You construct the object first, then thread it through a
 chain of these verbs with the native pipe, tidyverse-style, instead of
@@ -155,27 +156,27 @@ reassigning a variable at every step:
 `# 2.x -- synStore() was one Python-backed function shared by every entity`\
 `` # type, with Python duck-typing on `obj` internally; each step reassigned a ``\
 `# variable rather than chaining`\
-`file`` ``<-`` `[`File`](https://r-docs.synapse.org/latest/reference/File.md)`(``path``, parentId ``=`` ``"syn123"``)`\
-`file`` ``<-`` `[`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)`(``file``)`\
-`file`` ``<-`` `[`synGet`](https://r-docs.synapse.org/latest/reference/synGet.md)`(``file``$``properties``$``id``, downloadFile ``=`` ``FALSE``)`\
+`file`` ``<-`` `[`File`](https://linglp.github.io/synapser/latest/reference/File.md)`(``path``, parentId ``=`` ``"syn123"``)`\
+`file`` ``<-`` `[`synStore`](https://linglp.github.io/synapser/latest/reference/synStore.md)`(``file``)`\
+`file`` ``<-`` `[`synGet`](https://linglp.github.io/synapser/latest/reference/synGet.md)`(``file``$``properties``$``id``, downloadFile ``=`` ``FALSE``)`\
 \
 `# 3.0 -- construct the instance, then pipe it through verbs`\
-`file`` ``<-`` `[`File`](https://r-docs.synapse.org/latest/reference/File.md)`(``path ``=`` ``path``, parent_id ``=`` ``"syn123"``)`` ``|>`\
-`  `[`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)`(``)`` ``|>`\
-`  `[`synGet`](https://r-docs.synapse.org/latest/reference/synGet.md)`(``file_options ``=`` `[`FileOptions`](https://r-docs.synapse.org/latest/reference/FileOptions.md)`(``download_file ``=`` ``FALSE``)``)`
+`file`` ``<-`` `[`File`](https://linglp.github.io/synapser/latest/reference/File.md)`(``path ``=`` ``path``, parent_id ``=`` ``"syn123"``)`` ``|>`\
+`  `[`synStore`](https://linglp.github.io/synapser/latest/reference/synStore.md)`(``)`` ``|>`\
+`  `[`synGet`](https://linglp.github.io/synapser/latest/reference/synGet.md)`(``file_options ``=`` `[`FileOptions`](https://linglp.github.io/synapser/latest/reference/FileOptions.md)`(``download_file ``=`` ``FALSE``)``)`
 
 This is the change everything else in this guide follows from. Two kinds
 of function take an instance this way:
 
-- [`synStore()`](https://r-docs.synapse.org/latest/reference/synStore.md),
-  [`synGet()`](https://r-docs.synapse.org/latest/reference/synGet.md),
+- [`synStore()`](https://linglp.github.io/synapser/latest/reference/synStore.md),
+  [`synGet()`](https://linglp.github.io/synapser/latest/reference/synGet.md),
   and
-  [`synDelete()`](https://r-docs.synapse.org/latest/reference/synDelete.md)
+  [`synDelete()`](https://linglp.github.io/synapser/latest/reference/synDelete.md)
   are single factory functions that accept any supported entity — or,
   for
-  [`synGet()`](https://r-docs.synapse.org/latest/reference/synGet.md)
+  [`synGet()`](https://linglp.github.io/synapser/latest/reference/synGet.md)
   and
-  [`synDelete()`](https://r-docs.synapse.org/latest/reference/synDelete.md),
+  [`synDelete()`](https://linglp.github.io/synapser/latest/reference/synDelete.md),
   a Synapse ID string instead — and apply the behavior appropriate to
   that entity’s type.
 - Every other verb (`synAddColumn()`, `synGetAcl()`, `synCopy()`,
@@ -187,10 +188,10 @@ of function take an instance this way:
 
 Properties and annotations are now plain fields on the object. Read them
 directly, and update them with the convenience function
-[`synSetProperties()`](https://r-docs.synapse.org/latest/reference/synSetProperties.md),
+[`synSetProperties()`](https://linglp.github.io/synapser/latest/reference/synSetProperties.md),
 which sets any number of fields, including `annotations`, in one call
 and returns the entity so you can pipe it into
-[`synStore()`](https://r-docs.synapse.org/latest/reference/synStore.md):
+[`synStore()`](https://linglp.github.io/synapser/latest/reference/synStore.md):
 
 \
 `# 2.x`\
@@ -203,13 +204,13 @@ and returns the entity so you can pipe it into
 `entity``$``name`\
 `entity``$``annotations``$``assay`\
 \
-[`synGet`](https://r-docs.synapse.org/latest/reference/synGet.md)`(``synapse_id``)`` ``|>`\
-`  `[`synSetProperties`](https://r-docs.synapse.org/latest/reference/synSetProperties.md)`(`\
+[`synGet`](https://linglp.github.io/synapser/latest/reference/synGet.md)`(``synapse_id``)`` ``|>`\
+`  `[`synSetProperties`](https://linglp.github.io/synapser/latest/reference/synSetProperties.md)`(`\
 `    name ``=`` ``"new name"``,`\
 `    version_label ``=`` ``"2"``,`\
 `    annotations ``=`` `[`list`](https://rdrr.io/r/base/list.html)`(``assay ``=`` ``"RNA-seq"``)`\
 `  ``)`` ``|>`\
-`  `[`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)`(``)`
+`  `[`synStore`](https://linglp.github.io/synapser/latest/reference/synStore.md)`(``)`
 
 Setting `annotations` replaces all of the entity’s existing annotations.
 To add to them instead, combine them first:
@@ -219,66 +220,66 @@ To add to them instead, combine them first:
 
 \
 `# 2.x`\
-[`synGet`](https://r-docs.synapse.org/latest/reference/synGet.md)`(``entity``, downloadFile ``=`` ``FALSE``)`\
-[`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)`(``obj``, forceVersion ``=`` ``FALSE``, versionLabel ``=`` ``"2"``)`\
-[`File`](https://r-docs.synapse.org/latest/reference/File.md)`(``path``, parentId ``=`` ``project``$``properties``$``id``)`\
+[`synGet`](https://linglp.github.io/synapser/latest/reference/synGet.md)`(``entity``, downloadFile ``=`` ``FALSE``)`\
+[`synStore`](https://linglp.github.io/synapser/latest/reference/synStore.md)`(``obj``, forceVersion ``=`` ``FALSE``, versionLabel ``=`` ``"2"``)`\
+[`File`](https://linglp.github.io/synapser/latest/reference/File.md)`(``path``, parentId ``=`` ``project``$``properties``$``id``)`\
 \
 `# 3.0`\
-[`synGet`](https://r-docs.synapse.org/latest/reference/synGet.md)`(``entity``, file_options ``=`` `[`FileOptions`](https://r-docs.synapse.org/latest/reference/FileOptions.md)`(``download_file ``=`` ``FALSE``)``)`\
-`obj`` ``|>`` `[`synSetProperties`](https://r-docs.synapse.org/latest/reference/synSetProperties.md)`(``force_version ``=`` ``FALSE``, version_label ``=`` ``"2"``)`` ``|>`` `[`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)`(``)`\
-[`File`](https://r-docs.synapse.org/latest/reference/File.md)`(``path ``=`` ``path``, parent_id ``=`` ``project``$``id``)`
+[`synGet`](https://linglp.github.io/synapser/latest/reference/synGet.md)`(``entity``, file_options ``=`` `[`FileOptions`](https://linglp.github.io/synapser/latest/reference/FileOptions.md)`(``download_file ``=`` ``FALSE``)``)`\
+`obj`` ``|>`` `[`synSetProperties`](https://linglp.github.io/synapser/latest/reference/synSetProperties.md)`(``force_version ``=`` ``FALSE``, version_label ``=`` ``"2"``)`` ``|>`` `[`synStore`](https://linglp.github.io/synapser/latest/reference/synStore.md)`(``)`\
+[`File`](https://linglp.github.io/synapser/latest/reference/File.md)`(``path ``=`` ``path``, parent_id ``=`` ``project``$``id``)`
 
 Some arguments didn’t just change case; they moved. In 2.x,
 `forceVersion` and `versionLabel` were arguments to
-[`synStore()`](https://r-docs.synapse.org/latest/reference/synStore.md).
+[`synStore()`](https://linglp.github.io/synapser/latest/reference/synStore.md).
 In 3.0 they are fields on the entity (`force_version`, `version_label`),
 which you set when you create the entity or with
-[`synSetProperties()`](https://r-docs.synapse.org/latest/reference/synSetProperties.md).
-[`synStore()`](https://r-docs.synapse.org/latest/reference/synStore.md)
+[`synSetProperties()`](https://linglp.github.io/synapser/latest/reference/synSetProperties.md).
+[`synStore()`](https://linglp.github.io/synapser/latest/reference/synStore.md)
 no longer accepts them. It takes only the entity, an optional `parent`,
 and an options object for the entity type, such as
-[`StoreFileOptions()`](https://r-docs.synapse.org/latest/reference/StoreFileOptions.md),
-[`StoreContainerOptions()`](https://r-docs.synapse.org/latest/reference/StoreContainerOptions.md),
+[`StoreFileOptions()`](https://linglp.github.io/synapser/latest/reference/StoreFileOptions.md),
+[`StoreContainerOptions()`](https://linglp.github.io/synapser/latest/reference/StoreContainerOptions.md),
 or
-[`StoreTableOptions()`](https://r-docs.synapse.org/latest/reference/StoreTableOptions.md).
+[`StoreTableOptions()`](https://linglp.github.io/synapser/latest/reference/StoreTableOptions.md).
 
 ### 4. Property Mutation goes through `synSetProperties()`, then an explicit `synStore()`
 
 Directly assigning into `$properties` no longer works. Properties are
 set with
-[`synSetProperties()`](https://r-docs.synapse.org/latest/reference/synSetProperties.md)
+[`synSetProperties()`](https://linglp.github.io/synapser/latest/reference/synSetProperties.md)
 — which validates the field names against the object’s dataclass fields
 — and piped into
-[`synStore()`](https://r-docs.synapse.org/latest/reference/synStore.md):
+[`synStore()`](https://linglp.github.io/synapser/latest/reference/synStore.md):
 
 \
 `# 2.x`\
 `entity``$``properties``$``name`` ``<-`` ``"new name"`\
-`entity`` ``<-`` `[`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)`(``entity``)`\
+`entity`` ``<-`` `[`synStore`](https://linglp.github.io/synapser/latest/reference/synStore.md)`(``entity``)`\
 \
 `# 3.0`\
-`entity`` ``<-`` `[`synGet`](https://r-docs.synapse.org/latest/reference/synGet.md)`(``synapse_id``)`` ``|>`\
-`  `[`synSetProperties`](https://r-docs.synapse.org/latest/reference/synSetProperties.md)`(``name ``=`` ``"new name"``)`` ``|>`\
-`  `[`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)`(``)`
+`entity`` ``<-`` `[`synGet`](https://linglp.github.io/synapser/latest/reference/synGet.md)`(``synapse_id``)`` ``|>`\
+`  `[`synSetProperties`](https://linglp.github.io/synapser/latest/reference/synSetProperties.md)`(``name ``=`` ``"new name"``)`` ``|>`\
+`  `[`synStore`](https://linglp.github.io/synapser/latest/reference/synStore.md)`(``)`
 
 Table columns are the one exception — those are still mutated in place
 on the `$columns` list before
-[`synStore()`](https://r-docs.synapse.org/latest/reference/synStore.md):
+[`synStore()`](https://linglp.github.io/synapser/latest/reference/synStore.md):
 
 \
 `table``$``columns``[[``"Expression"``]``]``$``name`` ``<-`` ``"Expression2"`\
 `table``$``columns``[[``"Expression"``]``]``$``column_type`` ``<-`` ``"INTEGER"`\
-`table`` ``|>`` `[`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)`(``)`
+`table`` ``|>`` `[`synStore`](https://linglp.github.io/synapser/latest/reference/synStore.md)`(``)`
 
 The column verbs `synAddColumn()`, `synDeleteColumn()`, and
 `synReorderColumn()` work the same way: they change the table object in
 place and return nothing, so they are separate statements rather than
 links in a pipe into
-[`synStore()`](https://r-docs.synapse.org/latest/reference/synStore.md):
+[`synStore()`](https://linglp.github.io/synapser/latest/reference/synStore.md):
 
 \
-`table`` ``|>`` ``synAddColumn``(`[`Column`](https://r-docs.synapse.org/latest/reference/Column.md)`(``name ``=`` ``"Expression"``, column_type ``=`` ``"STRING"``)``)`\
-`table`` ``|>`` `[`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)`(``)`
+`table`` ``|>`` ``synAddColumn``(`[`Column`](https://linglp.github.io/synapser/latest/reference/Column.md)`(``name ``=`` ``"Expression"``, column_type ``=`` ``"STRING"``)``)`\
+`table`` ``|>`` `[`synStore`](https://linglp.github.io/synapser/latest/reference/synStore.md)`(``)`
 
 ## Side-by-side reference: common operations
 
@@ -313,60 +314,60 @@ most scripts will hit.
 - **`synBuildTable()`** →
   `Table(...) |> synStore() |> synStoreRows(values = ..., schema_storage_strategy = "INFER_FROM_DATA")`.
   The table has to exist before rows can be stored into it, so the
-  [`synStore()`](https://r-docs.synapse.org/latest/reference/synStore.md)
+  [`synStore()`](https://linglp.github.io/synapser/latest/reference/synStore.md)
   step is not optional. See
-  [Tables](https://r-docs.synapse.org/latest/articles/tables.md).
+  [Tables](https://linglp.github.io/synapser/latest/articles/tables.md).
 - **`synTableQuery()`** → `synQuery()`. See
-  [Tables](https://r-docs.synapse.org/latest/articles/tables.html#querying-for-data).
+  [Tables](https://linglp.github.io/synapser/latest/articles/tables.html#querying-for-data).
 - **`synMove()`** →
   `synGet() |> synSetProperties(parent_id = ...) |> synStore()`
 - **`synGetChildren()`** →
   `synSyncFromSynapse(recursive = FALSE, download_file = FALSE)` and
   then the container’s `$files`/`$folders`, or `synWalk()` to traverse a
   whole tree. See [Downloading data in
-  bulk](https://r-docs.synapse.org/latest/articles/download_data_in_bulk.md).
+  bulk](https://linglp.github.io/synapser/latest/articles/download_data_in_bulk.md).
 - **`synGetAnnotations()` / `synSetAnnotations()`** → the `annotations`
   field: read `entity$annotations`, write
   `synSetProperties(annotations = list(...)) |> synStore()`. See
-  [Annotations](https://r-docs.synapse.org/latest/articles/annotation.md).
+  [Annotations](https://linglp.github.io/synapser/latest/articles/annotation.md).
 - **`synGetProvenance()`** →
   `Activity() |> synGetFromParent(parent = synapse_id)`, adding
   `parent_version_number` for a specific version. See
-  [Activity/Provenance](https://r-docs.synapse.org/latest/articles/domain_models_of_synapse.html#activityprovenance).
+  [Activity/Provenance](https://linglp.github.io/synapser/latest/articles/domain_models_of_synapse.html#activityprovenance).
 - **`synSetProvenance()` / `synDeleteProvenance()` /
   `synUpdateActivity()`** → the `activity` field (an
-  [`Activity()`](https://r-docs.synapse.org/latest/reference/Activity.md)
+  [`Activity()`](https://linglp.github.io/synapser/latest/reference/Activity.md)
   object) set via
-  [`synSetProperties()`](https://r-docs.synapse.org/latest/reference/synSetProperties.md),
+  [`synSetProperties()`](https://linglp.github.io/synapser/latest/reference/synSetProperties.md),
   and `synDisassociateActivityFromEntity(Activity, parent = entity)` to
   remove it. See
-  [Activity/Provenance](https://r-docs.synapse.org/latest/articles/domain_models_of_synapse.html#activityprovenance).
+  [Activity/Provenance](https://linglp.github.io/synapser/latest/articles/domain_models_of_synapse.html#activityprovenance).
 - **`synCreateColumn()` / `synCreateColumns()` / `synGetColumn()` /
   `synGetColumns()` / `synGetTableColumns()`** → the
-  [`Column()`](https://r-docs.synapse.org/latest/reference/Column.md)
+  [`Column()`](https://linglp.github.io/synapser/latest/reference/Column.md)
   constructor and the table’s own `$columns` list. See
-  [Tables](https://r-docs.synapse.org/latest/articles/tables.html#changing-table-structure).
+  [Tables](https://linglp.github.io/synapser/latest/articles/tables.html#changing-table-structure).
 - **`synCreateSnapshotVersion()`** → `synSnapshot()`. See
-  [`Table`](https://r-docs.synapse.org/latest/reference/Table_Snapshot.md).
+  [`Table`](https://linglp.github.io/synapser/latest/reference/Table_Snapshot.md).
 - **`synRestGET()` / `synRestPOST()` / `synRestPUT()` /
   `synRestDELETE()`**, and the 2.x `synRestGetAsync()` family →
-  [`synRestGet()`](https://r-docs.synapse.org/latest/reference/synRestGet.md),
-  [`synRestPost()`](https://r-docs.synapse.org/latest/reference/synRestPost.md),
-  [`synRestPut()`](https://r-docs.synapse.org/latest/reference/synRestPut.md),
-  [`synRestDelete()`](https://r-docs.synapse.org/latest/reference/synRestDelete.md)
+  [`synRestGet()`](https://linglp.github.io/synapser/latest/reference/synRestGet.md),
+  [`synRestPost()`](https://linglp.github.io/synapser/latest/reference/synRestPost.md),
+  [`synRestPut()`](https://linglp.github.io/synapser/latest/reference/synRestPut.md),
+  [`synRestDelete()`](https://linglp.github.io/synapser/latest/reference/synRestDelete.md)
 - **`synCreateTeam()`** → `Team(name = "...") |> synCreate()`;
   **`synGetTeam()`** → `Team |> synGetFromId(id = id)` or
   `Team |> synGetFromName(name = name)`; **`synDeleteTeam()`** →
   `synDelete(team)`. See
-  [`Team`](https://r-docs.synapse.org/latest/reference/Team.md).
+  [`Team`](https://linglp.github.io/synapser/latest/reference/Team.md).
 - **`synSendMembershipInvitation()`** → `synInviteToTeam()`;
   **`synGetTeamOpenInvitations()`** → `synGetOpenInvitations()`;
   **`synGetMembershipStatus()`** → `synGetUserMembershipStatus()`. See
-  [`Team`](https://r-docs.synapse.org/latest/reference/Team.md).
+  [`Team`](https://linglp.github.io/synapser/latest/reference/Team.md).
 - **`synGetUserProfile()`** →
   `UserProfile |> synGetFromId(user_id = user_id)` or
   `UserProfile |> synGetFromUsername(username = username)`. See
-  [`UserProfile`](https://r-docs.synapse.org/latest/reference/UserProfile.md).
+  [`UserProfile`](https://linglp.github.io/synapser/latest/reference/UserProfile.md).
 - **Wikis:** **`synGetWiki()`** →
   `WikiPage(owner_id = ..., id = ...) |> synGet()`; storing a wiki page
   →
@@ -375,25 +376,25 @@ most scripts will hit.
   `as.list(WikiHeader() |> synGet(owner_id = ...))`;
   **`synGetWikiAttachments()`** → `synGetAttachmentHandles()`, or
   `synGetAttachment()` to fetch one attachment. See
-  [Wikis](https://r-docs.synapse.org/latest/articles/wiki.md).
+  [Wikis](https://linglp.github.io/synapser/latest/articles/wiki.md).
 - **Evaluations:** **`synGetEvaluation()`** →
   `Evaluation(id = ...) |> synGet()`; **`synGetEvaluationByName()`** →
   `Evaluation(name = ...) |> synGet()`;
   **`synGetEvaluationByContentSource()`** →
   `synGetEvaluationsByProject(project_id = ...)`. See
-  [Evaluation](https://r-docs.synapse.org/latest/articles/evaluation.md).
+  [Evaluation](https://linglp.github.io/synapser/latest/articles/evaluation.md).
 - **Submissions:** **`synSubmit()`** →
   `Submission(entity_id = ..., evaluation_id = ...) |> synStore()`;
   **`synGetSubmission()`** → `Submission(id = ...) |> synGet()`;
   **`synGetSubmissionStatus()`** →
   `SubmissionStatus(id = ...) |> synGet()`, then
-  [`synStore()`](https://r-docs.synapse.org/latest/reference/synStore.md)
+  [`synStore()`](https://linglp.github.io/synapser/latest/reference/synStore.md)
   to update it; **`synGetSubmissions()`** →
   `Submission() |> synGetEvaluationSubmissions(evaluation_id = ...)`;
   **`synGetSubmissionBundles()`** →
   `SubmissionBundle() |> synGetEvaluationSubmissionBundles(evaluation_id = ...)`.
   See
-  [Submission](https://r-docs.synapse.org/latest/articles/submission.md).
+  [Submission](https://linglp.github.io/synapser/latest/articles/submission.md).
 - **Storage locations:** **`synCreateS3StorageLocation()`** /
   **`synCreateStorageLocationSetting()`** →
   `StorageLocation(...) |> synStore()`;
@@ -408,14 +409,14 @@ most scripts will hit.
   `synMigrateIndexedFiles()` moves a container’s existing files to
   another storage location.
 - **Download lists:** **`synGetDownloadList()`** →
-  [`synDownloadListFiles()`](https://r-docs.synapse.org/latest/reference/synDownloadListFiles.md);
+  [`synDownloadListFiles()`](https://linglp.github.io/synapser/latest/reference/synDownloadListFiles.md);
   **`synGetDownloadListManifest()`** →
-  [`synDownloadListManifest()`](https://r-docs.synapse.org/latest/reference/synDownloadListManifest.md);
+  [`synDownloadListManifest()`](https://linglp.github.io/synapser/latest/reference/synDownloadListManifest.md);
   **`synRemoveFromDownloadList()`** →
-  [`synDownloadListRemove()`](https://r-docs.synapse.org/latest/reference/synDownloadListRemove.md);
+  [`synDownloadListRemove()`](https://linglp.github.io/synapser/latest/reference/synDownloadListRemove.md);
   **`synClearDownloadList()`** →
-  [`synDownloadListClear()`](https://r-docs.synapse.org/latest/reference/synDownloadListClear.md).
-  [`synDownloadListAdd()`](https://r-docs.synapse.org/latest/reference/synDownloadListAdd.md)
+  [`synDownloadListClear()`](https://linglp.github.io/synapser/latest/reference/synDownloadListClear.md).
+  [`synDownloadListAdd()`](https://linglp.github.io/synapser/latest/reference/synDownloadListAdd.md)
   is new.
 
 Note the calling convention in the Team, UserProfile, and provenance
@@ -431,7 +432,7 @@ style the reference pages use.
 
 These 2.x functions have no equivalent in 3.0. Where you still need one,
 call the [REST API](https://rest-docs.synapse.org/) directly with
-[`synRestGet()`](https://r-docs.synapse.org/latest/reference/synRestGet.md)/[`synRestPost()`](https://r-docs.synapse.org/latest/reference/synRestPost.md)/[`synRestPut()`](https://r-docs.synapse.org/latest/reference/synRestPut.md)/[`synRestDelete()`](https://r-docs.synapse.org/latest/reference/synRestDelete.md):
+[`synRestGet()`](https://linglp.github.io/synapser/latest/reference/synRestGet.md)/[`synRestPost()`](https://linglp.github.io/synapser/latest/reference/synRestPost.md)/[`synRestPut()`](https://linglp.github.io/synapser/latest/reference/synRestPut.md)/[`synRestDelete()`](https://linglp.github.io/synapser/latest/reference/synRestDelete.md):
 
 - **`synCreateExternalS3FileHandle()`**: no replacement.
 - **`synUploadFileHandle()`**: no replacement.
@@ -442,7 +443,7 @@ call the [REST API](https://rest-docs.synapse.org/) directly with
   `associateObjectType` set to `TableEntity`).
 - **`synGetConfigFile()`**: no replacement. Read `~/.synapseConfig`
   directly if you need it. See
-  [Configuration](https://r-docs.synapse.org/latest/articles/configuration.md).
+  [Configuration](https://linglp.github.io/synapser/latest/articles/configuration.md).
 - **`synInvalidateAPIKey()`**: removed with no replacement. Synapse no
   longer supports API keys. Use a [personal access
   token](https://help.synapse.org/docs/Managing-Your-Account.2055405596.html#ManagingYourAccount-PersonalAccessTokens)
@@ -470,11 +471,11 @@ entire project tree instead of a single entity:
 
 \
 `# Preview, then perform, a recursive ACL cleardown of a folder and its children`\
-[`Folder`](https://r-docs.synapse.org/latest/reference/Folder.md)`(``id ``=`` ``"syn123"``)`` ``|>`` ``synDeletePermissions``(``recursive ``=`` ``TRUE``, include_container_content ``=`` ``TRUE``, dry_run ``=`` ``TRUE``)`\
-[`Folder`](https://r-docs.synapse.org/latest/reference/Folder.md)`(``id ``=`` ``"syn123"``)`` ``|>`` ``synDeletePermissions``(``recursive ``=`` ``TRUE``, include_container_content ``=`` ``TRUE``)`\
+[`Folder`](https://linglp.github.io/synapser/latest/reference/Folder.md)`(``id ``=`` ``"syn123"``)`` ``|>`` ``synDeletePermissions``(``recursive ``=`` ``TRUE``, include_container_content ``=`` ``TRUE``, dry_run ``=`` ``TRUE``)`\
+[`Folder`](https://linglp.github.io/synapser/latest/reference/Folder.md)`(``id ``=`` ``"syn123"``)`` ``|>`` ``synDeletePermissions``(``recursive ``=`` ``TRUE``, include_container_content ``=`` ``TRUE``)`\
 \
 `# List every ACL in a hierarchy, optionally as an ASCII tree`\
-[`Folder`](https://r-docs.synapse.org/latest/reference/Folder.md)`(``id ``=`` ``"syn123"``)`` ``|>`` ``synListAcl``(``recursive ``=`` ``TRUE``, log_tree ``=`` ``TRUE``)`
+[`Folder`](https://linglp.github.io/synapser/latest/reference/Folder.md)`(``id ``=`` ``"syn123"``)`` ``|>`` ``synListAcl``(``recursive ``=`` ``TRUE``, log_tree ``=`` ``TRUE``)`
 
 `synGetPermissions()` returns only *your own* effective permissions. The
 2.x reference page documented a `principalId` argument for it, but 2.x’s
@@ -487,7 +488,7 @@ also had `synGetAcl()`; in 3.0 it is a verb you pipe an entity into:
 `synGetAcl``(``entity``, principal_id ``=`` ``"273948"``)`\
 \
 `# 3.0 -- synGetPermissions() is caller-only; use synGetAcl() for another principal`\
-[`File`](https://r-docs.synapse.org/latest/reference/File.md)`(``id ``=`` ``"syn123"``)`` ``|>`` ``synGetAcl``(``principal_id ``=`` ``273948L``)`
+[`File`](https://linglp.github.io/synapser/latest/reference/File.md)`(``id ``=`` ``"syn123"``)`` ``|>`` ``synGetAcl``(``principal_id ``=`` ``273948L``)`
 
 On an `Evaluation`, `synGetAcl()` takes no `principal_id`; it returns
 the ACL for every principal.
@@ -503,10 +504,10 @@ pipeline in R:
 
 \
 `# Recursively copy a folder, and everything in it, to a new parent`\
-[`Folder`](https://r-docs.synapse.org/latest/reference/Folder.md)`(``id ``=`` ``"syn123"``)`` ``|>`` ``synCopy``(``parent_id ``=`` ``"syn456"``)`\
+[`Folder`](https://linglp.github.io/synapser/latest/reference/Folder.md)`(``id ``=`` ``"syn123"``)`` ``|>`` ``synCopy``(``parent_id ``=`` ``"syn456"``)`\
 \
 `# Recursively download a folder tree, populating $files/$folders/$tables/...`\
-`folder`` ``<-`` `[`Folder`](https://r-docs.synapse.org/latest/reference/Folder.md)`(``id ``=`` ``"syn123"``)`` ``|>`` ``synSyncFromSynapse``(``path ``=`` ``"~/local-copy"``)`\
+`folder`` ``<-`` `[`Folder`](https://linglp.github.io/synapser/latest/reference/Folder.md)`(``id ``=`` ``"syn123"``)`` ``|>`` ``synSyncFromSynapse``(``path ``=`` ``"~/local-copy"``)`\
 \
 `# Bulk upload: write a manifest that mirrors a local directory, then upload it`\
 `folder`` ``|>`` ``synGenerateSyncManifest``(``directory_path ``=`` ``"./my_data"``, manifest_path ``=`` ``"manifest.csv"``)`\
@@ -531,11 +532,11 @@ the resulting `$files`/`$folders`.
 The manifest that `synGenerateSyncManifest()` writes, and that
 `synSyncToSynapse()` reads, is the same format that
 `synSyncFromSynapse()` and
-[`synDownloadListFiles()`](https://r-docs.synapse.org/latest/reference/synDownloadListFiles.md)
+[`synDownloadListFiles()`](https://linglp.github.io/synapser/latest/reference/synDownloadListFiles.md)
 use — see [Manifest
-CSV](https://r-docs.synapse.org/latest/articles/manifest_csv.md) and
-[Uploading data in
-bulk](https://r-docs.synapse.org/latest/articles/upload_data_in_bulk.md).
+CSV](https://linglp.github.io/synapser/latest/articles/manifest_csv.md)
+and [Uploading data in
+bulk](https://linglp.github.io/synapser/latest/articles/upload_data_in_bulk.md).
 
 ### JSON Schema binding and validation
 
@@ -547,7 +548,7 @@ of relying on manual review or the web UI — and derive annotation values
 automatically from the schema rather than entering them by hand:
 
 \
-`folder`` ``<-`` `[`Folder`](https://r-docs.synapse.org/latest/reference/Folder.md)`(``id ``=`` ``"syn123"``)`\
+`folder`` ``<-`` `[`Folder`](https://linglp.github.io/synapser/latest/reference/Folder.md)`(``id ``=`` ``"syn123"``)`\
 `folder`` ``|>`` ``synBindSchema``(``json_schema_uri ``=`` ``"myOrg-mySchema-0.0.1"``)`\
 `folder`` ``|>`` ``synValidateSchema``(``)`\
 `folder`` ``|>`` ``synUnbindSchema``(``)`
@@ -558,9 +559,9 @@ This applies to Files, Folders, Tables, Projects, and other
 container/entity types. Creating the organization and schema themselves
 uses the new `Organization`/`JSONSchema` constructors
 (`SchemaOrganization()`, from pre-release 3.0 builds, is now
-[`Organization()`](https://r-docs.synapse.org/latest/reference/Organization.md))
+[`Organization()`](https://linglp.github.io/synapser/latest/reference/Organization.md))
 — see
-[`?Folder_synBindSchema`](https://r-docs.synapse.org/latest/reference/Folder_BindSchema.md)
+[`?Folder_synBindSchema`](https://linglp.github.io/synapser/latest/reference/Folder_BindSchema.md)
 for a full example. The rest of the family: `synGetSchema()` and
 `synGetSchemaDerivedKeys()` on any bindable entity, plus
 `synGetSchemaValidationStatistics()` and `synGetInvalidValidation()` on
@@ -568,18 +569,18 @@ containers (Folder, Project).
 
 You can also browse schemas from R. `synGetJsonSchemas()` lists an
 organization’s schemas, and
-[`synGetVersions()`](https://r-docs.synapse.org/latest/reference/JSONSchema_GetVersions.md)
+[`synGetVersions()`](https://linglp.github.io/synapser/latest/reference/JSONSchema_GetVersions.md)
 and
-[`synGetBody()`](https://r-docs.synapse.org/latest/reference/JSONSchema_GetBody.md)
+[`synGetBody()`](https://linglp.github.io/synapser/latest/reference/JSONSchema_GetBody.md)
 return a schema’s published versions and its body. `synGetAcl()` and
 `synUpdateAcl()` manage who can publish schemas to an organization:
 
 \
-[`Organization`](https://r-docs.synapse.org/latest/reference/Organization.md)`(``name ``=`` ``"myOrg"``)`` ``|>`` ``synGetJsonSchemas``(``)`\
+[`Organization`](https://linglp.github.io/synapser/latest/reference/Organization.md)`(``name ``=`` ``"myOrg"``)`` ``|>`` ``synGetJsonSchemas``(``)`\
 \
-`schema`` ``<-`` `[`JSONSchema`](https://r-docs.synapse.org/latest/reference/JSONSchema.md)`(``organization_name ``=`` ``"myOrg"``, name ``=`` ``"mySchema"``)`\
-`schema`` ``|>`` `[`synGetVersions`](https://r-docs.synapse.org/latest/reference/JSONSchema_GetVersions.md)`(``)`\
-`schema`` ``|>`` `[`synGetBody`](https://r-docs.synapse.org/latest/reference/JSONSchema_GetBody.md)`(``version ``=`` ``"0.0.1"``)`
+`schema`` ``<-`` `[`JSONSchema`](https://linglp.github.io/synapser/latest/reference/JSONSchema.md)`(``organization_name ``=`` ``"myOrg"``, name ``=`` ``"mySchema"``)`\
+`schema`` ``|>`` `[`synGetVersions`](https://linglp.github.io/synapser/latest/reference/JSONSchema_GetVersions.md)`(``)`\
+`schema`` ``|>`` `[`synGetBody`](https://linglp.github.io/synapser/latest/reference/JSONSchema_GetBody.md)`(``version ``=`` ``"0.0.1"``)`
 
 ### Upserting table rows
 
@@ -589,12 +590,13 @@ the results in R, and store them again. Use `dry_run = TRUE` to see what
 would change before writing anything:
 
 \
-`table`` ``<-`` `[`Table`](https://r-docs.synapse.org/latest/reference/Table.md)`(``id ``=`` ``"syn123"``)`` ``|>`` `[`synGet`](https://r-docs.synapse.org/latest/reference/synGet.md)`(``)`\
+`table`` ``<-`` `[`Table`](https://linglp.github.io/synapser/latest/reference/Table.md)`(``id ``=`` ``"syn123"``)`` ``|>`` `[`synGet`](https://linglp.github.io/synapser/latest/reference/synGet.md)`(``)`\
 `table`` ``|>`` ``synUpsertRows``(``values ``=`` ``df``, primary_keys ``=`` `[`list`](https://rdrr.io/r/base/list.html)`(``"Name"``)``, dry_run ``=`` ``TRUE``)`\
 `table`` ``|>`` ``synUpsertRows``(``values ``=`` ``df``, primary_keys ``=`` `[`list`](https://rdrr.io/r/base/list.html)`(``"Name"``)``)`
 
-See [Tables](https://r-docs.synapse.org/latest/articles/tables.md) for
-the full set of options.
+See
+[Tables](https://linglp.github.io/synapser/latest/articles/tables.md)
+for the full set of options.
 
 ### More `synapseutils` utilities
 
@@ -605,15 +607,15 @@ to another storage location.
 \
 `# Rename a file, or change its download name or content type, without`\
 `# re-uploading it. These fields can't be changed with synStore().`\
-[`synGet`](https://r-docs.synapse.org/latest/reference/synGet.md)`(``"syn123"``, file_options ``=`` `[`FileOptions`](https://r-docs.synapse.org/latest/reference/FileOptions.md)`(``download_file ``=`` ``FALSE``)``)`` ``|>`\
+[`synGet`](https://linglp.github.io/synapser/latest/reference/synGet.md)`(``"syn123"``, file_options ``=`` `[`FileOptions`](https://linglp.github.io/synapser/latest/reference/FileOptions.md)`(``download_file ``=`` ``FALSE``)``)`` ``|>`\
 `  ``synChangeMetadata``(``name ``=`` ``"renamed.csv"``, download_as ``=`` ``"renamed.csv"``, content_type ``=`` ``"text/csv"``)`\
 \
 `# Copy a project's whole wiki tree to another entity and rewrite internal links.`\
 `` # Set `id` to copy only the sub-tree under that page. ``\
-[`WikiPage`](https://r-docs.synapse.org/latest/reference/WikiPage.md)`(``owner_id ``=`` ``"syn123"``)`` ``|>`` ``synCopy``(``destination_owner_id ``=`` ``"syn456"``)`\
+[`WikiPage`](https://linglp.github.io/synapser/latest/reference/WikiPage.md)`(``owner_id ``=`` ``"syn123"``)`` ``|>`` ``synCopy``(``destination_owner_id ``=`` ``"syn456"``)`\
 \
 `# Move a container's existing files to another storage location in two steps`\
-`folder`` ``<-`` `[`Folder`](https://r-docs.synapse.org/latest/reference/Folder.md)`(``id ``=`` ``"syn123"``)`\
+`folder`` ``<-`` `[`Folder`](https://linglp.github.io/synapser/latest/reference/Folder.md)`(``id ``=`` ``"syn123"``)`\
 `folder`` ``|>`` ``synIndexFilesForMigration``(``dest_storage_location_id ``=`` ``"12345"``, db_path ``=`` ``"migration.db"``)`\
 `folder`` ``|>`` ``synMigrateIndexedFiles``(``db_path ``=`` ``"migration.db"``, force ``=`` ``TRUE``)`
 
@@ -629,20 +631,20 @@ earlier version, and set the order of the pages:
 
 \
 `# List a page's versions, then restore one of them`\
-[`WikiHistorySnapshot`](https://r-docs.synapse.org/latest/reference/WikiHistorySnapshot.md)`(``)`` ``|>`` `[`synGet`](https://r-docs.synapse.org/latest/reference/synGet.md)`(``owner_id ``=`` ``"syn123"``, id ``=`` ``wiki_id``)`\
-[`WikiPage`](https://r-docs.synapse.org/latest/reference/WikiPage.md)`(``owner_id ``=`` ``"syn123"``, id ``=`` ``wiki_id``, wiki_version ``=`` ``"0"``)`` ``|>`` ``synRestore``(``)`\
+[`WikiHistorySnapshot`](https://linglp.github.io/synapser/latest/reference/WikiHistorySnapshot.md)`(``)`` ``|>`` `[`synGet`](https://linglp.github.io/synapser/latest/reference/synGet.md)`(``owner_id ``=`` ``"syn123"``, id ``=`` ``wiki_id``)`\
+[`WikiPage`](https://linglp.github.io/synapser/latest/reference/WikiPage.md)`(``owner_id ``=`` ``"syn123"``, id ``=`` ``wiki_id``, wiki_version ``=`` ``"0"``)`` ``|>`` ``synRestore``(``)`\
 \
 `# Set the order of the wiki's pages in the navigation.`\
 `# Page IDs are numeric strings, such as "12345", not numbers.`\
-[`WikiOrderHint`](https://r-docs.synapse.org/latest/reference/WikiOrderHint.md)`(``owner_id ``=`` ``"syn123"``)`` ``|>`` `[`synGet`](https://r-docs.synapse.org/latest/reference/synGet.md)`(``)`` ``|>`\
-`  `[`synSetProperties`](https://r-docs.synapse.org/latest/reference/synSetProperties.md)`(``id_list ``=`` `[`list`](https://rdrr.io/r/base/list.html)`(``root_id``, ``page_2_id``, ``page_1_id``)``)`` ``|>`\
-`  `[`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)`(``)`\
+[`WikiOrderHint`](https://linglp.github.io/synapser/latest/reference/WikiOrderHint.md)`(``owner_id ``=`` ``"syn123"``)`` ``|>`` `[`synGet`](https://linglp.github.io/synapser/latest/reference/synGet.md)`(``)`` ``|>`\
+`  `[`synSetProperties`](https://linglp.github.io/synapser/latest/reference/synSetProperties.md)`(``id_list ``=`` `[`list`](https://rdrr.io/r/base/list.html)`(``root_id``, ``page_2_id``, ``page_1_id``)``)`` ``|>`\
+`  `[`synStore`](https://linglp.github.io/synapser/latest/reference/synStore.md)`(``)`\
 \
 `# Download a page's markdown`\
-[`WikiPage`](https://r-docs.synapse.org/latest/reference/WikiPage.md)`(``owner_id ``=`` ``"syn123"``, id ``=`` ``wiki_id``)`` ``|>`` ``synGetMarkdownFile``(``download_location ``=`` ``"~/temp"``)`
+[`WikiPage`](https://linglp.github.io/synapser/latest/reference/WikiPage.md)`(``owner_id ``=`` ``"syn123"``, id ``=`` ``wiki_id``)`` ``|>`` ``synGetMarkdownFile``(``download_location ``=`` ``"~/temp"``)`
 
 `synGetAttachmentPreview()` downloads the preview of an attachment. See
-[Wikis](https://r-docs.synapse.org/latest/articles/wiki.md).
+[Wikis](https://linglp.github.io/synapser/latest/articles/wiki.md).
 
 ### Evaluation queues, submissions, and teams
 
@@ -658,37 +660,37 @@ queue (a challenge) that 2.x never had:
 `synBatchUpdateSubmissionStatuses``(``evaluation_id ``=`` ``"9614112"``, statuses ``=`` ``statuses``)`\
 \
 `# Cancel one of your own submissions`\
-[`Submission`](https://r-docs.synapse.org/latest/reference/Submission.md)`(``id ``=`` ``submission_id``)`` ``|>`` ``synCancel``(``)`\
+[`Submission`](https://linglp.github.io/synapser/latest/reference/Submission.md)`(``id ``=`` ``submission_id``)`` ``|>`` ``synCancel``(``)`\
 \
 `# List the queues you can submit to`\
 `synGetAvailableEvaluations``(``active_only ``=`` ``TRUE``)`\
 \
 `# Withdraw a pending team invitation (2.x could send one, but not delete it)`\
-`invitations`` ``<-`` `[`Team`](https://r-docs.synapse.org/latest/reference/Team.md)`(``id ``=`` ``123456L``)`` ``|>`` `[`synGet`](https://r-docs.synapse.org/latest/reference/synGet.md)`(``)`` ``|>`` ``synGetOpenInvitations``(``)`\
+`invitations`` ``<-`` `[`Team`](https://linglp.github.io/synapser/latest/reference/Team.md)`(``id ``=`` ``123456L``)`` ``|>`` `[`synGet`](https://linglp.github.io/synapser/latest/reference/synGet.md)`(``)`` ``|>`` ``synGetOpenInvitations``(``)`\
 `synDeleteInvitation``(``invitation_id ``=`` ``invitations``[[``1``]``]``$``id``)`
 
 See
-[Evaluation](https://r-docs.synapse.org/latest/articles/evaluation.md),
-[Submission](https://r-docs.synapse.org/latest/articles/submission.md)
-and [Team](https://r-docs.synapse.org/latest/articles/team.md).
+[Evaluation](https://linglp.github.io/synapser/latest/articles/evaluation.md),
+[Submission](https://linglp.github.io/synapser/latest/articles/submission.md)
+and [Team](https://linglp.github.io/synapser/latest/articles/team.md).
 
 ### Synapse AI agents
 
 `Agent` and `AgentSession` let you chat with a Synapse AI agent from R.
-[`Agent()`](https://r-docs.synapse.org/latest/reference/Agent.md) with
-no arguments uses the same default agent as the [Synapse chat
+[`Agent()`](https://linglp.github.io/synapser/latest/reference/Agent.md)
+with no arguments uses the same default agent as the [Synapse chat
 page](https://www.synapse.org/Chat:default). A session starts
 automatically the first time you send a prompt:
 
 \
-`agent`` ``<-`` `[`Agent`](https://r-docs.synapse.org/latest/reference/Agent.md)`(``)`\
+`agent`` ``<-`` `[`Agent`](https://linglp.github.io/synapser/latest/reference/Agent.md)`(``)`\
 `agent`` ``|>`` ``synPrompt``(``prompt ``=`` ``"What is in the AD Knowledge Portal?"``, print_response ``=`` ``TRUE``)`\
 `agent`` ``|>`` ``synGetChatHistory``(``)`
 
 To use a custom agent, register it with `synRegister()` (custom agents
 are available only to Sage Bionetworks staff). To manage sessions
 yourself, use `AgentSession() |> synStart()`. See
-[`Agent`](https://r-docs.synapse.org/latest/reference/Agent.md).
+[`Agent`](https://linglp.github.io/synapser/latest/reference/Agent.md).
 
 ## Known pitfall: integer literals
 
@@ -705,71 +707,71 @@ defaults.
 \*\* Updated Tutorials\*\*
 
 - [Synapse R Client
-  Overview](https://r-docs.synapse.org/latest/articles/synapser.md) is a
-  short tour of the package.
+  Overview](https://linglp.github.io/synapser/latest/articles/synapser.md)
+  is a short tour of the package.
 - [Data Upload, Download, and
-  Delete](https://r-docs.synapse.org/latest/articles/data_upload_download.md)
+  Delete](https://linglp.github.io/synapser/latest/articles/data_upload_download.md)
   walks through creating, downloading, and deleting projects, folders,
   and files.
-- [Tables](https://r-docs.synapse.org/latest/articles/tables.md) covers
-  the new table functions (`synAddColumn()`, `synDeleteColumn()`, and
-  `synUpsertRows()`), schema inference, and dates.
+- [Tables](https://linglp.github.io/synapser/latest/articles/tables.md)
+  covers the new table functions (`synAddColumn()`, `synDeleteColumn()`,
+  and `synUpsertRows()`), schema inference, and dates.
 - Tutorials for each model:
-  [Projects](https://r-docs.synapse.org/latest/articles/project.md),
-  [Folders](https://r-docs.synapse.org/latest/articles/folder.md),
-  [Files](https://r-docs.synapse.org/latest/articles/file.md),
-  [Annotations](https://r-docs.synapse.org/latest/articles/annotation.md),
-  [EntityViews](https://r-docs.synapse.org/latest/articles/entityview.md),
+  [Projects](https://linglp.github.io/synapser/latest/articles/project.md),
+  [Folders](https://linglp.github.io/synapser/latest/articles/folder.md),
+  [Files](https://linglp.github.io/synapser/latest/articles/file.md),
+  [Annotations](https://linglp.github.io/synapser/latest/articles/annotation.md),
+  [EntityViews](https://linglp.github.io/synapser/latest/articles/entityview.md),
   [Virtual
-  Tables](https://r-docs.synapse.org/latest/articles/virtualtable.md),
-  [Datasets](https://r-docs.synapse.org/latest/articles/dataset.md),
+  Tables](https://linglp.github.io/synapser/latest/articles/virtualtable.md),
+  [Datasets](https://linglp.github.io/synapser/latest/articles/dataset.md),
   [Dataset
-  Collections](https://r-docs.synapse.org/latest/articles/datasetcollection.md),
-  [Wikis](https://r-docs.synapse.org/latest/articles/wiki.md),
-  [Evaluations](https://r-docs.synapse.org/latest/articles/evaluation.md),
+  Collections](https://linglp.github.io/synapser/latest/articles/datasetcollection.md),
+  [Wikis](https://linglp.github.io/synapser/latest/articles/wiki.md),
+  [Evaluations](https://linglp.github.io/synapser/latest/articles/evaluation.md),
   and
-  [Submissions](https://r-docs.synapse.org/latest/articles/submission.md).
+  [Submissions](https://linglp.github.io/synapser/latest/articles/submission.md).
 - Workflow guides: [Sharing Settings (ACL
-  Management)](https://r-docs.synapse.org/latest/articles/sharing_settings.md),
+  Management)](https://linglp.github.io/synapser/latest/articles/sharing_settings.md),
   [Uploading data in
-  bulk](https://r-docs.synapse.org/latest/articles/upload_data_in_bulk.md),
+  bulk](https://linglp.github.io/synapser/latest/articles/upload_data_in_bulk.md),
   [Downloading data in
-  bulk](https://r-docs.synapse.org/latest/articles/download_data_in_bulk.md),
+  bulk](https://linglp.github.io/synapser/latest/articles/download_data_in_bulk.md),
   and [Downloading data by Synapse
-  ID](https://r-docs.synapse.org/latest/articles/download_data_by_synid.md).
+  ID](https://linglp.github.io/synapser/latest/articles/download_data_by_synid.md).
 - Concepts: [Domain Models of
-  Synapse](https://r-docs.synapse.org/latest/articles/domain_models_of_synapse.md),
+  Synapse](https://linglp.github.io/synapser/latest/articles/domain_models_of_synapse.md),
   [Access
-  Control](https://r-docs.synapse.org/latest/articles/access_control.md),
+  Control](https://linglp.github.io/synapser/latest/articles/access_control.md),
   [Properties and
-  annotations](https://r-docs.synapse.org/latest/articles/properties_vs_annotations.md),
+  annotations](https://linglp.github.io/synapser/latest/articles/properties_vs_annotations.md),
   [Structuring Your Synapse
-  Project](https://r-docs.synapse.org/latest/articles/structuring_your_project.md),
+  Project](https://linglp.github.io/synapser/latest/articles/structuring_your_project.md),
   and [Manifest
-  CSV](https://r-docs.synapse.org/latest/articles/manifest_csv.md).
+  CSV](https://linglp.github.io/synapser/latest/articles/manifest_csv.md).
 
 **Setup and environment** (the API changes above don’t affect how you
 log in or configure the client; for installation changes, see [Before
 you upgrade](#before-you-upgrade)):
 
-- [Installation](https://r-docs.synapse.org/latest/articles/installation.md)
+- [Installation](https://linglp.github.io/synapser/latest/articles/installation.md)
   covers installing the package and the Python environment that synapser
   sets up for you.
-- [Authentication](https://r-docs.synapse.org/latest/articles/authentication.md)
+- [Authentication](https://linglp.github.io/synapser/latest/articles/authentication.md)
   covers authentication token setup and storage.
-- [Configuration](https://r-docs.synapse.org/latest/articles/configuration.md)
+- [Configuration](https://linglp.github.io/synapser/latest/articles/configuration.md)
   covers the `.synapseConfig` file and client settings.
-- [Troubleshooting](https://r-docs.synapse.org/latest/articles/troubleshooting.md)
+- [Troubleshooting](https://linglp.github.io/synapser/latest/articles/troubleshooting.md)
   covers common connection and configuration errors.
 - [System
-  Dependencies](https://r-docs.synapse.org/latest/articles/systemDependencies.md)
+  Dependencies](https://linglp.github.io/synapser/latest/articles/systemDependencies.md)
   covers the system libraries needed on Linux and the supported Python
   versions.
 
 **Reference:**
 
 - The [reference
-  site](https://r-docs.synapse.org/latest/articles/index.md) is
+  site](https://linglp.github.io/synapser/latest/articles/index.md) is
   organized per entity type (File, Table, Folder, …) — every constructor
   and method function is documented there, generated directly from the
   Python client so it stays current going forward.

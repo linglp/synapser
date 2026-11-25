@@ -27,7 +27,7 @@ In this tutorial, you will:
   already created datasets that you would like to add to a Dataset
   Collection.
 - If you need help creating datasets, you can refer to the
-  [Dataset](https://r-docs.synapse.org/latest/articles/dataset.md)
+  [Dataset](https://linglp.github.io/synapser/latest/articles/dataset.md)
   tutorial.
 
 ## 1. Get the ID of your Synapse project
@@ -39,11 +39,11 @@ of your project.
 [`library`](https://rdrr.io/r/base/library.html)`(`[`synapser`](https://github.com/Sage-Bionetworks/synapser)`)`\
 \
 `# First, let's get the project that we want to create the DatasetCollection in`\
-[`synLogin`](https://r-docs.synapse.org/latest/reference/synLogin.md)`(``)`\
+[`synLogin`](https://linglp.github.io/synapser/latest/reference/synLogin.md)`(``)`\
 \
-`project`` ``<-`` `[`Project`](https://r-docs.synapse.org/latest/reference/Project.md)`(`\
+`project`` ``<-`` `[`Project`](https://linglp.github.io/synapser/latest/reference/Project.md)`(`\
 `  name ``=`` ``"My uniquely named project about Alzheimer's Disease"`\
-`)`` ``|>`` `[`synGet`](https://r-docs.synapse.org/latest/reference/synGet.md)`(``)`` ``# Replace with your project name`\
+`)`` ``|>`` `[`synGet`](https://linglp.github.io/synapser/latest/reference/synGet.md)`(``)`` ``# Replace with your project name`\
 `project_id`` ``<-`` ``project``$``id`\
 [`print`](https://rdrr.io/r/base/print.html)`(`[`sprintf`](https://rdrr.io/r/base/sprintf.html)`(``"My project ID is %s"``, ``project_id``)``)`
 
@@ -60,9 +60,9 @@ information to start building the collection.
 `  ``"syn65987019"``,`\
 `  ``"syn65987020"`\
 `)`` ``# Replace with your dataset IDs`\
-`test_dataset_collection`` ``<-`` `[`DatasetCollection`](https://r-docs.synapse.org/latest/reference/DatasetCollection.md)`(`\
+`test_dataset_collection`` ``<-`` `[`DatasetCollection`](https://linglp.github.io/synapser/latest/reference/DatasetCollection.md)`(`\
 `  parent_id ``=`` ``project_id``, name ``=`` ``"test_dataset_collection"`\
-`)`` ``|>`` `[`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)`(``)`\
+`)`` ``|>`` `[`synStore`](https://linglp.github.io/synapser/latest/reference/synStore.md)`(``)`\
 [`print`](https://rdrr.io/r/base/print.html)`(`[`sprintf`](https://rdrr.io/r/base/sprintf.html)`(``"My DatasetCollection's ID is %s"``, ``test_dataset_collection``$``id``)``)`
 
 Because we haven’t added any datasets to the collection yet, it will be
@@ -82,15 +82,15 @@ dataset ids and add each dataset to the collection using the
 
 \
 `for`` ``(``dataset_id`` ``in`` ``DATASET_IDS``)`` ``{`\
-`  ``test_dataset_collection`` ``|>`` ``synAddItem``(`[`Dataset`](https://r-docs.synapse.org/latest/reference/Dataset.md)`(``id ``=`` ``dataset_id``)`` ``|>`` `[`synGet`](https://r-docs.synapse.org/latest/reference/synGet.md)`(``)``)`\
+`  ``test_dataset_collection`` ``|>`` ``synAddItem``(`[`Dataset`](https://linglp.github.io/synapser/latest/reference/Dataset.md)`(``id ``=`` ``dataset_id``)`` ``|>`` `[`synGet`](https://linglp.github.io/synapser/latest/reference/synGet.md)`(``)``)`\
 `}`
 
 Whenever we make changes to the Dataset Collection, we need to call the
-[`synStore()`](https://r-docs.synapse.org/latest/reference/synStore.md)
+[`synStore()`](https://linglp.github.io/synapser/latest/reference/synStore.md)
 function to save the changes to Synapse.
 
 \
-`test_dataset_collection`` ``|>`` `[`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)`(``)`
+`test_dataset_collection`` ``|>`` `[`synStore`](https://linglp.github.io/synapser/latest/reference/synStore.md)`(``)`
 
 And now we are able to see our Dataset Collection with all of the
 datasets that we added to it.
@@ -107,7 +107,7 @@ Datasets to it, we can retrieve the Dataset Collection from Synapse the
 next time we need to use it.
 
 \
-`my_retrieved_dataset_collection`` ``<-`` `[`DatasetCollection`](https://r-docs.synapse.org/latest/reference/DatasetCollection.md)`(``id ``=`` ``test_dataset_collection``$``id``)`` ``|>`` `[`synGet`](https://r-docs.synapse.org/latest/reference/synGet.md)`(``)`\
+`my_retrieved_dataset_collection`` ``<-`` `[`DatasetCollection`](https://linglp.github.io/synapser/latest/reference/DatasetCollection.md)`(``id ``=`` ``test_dataset_collection``$``id``)`` ``|>`` `[`synGet`](https://linglp.github.io/synapser/latest/reference/synGet.md)`(``)`\
 [`print`](https://rdrr.io/r/base/print.html)`(`[`sprintf`](https://rdrr.io/r/base/sprintf.html)`(``"My DatasetCollection's ID is still %s"``, ``my_retrieved_dataset_collection``$``id``)``)`\
 [`print`](https://rdrr.io/r/base/print.html)`(`[`sprintf`](https://rdrr.io/r/base/sprintf.html)`(``"My DatasetCollection has %d items"``, `[`length`](https://rdrr.io/r/base/length.html)`(``my_retrieved_dataset_collection``$``items``)``)``)`
 
@@ -118,12 +118,12 @@ your DatasetCollection using custom columns.
 
 \
 `my_retrieved_dataset_collection`` ``|>`` ``synAddColumn``(`\
-`  column ``=`` `[`Column`](https://r-docs.synapse.org/latest/reference/Column.md)`(`\
+`  column ``=`` `[`Column`](https://linglp.github.io/synapser/latest/reference/Column.md)`(`\
 `    name ``=`` ``"my_annotation"``,`\
 `    column_type ``=`` ``"STRING"`\
 `  ``)`\
 `)`\
-`my_retrieved_dataset_collection`` ``|>`` `[`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)`(``)`
+`my_retrieved_dataset_collection`` ``|>`` `[`synStore`](https://linglp.github.io/synapser/latest/reference/synStore.md)`(``)`
 
 Our custom column isn’t all that useful empty, so let’s update the
 Dataset Collection with some values.
@@ -162,8 +162,8 @@ state of the Dataset Collection and can be referenced later.
 
 ## References
 
-- [`DatasetCollection`](https://r-docs.synapse.org/latest/reference/DatasetCollection.md)
-- [`Dataset`](https://r-docs.synapse.org/latest/reference/Dataset.md)
-- [`Project`](https://r-docs.synapse.org/latest/reference/Project.md)
-- [`Column`](https://r-docs.synapse.org/latest/reference/Column.md)
-- [`synLogin`](https://r-docs.synapse.org/latest/reference/synLogin.md)
+- [`DatasetCollection`](https://linglp.github.io/synapser/latest/reference/DatasetCollection.md)
+- [`Dataset`](https://linglp.github.io/synapser/latest/reference/Dataset.md)
+- [`Project`](https://linglp.github.io/synapser/latest/reference/Project.md)
+- [`Column`](https://linglp.github.io/synapser/latest/reference/Column.md)
+- [`synLogin`](https://linglp.github.io/synapser/latest/reference/synLogin.md)

@@ -2,7 +2,7 @@
 
 Mark a column for deletion. Note that this does not delete the column
 from Synapse. You must call the
-[`synStore()`](https://r-docs.synapse.org/latest/reference/synStore.md)
+[`synStore()`](https://linglp.github.io/synapser/latest/reference/synStore.md)
 function on this EntityView instance to delete the column from Synapse.
 
 ## Usage

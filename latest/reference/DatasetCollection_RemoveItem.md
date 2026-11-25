@@ -20,7 +20,7 @@ synRemoveItem(instance, item)
 - item:
 
   (Dataset or EntityRef) The Dataset, or an
-  [`EntityRef`](https://r-docs.synapse.org/latest/reference/EntityRef.md)
+  [`EntityRef`](https://linglp.github.io/synapser/latest/reference/EntityRef.md)
   pointing to one, to remove from the collection.
 
 ## Value

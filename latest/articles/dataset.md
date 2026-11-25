@@ -43,11 +43,11 @@ of your project.
 [`library`](https://rdrr.io/r/base/library.html)`(`[`synapser`](https://github.com/Sage-Bionetworks/synapser)`)`\
 \
 `# First, let's get the project that we want to create the dataset in`\
-[`synLogin`](https://r-docs.synapse.org/latest/reference/synLogin.md)`(``)`\
+[`synLogin`](https://linglp.github.io/synapser/latest/reference/synLogin.md)`(``)`\
 \
-`project`` ``<-`` `[`Project`](https://r-docs.synapse.org/latest/reference/Project.md)`(`\
+`project`` ``<-`` `[`Project`](https://linglp.github.io/synapser/latest/reference/Project.md)`(`\
 `  name ``=`` ``"My uniquely named project about Alzheimer's Disease"`\
-`)`` ``|>`` `[`synGet`](https://r-docs.synapse.org/latest/reference/synGet.md)`(``)`` ``# Replace with your project name`\
+`)`` ``|>`` `[`synGet`](https://linglp.github.io/synapser/latest/reference/synGet.md)`(``)`` ``# Replace with your project name`\
 `project_id`` ``<-`` ``project``$``id`\
 [`print`](https://rdrr.io/r/base/print.html)`(`[`sprintf`](https://rdrr.io/r/base/sprintf.html)`(``"My project ID is %s"``, ``project_id``)``)`
 
@@ -59,7 +59,7 @@ will have a Dataset object with all of the needed information to start
 building the dataset.
 
 \
-`my_new_dataset`` ``<-`` `[`Dataset`](https://r-docs.synapse.org/latest/reference/Dataset.md)`(``parent_id ``=`` ``project_id``, name ``=`` ``"My New Dataset"``)`` ``|>`` `[`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)`(``)`\
+`my_new_dataset`` ``<-`` `[`Dataset`](https://linglp.github.io/synapser/latest/reference/Dataset.md)`(``parent_id ``=`` ``project_id``, name ``=`` ``"My New Dataset"``)`` ``|>`` `[`synStore`](https://linglp.github.io/synapser/latest/reference/synStore.md)`(``)`\
 [`print`](https://rdrr.io/r/base/print.html)`(`[`sprintf`](https://rdrr.io/r/base/sprintf.html)`(``"My Dataset's ID is %s"``, ``my_new_dataset``$``id``)``)`
 
 Because we haven’t added any files to the dataset yet, it will be empty,
@@ -80,14 +80,14 @@ files to a dataset:
 
 \
 `my_new_dataset`` ``|>`` ``synAddItem``(`\
-`  `[`EntityRef`](https://r-docs.synapse.org/latest/reference/EntityRef.md)`(``id ``=`` ``"syn51790029"``, version ``=`` ``1L``)`\
+`  `[`EntityRef`](https://linglp.github.io/synapser/latest/reference/EntityRef.md)`(``id ``=`` ``"syn51790029"``, version ``=`` ``1L``)`\
 `)`` ``# Replace with the ID of the file you want to add`
 
 2.  Add a File with its ID and version
 
 \
 `my_new_dataset`` ``|>`` ``synAddItem``(`\
-`  `[`File`](https://r-docs.synapse.org/latest/reference/File.md)`(``id ``=`` ``"syn51790028"``, version_number ``=`` ``1L``)`\
+`  `[`File`](https://linglp.github.io/synapser/latest/reference/File.md)`(``id ``=`` ``"syn51790028"``, version_number ``=`` ``1L``)`\
 `)`` ``# Replace with the ID of the file you want to add`
 
 3.  Add a Folder. When adding a folder, all child files inside of the
@@ -95,15 +95,15 @@ files to a dataset:
 
 \
 `my_new_dataset`` ``|>`` ``synAddItem``(`\
-`  `[`Folder`](https://r-docs.synapse.org/latest/reference/Folder.md)`(``id ``=`` ``"syn64893446"``)`\
+`  `[`Folder`](https://linglp.github.io/synapser/latest/reference/Folder.md)`(``id ``=`` ``"syn64893446"``)`\
 `)`` ``# Replace with the ID of the folder you want to add`
 
 Whenever we make changes to the dataset, we need to call the
-[`synStore()`](https://r-docs.synapse.org/latest/reference/synStore.md)
+[`synStore()`](https://linglp.github.io/synapser/latest/reference/synStore.md)
 function to save the changes to Synapse.
 
 \
-`my_new_dataset`` ``|>`` `[`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)`(``)`
+`my_new_dataset`` ``|>`` `[`synStore`](https://linglp.github.io/synapser/latest/reference/synStore.md)`(``)`
 
 And now we are able to see our dataset with all of the files that we
 added to it.
@@ -118,7 +118,7 @@ Now that we have a dataset with some files in it, we can retrieve the
 dataset from Synapse the next time we need to use it.
 
 \
-`my_retrieved_dataset`` ``<-`` `[`Dataset`](https://r-docs.synapse.org/latest/reference/Dataset.md)`(``id ``=`` ``my_new_dataset``$``id``)`` ``|>`` `[`synGet`](https://r-docs.synapse.org/latest/reference/synGet.md)`(``)`\
+`my_retrieved_dataset`` ``<-`` `[`Dataset`](https://linglp.github.io/synapser/latest/reference/Dataset.md)`(``id ``=`` ``my_new_dataset``$``id``)`` ``|>`` `[`synGet`](https://linglp.github.io/synapser/latest/reference/synGet.md)`(``)`\
 [`print`](https://rdrr.io/r/base/print.html)`(`[`sprintf`](https://rdrr.io/r/base/sprintf.html)`(``"My Dataset's ID is %s"``, ``my_retrieved_dataset``$``id``)``)`\
 [`print`](https://rdrr.io/r/base/print.html)`(`[`length`](https://rdrr.io/r/base/length.html)`(``my_retrieved_dataset``$``items``)``)`
 
@@ -143,12 +143,12 @@ annotate files in the dataset with additional information.
 
 \
 `my_retrieved_dataset`` ``|>`` ``synAddColumn``(`\
-`  column ``=`` `[`Column`](https://r-docs.synapse.org/latest/reference/Column.md)`(`\
+`  column ``=`` `[`Column`](https://linglp.github.io/synapser/latest/reference/Column.md)`(`\
 `    name ``=`` ``"my_annotation"``,`\
 `    column_type ``=`` ``"STRING"`\
 `  ``)`\
 `)`\
-`my_retrieved_dataset`` ``|>`` `[`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)`(``)`
+`my_retrieved_dataset`` ``|>`` `[`synStore`](https://linglp.github.io/synapser/latest/reference/synStore.md)`(``)`
 
 Our custom column isn’t all that useful empty, so let’s update the
 dataset with some values.
@@ -161,7 +161,7 @@ dataset with some values.
 `my_retrieved_dataset`` ``|>`` ``synUpdateRows``(`\
 `  values ``=`` ``modified_data``, primary_keys ``=`` `[`list`](https://rdrr.io/r/base/list.html)`(``"id"``)``, dry_run ``=`` ``FALSE`\
 `)`\
-`my_retrieved_dataset`` ``|>`` `[`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)`(``)`
+`my_retrieved_dataset`` ``|>`` `[`synStore`](https://linglp.github.io/synapser/latest/reference/synStore.md)`(``)`
 
 ## 7. Save a snapshot of the dataset
 
@@ -178,18 +178,18 @@ and can be referenced later.
 
 ## References
 
-- [`Dataset`](https://r-docs.synapse.org/latest/reference/Dataset.md)
-- [`Column`](https://r-docs.synapse.org/latest/reference/Column.md)
-- [`EntityRef`](https://r-docs.synapse.org/latest/reference/EntityRef.md)
-- [`File`](https://r-docs.synapse.org/latest/reference/File.md)
-- [`Project`](https://r-docs.synapse.org/latest/reference/Project.md)
-- [`synLogin`](https://r-docs.synapse.org/latest/reference/synLogin.md)
-- [`synGet`](https://r-docs.synapse.org/latest/reference/synGet.md)
-- [`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)
-- [`synAddItem`](https://r-docs.synapse.org/latest/reference/Dataset_AddItem.md)
-- [`synQuery`](https://r-docs.synapse.org/latest/reference/Dataset_Query.md)
-- [`synAddColumn`](https://r-docs.synapse.org/latest/reference/Dataset_AddColumn.md)
-- [`synUpdateRows`](https://r-docs.synapse.org/latest/reference/Dataset_UpdateRows.md)
-- [`synSnapshot`](https://r-docs.synapse.org/latest/reference/Dataset_Snapshot.md)
+- [`Dataset`](https://linglp.github.io/synapser/latest/reference/Dataset.md)
+- [`Column`](https://linglp.github.io/synapser/latest/reference/Column.md)
+- [`EntityRef`](https://linglp.github.io/synapser/latest/reference/EntityRef.md)
+- [`File`](https://linglp.github.io/synapser/latest/reference/File.md)
+- [`Project`](https://linglp.github.io/synapser/latest/reference/Project.md)
+- [`synLogin`](https://linglp.github.io/synapser/latest/reference/synLogin.md)
+- [`synGet`](https://linglp.github.io/synapser/latest/reference/synGet.md)
+- [`synStore`](https://linglp.github.io/synapser/latest/reference/synStore.md)
+- [`synAddItem`](https://linglp.github.io/synapser/latest/reference/Dataset_AddItem.md)
+- [`synQuery`](https://linglp.github.io/synapser/latest/reference/Dataset_Query.md)
+- [`synAddColumn`](https://linglp.github.io/synapser/latest/reference/Dataset_AddColumn.md)
+- [`synUpdateRows`](https://linglp.github.io/synapser/latest/reference/Dataset_UpdateRows.md)
+- [`synSnapshot`](https://linglp.github.io/synapser/latest/reference/Dataset_Snapshot.md)
 - [query
   examples](https://rest-docs.synapse.org/rest/org/sagebionetworks/repo/web/controller/TableExamples.html)

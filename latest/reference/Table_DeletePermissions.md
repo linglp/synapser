@@ -8,7 +8,7 @@ which is typically its parent entity or the Project it belongs to.
 
 In order to remove permissions for a specific user or group, you should
 use the
-[`synSetPermissions()`](https://r-docs.synapse.org/latest/reference/Table_SetPermissions.md)
+[`synSetPermissions()`](https://linglp.github.io/synapser/latest/reference/Table_SetPermissions.md)
 function with the `access_type` set to an empty list.
 
 By default, Entities such as FileEntity and Folder inherit their

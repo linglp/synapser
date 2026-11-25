@@ -161,8 +161,8 @@ all files in experiment/batches; in the **flattened case**, you would
 fill in one manifest for each top level folder. The manifest would
 contain Synapse annotations which can be used to query the data when a
 File View is created. Please read [Manifest
-CSV](https://r-docs.synapse.org/latest/articles/manifest_csv.md) for
-more information.
+CSV](https://linglp.github.io/synapser/latest/articles/manifest_csv.md)
+for more information.
 
 ### An example: ELITE portal
 

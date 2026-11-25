@@ -20,7 +20,7 @@ synRemoveItem(instance, item, synapse_client=NULL)
 
   (EntityRef, File, or Folder) The entity to remove from the dataset.
   Must be an
-  [`EntityRef`](https://r-docs.synapse.org/latest/reference/EntityRef.md),
+  [`EntityRef`](https://linglp.github.io/synapser/latest/reference/EntityRef.md),
   File, or Folder.
 
 - synapse_client:

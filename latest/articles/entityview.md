@@ -21,7 +21,7 @@ powerful tool used to systematically group and describe things in
 Synapse.
 
 This tutorial will follow a [Flattened Data
-Layout](https://r-docs.synapse.org/latest/articles/structuring_your_project.html#flattened-data-layout-example).
+Layout](https://linglp.github.io/synapser/latest/articles/structuring_your_project.html#flattened-data-layout-example).
 With a project that has this example layout:
 
     .
@@ -46,8 +46,9 @@ In this tutorial you will:
   more files/folders. It does not need to match the given structure in
   this tutorial, but, if you do not have this already set up you may
   reference the
-  [Folder](https://r-docs.synapse.org/latest/articles/folder.md) and
-  [File](https://r-docs.synapse.org/latest/articles/file.md) tutorials.
+  [Folder](https://linglp.github.io/synapser/latest/articles/folder.md)
+  and [File](https://linglp.github.io/synapser/latest/articles/file.md)
+  tutorials.
 
 ## 1. Find the Synapse ID of your project
 
@@ -56,10 +57,10 @@ ID of our project
 
 \
 [`library`](https://rdrr.io/r/base/library.html)`(`[`synapser`](https://github.com/Sage-Bionetworks/synapser)`)`\
-[`synLogin`](https://r-docs.synapse.org/latest/reference/synLogin.md)`(``)`\
+[`synLogin`](https://linglp.github.io/synapser/latest/reference/synLogin.md)`(``)`\
 \
 `# First let's get the project we want to create the EntityView in`\
-`my_project`` ``<-`` `[`Project`](https://r-docs.synapse.org/latest/reference/Project.md)`(``name ``=`` ``"My uniquely named project about Alzheimer's Disease"``)`` ``|>`` `[`synGet`](https://r-docs.synapse.org/latest/reference/synGet.md)`(``)`\
+`my_project`` ``<-`` `[`Project`](https://linglp.github.io/synapser/latest/reference/Project.md)`(``name ``=`` ``"My uniquely named project about Alzheimer's Disease"``)`` ``|>`` `[`synGet`](https://linglp.github.io/synapser/latest/reference/synGet.md)`(``)`\
 `project_id`` ``<-`` ``my_project``$``id`
 
 ## 2. Create an EntityView with Columns
@@ -72,10 +73,10 @@ underlying File.
 `# Next let's add some columns to the EntityView, the data in these columns will end up`\
 `# being stored as annotations on the files`\
 `columns`` ``<-`` `[`list`](https://rdrr.io/r/base/list.html)`(`\
-`  `[`Column`](https://r-docs.synapse.org/latest/reference/Column.md)`(``name ``=`` ``"species"``, column_type ``=`` ``"STRING"``)``,`\
-`  `[`Column`](https://r-docs.synapse.org/latest/reference/Column.md)`(``name ``=`` ``"dataType"``, column_type ``=`` ``"STRING"``)``,`\
-`  `[`Column`](https://r-docs.synapse.org/latest/reference/Column.md)`(``name ``=`` ``"assay"``, column_type ``=`` ``"STRING"``)``,`\
-`  `[`Column`](https://r-docs.synapse.org/latest/reference/Column.md)`(``name ``=`` ``"fileFormat"``, column_type ``=`` ``"STRING"``)`\
+`  `[`Column`](https://linglp.github.io/synapser/latest/reference/Column.md)`(``name ``=`` ``"species"``, column_type ``=`` ``"STRING"``)``,`\
+`  `[`Column`](https://linglp.github.io/synapser/latest/reference/Column.md)`(``name ``=`` ``"dataType"``, column_type ``=`` ``"STRING"``)``,`\
+`  `[`Column`](https://linglp.github.io/synapser/latest/reference/Column.md)`(``name ``=`` ``"assay"``, column_type ``=`` ``"STRING"``)``,`\
+`  `[`Column`](https://linglp.github.io/synapser/latest/reference/Column.md)`(``name ``=`` ``"fileFormat"``, column_type ``=`` ``"STRING"``)`\
 `)`
 
 Next we’re going to store what we have to Synapse and print out the
@@ -85,13 +86,13 @@ include in the view; `0x01L` selects Files.
 \
 `# Then we will create an EntityView that is scoped to the project, and will contain a row`\
 `# for each file in the project`\
-`view`` ``<-`` `[`EntityView`](https://r-docs.synapse.org/latest/reference/EntityView.md)`(`\
+`view`` ``<-`` `[`EntityView`](https://linglp.github.io/synapser/latest/reference/EntityView.md)`(`\
 `  name ``=`` ``"My Entity View"``,`\
 `  parent_id ``=`` ``project_id``,`\
 `  scope_ids ``=`` `[`list`](https://rdrr.io/r/base/list.html)`(``project_id``)``,`\
 `  view_type_mask ``=`` ``0x01L``, ``# File`\
 `  columns ``=`` ``columns`\
-`)`` ``|>`` `[`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)`(``)`\
+`)`` ``|>`` `[`synStore`](https://linglp.github.io/synapser/latest/reference/synStore.md)`(``)`\
 \
 [`cat`](https://rdrr.io/r/base/cat.html)`(``"My EntityView ID is:"``, ``view``$``id``, ``"\n"``)`\
 \
@@ -161,7 +162,7 @@ this you may modify the `scope_ids` attribute on your view.
 `# scope_ids to the full list of Synapse IDs you want the view to include`\
 `view``$``scope_ids`` ``<-`` `[`list`](https://rdrr.io/r/base/list.html)`(``project_id``, ``"syn1234"``)`\
 `# view$scope_ids = list(project_id)`\
-`view`` ``|>`` `[`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)`(``)`
+`view`` ``|>`` `[`synStore`](https://linglp.github.io/synapser/latest/reference/synStore.md)`(``)`
 
 ## 6. Update the types of Entities included in your EntityView
 
@@ -174,7 +175,7 @@ attribute on your view.
 `# You will be able to specify multiple types using bitwOr(), or a single value`\
 `view``$``view_type_mask`` ``<-`` `[`bitwOr`](https://rdrr.io/r/base/bitwise.html)`(``0x01L``, ``0x08L``)`` ``# File | Folder`\
 `# view$view_type_mask = 0x01L # File`\
-`view`` ``|>`` `[`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)`(``)`
+`view`` ``|>`` `[`synStore`](https://linglp.github.io/synapser/latest/reference/synStore.md)`(``)`
 
 The possible types are: File=`0x01`, Project=`0x02`, Table=`0x04`,
 Folder=`0x08`, View=`0x10`, Docker=`0x20`, SubmissionView=`0x40`,
@@ -191,11 +192,11 @@ entityview
 
 ## References used in this tutorial
 
-- [`EntityView`](https://r-docs.synapse.org/latest/reference/EntityView.md)
-- [`Column`](https://r-docs.synapse.org/latest/reference/Column.md)
-- [`synLogin`](https://r-docs.synapse.org/latest/reference/synLogin.md)
-- [`Project`](https://r-docs.synapse.org/latest/reference/Project.md)
-- [`synQuery`](https://r-docs.synapse.org/latest/reference/EntityView_Query.md)
-- [`synUpdateRows`](https://r-docs.synapse.org/latest/reference/EntityView_UpdateRows.md)
+- [`EntityView`](https://linglp.github.io/synapser/latest/reference/EntityView.md)
+- [`Column`](https://linglp.github.io/synapser/latest/reference/Column.md)
+- [`synLogin`](https://linglp.github.io/synapser/latest/reference/synLogin.md)
+- [`Project`](https://linglp.github.io/synapser/latest/reference/Project.md)
+- [`synQuery`](https://linglp.github.io/synapser/latest/reference/EntityView_Query.md)
+- [`synUpdateRows`](https://linglp.github.io/synapser/latest/reference/EntityView_UpdateRows.md)
 - [query
   examples](https://rest-docs.synapse.org/rest/org/sagebionetworks/repo/web/controller/TableExamples.html)

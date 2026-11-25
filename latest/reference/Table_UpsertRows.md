@@ -23,10 +23,10 @@ kept to a minimum (\< 50,000). There is significant overhead in the
 request to Synapse for each row that is upserted. If you are upserting a
 large number of rows a better approach may be to query for the data you
 want to update, update the data, then use the
-[`synStoreRows()`](https://r-docs.synapse.org/latest/reference/Table_StoreRows.md)
+[`synStoreRows()`](https://linglp.github.io/synapser/latest/reference/Table_StoreRows.md)
 function to update the data in Synapse. Any rows you want to insert may
 be added to the data frame that is passed to the
-[`synStoreRows()`](https://r-docs.synapse.org/latest/reference/Table_StoreRows.md)
+[`synStoreRows()`](https://linglp.github.io/synapser/latest/reference/Table_StoreRows.md)
 function.\
 \- When upserting many rows the requests to Synapse will be chunked into
 smaller requests. The limit is 2MB per request. This chunking will

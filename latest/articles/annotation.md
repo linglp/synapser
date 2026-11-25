@@ -17,7 +17,7 @@ vocabulary, or can be created as needed and modified later as your
 metadata evolves.
 
 **Note:** You may optionally follow the [Uploading data in
-bulk](https://r-docs.synapse.org/latest/articles/upload_data_in_bulk.md)
+bulk](https://linglp.github.io/synapser/latest/articles/upload_data_in_bulk.md)
 tutorial instead. The bulk tutorial may fit your needs better as it
 limits the amount of code that you are required to write and maintain.
 
@@ -29,8 +29,8 @@ In this tutorial you will:
 ## Prerequisites
 
 - Make sure that you have completed the
-  [Files](https://r-docs.synapse.org/latest/articles/file.md) vignette
-  or have at least 1 file in your Synapse project.
+  [Files](https://linglp.github.io/synapser/latest/articles/file.md)
+  vignette or have at least 1 file in your Synapse project.
 
 ## 1. Add several annotations to stored files
 
@@ -38,18 +38,18 @@ In this tutorial you will:
 
 \
 [`library`](https://rdrr.io/r/base/library.html)`(`[`synapser`](https://github.com/Sage-Bionetworks/synapser)`)`\
-[`synLogin`](https://r-docs.synapse.org/latest/reference/synLogin.md)`(``)`\
+[`synLogin`](https://linglp.github.io/synapser/latest/reference/synLogin.md)`(``)`\
 \
 `# Retrieve the project ID`\
 `my_project_id`` ``<-`` ``(`\
-`  `[`Project`](https://r-docs.synapse.org/latest/reference/Project.md)`(``name ``=`` ``"My uniquely named project about Alzheimer's Disease"``)`` ``|>`` `[`synGet`](https://r-docs.synapse.org/latest/reference/synGet.md)`(``)`\
+`  `[`Project`](https://linglp.github.io/synapser/latest/reference/Project.md)`(``name ``=`` ``"My uniquely named project about Alzheimer's Disease"``)`` ``|>`` `[`synGet`](https://linglp.github.io/synapser/latest/reference/synGet.md)`(``)`\
 `)``$``id`\
 \
 `# Retrieve the folders I want to annotate files in`\
-`batch_1_folder`` ``<-`` `[`Folder`](https://r-docs.synapse.org/latest/reference/Folder.md)`(`\
+`batch_1_folder`` ``<-`` `[`Folder`](https://linglp.github.io/synapser/latest/reference/Folder.md)`(`\
 `  name ``=`` ``"single_cell_RNAseq_batch_1"``,`\
 `  parent_id ``=`` ``my_project_id`\
-`)`` ``|>`` `[`synGet`](https://r-docs.synapse.org/latest/reference/synGet.md)`(``)`\
+`)`` ``|>`` `[`synGet`](https://linglp.github.io/synapser/latest/reference/synGet.md)`(``)`\
 \
 [`cat`](https://rdrr.io/r/base/cat.html)`(``"Batch 1 Folder ID:"``, ``batch_1_folder``$``id``, ``"\n"``)`
 
@@ -89,8 +89,8 @@ folder’s `files` field without downloading any file content.
 `  ``)`\
 \
 `  ``file_batch_1`` ``<-`` ``file_batch_1`` ``|>`\
-`    `[`synSetProperties`](https://r-docs.synapse.org/latest/reference/synSetProperties.md)`(``annotations ``=`` ``existing_annotations_for_file``)`` ``|>`\
-`    `[`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)`(``)`\
+`    `[`synSetProperties`](https://linglp.github.io/synapser/latest/reference/synSetProperties.md)`(``annotations ``=`` ``existing_annotations_for_file``)`` ``|>`\
+`    `[`synStore`](https://linglp.github.io/synapser/latest/reference/synStore.md)`(``)`\
 `  `[`cat`](https://rdrr.io/r/base/cat.html)`(`\
 `    ``"Set the annotations for File:"``, `[`paste0`](https://rdrr.io/r/base/paste.html)`(``file_batch_1``$``name``, ``","``)``,`\
 `    ``"ID:"``, `[`paste0`](https://rdrr.io/r/base/paste.html)`(``file_batch_1``$``id``, ``","``)``,`\
@@ -110,25 +110,25 @@ You’ll see that each file now has a number of annotations:
 
 Assuming we have a few new files we want to upload we’ll follow a
 similar pattern defined in the
-[Files](https://r-docs.synapse.org/latest/articles/file.md) vignette,
-except now we’ll specify the `annotations` attribute before uploading
-the file to Synapse.
+[Files](https://linglp.github.io/synapser/latest/articles/file.md)
+vignette, except now we’ll specify the `annotations` attribute before
+uploading the file to Synapse.
 
 In order for the following script to work please replace the files with
 ones that already exist on your local machine.
 
 \
-`batch_1_scrnaseq_new_file_1`` ``<-`` `[`File`](https://r-docs.synapse.org/latest/reference/File.md)`(`\
+`batch_1_scrnaseq_new_file_1`` ``<-`` `[`File`](https://linglp.github.io/synapser/latest/reference/File.md)`(`\
 `  path ``=`` `[`path.expand`](https://rdrr.io/r/base/path.expand.html)`(``"~/my_ad_project/single_cell_RNAseq_batch_1/SRR92345678_R1.fastq.gz"``)``,`\
 `  parent_id ``=`` ``batch_1_folder``$``id``,`\
 `  annotations ``=`` ``annotation_values`\
-`)`` ``|>`` `[`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)`(``)`\
+`)`` ``|>`` `[`synStore`](https://linglp.github.io/synapser/latest/reference/synStore.md)`(``)`\
 \
-`batch_1_scrnaseq_new_file_2`` ``<-`` `[`File`](https://r-docs.synapse.org/latest/reference/File.md)`(`\
+`batch_1_scrnaseq_new_file_2`` ``<-`` `[`File`](https://linglp.github.io/synapser/latest/reference/File.md)`(`\
 `  path ``=`` `[`path.expand`](https://rdrr.io/r/base/path.expand.html)`(``"~/my_ad_project/single_cell_RNAseq_batch_1/SRR92345678_R2.fastq.gz"``)``,`\
 `  parent_id ``=`` ``batch_1_folder``$``id``,`\
 `  annotations ``=`` ``annotation_values`\
-`)`` ``|>`` `[`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)`(``)`\
+`)`` ``|>`` `[`synStore`](https://linglp.github.io/synapser/latest/reference/synStore.md)`(``)`\
 \
 [`cat`](https://rdrr.io/r/base/cat.html)`(`\
 `  ``"Stored file:"``, `[`paste0`](https://rdrr.io/r/base/paste.html)`(``batch_1_scrnaseq_new_file_1``$``name``, ``","``)``,`\
@@ -184,10 +184,10 @@ Annotations shown on a file in the Synapse web UI
 
 ## References used in this tutorial
 
-- [`File`](https://r-docs.synapse.org/latest/reference/File.md)
-- [`Folder`](https://r-docs.synapse.org/latest/reference/Folder.md)
-- [`Project`](https://r-docs.synapse.org/latest/reference/Project.md)
-- [`synGet`](https://r-docs.synapse.org/latest/reference/synGet.md)
-- [`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)
-- [`synSetProperties`](https://r-docs.synapse.org/latest/reference/synSetProperties.md)
-- [`synSyncFromSynapse`](https://r-docs.synapse.org/latest/reference/Folder_SyncFromSynapse.md)
+- [`File`](https://linglp.github.io/synapser/latest/reference/File.md)
+- [`Folder`](https://linglp.github.io/synapser/latest/reference/Folder.md)
+- [`Project`](https://linglp.github.io/synapser/latest/reference/Project.md)
+- [`synGet`](https://linglp.github.io/synapser/latest/reference/synGet.md)
+- [`synStore`](https://linglp.github.io/synapser/latest/reference/synStore.md)
+- [`synSetProperties`](https://linglp.github.io/synapser/latest/reference/synSetProperties.md)
+- [`synSyncFromSynapse`](https://linglp.github.io/synapser/latest/reference/Folder_SyncFromSynapse.md)

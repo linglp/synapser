@@ -18,12 +18,13 @@ programming language. Other Synapse clients exist for
 and [the web browser](https://www.synapse.org).
 
 If you’re just getting started with `synapser`, have a look at the
-[Getting Started](https://r-docs.synapse.org/latest/articles/index.md)
+[Getting
+Started](https://linglp.github.io/synapser/latest/articles/index.md)
 guides:
-[Installation](https://r-docs.synapse.org/latest/articles/installation.md),
-[Authentication](https://r-docs.synapse.org/latest/articles/authentication.md),
+[Installation](https://linglp.github.io/synapser/latest/articles/installation.md),
+[Authentication](https://linglp.github.io/synapser/latest/articles/authentication.md),
 and
-[Configuration](https://r-docs.synapse.org/latest/articles/configuration.md).
+[Configuration](https://linglp.github.io/synapser/latest/articles/configuration.md).
 
 Good example projects are:
 
@@ -64,15 +65,15 @@ repositories:
 `synapser` sets up the Synapse Python client it needs the first time it
 is loaded, so you don’t need to install Python yourself. On Linux,
 complete the extra setup steps in the
-[Installation](https://r-docs.synapse.org/latest/articles/installation.md)
+[Installation](https://linglp.github.io/synapser/latest/articles/installation.md)
 vignette first. That vignette also covers installing from GitHub and
 installing synapser 2.x and earlier, which remain on the Synapse R
 repository (RAN). For troubleshooting, see the
-[Troubleshooting](https://r-docs.synapse.org/latest/articles/troubleshooting.md)
+[Troubleshooting](https://linglp.github.io/synapser/latest/articles/troubleshooting.md)
 guide.
 
 If you’re upgrading from synapser 2.x, read [Migrating to synapser
-3.0](https://r-docs.synapse.org/latest/articles/migration_to_synapser_3_0.md)
+3.0](https://linglp.github.io/synapser/latest/articles/migration_to_synapser_3_0.md)
 first.
 
 ## Connecting to Synapse
@@ -89,13 +90,13 @@ Then load the library and log in with your token:
 
 \
 [`library`](https://rdrr.io/r/base/library.html)`(`[`synapser`](https://github.com/Sage-Bionetworks/synapser)`)`\
-[`synLogin`](https://r-docs.synapse.org/latest/reference/synLogin.md)`(``authToken ``=`` ``"your_personal_access_token"``)`
+[`synLogin`](https://linglp.github.io/synapser/latest/reference/synLogin.md)`(``authToken ``=`` ``"your_personal_access_token"``)`
 
 To avoid putting your token in your code, save it in your
 `~/.synapseConfig` file instead.
-[`synLogin()`](https://r-docs.synapse.org/latest/reference/synLogin.md)
+[`synLogin()`](https://linglp.github.io/synapser/latest/reference/synLogin.md)
 then finds it without any arguments. See the
-[Authentication](https://r-docs.synapse.org/latest/articles/authentication.md)
+[Authentication](https://linglp.github.io/synapser/latest/articles/authentication.md)
 vignette for how to set this up, and the reference documentation:
 
 \
@@ -106,40 +107,40 @@ vignette for how to set this up, and the reference documentation:
 
 Synapse identifiers start with `syn`, followed by numbers (for example,
 `syn123`). Upload a local file with
-[`synStore()`](https://r-docs.synapse.org/latest/reference/synStore.md),
+[`synStore()`](https://linglp.github.io/synapser/latest/reference/synStore.md),
 and download a file with
-[`synGet()`](https://r-docs.synapse.org/latest/reference/synGet.md):
+[`synGet()`](https://linglp.github.io/synapser/latest/reference/synGet.md):
 
 \
-`file`` ``<-`` `[`File`](https://r-docs.synapse.org/latest/reference/File.md)`(``path ``=`` ``"/path/to/data.csv"``, parent_id ``=`` ``"syn123"``)`` ``|>`` `[`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)`(``)`\
+`file`` ``<-`` `[`File`](https://linglp.github.io/synapser/latest/reference/File.md)`(``path ``=`` ``"/path/to/data.csv"``, parent_id ``=`` ``"syn123"``)`` ``|>`` `[`synStore`](https://linglp.github.io/synapser/latest/reference/synStore.md)`(``)`\
 \
-`downloaded_file`` ``<-`` `[`synGet`](https://r-docs.synapse.org/latest/reference/synGet.md)`(`\
+`downloaded_file`` ``<-`` `[`synGet`](https://linglp.github.io/synapser/latest/reference/synGet.md)`(`\
 `  ``file``$``id``,`\
-`  file_options ``=`` `[`FileOptions`](https://r-docs.synapse.org/latest/reference/FileOptions.md)`(``download_location ``=`` ``"/path/to/downloads/"``)`\
+`  file_options ``=`` `[`FileOptions`](https://linglp.github.io/synapser/latest/reference/FileOptions.md)`(``download_location ``=`` ``"/path/to/downloads/"``)`\
 `)`\
 `downloaded_file``$``path`
 
 By default, files are downloaded to the Synapse cache. See [Data Upload,
 Download, and
-Delete](https://r-docs.synapse.org/latest/articles/data_upload_download.md)
-and [Files](https://r-docs.synapse.org/latest/articles/file.md) for
-more, including versioning. To move many files at once, see [Uploading
-data in
-bulk](https://r-docs.synapse.org/latest/articles/upload_data_in_bulk.md),
+Delete](https://linglp.github.io/synapser/latest/articles/data_upload_download.md)
+and [Files](https://linglp.github.io/synapser/latest/articles/file.md)
+for more, including versioning. To move many files at once, see
+[Uploading data in
+bulk](https://linglp.github.io/synapser/latest/articles/upload_data_in_bulk.md),
 [Downloading data in
-bulk](https://r-docs.synapse.org/latest/articles/download_data_in_bulk.md),
+bulk](https://linglp.github.io/synapser/latest/articles/download_data_in_bulk.md),
 and [Downloading data by Synapse
-ID](https://r-docs.synapse.org/latest/articles/download_data_by_synid.md).
+ID](https://linglp.github.io/synapser/latest/articles/download_data_by_synid.md).
 The manifest file used for bulk uploads is described in [Manifest
-CSV](https://r-docs.synapse.org/latest/articles/manifest_csv.md).
+CSV](https://linglp.github.io/synapser/latest/articles/manifest_csv.md).
 
 ## Organizing Data in a Project
 
 Projects and folders are containers that organize your data:
 
 \
-`project`` ``<-`` `[`Project`](https://r-docs.synapse.org/latest/reference/Project.md)`(``name ``=`` ``"My uniquely named project"``)`` ``|>`` `[`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)`(``)`\
-`folder`` ``<-`` `[`Folder`](https://r-docs.synapse.org/latest/reference/Folder.md)`(``name ``=`` ``"raw_data"``, parent_id ``=`` ``project``$``id``)`` ``|>`` `[`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)`(``)`
+`project`` ``<-`` `[`Project`](https://linglp.github.io/synapser/latest/reference/Project.md)`(``name ``=`` ``"My uniquely named project"``)`` ``|>`` `[`synStore`](https://linglp.github.io/synapser/latest/reference/synStore.md)`(``)`\
+`folder`` ``<-`` `[`Folder`](https://linglp.github.io/synapser/latest/reference/Folder.md)`(``name ``=`` ``"raw_data"``, parent_id ``=`` ``project``$``id``)`` ``|>`` `[`synStore`](https://linglp.github.io/synapser/latest/reference/synStore.md)`(``)`
 
 To list what a project or folder contains without downloading anything,
 sync its metadata:
@@ -150,31 +151,32 @@ sync its metadata:
 `  `[`print`](https://rdrr.io/r/base/print.html)`(``child``$``name``)`\
 `}`
 
-See [Projects](https://r-docs.synapse.org/latest/articles/project.md),
-[Folders](https://r-docs.synapse.org/latest/articles/folder.md), and
-[Structuring Your Synapse
-Project](https://r-docs.synapse.org/latest/articles/structuring_your_project.md).
+See
+[Projects](https://linglp.github.io/synapser/latest/articles/project.md),
+[Folders](https://linglp.github.io/synapser/latest/articles/folder.md),
+and [Structuring Your Synapse
+Project](https://linglp.github.io/synapser/latest/articles/structuring_your_project.md).
 
 ## Annotating Synapse Entities
 
 Annotations are key-value metadata that make your data searchable. Set
 them with
-[`synSetProperties()`](https://r-docs.synapse.org/latest/reference/synSetProperties.md)
+[`synSetProperties()`](https://linglp.github.io/synapser/latest/reference/synSetProperties.md)
 and save them with
-[`synStore()`](https://r-docs.synapse.org/latest/reference/synStore.md):
+[`synStore()`](https://linglp.github.io/synapser/latest/reference/synStore.md):
 
 \
-`file`` ``<-`` `[`synGet`](https://r-docs.synapse.org/latest/reference/synGet.md)`(``file``$``id``, file_options ``=`` `[`FileOptions`](https://r-docs.synapse.org/latest/reference/FileOptions.md)`(``download_file ``=`` ``FALSE``)``)`` ``|>`\
-`  `[`synSetProperties`](https://r-docs.synapse.org/latest/reference/synSetProperties.md)`(``annotations ``=`` `[`list`](https://rdrr.io/r/base/list.html)`(``assay ``=`` ``"RNA-seq"``, fileType ``=`` ``"csv"``)``)`` ``|>`\
-`  `[`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)`(``)`\
+`file`` ``<-`` `[`synGet`](https://linglp.github.io/synapser/latest/reference/synGet.md)`(``file``$``id``, file_options ``=`` `[`FileOptions`](https://linglp.github.io/synapser/latest/reference/FileOptions.md)`(``download_file ``=`` ``FALSE``)``)`` ``|>`\
+`  `[`synSetProperties`](https://linglp.github.io/synapser/latest/reference/synSetProperties.md)`(``annotations ``=`` `[`list`](https://rdrr.io/r/base/list.html)`(``assay ``=`` ``"RNA-seq"``, fileType ``=`` ``"csv"``)``)`` ``|>`\
+`  `[`synStore`](https://linglp.github.io/synapser/latest/reference/synStore.md)`(``)`\
 `file``$``annotations`
 
 See
-[Annotations](https://r-docs.synapse.org/latest/articles/annotation.md),
+[Annotations](https://linglp.github.io/synapser/latest/articles/annotation.md),
 [Add, Update and Remove
-Annotations](https://r-docs.synapse.org/latest/articles/data_upload_download.html#add-update-and-remove-annotations),
+Annotations](https://linglp.github.io/synapser/latest/articles/data_upload_download.html#add-update-and-remove-annotations),
 and [Properties and
-annotations](https://r-docs.synapse.org/latest/articles/properties_vs_annotations.md).
+annotations](https://linglp.github.io/synapser/latest/articles/properties_vs_annotations.md).
 
 ## Provenance
 
@@ -182,50 +184,50 @@ Synapse’s provenance tools record what was used, and what was executed,
 to create a file. Attach an `Activity` to an entity and store it:
 
 \
-`file`` ``<-`` `[`synGet`](https://r-docs.synapse.org/latest/reference/synGet.md)`(``file``$``id``, file_options ``=`` `[`FileOptions`](https://r-docs.synapse.org/latest/reference/FileOptions.md)`(``download_file ``=`` ``FALSE``)``)`` ``|>`\
-`  `[`synSetProperties`](https://r-docs.synapse.org/latest/reference/synSetProperties.md)`(`\
-`    activity ``=`` `[`Activity`](https://r-docs.synapse.org/latest/reference/Activity.md)`(`\
+`file`` ``<-`` `[`synGet`](https://linglp.github.io/synapser/latest/reference/synGet.md)`(``file``$``id``, file_options ``=`` `[`FileOptions`](https://linglp.github.io/synapser/latest/reference/FileOptions.md)`(``download_file ``=`` ``FALSE``)``)`` ``|>`\
+`  `[`synSetProperties`](https://linglp.github.io/synapser/latest/reference/synSetProperties.md)`(`\
+`    activity ``=`` `[`Activity`](https://linglp.github.io/synapser/latest/reference/Activity.md)`(`\
 `      name ``=`` ``"clustering"``,`\
 `      description ``=`` ``"whizzy clustering"``,`\
-`      used ``=`` `[`list`](https://rdrr.io/r/base/list.html)`(`[`UsedEntity`](https://r-docs.synapse.org/latest/reference/UsedEntity.md)`(``target_id ``=`` ``"syn1234"``)``)``,`\
-`      executed ``=`` `[`list`](https://rdrr.io/r/base/list.html)`(`[`UsedURL`](https://r-docs.synapse.org/latest/reference/UsedURL.md)`(``name ``=`` ``"analysis code"``, url ``=`` ``"https://github.com/my-org/my-analysis"``)``)`\
+`      used ``=`` `[`list`](https://rdrr.io/r/base/list.html)`(`[`UsedEntity`](https://linglp.github.io/synapser/latest/reference/UsedEntity.md)`(``target_id ``=`` ``"syn1234"``)``)``,`\
+`      executed ``=`` `[`list`](https://rdrr.io/r/base/list.html)`(`[`UsedURL`](https://linglp.github.io/synapser/latest/reference/UsedURL.md)`(``name ``=`` ``"analysis code"``, url ``=`` ``"https://github.com/my-org/my-analysis"``)``)`\
 `    ``)`\
 `  ``)`` ``|>`\
-`  `[`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)`(``)`
+`  `[`synStore`](https://linglp.github.io/synapser/latest/reference/synStore.md)`(``)`
 
 See
-[Activity/Provenance](https://r-docs.synapse.org/latest/articles/domain_models_of_synapse.html#activityprovenance)
+[Activity/Provenance](https://linglp.github.io/synapser/latest/articles/domain_models_of_synapse.html#activityprovenance)
 and the `Activity` reference documentation
-([`?Activity`](https://r-docs.synapse.org/latest/reference/Activity.md)).
+([`?Activity`](https://linglp.github.io/synapser/latest/reference/Activity.md)).
 
 ## Tables
 
 Synapse Tables store tabular data that can be queried using a SQL-like
 query language. See
-[Tables](https://r-docs.synapse.org/latest/articles/tables.md) and
-[Virtual
-Tables](https://r-docs.synapse.org/latest/articles/virtualtable.md).
+[Tables](https://linglp.github.io/synapser/latest/articles/tables.md)
+and [Virtual
+Tables](https://linglp.github.io/synapser/latest/articles/virtualtable.md).
 
 ## Datasets
 
 A Dataset is a curated, versionable collection of files that can be
 queried like a table. Group datasets into a Dataset Collection. See
-[Datasets](https://r-docs.synapse.org/latest/articles/dataset.md) and
-[Dataset
-Collection](https://r-docs.synapse.org/latest/articles/datasetcollection.md).
+[Datasets](https://linglp.github.io/synapser/latest/articles/dataset.md)
+and [Dataset
+Collection](https://linglp.github.io/synapser/latest/articles/datasetcollection.md).
 
 ## Wikis
 
 Wiki pages let you describe your project and its data in Markdown:
 
 \
-`wiki_page`` ``<-`` `[`WikiPage`](https://r-docs.synapse.org/latest/reference/WikiPage.md)`(`\
+`wiki_page`` ``<-`` `[`WikiPage`](https://linglp.github.io/synapser/latest/reference/WikiPage.md)`(`\
 `  owner_id ``=`` ``project``$``id``,`\
 `  title ``=`` ``"My Wiki Page"``,`\
 `  markdown ``=`` ``"# My Wiki Page\n\nThis is a wiki page."`\
-`)`` ``|>`` `[`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)`(``)`
+`)`` ``|>`` `[`synStore`](https://linglp.github.io/synapser/latest/reference/synStore.md)`(``)`
 
-See [Wikis](https://r-docs.synapse.org/latest/articles/wiki.md).
+See [Wikis](https://linglp.github.io/synapser/latest/articles/wiki.md).
 
 ## Evaluations
 
@@ -234,16 +236,16 @@ example in a computational challenge. Submit an entity to an evaluation
 queue:
 
 \
-`submission`` ``<-`` `[`Submission`](https://r-docs.synapse.org/latest/reference/Submission.md)`(`\
+`submission`` ``<-`` `[`Submission`](https://linglp.github.io/synapser/latest/reference/Submission.md)`(`\
 `  entity_id ``=`` ``file``$``id``,`\
 `  evaluation_id ``=`` ``"9999999"``,`\
 `  name ``=`` ``"My Submission"`\
-`)`` ``|>`` `[`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)`(``)`
+`)`` ``|>`` `[`synStore`](https://linglp.github.io/synapser/latest/reference/synStore.md)`(``)`
 
 See
-[Evaluations](https://r-docs.synapse.org/latest/articles/evaluation.md)
+[Evaluations](https://linglp.github.io/synapser/latest/articles/evaluation.md)
 and [Submissions, SubmissionStatuses,
-SubmissionBundles](https://r-docs.synapse.org/latest/articles/submission.md).
+SubmissionBundles](https://linglp.github.io/synapser/latest/articles/submission.md).
 
 ## Sharing Access to Content
 
@@ -264,15 +266,15 @@ To give a folder or file different access from its project, call
 settings and stops inheriting from the project.
 
 See [Sharing Settings (ACL
-Management)](https://r-docs.synapse.org/latest/articles/sharing_settings.md)
+Management)](https://linglp.github.io/synapser/latest/articles/sharing_settings.md)
 and [Access
-Control](https://r-docs.synapse.org/latest/articles/access_control.md).
+Control](https://linglp.github.io/synapser/latest/articles/access_control.md).
 
 ## File Views
 
 A file view can be defined by its scope. It allows querying for files
 within the scope using a SQL-like syntax. Please visit the
-[EntityView](https://r-docs.synapse.org/latest/articles/entityview.md)
+[EntityView](https://linglp.github.io/synapser/latest/articles/entityview.md)
 vignette for more information.
 
 ## Accessing the API Directly
@@ -298,10 +300,10 @@ package are now available directly in `synapser`:
 - Generate a manifest for a local directory with
   `synGenerateSyncManifest()`, then upload data to Synapse in bulk with
   `synSyncToSynapse()` (see [Uploading data in
-  bulk](https://r-docs.synapse.org/latest/articles/upload_data_in_bulk.md)).
+  bulk](https://linglp.github.io/synapser/latest/articles/upload_data_in_bulk.md)).
 - Download data from Synapse in bulk with `synSyncFromSynapse()` (see
   [Downloading data in
-  bulk](https://r-docs.synapse.org/latest/articles/download_data_in_bulk.md)).
+  bulk](https://linglp.github.io/synapser/latest/articles/download_data_in_bulk.md)).
 
 ## More information
 

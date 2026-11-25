@@ -12,13 +12,13 @@ below.
 
 If you'd like to perform an `upsert` or partial update of a row you may
 use the
-[`synUpsertRows()`](https://r-docs.synapse.org/latest/reference/Table_UpsertRows.md)
+[`synUpsertRows()`](https://linglp.github.io/synapser/latest/reference/Table_UpsertRows.md)
 function. See that function for more information.
 
 Note the following behavior for the order of columns:
 
 \- If a column is added via the
-[`synAddColumn()`](https://r-docs.synapse.org/latest/reference/Table_AddColumn.md)
+[`synAddColumn()`](https://linglp.github.io/synapser/latest/reference/Table_AddColumn.md)
 function it will be added at the index you specify, or at the end of the
 columns list.\
 \- If column(s) are added during the construction of your `Table`
@@ -75,9 +75,9 @@ looks up what LA clocks were set to on each value's own date:
 \- `2018-10-01` → summer → interpreted using UTC-7
 
 When the data is queried back with
-[`synQuery`](https://r-docs.synapse.org/latest/reference/Table_Query.md)`(..., convert_to_datetime = TRUE)`,
+[`synQuery`](https://linglp.github.io/synapser/latest/reference/Table_Query.md)`(..., convert_to_datetime = TRUE)`,
 `DATE` columns are returned as datetimes in UTC. See
-[`vignette("tables", package = "synapser")`](https://r-docs.synapse.org/latest/articles/tables.md)
+[`vignette("tables", package = "synapser")`](https://linglp.github.io/synapser/latest/articles/tables.md)
 for how to work with the returned values and view them in another
 timezone.
 
@@ -247,9 +247,9 @@ synStoreRows(instance, values, schema_storage_strategy=NULL, column_expansion_st
   or change the type of a column that already exists. If you need to
   change any of these attributes you must do so after getting the table
   via a
-  [`synGet()`](https://r-docs.synapse.org/latest/reference/synGet.md)
+  [`synGet()`](https://linglp.github.io/synapser/latest/reference/synGet.md)
   call, updating the columns as needed, then calling
-  [`synStore()`](https://r-docs.synapse.org/latest/reference/synStore.md)
+  [`synStore()`](https://linglp.github.io/synapser/latest/reference/synStore.md)
   on the table.
 
 - column_expansion_strategy:
@@ -278,7 +278,7 @@ synStoreRows(instance, values, schema_storage_strategy=NULL, column_expansion_st
   AppendableRowSetRequest\]\]) Additional changes to the table that
   should execute within the same transaction as appending or updating
   rows. This is used as a part of the
-  [`synUpsertRows()`](https://r-docs.synapse.org/latest/reference/Table_UpsertRows.md)
+  [`synUpsertRows()`](https://linglp.github.io/synapser/latest/reference/Table_UpsertRows.md)
   function call to allow for the updating of rows and the updating of
   the table schema in the same transaction. In most cases you will not
   need to use this argument.

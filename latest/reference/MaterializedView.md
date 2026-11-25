@@ -124,16 +124,16 @@ NULL
 - `MaterializedView(id=NULL, name=NULL, parent_id=NULL, activity=NULL, version_number=NULL, description=NULL, etag=NULL, created_on=NULL, modified_on=NULL, created_by=NULL, modified_by=NULL, version_label=NULL, version_comment=NULL, is_latest_version=NULL, columns=list(), is_search_enabled=NULL, defining_sql=NULL, annotations=list())`:
   Constructor for `MaterializedView`
 
-- [`synGetPermissions`](https://r-docs.synapse.org/latest/reference/MaterializedView_GetPermissions.md)`(instance, synapse_client=NULL)`:
+- [`synGetPermissions`](https://linglp.github.io/synapser/latest/reference/MaterializedView_GetPermissions.md)`(instance, synapse_client=NULL)`:
   Get the
   [permissions](https://python-docs.synapse.org/reference/permissions/)
   that the caller has on an Entity.
 
-- [`synSetPermissions`](https://r-docs.synapse.org/latest/reference/MaterializedView_SetPermissions.md)`(instance, principal_id=NULL, access_type=NULL, modify_benefactor=FALSE, warn_if_inherits=TRUE, overwrite=TRUE, synapse_client=NULL)`:
+- [`synSetPermissions`](https://linglp.github.io/synapser/latest/reference/MaterializedView_SetPermissions.md)`(instance, principal_id=NULL, access_type=NULL, modify_benefactor=FALSE, warn_if_inherits=TRUE, overwrite=TRUE, synapse_client=NULL)`:
   Sets permission that a user or group has on an Entity. An Entity may
   have its own ACL or inherit its ACL from a benefactor.
 
-- [`synDeletePermissions`](https://r-docs.synapse.org/latest/reference/MaterializedView_DeletePermissions.md)`(instance, include_self=TRUE, include_container_content=FALSE, recursive=FALSE, target_entity_types=NULL, dry_run=FALSE, show_acl_details=TRUE, show_files_in_containers=TRUE, synapse_client=NULL)`:
+- [`synDeletePermissions`](https://linglp.github.io/synapser/latest/reference/MaterializedView_DeletePermissions.md)`(instance, include_self=TRUE, include_container_content=FALSE, recursive=FALSE, target_entity_types=NULL, dry_run=FALSE, show_acl_details=TRUE, show_files_in_containers=TRUE, synapse_client=NULL)`:
   Delete the entire **local** Access Control List (ACL) for a given
   Entity. This is not scoped to a specific user or group, but rather
   removes all permissions associated with the Entity. After this
@@ -142,7 +142,7 @@ NULL
   \
   In order to remove permissions for a specific user or group, you
   should use the
-  [`synSetPermissions()`](https://r-docs.synapse.org/latest/reference/MaterializedView_SetPermissions.md)
+  [`synSetPermissions()`](https://linglp.github.io/synapser/latest/reference/MaterializedView_SetPermissions.md)
   function with the `access_type` set to an empty list.\
   \
   By default, Entities such as FileEntity and Folder inherit their
@@ -159,12 +159,12 @@ NULL
   deleted, you must individually update or revoke the permissions for
   each user or group.
 
-- [`synGetAcl`](https://r-docs.synapse.org/latest/reference/MaterializedView_GetAcl.md)`(instance, principal_id=NULL, check_benefactor=TRUE, synapse_client=NULL)`:
+- [`synGetAcl`](https://linglp.github.io/synapser/latest/reference/MaterializedView_GetAcl.md)`(instance, principal_id=NULL, check_benefactor=TRUE, synapse_client=NULL)`:
   Get the
   [ACL](https://rest-docs.synapse.org/rest/org/sagebionetworks/repo/model/ACCESS_TYPE.html)
   that a user or group has on an Entity.
 
-- [`synListAcl`](https://r-docs.synapse.org/latest/reference/MaterializedView_ListAcl.md)`(instance, recursive=FALSE, include_container_content=FALSE, target_entity_types=NULL, log_tree=FALSE, synapse_client=NULL)`:
+- [`synListAcl`](https://linglp.github.io/synapser/latest/reference/MaterializedView_ListAcl.md)`(instance, recursive=FALSE, include_container_content=FALSE, target_entity_types=NULL, log_tree=FALSE, synapse_client=NULL)`:
   List the Access Control Lists (ACLs) for this entity and optionally
   its children.\
   \
@@ -178,7 +178,7 @@ NULL
   Team that the user has access to that has permissions on the entity,
   or through inheritance from parent entities.
 
-- [`synQuery`](https://r-docs.synapse.org/latest/reference/MaterializedView_Query.md)`(query, include_row_id_and_row_version=TRUE, convert_to_datetime=FALSE, download_location=NULL, quote_character="\"", escape_character=r"(\)", line_end="\n", separator=",", header=TRUE, timeout=250L, synapse_client=NULL)`:
+- [`synQuery`](https://linglp.github.io/synapser/latest/reference/MaterializedView_Query.md)`(query, include_row_id_and_row_version=TRUE, convert_to_datetime=FALSE, download_location=NULL, quote_character="\"", escape_character=r"(\)", line_end="\n", separator=",", header=TRUE, timeout=250L, synapse_client=NULL)`:
   Query for data on a table stored in Synapse. The results will always
   be returned as a data frame unless you specify a `download_location`
   in which case the results will be downloaded to that location. There
@@ -186,14 +186,14 @@ NULL
   on if you are getting the results back as a DataFrame or downloading
   the results to a file.
 
-- [`synQueryPartMask`](https://r-docs.synapse.org/latest/reference/MaterializedView_QueryPartMask.md)`(query, part_mask, timeout=250L, synapse_client=NULL)`:
+- [`synQueryPartMask`](https://linglp.github.io/synapser/latest/reference/MaterializedView_QueryPartMask.md)`(query, part_mask, timeout=250L, synapse_client=NULL)`:
   Query for data on a table stored in Synapse. This is a more advanced
   use case of the
-  [`synQuery()`](https://r-docs.synapse.org/latest/reference/MaterializedView_Query.md)
+  [`synQuery()`](https://linglp.github.io/synapser/latest/reference/MaterializedView_Query.md)
   function that allows you to determine what additional metadata about
   the table or query should also be returned. If you do not need this
   additional information then you are better off using the
-  [`synQuery()`](https://r-docs.synapse.org/latest/reference/MaterializedView_Query.md)
+  [`synQuery()`](https://linglp.github.io/synapser/latest/reference/MaterializedView_Query.md)
   function.\
   \
   The query for this method uses this Rest API:\

@@ -3,8 +3,8 @@
 Upload files to Synapse using a manifest CSV file.
 
 Accepts manifests produced by
-[`synSyncFromSynapse()`](https://r-docs.synapse.org/latest/reference/Folder_SyncFromSynapse.md),
-[`synDownloadListFiles()`](https://r-docs.synapse.org/latest/reference/synDownloadListFiles.md),
+[`synSyncFromSynapse()`](https://linglp.github.io/synapser/latest/reference/Folder_SyncFromSynapse.md),
+[`synDownloadListFiles()`](https://linglp.github.io/synapser/latest/reference/synDownloadListFiles.md),
 or the Synapse UI download cart. The manifest must have at minimum a
 path and parentId column. All other columns that are not part of the
 standard manifest column set are treated as file annotations.
