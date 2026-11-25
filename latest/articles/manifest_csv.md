@@ -59,7 +59,7 @@ specifying “syn1234”
 | activityName | name of activity in provenance | Ran normalization |
 | activityDescription | text description of what was done | Ran algorithm xyz with parameters… |
 | used | list of items used to generate file | syn1235;/path/to_local/file.txt |
-| executed | list of items executed | <https://github.org/;/path/to_local/code.py> |
+| executed | list of items executed | `https://example.org/;/path/to_local/code.py` |
 
 ### Metadata fields (ignored during upload)
 
@@ -146,9 +146,9 @@ column by default, so users must add it before uploading.
 
 | path | parentId | ID | name | annot1 | annot2 | collection_date | used | executed |
 |----|----|----|----|----|----|----|----|----|
-| /path/file1.txt | syn1243 | syn5001 | file1.txt | bar | 3.1415 | 2023-12-04T07:00:00Z | syn124;/path/file2.txt | <https://github.org/foo/bar> |
-| /path/file2.txt | syn12433 | syn5002 | file2.txt | baz | 2.71 | 2001-01-01T08:00:00Z |  | <https://github.org/foo/baz> |
-| /path/file3.txt | syn12455 | syn5003 | file3.txt | zzz | 3.52 | 2023-12-04T07:00:00Z |  | <https://github.org/foo/zzz> |
+| /path/file1.txt | syn1243 | syn5001 | file1.txt | bar | 3.1415 | 2023-12-04T07:00:00Z | syn124;/path/file2.txt | `https://example.org/foo/bar` |
+| /path/file2.txt | syn12433 | syn5002 | file2.txt | baz | 2.71 | 2001-01-01T08:00:00Z |  | `https://example.org/foo/baz` |
+| /path/file3.txt | syn12455 | syn5003 | file3.txt | zzz | 3.52 | 2023-12-04T07:00:00Z |  | `https://example.org/foo/zzz` |
 
 ## References
 

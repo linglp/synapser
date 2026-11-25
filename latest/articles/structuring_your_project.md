@@ -34,7 +34,7 @@ project:
   should not have access to each other’s raw data. You would then create
   a central “public” project that will contain the harmonized data. You
   can technically leverage [local share
-  settings](https://help.synapse.org/docs/Sharing-Settings,-Permissions,-and-Conditions-for-Use.2024276030.html#SharingSettings,Permissions,andConditionsforUse-EditSharingSettingsonFiles,Folders,andTables)
+  settings](https://docs.synapse.org/synapse-docs/sharing-settings-permissions-and-conditions-for-use#SharingSettings,Permissions,andConditionsforUse-EditSharingSettingsonFiles,Folders,andTables)
   by creating private folders in one project but managing local share
   settings is more complicated and not recommended.
 - Do not mix data that requires different permission models within a

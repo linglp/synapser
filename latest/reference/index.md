@@ -372,6 +372,8 @@ view.
   Column
 - [`synList()`](https://r-docs.synapse.org/latest/reference/Column_List.md)
   : Column : list
+- [`JsonSubColumn()`](https://r-docs.synapse.org/latest/reference/JsonSubColumn.md)
+  : JsonSubColumn
 
 ## VirtualTable
 
@@ -639,6 +641,20 @@ Represents an
   : Organization : get_json_schemas
 - [`synUpdateAcl()`](https://r-docs.synapse.org/latest/reference/Organization_UpdateAcl.md)
   : Organization : update_acl
+
+## JSONSchema
+
+Represents a [JSON
+Schema](https://rest-docs.synapse.org/rest/org/sagebionetworks/repo/model/schema/JsonSchemaInfo.html).
+
+- [`JSONSchema()`](https://r-docs.synapse.org/latest/reference/JSONSchema.md)
+  : JSONSchema
+- [`synFromUri()`](https://r-docs.synapse.org/latest/reference/JSONSchema_FromUri.md)
+  : JSONSchema : from_uri
+- [`synGetBody()`](https://r-docs.synapse.org/latest/reference/JSONSchema_GetBody.md)
+  : JSONSchema : get_body
+- [`synGetVersions()`](https://r-docs.synapse.org/latest/reference/JSONSchema_GetVersions.md)
+  : JSONSchema : get_versions
 
 ## WikiPage
 

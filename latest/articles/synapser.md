@@ -43,37 +43,31 @@ section links to a tutorial that covers the topic in depth.
 Install `synapser` from
 [R-universe](https://sage-bionetworks.r-universe.dev/synapser):
 
-``` r
-
-install.packages(
-  "synapser",
-  repos = c("https://sage-bionetworks.r-universe.dev", "https://cloud.r-project.org")
-)
-```
+\
+[`install.packages`](https://rdrr.io/r/utils/install.packages.html)`(`\
+`  ``"synapser"``,`\
+`  repos ``=`` `[`c`](https://rdrr.io/r/base/c.html)`(``"https://sage-bionetworks.r-universe.dev"``, ``"https://cloud.r-project.org"``)`\
+`)`
 
 Alternatively, edit your `~/.Rprofile` and configure your default
 repositories:
 
-``` r
-
-options(repos = c("https://sage-bionetworks.r-universe.dev", "https://cloud.r-project.org"))
-```
+\
+[`options`](https://rdrr.io/r/base/options.html)`(``repos ``=`` `[`c`](https://rdrr.io/r/base/c.html)`(``"https://sage-bionetworks.r-universe.dev"``, ``"https://cloud.r-project.org"``)``)`
 
 after which you may run `install.packages` without specifying the
 repositories:
 
-``` r
-
-install.packages("synapser")
-```
+\
+[`install.packages`](https://rdrr.io/r/utils/install.packages.html)`(``"synapser"``)`
 
 `synapser` sets up the Synapse Python client it needs the first time it
 is loaded, so you don’t need to install Python yourself. On Linux,
-complete the extra setup steps in the [Installation
-vignette](https://r-docs.synapse.org/latest/articles/installation.md)
-first. That vignette also covers installing from GitHub and installing
-synapser 2.x and earlier, which remain on the Synapse R repository
-(RAN). For troubleshooting, see the
+complete the extra setup steps in the
+[Installation](https://r-docs.synapse.org/latest/articles/installation.md)
+vignette first. That vignette also covers installing from GitHub and
+installing synapser 2.x and earlier, which remain on the Synapse R
+repository (RAN). For troubleshooting, see the
 [Troubleshooting](https://r-docs.synapse.org/latest/articles/troubleshooting.md)
 guide.
 
@@ -85,31 +79,28 @@ first.
 
 To use Synapse, you’ll need to
 [register](https://www.synapse.org/#!RegisterAccount:0) for an account.
-The Synapse website can authenticate using a Google account. If you
-authenticate using a Google account, you’ll need to create a personal
-access token to log in to Synapse through the programmatic clients. See
-the [Authentication
-vignette](https://r-docs.synapse.org/latest/articles/authentication.md)
-for more information.
+To log in from R, create a [personal access
+token](https://help.synapse.org/docs/Managing-Your-Account.2055405596.html#ManagingYourAccount-PersonalAccessTokens)
+under your Synapse account settings. Give it at least the **view**
+scope, and add **download** and **modify** if you want to download and
+upload data.
 
-Once that’s done, you’ll be able to load the library and login:
+Then load the library and log in with your token:
 
-``` r
+\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`synapser`](https://github.com/Sage-Bionetworks/synapser)`)`\
+[`synLogin`](https://r-docs.synapse.org/latest/reference/synLogin.md)`(``authToken ``=`` ``"your_personal_access_token"``)`
 
-library(synapser)
-synLogin()
-```
+To avoid putting your token in your code, save it in your
+`~/.synapseConfig` file instead.
+[`synLogin()`](https://r-docs.synapse.org/latest/reference/synLogin.md)
+then finds it without any arguments. See the
+[Authentication](https://r-docs.synapse.org/latest/articles/authentication.md)
+vignette for how to set this up, and the reference documentation:
 
-For more ways to manage your Synapse credentials, please see the
-[Authentication
-vignette](https://r-docs.synapse.org/latest/articles/authentication.md),
-and the native reference documentation:
-
-``` r
-
-?synLogin
-?synLogout
-```
+\
+`?``synLogin`\
+`?``synLogout`
 
 ## Accessing Data
 
@@ -119,16 +110,14 @@ Synapse identifiers start with `syn`, followed by numbers (for example,
 and download a file with
 [`synGet()`](https://r-docs.synapse.org/latest/reference/synGet.md):
 
-``` r
-
-file <- File(path = "/path/to/data.csv", parent_id = "syn123") |> synStore()
-
-downloaded_file <- synGet(
-  file$id,
-  file_options = FileOptions(download_location = "/path/to/downloads/")
-)
-downloaded_file$path
-```
+\
+`file`` ``<-`` `[`File`](https://r-docs.synapse.org/latest/reference/File.md)`(``path ``=`` ``"/path/to/data.csv"``, parent_id ``=`` ``"syn123"``)`` ``|>`` `[`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)`(``)`\
+\
+`downloaded_file`` ``<-`` `[`synGet`](https://r-docs.synapse.org/latest/reference/synGet.md)`(`\
+`  ``file``$``id``,`\
+`  file_options ``=`` `[`FileOptions`](https://r-docs.synapse.org/latest/reference/FileOptions.md)`(``download_location ``=`` ``"/path/to/downloads/"``)`\
+`)`\
+`downloaded_file``$``path`
 
 By default, files are downloaded to the Synapse cache. See [Data Upload,
 Download, and
@@ -148,22 +137,18 @@ CSV](https://r-docs.synapse.org/latest/articles/manifest_csv.md).
 
 Projects and folders are containers that organize your data:
 
-``` r
-
-project <- Project(name = "My uniquely named project") |> synStore()
-folder <- Folder(name = "raw_data", parent_id = project$id) |> synStore()
-```
+\
+`project`` ``<-`` `[`Project`](https://r-docs.synapse.org/latest/reference/Project.md)`(``name ``=`` ``"My uniquely named project"``)`` ``|>`` `[`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)`(``)`\
+`folder`` ``<-`` `[`Folder`](https://r-docs.synapse.org/latest/reference/Folder.md)`(``name ``=`` ``"raw_data"``, parent_id ``=`` ``project``$``id``)`` ``|>`` `[`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)`(``)`
 
 To list what a project or folder contains without downloading anything,
 sync its metadata:
 
-``` r
-
-project <- project |> synSyncFromSynapse(download_file = FALSE, recursive = FALSE)
-for (child in project$folders) {
-  print(child$name)
-}
-```
+\
+`project`` ``<-`` ``project`` ``|>`` ``synSyncFromSynapse``(``download_file ``=`` ``FALSE``, recursive ``=`` ``FALSE``)`\
+`for`` ``(``child`` ``in`` ``project``$``folders``)`` ``{`\
+`  `[`print`](https://rdrr.io/r/base/print.html)`(``child``$``name``)`\
+`}`
 
 See [Projects](https://r-docs.synapse.org/latest/articles/project.md),
 [Folders](https://r-docs.synapse.org/latest/articles/folder.md), and
@@ -178,13 +163,11 @@ them with
 and save them with
 [`synStore()`](https://r-docs.synapse.org/latest/reference/synStore.md):
 
-``` r
-
-file <- synGet(file$id, file_options = FileOptions(download_file = FALSE)) |>
-  synSetProperties(annotations = list(assay = "RNA-seq", fileType = "csv")) |>
-  synStore()
-file$annotations
-```
+\
+`file`` ``<-`` `[`synGet`](https://r-docs.synapse.org/latest/reference/synGet.md)`(``file``$``id``, file_options ``=`` `[`FileOptions`](https://r-docs.synapse.org/latest/reference/FileOptions.md)`(``download_file ``=`` ``FALSE``)``)`` ``|>`\
+`  `[`synSetProperties`](https://r-docs.synapse.org/latest/reference/synSetProperties.md)`(``annotations ``=`` `[`list`](https://rdrr.io/r/base/list.html)`(``assay ``=`` ``"RNA-seq"``, fileType ``=`` ``"csv"``)``)`` ``|>`\
+`  `[`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)`(``)`\
+`file``$``annotations`
 
 See
 [Annotations](https://r-docs.synapse.org/latest/articles/annotation.md),
@@ -198,19 +181,17 @@ annotations](https://r-docs.synapse.org/latest/articles/properties_vs_annotation
 Synapse’s provenance tools record what was used, and what was executed,
 to create a file. Attach an `Activity` to an entity and store it:
 
-``` r
-
-file <- synGet(file$id, file_options = FileOptions(download_file = FALSE)) |>
-  synSetProperties(
-    activity = Activity(
-      name = "clustering",
-      description = "whizzy clustering",
-      used = list(UsedEntity(target_id = "syn1234")),
-      executed = list(UsedURL(name = "analysis code", url = "https://github.com/my-org/my-analysis"))
-    )
-  ) |>
-  synStore()
-```
+\
+`file`` ``<-`` `[`synGet`](https://r-docs.synapse.org/latest/reference/synGet.md)`(``file``$``id``, file_options ``=`` `[`FileOptions`](https://r-docs.synapse.org/latest/reference/FileOptions.md)`(``download_file ``=`` ``FALSE``)``)`` ``|>`\
+`  `[`synSetProperties`](https://r-docs.synapse.org/latest/reference/synSetProperties.md)`(`\
+`    activity ``=`` `[`Activity`](https://r-docs.synapse.org/latest/reference/Activity.md)`(`\
+`      name ``=`` ``"clustering"``,`\
+`      description ``=`` ``"whizzy clustering"``,`\
+`      used ``=`` `[`list`](https://rdrr.io/r/base/list.html)`(`[`UsedEntity`](https://r-docs.synapse.org/latest/reference/UsedEntity.md)`(``target_id ``=`` ``"syn1234"``)``)``,`\
+`      executed ``=`` `[`list`](https://rdrr.io/r/base/list.html)`(`[`UsedURL`](https://r-docs.synapse.org/latest/reference/UsedURL.md)`(``name ``=`` ``"analysis code"``, url ``=`` ``"https://github.com/my-org/my-analysis"``)``)`\
+`    ``)`\
+`  ``)`` ``|>`\
+`  `[`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)`(``)`
 
 See
 [Activity/Provenance](https://r-docs.synapse.org/latest/articles/domain_models_of_synapse.html#activityprovenance)
@@ -237,14 +218,12 @@ Collection](https://r-docs.synapse.org/latest/articles/datasetcollection.md).
 
 Wiki pages let you describe your project and its data in Markdown:
 
-``` r
-
-wiki_page <- WikiPage(
-  owner_id = project$id,
-  title = "My Wiki Page",
-  markdown = "# My Wiki Page\n\nThis is a wiki page."
-) |> synStore()
-```
+\
+`wiki_page`` ``<-`` `[`WikiPage`](https://r-docs.synapse.org/latest/reference/WikiPage.md)`(`\
+`  owner_id ``=`` ``project``$``id``,`\
+`  title ``=`` ``"My Wiki Page"``,`\
+`  markdown ``=`` ``"# My Wiki Page\n\nThis is a wiki page."`\
+`)`` ``|>`` `[`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)`(``)`
 
 See [Wikis](https://r-docs.synapse.org/latest/articles/wiki.md).
 
@@ -254,14 +233,12 @@ An Evaluation is a queue that accepts and scores submissions, for
 example in a computational challenge. Submit an entity to an evaluation
 queue:
 
-``` r
-
-submission <- Submission(
-  entity_id = file$id,
-  evaluation_id = "9999999",
-  name = "My Submission"
-) |> synStore()
-```
+\
+`submission`` ``<-`` `[`Submission`](https://r-docs.synapse.org/latest/reference/Submission.md)`(`\
+`  entity_id ``=`` ``file``$``id``,`\
+`  evaluation_id ``=`` ``"9999999"``,`\
+`  name ``=`` ``"My Submission"`\
+`)`` ``|>`` `[`synStore`](https://r-docs.synapse.org/latest/reference/synStore.md)`(``)`
 
 See
 [Evaluations](https://r-docs.synapse.org/latest/articles/evaluation.md)
@@ -270,14 +247,21 @@ SubmissionBundles](https://r-docs.synapse.org/latest/articles/submission.md).
 
 ## Sharing Access to Content
 
-By default, data you upload is private to you. Share it by setting
-permissions for a user, a team, or everyone, for example to give the
-public read access:
+A new project is private to you, and the folders and files you add to it
+inherit its sharing settings. To share, grant permissions to a user or
+team by ID, or to one of these groups: `273948L` (all registered Synapse
+users) or `273949L` (anyone on the internet). For example, let all
+registered users view and download a project’s files:
 
-``` r
+\
+`project`` ``|>`` ``synSetPermissions``(`\
+`  principal_id ``=`` ``273948L``,`\
+`  access_type ``=`` `[`list`](https://rdrr.io/r/base/list.html)`(``"READ"``, ``"DOWNLOAD"``)`\
+`)`
 
-project |> synSetPermissions(principal_id = 273949L, access_type = list("READ"))
-```
+To give a folder or file different access from its project, call
+`synSetPermissions()` on it directly. It then gets its own sharing
+settings and stops inheriting from the project.
 
 See [Sharing Settings (ACL
 Management)](https://r-docs.synapse.org/latest/articles/sharing_settings.md)
@@ -287,9 +271,9 @@ Control](https://r-docs.synapse.org/latest/articles/access_control.md).
 ## File Views
 
 A file view can be defined by its scope. It allows querying for files
-within the scope using a SQL-like syntax. Please visit the [EntityView
-vignette](https://r-docs.synapse.org/latest/articles/entityview.md) for
-more information.
+within the scope using a SQL-like syntax. Please visit the
+[EntityView](https://r-docs.synapse.org/latest/articles/entityview.md)
+vignette for more information.
 
 ## Accessing the API Directly
 
@@ -297,13 +281,11 @@ These methods enable access to the Synapse REST(ish) API taking care of
 details like endpoints and authentication. See the [REST API
 documentation](https://rest-docs.synapse.org/rest/).
 
-``` r
-
-?synRestGet
-?synRestPost
-?synRestPut
-?synRestDelete
-```
+\
+`?``synRestGet`\
+`?``synRestPost`\
+`?``synRestPut`\
+`?``synRestDelete`
 
 ## Synapse Utilities
 
@@ -312,8 +294,10 @@ Utilities that used to live in the separate
 package are now available directly in `synapser`:
 
 - Copy files, folders, and projects with `synCopy()`.
-- Upload data to Synapse in bulk with `synSyncToSynapse()` (see
-  [Uploading data in
+- Walk the contents of a project or folder with `synWalk()`.
+- Generate a manifest for a local directory with
+  `synGenerateSyncManifest()`, then upload data to Synapse in bulk with
+  `synSyncToSynapse()` (see [Uploading data in
   bulk](https://r-docs.synapse.org/latest/articles/upload_data_in_bulk.md)).
 - Download data from Synapse in bulk with `synSyncFromSynapse()` (see
   [Downloading data in

@@ -16,18 +16,55 @@ choose the method that fits their workflow best.
 - Once a personal access token has been created it can be used for any
   of the options below.
 
+**Note:** Credentials are looked up in this order: arguments passed to
+[`synLogin()`](https://r-docs.synapse.org/latest/reference/synLogin.md),
+then the `~/.synapseConfig` file, then the `SYNAPSE_AUTH_TOKEN`
+environment variable.
+
 ## One Time Login
 
 Use the
 [`synLogin()`](https://r-docs.synapse.org/latest/reference/synLogin.md)
 function.
 
-``` r
+\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`synapser`](https://github.com/Sage-Bionetworks/synapser)`)`\
+[`synLogin`](https://r-docs.synapse.org/latest/reference/synLogin.md)`(``authToken ``=`` ``"authtoken"``)`\
+`# Prints: Welcome, First Last!`
 
-library(synapser)
-synLogin(authToken = "authtoken")
-# Prints: Welcome, First Last!
-```
+## Use Environment Variable
+
+Setting the `SYNAPSE_AUTH_TOKEN` environment variable will allow you to
+login to Synapse with a [Personal Access
+Token](https://docs.synapse.org/synapse-docs/managing-your-account#Personal-Access-Tokens-(PATs))
+
+To make the variable available in the R session, add it to your
+`~/.Renviron` file. R reads this file each time it starts.
+
+1.  Open the file. If you have the `usethis` package, run the following
+    in R; it creates the file if it doesn’t exist and opens it for
+    editing:
+
+    \
+    `usethis``::``edit_r_environ``(``)`
+
+    Otherwise, open `~/.Renviron` in any text editor.
+
+2.  Add this line, replacing the placeholder with your token, and save
+    the file. Make sure the file ends with a newline.
+
+        SYNAPSE_AUTH_TOKEN=<my_personal_access_token>
+
+3.  Restart R (in RStudio: **Session \> Restart R**), then log in:
+
+    \
+    [`library`](https://rdrr.io/r/base/library.html)`(`[`synapser`](https://github.com/Sage-Bionetworks/synapser)`)`\
+    [`synLogin`](https://r-docs.synapse.org/latest/reference/synLogin.md)`(``)`
+
+Because `.Renviron` contains your token, keep it out of version control.
+If you use a project-level `.Renviron` inside a git repository, add it
+to the repository’s `.gitignore`. If you have the `usethis` package,
+`usethis::use_git_ignore(".Renviron")` adds the entry for you.
 
 ## Use `.synapseConfig`
 
@@ -101,20 +138,16 @@ used and `default` is not present in the configuration file.
 
 ### Logging in via R
 
-``` r
-
-library(synapser)
-synLogin()
-```
+\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`synapser`](https://github.com/Sage-Bionetworks/synapser)`)`\
+[`synLogin`](https://r-docs.synapse.org/latest/reference/synLogin.md)`(``)`
 
 If you want to log in with a specific profile, simply pass the profile
 name as an argument to
 [`synLogin()`](https://r-docs.synapse.org/latest/reference/synLogin.md):
 
-``` r
-
-synLogin(profile = "user1")
-```
+\
+[`synLogin`](https://r-docs.synapse.org/latest/reference/synLogin.md)`(``profile ``=`` ``"user1"``)`
 
 ### For more information, see:
 

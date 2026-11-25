@@ -53,15 +53,6 @@ synRestPut(uri, body=NULL, endpoint=NULL, headers=NULL, retry_policy=list(), req
 
 JSON encoding of response
 
-## Note
-
-This wraps synapseclient's `rest_put_async()`, which is a Python `async`
-coroutine method. Calling `synRestPut()` does not run that coroutine –
-it returns an unresolved Python coroutine object, since reticulate does
-not automatically await coroutines. To get the actual response, resolve
-the returned coroutine yourself with Python's `asyncio.run()` via
-reticulate, as shown in the example below.
-
 ## Examples
 
 ``` r
@@ -74,11 +65,8 @@ if (FALSE) { # \dontrun{
     library(synapser)
     synLogin()
 
-    asyncio = reticulate::import("asyncio")
-
     # Fetch the entity's current properties first
-    get_coro = synRestGet(uri = "/entity/syn123456")
-    entity_properties = asyncio$run(get_coro)
+    entity_properties = synRestGet(uri = "/entity/syn123456")
 
     # Modify the field(s) you want to change
     entity_properties$name = "New Name"
@@ -86,8 +74,7 @@ if (FALSE) { # \dontrun{
     # The body must be a JSON-encoded string, not a named list -- it is passed
     # straight through to the underlying HTTP client's `content` argument,
     # which only accepts a string or raw bytes.
-    put_coro = synRestPut(uri = "/entity/syn123456", body = rjson::toJSON(entity_properties))
-    response = asyncio$run(put_coro)
+    response = synRestPut(uri = "/entity/syn123456", body = rjson::toJSON(entity_properties))
     response
 } # }
 ```

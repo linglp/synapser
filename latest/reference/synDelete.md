@@ -25,9 +25,9 @@ attribute.
 
 **Supported for version-specific deletion:**
 
-\- String ID with version (e.g., "syn123.4")  
-- File, RecordSet (use version_only=TRUE)  
-- Table, Dataset, DatasetCollection, EntityView, MaterializedView,
+\- String ID with version (e.g., "syn123.4")\
+\- File, RecordSet (use version_only=TRUE)\
+\- Table, Dataset, DatasetCollection, EntityView, MaterializedView,
 SubmissionView, VirtualTable (use version_only=TRUE)
 
 **Not supported for version-specific deletion:**
@@ -38,7 +38,7 @@ SearchIndex
 ## Usage
 
 ``` r
-synDelete(entity, version=NULL, version_only=FALSE, synapse_client=NULL)
+synDelete(entity, version=NULL, version_only=FALSE, synapse_client=NULL, parent=NULL)
 ```
 
 ## Arguments
@@ -74,6 +74,23 @@ synDelete(entity, version=NULL, version_only=FALSE, synapse_client=NULL)
   (Optional\[Synapse\]) If not passed in, the last created instance from
   the Synapse class constructor will be used.
 
+- parent:
+
+  (Union\[File, Table, str\]) `Activity` only. The entity the activity
+  is associated with.
+
+## Details
+
+For these model classes synDelete calls the class's own `delete` method
+instead of the factory, because the factory does not support them. Pass
+an instance, or the class itself for the classmethod, as the first
+argument:
+
+\- Instances: Submission, WikiPage\
+\- Classes: Activity
+
+parent parameter applies only to the Activity route.
+
 ## Value
 
 NULL
@@ -81,8 +98,8 @@ NULL
 ## Errors
 
 \- An error is raised if the entity is not a supported type or not a
-valid Synapse ID.  
-- An error is raised if version_only is TRUE but no version number is
+valid Synapse ID.\
+\- An error is raised if version_only is TRUE but no version number is
 available.
 
 ## Examples
@@ -149,5 +166,13 @@ if (FALSE) { # \dontrun{
     team = Team(id = "123456")
     team |> synDelete()
     print("Team deleted successfully")
+
+## Example 7: Deleting an activity
+    # Delete the provenance activity associated with an entity:
+    library(synapser)
+    synLogin()
+
+    Activity() |> synDelete(parent = "syn123456")
+    print("Activity deleted successfully")
 } # }
 ```

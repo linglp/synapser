@@ -4,6 +4,9 @@
 
 - [Synapse R Client
   Overview](https://r-docs.synapse.org/latest/articles/synapser.md):
+
+### Setup
+
 - [Installation](https://r-docs.synapse.org/latest/articles/installation.md):
 - [Authentication](https://r-docs.synapse.org/latest/articles/authentication.md):
 - [Configuration](https://r-docs.synapse.org/latest/articles/configuration.md):
@@ -52,5 +55,5 @@
   Project](https://r-docs.synapse.org/latest/articles/structuring_your_project.md):
 - [Manifest
   CSV](https://r-docs.synapse.org/latest/articles/manifest_csv.md):
-- [Docker](https://r-docs.synapse.org/latest/articles/docker.md):
 - [Troubleshooting](https://r-docs.synapse.org/latest/articles/troubleshooting.md):
+- [Docker](https://r-docs.synapse.org/latest/articles/docker.md):

@@ -154,6 +154,11 @@
 <url><loc>https://r-docs.synapse.org/latest/reference/Folder_UnbindSchema.html</loc></url>
 <url><loc>https://r-docs.synapse.org/latest/reference/Folder_ValidateSchema.html</loc></url>
 <url><loc>https://r-docs.synapse.org/latest/reference/Folder_Walk.html</loc></url>
+<url><loc>https://r-docs.synapse.org/latest/reference/JSONSchema.html</loc></url>
+<url><loc>https://r-docs.synapse.org/latest/reference/JSONSchema_FromUri.html</loc></url>
+<url><loc>https://r-docs.synapse.org/latest/reference/JSONSchema_GetBody.html</loc></url>
+<url><loc>https://r-docs.synapse.org/latest/reference/JSONSchema_GetVersions.html</loc></url>
+<url><loc>https://r-docs.synapse.org/latest/reference/JsonSubColumn.html</loc></url>
 <url><loc>https://r-docs.synapse.org/latest/reference/Link.html</loc></url>
 <url><loc>https://r-docs.synapse.org/latest/reference/LinkOptions.html</loc></url>
 <url><loc>https://r-docs.synapse.org/latest/reference/MaterializedView.html</loc></url>

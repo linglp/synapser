@@ -3,6 +3,12 @@
 Represents a [Synapse Agent
 Registration](https://rest-docs.synapse.org/rest/org/sagebionetworks/repo/model/agent/AgentRegistration.html)
 
+The baseline agent is the one used by the Synapse [Chat
+UI](https://www.synapse.org/Chat:default); see the [Agent REST API
+docs](https://rest-docs.synapse.org/rest/#org.sagebionetworks.repo.web.controller.AgentController)
+for details. Registering custom agents is [restricted to internal
+users](https://rest-docs.synapse.org/rest/org/sagebionetworks/repo/model/agent/AgentRegistrationRequest.html).
+
 ## Usage
 
 ``` r
@@ -122,6 +128,14 @@ if (FALSE) { # \dontrun{
         enable_trace = TRUE,
         print_response = TRUE
     )
+
+## Example 4: Get an existing custom agent
+    # Retrieve a registered custom agent by its registration ID.
+    library(synapser)
+    synLogin()
+
+    my_agent = Agent(registration_id = "foo") |> synGet()
+    print(my_agent$cloud_agent_id)
 
 ## Advanced Example: Start and prompt multiple sessions
     # Here, we connect to a custom agent and start one session with the prompt "Hello".

@@ -10,13 +10,13 @@ appropriate model instance.
 
 You can retrieve entities in two ways:
 
-1\. By providing a synapse_id directly  
-2. By providing entity_name and optionally parent_id for lookup
+1\. By providing a synapse_id directly\
+2\. By providing entity_name and optionally parent_id for lookup
 
 ## Usage
 
 ``` r
-synGet(synapse_id=NULL, entity_name=NULL, parent_id=NULL, version_number=NULL, activity_options=NULL, file_options=NULL, table_options=NULL, link_options=NULL, synapse_client=NULL)
+synGet(synapse_id=NULL, entity_name=NULL, parent_id=NULL, version_number=NULL, activity_options=NULL, file_options=NULL, table_options=NULL, link_options=NULL, synapse_client=NULL, owner_id=NULL, id=NULL, offset=0L, limit=20L, activity_id=NULL, parent_version_number=NULL)
 ```
 
 ## Arguments
@@ -35,7 +35,9 @@ synGet(synapse_id=NULL, entity_name=NULL, parent_id=NULL, version_number=NULL, a
 - parent_id:
 
   (Optional\[str\]) The parent entity ID when looking up by name. Set to
-  NULL when looking up projects by name. Only used with entity_name.
+  NULL when looking up projects by name. Only used with entity_name,
+  except for `Activity`, where it is the Synapse ID of the entity whose
+  activity to retrieve (ignored if activity_id is provided).
 
 - version_number:
 
@@ -78,24 +80,79 @@ synGet(synapse_id=NULL, entity_name=NULL, parent_id=NULL, version_number=NULL, a
   (Optional\[Synapse\]) If not passed in, the last created instance from
   the Synapse class constructor will be used.
 
+- owner_id:
+
+  (Optional\[str\]) `WikiHeader` and `WikiHistorySnapshot` only. The
+  Synapse ID of the entity that owns the wiki.
+
+- id:
+
+  (Optional\[str\]) `WikiHistorySnapshot` only. The ID of the wiki page.
+
+- offset:
+
+  (int) `WikiHeader` and `WikiHistorySnapshot` only. The index of the
+  pagination offset.
+
+- limit:
+
+  (int) `WikiHeader` and `WikiHistorySnapshot` only. Limits the size of
+  the page returned.
+
+- activity_id:
+
+  (Optional\[str\]) `Activity` only. The ID of the activity to retrieve.
+  Takes precedence over parent_id.
+
+- parent_version_number:
+
+  (Optional\[int\]) `Activity` only. The version of parent_id to get the
+  activity for. Gets the most recent version if omitted.
+
+## Details
+
+For these model classes synGet calls the class's own `get` method
+instead of the factory, because the factory does not support them. Pass
+an instance, or the class itself for the classmethods, as the first
+argument:
+
+\- Instances: Agent, AgentSession, Column, Evaluation, JSONSchema,
+Organization, StorageLocation, Submission, SubmissionStatus, Team,
+UserProfile, WikiOrderHint, WikiPage\
+\- Classes: Activity, WikiHeader, WikiHistorySnapshot
+
+These arguments apply only to these routes:
+
+\- owner_id, offset, limit: WikiHeader and WikiHistorySnapshot\
+\- owner_id, offset, limit, id: WikiHistorySnapshot\
+\- activity_id, parent_version_number: Activity (which also takes
+parent_id in place of synapse_id)
+
 ## Value
 
-The appropriate Synapse entity model instance based on the entity type.
+The appropriate Synapse entity model instance based on the entity type,
+with these exceptions:
+
+\- WikiHeader and WikiHistorySnapshot return a paged generator; wrap it
+in [`as.list()`](https://rdrr.io/r/base/list.html) to collect the
+results.\
+\- Activity returns NULL if no activity is found.
 
 ## Errors
 
 \- An error is raised if both synapse_id and entity_name are provided,
-or if neither is provided.  
-- An error is raised if entity_name is provided without this being a
-valid lookup scenario.  
-- An error is raised if the synapse_id is not a valid Synapse ID format.
+or if neither is provided.\
+\- An error is raised if entity_name is provided without this being a
+valid lookup scenario.\
+\- An error is raised if the synapse_id is not a valid Synapse ID
+format.
 
 ## Note
 
 When using entity_name lookup:
 
-\- For projects: leave parent_id = NULL.  
-- For all other entities: provide the parent_id of the containing
+\- For projects: leave parent_id = NULL.\
+\- For all other entities: provide the parent_id of the containing
 folder/project.
 
 ## Examples
@@ -248,5 +305,85 @@ if (FALSE) { # \dontrun{
     # Then use the entity instance to get it again with different options
     refreshed_entity = entity |> synGet(file_options = FileOptions(download_file = FALSE))
     print(sprintf("Refreshed entity: %s (download_file: %s)", refreshed_entity$name, refreshed_entity$download_file))
+
+## Example 12: Retrieving a Team, Evaluation, or other model instance
+    # Models the factory does not support are retrieved by passing an instance
+    # with its identifying field(s) set as the first argument:
+    library(synapser)
+    synLogin()
+
+    team = Team(id = 123456L) |> synGet()
+    print(sprintf("Team: %s", team$name))
+
+    evaluation = Evaluation(id = "9999999") |> synGet()
+    print(sprintf("Evaluation: %s", evaluation$name))
+
+    submission = Submission(id = "9999999") |> synGet()
+    print(sprintf("Submission: %s", submission$id))
+
+## Example 13: Retrieving a UserProfile
+    # With no fields set, the profile of the logged in user is returned:
+    library(synapser)
+    synLogin()
+
+    my_profile = UserProfile() |> synGet()
+    print(sprintf("Logged in as: %s", my_profile$username))
+
+    # Or look up another user by id or username
+    profile = UserProfile(id = 273948L) |> synGet()
+    profile = UserProfile(username = "myUsername") |> synGet()
+
+## Example 14: Retrieving a wiki page
+    # Get a wiki page by the entity that owns it and the wiki page ID:
+    library(synapser)
+    synLogin()
+
+    wiki_page = WikiPage(owner_id = "syn123456", id = "789") |> synGet()
+    print(sprintf("Wiki: %s", wiki_page$title))
+
+## Example 15: Retrieving an Activity by ID
+    # Activity is retrieved by passing the class itself, not an instance.
+    # NULL is returned when no activity is found:
+    library(synapser)
+    synLogin()
+
+    activity = Activity |> synGet(activity_id = "9876543")
+    if (!is.null(activity)) {
+        print(sprintf("Activity: %s", activity$name))
+    } else {
+        print("No activity found")
+    }
+
+## Example 16: Retrieving the Activity attached to an entity
+    # Use parent_id (not synapse_id) to identify the entity. activity_id takes
+    # precedence when both are given.
+    library(synapser)
+    synLogin()
+
+    # Most recent version of the entity
+    activity = Activity |> synGet(parent_id = "syn123456")
+
+    # A specific version of the entity
+    activity = Activity |> synGet(parent_id = "syn123456", parent_version_number = 2L)
+    if (is.null(activity)) {
+        print("No activity found for this entity version")
+    }
+
+## Example 17: Listing wiki headers and wiki history
+    # WikiHeader and WikiHistorySnapshot return paged generators, so wrap the
+    # call in as.list() to collect the results:
+    library(synapser)
+    synLogin()
+
+    # The header tree of all wiki pages owned by an entity
+    for (header in as.list(WikiHeader() |> synGet(owner_id = "syn123456"))) {
+        print(header)
+    }
+
+    # The version history of a single wiki page, fetched in pages of 10
+    snapshots = as.list(
+        WikiHistorySnapshot() |> synGet(owner_id = "syn123456", id = "789", offset = 0L, limit = 10L)
+    )
+    print(sprintf("Wiki page has %d versions", length(snapshots)))
 } # }
 ```

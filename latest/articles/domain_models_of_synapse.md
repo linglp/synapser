@@ -15,7 +15,7 @@ ID, or synID. The synID is represented by the prefix “syn” followed by
 numbers (for example, syn12345678). This identifier can be used to refer
 to a specific entity on the web and through the programmatic clients.
 
-## [Projects](https://r-docs.synapse.org/latest/articles/data_upload_download.html#create-a-project)
+## [Projects](https://r-docs.synapse.org/latest/articles/project.md)
 
 Projects in Synapse are “containers” that group relevant content and
 people together. All data must be uploaded into a project. Projects can
@@ -65,10 +65,10 @@ you would on your local computer.
 
 You can control who has access to folders that you upload in two ways.
 First, you can apply [sharing
-settings](https://help.synapse.org/docs/Sharing-Settings,-Permissions,-and-Conditions-for-Use.2024276030.html#SharingSettings,Permissions,andConditionsforUse-SharingSettings),
+settings](https://docs.synapse.org/synapse-docs/sharing-settings-permissions-and-conditions-for-use#SharingSettings,Permissions,andConditionsforUse-SharingSettings),
 which control who can view, edit, download, or delete a file. Second,
 you can also apply [conditions for
-use](https://help.synapse.org/docs/Sharing-Settings,-Permissions,-and-Conditions-for-Use.2024276030.html#SharingSettings,Permissions,andConditionsforUse-ConditionsforUse),
+use](https://docs.synapse.org/synapse-docs/sharing-settings-permissions-and-conditions-for-use#SharingSettings,Permissions,andConditionsforUse-ConditionsforUse),
 which are additional requirements that Synapse users must meet before
 accessing your file. By default, files inherit the conditions for use of
 the Synapse folder where they are uploaded. You can also add additional
@@ -77,18 +77,18 @@ conditions for use on specific folders within a folder.
 - To read more about how to use sharing settings and conditions for use
   together, see the full article on [Sharing Settings, Permissions, and
   Conditions for
-  Use](https://help.synapse.org/docs/Sharing-Settings,-Permissions,-and-Conditions-for-Use.2024276030.html).
+  Use](https://docs.synapse.org/synapse-docs/sharing-settings-permissions-and-conditions-for-use).
 
-## [Files](https://r-docs.synapse.org/latest/articles/data_upload_download.md)
+## [Files](https://r-docs.synapse.org/latest/articles/file.md)
 
 Synapse files can be created by uploading content from your local
 computer or linking to digital files on the web. You can [annotate files
 with custom
 metadata](https://r-docs.synapse.org/latest/articles/data_upload_download.html#add-update-and-remove-annotations),
 [embed files into Synapse wiki
-pages](https://help.synapse.org/docs/Links.2667774092.html), or
-[associate them with a
-DOI](https://help.synapse.org/docs/Digital-Object-Identifiers-(DOIs).1972405096.html).
+pages](https://docs.synapse.org/synapse-docs/links), or [associate them
+with a
+DOI](https://docs.synapse.org/synapse-docs/digital-object-identifiers-dois).
 
 Files in Synapse always have a “parent”, which could be a project or a
 folder. You can organize collections of files into folders and
@@ -96,10 +96,10 @@ sub-folders, just as you would on your local computer.
 
 You can control who has access to files that you upload in two ways.
 First, you can apply [sharing
-settings](https://help.synapse.org/docs/Sharing-Settings,-Permissions,-and-Conditions-for-Use.2024276030.html#SharingSettings,Permissions,andConditionsforUse-SharingSettings),
+settings](https://docs.synapse.org/synapse-docs/sharing-settings-permissions-and-conditions-for-use#SharingSettings,Permissions,andConditionsforUse-SharingSettings),
 which control who can view, edit, download, or delete a file. Second,
 you can also apply [conditions for
-use](https://help.synapse.org/docs/Sharing-Settings,-Permissions,-and-Conditions-for-Use.2024276030.html#SharingSettings,Permissions,andConditionsforUse-ConditionsforUse),
+use](https://docs.synapse.org/synapse-docs/sharing-settings-permissions-and-conditions-for-use#SharingSettings,Permissions,andConditionsforUse-ConditionsforUse),
 which are additional requirements that Synapse users must meet before
 accessing your file. By default, files inherit the conditions for use of
 the Synapse folder where they are uploaded. You can also add additional
@@ -108,7 +108,7 @@ conditions for use on specific files within a folder.
 - To read more about how to use sharing settings and conditions for use
   together, see the full article on [Sharing Settings, Permissions, and
   Conditions for
-  Use](https://help.synapse.org/docs/Sharing-Settings,-Permissions,-and-Conditions-for-Use.2024276030.html).
+  Use](https://docs.synapse.org/synapse-docs/sharing-settings-permissions-and-conditions-for-use).
 
 ## [Annotations](https://r-docs.synapse.org/latest/articles/data_upload_download.html#add-update-and-remove-annotations)
 

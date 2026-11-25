@@ -37,6 +37,8 @@
     <li><a class="dropdown-item" href="../articles/authentication.html">Authentication</a></li>
     <li><a class="dropdown-item" href="../articles/configuration.html">Configuration</a></li>
     <li><a class="dropdown-item" href="../articles/migration_to_synapser_3_0.html">Migration to synapser 3.0</a></li>
+    <li><a class="dropdown-item" href="../articles/troubleshooting.html">Troubleshooting</a></li>
+    <li><a class="dropdown-item" href="../articles/systemDependencies.html">System Dependencies</a></li>
   </ul>
 </li>
 <li class="nav-item dropdown">
@@ -69,6 +71,7 @@
     <li><a class="dropdown-item" href="../articles/properties_vs_annotations.html">Properties and annotations</a></li>
     <li><a class="dropdown-item" href="../articles/structuring_your_project.html">Structuring Your Synapse Project</a></li>
     <li><a class="dropdown-item" href="../articles/manifest_csv.html">Manifest CSV</a></li>
+    <li><a class="dropdown-item" href="../articles/docker.html">Docker</a></li>
   </ul>
 </li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
@@ -93,9 +96,9 @@
 
       <h1>Domain Models of Synapse</h1>
             
-            <h4 data-toc-skip class="date">2026-11-11</h4>
+            <h4 data-toc-skip class="date">2026-11-25</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/Sage-Bionetworks/synapser/blob/docs-test-2/vignettes/domain_models_of_synapse.Rmd" class="external-link"><code>vignettes/domain_models_of_synapse.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/Sage-Bionetworks/synapser/blob/develop/vignettes/domain_models_of_synapse.Rmd" class="external-link"><code>vignettes/domain_models_of_synapse.Rmd</code></a></small>
       <div class="d-none name"><code>domain_models_of_synapse.Rmd</code></div>
     </div>
 
@@ -120,7 +123,7 @@ programmatic clients.</p>
 </div>
 <div class="section level2">
 <h2 id="projects">
-<a href="data_upload_download.html#create-a-project">Projects</a><a class="anchor" aria-label="anchor" href="#projects"></a>
+<a href="project.html">Projects</a><a class="anchor" aria-label="anchor" href="#projects"></a>
 </h2>
 <p>Projects in Synapse are “containers” that group relevant content and
 people together. All data must be uploaded into a project. Projects can
@@ -164,9 +167,9 @@ data in a systematic way.</p>
 or a folder. You can organize collections of folders and sub-folders,
 just as you would on your local computer.</p>
 <p>You can control who has access to folders that you upload in two
-ways. First, you can apply <a href="https://help.synapse.org/docs/Sharing-Settings,-Permissions,-and-Conditions-for-Use.2024276030.html#SharingSettings,Permissions,andConditionsforUse-SharingSettings" class="external-link">sharing
+ways. First, you can apply <a href="https://docs.synapse.org/synapse-docs/sharing-settings-permissions-and-conditions-for-use#SharingSettings,Permissions,andConditionsforUse-SharingSettings" class="external-link">sharing
 settings</a>, which control who can view, edit, download, or delete a
-file. Second, you can also apply <a href="https://help.synapse.org/docs/Sharing-Settings,-Permissions,-and-Conditions-for-Use.2024276030.html#SharingSettings,Permissions,andConditionsforUse-ConditionsforUse" class="external-link">conditions
+file. Second, you can also apply <a href="https://docs.synapse.org/synapse-docs/sharing-settings-permissions-and-conditions-for-use#SharingSettings,Permissions,andConditionsforUse-ConditionsforUse" class="external-link">conditions
 for use</a>, which are additional requirements that Synapse users must
 meet before accessing your file. By default, files inherit the
 conditions for use of the Synapse folder where they are uploaded. You
@@ -174,26 +177,26 @@ can also add additional conditions for use on specific folders within a
 folder.</p>
 <ul>
 <li>To read more about how to use sharing settings and conditions for
-use together, see the full article on <a href="https://help.synapse.org/docs/Sharing-Settings,-Permissions,-and-Conditions-for-Use.2024276030.html" class="external-link">Sharing
+use together, see the full article on <a href="https://docs.synapse.org/synapse-docs/sharing-settings-permissions-and-conditions-for-use" class="external-link">Sharing
 Settings, Permissions, and Conditions for Use</a>.</li>
 </ul>
 </div>
 <div class="section level2">
 <h2 id="files">
-<a href="data_upload_download.html">Files</a><a class="anchor" aria-label="anchor" href="#files"></a>
+<a href="file.html">Files</a><a class="anchor" aria-label="anchor" href="#files"></a>
 </h2>
 <p>Synapse files can be created by uploading content from your local
 computer or linking to digital files on the web. You can <a href="data_upload_download.html#add-update-and-remove-annotations">annotate
-files with custom metadata</a>, <a href="https://help.synapse.org/docs/Links.2667774092.html" class="external-link">embed files
-into Synapse wiki pages</a>, or <a href="https://help.synapse.org/docs/Digital-Object-Identifiers-(DOIs).1972405096.html" class="external-link">associate
+files with custom metadata</a>, <a href="https://docs.synapse.org/synapse-docs/links" class="external-link">embed files into
+Synapse wiki pages</a>, or <a href="https://docs.synapse.org/synapse-docs/digital-object-identifiers-dois" class="external-link">associate
 them with a DOI</a>.</p>
 <p>Files in Synapse always have a “parent”, which could be a project or
 a folder. You can organize collections of files into folders and
 sub-folders, just as you would on your local computer.</p>
 <p>You can control who has access to files that you upload in two ways.
-First, you can apply <a href="https://help.synapse.org/docs/Sharing-Settings,-Permissions,-and-Conditions-for-Use.2024276030.html#SharingSettings,Permissions,andConditionsforUse-SharingSettings" class="external-link">sharing
+First, you can apply <a href="https://docs.synapse.org/synapse-docs/sharing-settings-permissions-and-conditions-for-use#SharingSettings,Permissions,andConditionsforUse-SharingSettings" class="external-link">sharing
 settings</a>, which control who can view, edit, download, or delete a
-file. Second, you can also apply <a href="https://help.synapse.org/docs/Sharing-Settings,-Permissions,-and-Conditions-for-Use.2024276030.html#SharingSettings,Permissions,andConditionsforUse-ConditionsforUse" class="external-link">conditions
+file. Second, you can also apply <a href="https://docs.synapse.org/synapse-docs/sharing-settings-permissions-and-conditions-for-use#SharingSettings,Permissions,andConditionsforUse-ConditionsforUse" class="external-link">conditions
 for use</a>, which are additional requirements that Synapse users must
 meet before accessing your file. By default, files inherit the
 conditions for use of the Synapse folder where they are uploaded. You
@@ -201,7 +204,7 @@ can also add additional conditions for use on specific files within a
 folder.</p>
 <ul>
 <li>To read more about how to use sharing settings and conditions for
-use together, see the full article on <a href="https://help.synapse.org/docs/Sharing-Settings,-Permissions,-and-Conditions-for-Use.2024276030.html" class="external-link">Sharing
+use together, see the full article on <a href="https://docs.synapse.org/synapse-docs/sharing-settings-permissions-and-conditions-for-use" class="external-link">Sharing
 Settings, Permissions, and Conditions for Use</a>.</li>
 </ul>
 </div>
